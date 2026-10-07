@@ -1,0 +1,14 @@
+[Unit]
+Description=Jingpan chart AI proxy (Cloudflare Workers AI)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/jingpan-chart-ai
+EnvironmentFile=-/opt/jingpan-chart-ai/.env
+ExecStart=/usr/bin/python3 /opt/jingpan-chart-ai/chart_ai_proxy.py
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,38 @@
+MERG NOT subset; don't know how to subset; dropped
+[OK] 黄帝龙首经 (21041字, 224KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 黄帝金匮玉衡经 (9067字, 155KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 黄帝授三子玄女经 (1133字, 52KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 黄帝宅经 (6519字, 189KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 灵台经 (8200字, 145KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 秤星灵台秘要经 (2573字, 132KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 通占大象历星经 (11822字, 231KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue2f1)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 黄帝太乙八门入式秘诀 (3329字, 138KB)
+[失败] 黄帝太乙八门入式诀: IncompleteRead(0 bytes read, 21520 more expected)
+[失败] 黄帝太乙八门逆顺生死诀: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of 
+[失败] 太上六壬明鉴符阴经: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of 
+[失败] 秘藏通玄变化六阴洞微遁甲真经: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of 
+MERG NOT subset; don't know how to subset; dropped
+[OK] 黄庭遁甲缘身经 (3911字, 164KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue2a9), '' (\ue0a6)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 邓天君玄灵八门报应内旨 (4263字, 192KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 洞玄灵宝道士受三洞经箓法箓择日历 (3104字, 134KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue6fd)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 洞真太上八素真经占候入定妙诀 (4043字, 179KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 素问入式运气论奥 (23317字, 292KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue026), '' (\ue094), '' (\ue018)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 儒门崇理折衷堪舆完孝录 (81516字, 673KB)
+======================
+道藏重下载完成: 14 本

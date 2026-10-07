@@ -1,0 +1,39 @@
+{
+  "name": "chinese-traditional-wisdom-ai-agent-workflow",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local-first Chinese Traditional Wisdom Agent Skill and Dashboard",
+  "packageManager": "pnpm@10.26.1",
+  "engines": {
+    "node": ">=24.12.0 <25"
+  },
+  "scripts": {
+    "dev": "pnpm --dir apps/visual dev",
+    "build": "pnpm --dir apps/visual build",
+    "typecheck": "pnpm --dir apps/visual typecheck",
+    "test": "pnpm --dir apps/visual test:unit",
+    "test:e2e": "pnpm --dir apps/visual test:e2e",
+    "engine": "pnpm --dir apps/visual engine",
+    "engine:list": "pnpm --dir apps/visual engine:list",
+    "engine:describe": "pnpm --dir apps/visual engine:describe",
+    "engine:verify": "pnpm --dir apps/visual engine:verify",
+    "engine:present": "pnpm --dir apps/visual engine:present",
+    "engine:bundle": "pnpm --dir apps/visual engine:bundle",
+    "engine:bundle:verify": "pnpm --dir apps/visual engine:bundle:verify",
+    "knowledge:manifest": "pnpm --dir apps/visual knowledge:manifest",
+    "check:knowledge-provenance": "pnpm --dir apps/visual check:knowledge-provenance",
+    "knowledge:index": "pnpm --dir apps/visual knowledge:index",
+    "check:knowledge-index": "pnpm --dir apps/visual check:knowledge-index",
+    "data:char-shards": "pnpm --dir apps/visual data:char-shards",
+    "check:char-shards": "pnpm --dir apps/visual check:char-shards",
+    "data:dream-shards": "pnpm --dir apps/visual data:dream-shards",
+    "check:dream-shards": "pnpm --dir apps/visual check:dream-shards",
+    "check:bundle-budget": "pnpm --dir apps/visual check:bundle-budget",
+    "engine:bazi-time-sensitivity": "pnpm --dir apps/visual engine:bazi-time-sensitivity",
+    "engine:compare-rules": "pnpm --dir apps/visual engine:compare-rules",
+    "engine:iching-lookup": "pnpm --dir apps/visual engine:iching-lookup",
+    "engine:plan": "pnpm --dir apps/visual engine:plan",
+    "eval:skill": "pnpm --dir apps/visual eval:skill",
+    "check:release": "pnpm --dir apps/visual check:release"
+  }
+}

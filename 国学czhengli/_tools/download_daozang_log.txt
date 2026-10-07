@@ -1,0 +1,45 @@
+MERG NOT subset; don't know how to subset; dropped
+[OK] 黄帝龙首经 (241KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 黄帝金匮玉衡经 (171KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 黄帝授三子玄女经 (76KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 黄帝宅经 (205KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 灵台经 (161KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 秤星灵台秘要经 (191KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 通占大象历星经 (247KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue2f1)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 黄帝太乙八门入式秘诀 (194KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue7c6)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 黄帝太乙八门入式诀 (255KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue7c5), '' (\ue7c4)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 黄帝太乙八门逆顺生死诀 (266KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue00f)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 太上六壬明鉴符阴经 (299KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue5dd)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 秘藏通玄变化六阴洞微遁甲真经 (332KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 黄庭遁甲缘身经 (217KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 儒门崇理折衷堪舆完孝录 (147KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue2a9), '' (\ue0a6)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 邓天君玄灵八门报应内旨 (208KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 洞玄灵宝道士受三洞经箓法箓择日历 (188KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue6fd)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 洞真太上八素真经占候入定妙诀 (195KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 素问入式运气论奥 (305KB)
+======================
+道藏术数完成: 18 本

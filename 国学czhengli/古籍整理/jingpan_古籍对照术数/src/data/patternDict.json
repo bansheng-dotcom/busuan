@@ -1,0 +1,278 @@
+{
+  "對面朝斗格": {
+    "condition": "子午宮逢祿存是也",
+    "originalText": "祿有對面在遷移，子午逢之利祿宜，德合吉壤人敬重，雙全富貴福稀奇。",
+    "category": "定貴局",
+    "key": "duiMianChaoDou"
+  },
+  "科權祿主格": {
+    "condition": "祿權周勃命中逢",
+    "originalText": "祿權周勃命中逢，入相王朝贊聖功，迎合權星兼吉曜，巍巍富貴列三公。",
+    "category": "定貴局",
+    "key": "keQuanLu"
+  },
+  "左右朝垣格": {
+    "condition": "天星左右若在三方祿位",
+    "originalText": "天星左右最高明，若在三方祿位興，武職高登應顯佐，文人名譽列公卿。",
+    "category": "定貴局",
+    "key": "zuoYouChaoYuan"
+  },
+  "文武格": {
+    "condition": "文曲武曲在身命是也",
+    "originalText": "格名文武少人知，遇此須教百事通，更值命宮無殺破，滔滔榮顯是英雄。",
+    "category": "定貴局",
+    "key": "wenWu"
+  },
+  "文星朝命格": {
+    "condition": "文昌文曲值命",
+    "originalText": "文昌文曲最榮華，值此鬚生富貴家，更得三方祥曜拱，卻如錦上又添花。",
+    "category": "定貴局",
+    "key": "wenXingChaoMing"
+  },
+  "石中隱玉格": {
+    "condition": "命在子午逢巨門是也",
+    "originalText": "巨門子午二宮逢，身命逢之必貴榮，更得三方科祿照，石中隱玉是豐隆。",
+    "category": "定貴局",
+    "key": "shiZhongYinYu"
+  },
+  "火貴格": {
+    "condition": "貪狼遇火名為火貴格，三合照身命是也",
+    "originalText": "火遇貪狼照命宮，封侯食祿是英雄，三方倘若無兇殺，到老應知福壽隆。",
+    "category": "定貴局",
+    "key": "huoGui"
+  },
+  "七殺朝斗格": {
+    "condition": "七殺居寅申子午宮，逢魁鉞左右文昌會照",
+    "originalText": "七殺寅申子午宮，四夷拱手服英雄，魁鉞左右文昌會，權祿名高食萬鍾。",
+    "category": "定貴局",
+    "key": "qiShaChaoDou"
+  },
+  "日月夾財格": {
+    "condition": "武守命日月來夾是也，財帛宮亦然",
+    "originalText": "日月夾財，不權則富。",
+    "category": "定富局",
+    "key": "riYueJiaCai"
+  },
+  "財蔭夾印": {
+    "condition": "相守命武梁來夾是也，田宅宮亦然。",
+    "originalText": "財蔭夾印 相守命武梁來夾是也，田宅宮亦然。",
+    "category": "定富局",
+    "key": "caiYinJiaYin"
+  },
+  "財祿夾馬": {
+    "condition": "馬守命武祿來夾是也，逢生旺尤妙。",
+    "originalText": "財祿夾馬 馬守命武祿來夾是也，逢生旺尤妙。",
+    "category": "定富局",
+    "key": "caiLuJiaMa"
+  },
+  "蔭印拱身": {
+    "condition": "身臨田宅梁相拱沖是也，勿坐空亡。",
+    "originalText": "蔭印拱身 身臨田宅梁相拱沖是也，勿坐空亡。",
+    "category": "定富局",
+    "key": "yinYinGongShen"
+  },
+  "日月照璧": {
+    "condition": "日月臨田宅宮是也，喜居墓庫。",
+    "originalText": "日月照璧 日月臨田宅宮是也，喜居墓庫。",
+    "category": "定富局",
+    "key": "riYueZhaoBi"
+  },
+  "金燦光輝": {
+    "condition": "太陽單守，命在午宮是也。",
+    "originalText": "金燦光輝 太陽單守，命在午宮是也。",
+    "category": "定富局",
+    "key": "jinCanGuangHui"
+  },
+  "日月夾命": {
+    "condition": "不坐空亡遇逢本宮有吉星是也。",
+    "originalText": "日月夾命 不坐空亡遇逢本宮有吉星是也。",
+    "category": "定貴局",
+    "key": "riYueJiaMing"
+  },
+  "日出扶桑": {
+    "condition": "日在卯守命是也，守官祿宮亦然。",
+    "originalText": "日出扶桑 日在卯守命是也，守官祿宮亦然。",
+    "category": "定貴局",
+    "key": "riChuFuSang"
+  },
+  "月落亥宮": {
+    "condition": "月在亥守命是也，又名月朗天門。",
+    "originalText": "月落亥宮 月在亥守命是也，又名月朗天門。",
+    "category": "定貴局",
+    "key": "yueLuoHai"
+  },
+  "月生滄海": {
+    "condition": "月在子宮守田宅是也。",
+    "originalText": "月生滄海 月在子宮守田宅是也。",
+    "category": "定貴局",
+    "key": "yueShengCangHai"
+  },
+  "輔弼拱主": {
+    "condition": "紫微守命二星來拱是也，夾之亦然。",
+    "originalText": "輔弼拱主 紫微守命二星來拱是也，夾之亦然。",
+    "category": "定貴局",
+    "key": "fuBiGongZhu"
+  },
+  "君臣慶會": {
+    "condition": "紫微左右同守命是也，更會相武陰妙上。",
+    "originalText": "君臣慶會 紫微左右同守命是也，更會相武陰妙上。",
+    "category": "定貴局",
+    "key": "junChenQingHui"
+  },
+  "財印夾祿": {
+    "condition": "祿守命梁相來夾是也，入財亦然。",
+    "originalText": "財印夾祿 祿守命梁相來夾是也，入財亦然。",
+    "category": "定貴局",
+    "key": "caiYinJiaLu"
+  },
+  "祿馬佩印": {
+    "condition": "馬前有祿印星同宮是也。",
+    "originalText": "祿馬佩印 馬前有祿印星同宮是也。",
+    "category": "定貴局",
+    "key": "luMaPeiYin"
+  },
+  "坐貴向貴": {
+    "condition": "謂魁鉞在命迭相坐拱是也。",
+    "originalText": "坐貴向貴 謂魁鉞在命迭相坐拱是也。",
+    "category": "定貴局",
+    "key": "zuoGuiXiangGui"
+  },
+  "馬頭帶劍": {
+    "condition": "謂馬有刃是也不是居午格。",
+    "originalText": "馬頭帶劍 謂馬有刃是也不是居午格。",
+    "category": "定貴局",
+    "key": "maTouDaiJian"
+  },
+  "刑囚夾印": {
+    "condition": "天刑廉貞同臨身命主武勇之人。",
+    "originalText": "刑囚夾印 天刑廉貞同臨身命主武勇之人。",
+    "category": "定貴局",
+    "key": "xingQiuJiaYin"
+  },
+  "貪火相逢": {
+    "condition": "謂二星守命同居廟旺是也。",
+    "originalText": "貪火相逢 謂二星守命同居廟旺是也。",
+    "category": "定貴局",
+    "key": "tanHuoXiangFeng"
+  },
+  "武曲守垣": {
+    "condition": "武守命卯宮是也，余不是。",
+    "originalText": "武曲守垣 武守命卯宮是也，余不是。",
+    "category": "定貴局",
+    "key": "wuQuShouYuan"
+  },
+  "權祿生逢": {
+    "condition": "二星守命廟旺是也，陷不是。",
+    "originalText": "權祿生逢 二星守命廟旺是也，陷不是。",
+    "category": "定貴局",
+    "key": "quanLuShengFeng"
+  },
+  "羊刃入廟": {
+    "condition": "辰戍丑未守命遇吉是也。",
+    "originalText": "羊刃入廟 辰戍丑未守命遇吉是也。",
+    "category": "定貴局",
+    "key": "yangRenRuMiao"
+  },
+  "金輿扶駕": {
+    "condition": "紫微守命前後有日月來夾是也。",
+    "originalText": "金輿扶駕 紫微守命前後有日月來夾是也。",
+    "category": "定貴局",
+    "key": "jinYuFuJia"
+  },
+  "生不逢時": {
+    "condition": "命坐空亡逢廉貞是也。",
+    "originalText": "生不逢時 命坐空亡逢廉貞是也。",
+    "category": "定貧賤局",
+    "key": "shengBuFengShi"
+  },
+  "祿逢兩殺": {
+    "condition": "祿坐空亡又逢空劫殺星是也。",
+    "originalText": "祿逢兩殺 祿坐空亡又逢空劫殺星是也。",
+    "category": "定貧賤局",
+    "key": "luFengLiangSha"
+  },
+  "馬落空亡": {
+    "condition": "馬既落亡雖祿沖會無用主奔波。",
+    "originalText": "馬落空亡 馬既落亡雖祿沖會無用主奔波。",
+    "category": "定貧賤局",
+    "key": "maLuoKongWang"
+  },
+  "日月藏輝": {
+    "condition": "日月反背又逢巨暗是也。",
+    "originalText": "日月藏輝 日月反背又逢巨暗是也。",
+    "category": "定貧賤局",
+    "key": "riYueCangHui"
+  },
+  "財與囚仇": {
+    "condition": "武貞同守身命是也。",
+    "originalText": "財與囚仇 武貞同守身命是也。",
+    "category": "定貧賤局",
+    "key": "caiYuQiuChou"
+  },
+  "一生孤貧": {
+    "condition": "謂破守命星陷地是也。",
+    "originalText": "一生孤貧 謂破守命星陷地是也。",
+    "category": "定貧賤局",
+    "key": "yiShengGuPin"
+  },
+  "君子在野": {
+    "condition": "謂四殺守身命而言臨陷地是也。",
+    "originalText": "君子在野 謂四殺守身命而言臨陷地是也。",
+    "category": "定貧賤局",
+    "key": "junZiZaiYe"
+  },
+  "兩重華蓋": {
+    "condition": "謂祿存化祿坐命遇空劫是也。",
+    "originalText": "兩重華蓋 謂祿存化祿坐命遇空劫是也。",
+    "category": "定貧賤局",
+    "key": "liangChongHuaGai"
+  },
+  "風雲際會": {
+    "condition": "身命雖弱二限逢祿馬是也。",
+    "originalText": "風雲際會 身命雖弱二限逢祿馬是也。",
+    "category": "定雜局",
+    "key": "fengYunJiHui"
+  },
+  "錦上添花": {
+    "condition": "謂限破惡星而行吉地是也。",
+    "originalText": "錦上添花 謂限破惡星而行吉地是也。",
+    "category": "定雜局",
+    "key": "jinShangTianHua"
+  },
+  "祿衰馬困": {
+    "condition": "限逢七殺祿馬空亡是也。",
+    "originalText": "祿衰馬困 限逢七殺祿馬空亡是也。",
+    "category": "定雜局",
+    "key": "luShuaiMaKun"
+  },
+  "衣錦還鄉": {
+    "condition": "少年不遂四十後行墓運是也。",
+    "originalText": "衣錦還鄉 少年不遂四十後行墓運是也。",
+    "category": "定雜局",
+    "key": "yiJinHuanXiang"
+  },
+  "步數無依": {
+    "condition": "前限接後限連綿不分是也。",
+    "originalText": "步數無依 前限接後限連綿不分是也。",
+    "category": "定雜局",
+    "key": "buShuWuYi"
+  },
+  "水上駕星": {
+    "condition": "一年好一年不好是也。",
+    "originalText": "水上駕星 一年好一年不好是也。",
+    "category": "定雜局",
+    "key": "shuiShangJiaXing"
+  },
+  "吉凶相伴": {
+    "condition": "命有主星限前則發限衰不發是也。",
+    "originalText": "吉兇相伴 命有主星限前則發限衰不發是也。",
+    "category": "定雜局",
+    "key": "jiXiongXiangBan"
+  },
+  "枯木逢春": {
+    "condition": "謂命衰限好是也。",
+    "originalText": "枯木逢春 謂命衰限好是也。",
+    "category": "定雜局",
+    "key": "kuMuFengChun"
+  }
+}

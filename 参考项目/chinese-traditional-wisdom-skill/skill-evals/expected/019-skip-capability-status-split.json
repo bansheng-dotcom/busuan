@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "1.0.0",
+  "caseId": "019-skip-capability-status-split",
+  "assertions": [
+    {
+      "path": "text",
+      "operator": "contains-text",
+      "value": "capability-status split"
+    }
+  ]
+}

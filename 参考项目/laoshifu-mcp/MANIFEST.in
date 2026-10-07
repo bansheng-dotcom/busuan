@@ -1,0 +1,4 @@
+include LICENSE
+include NOTICE
+recursive-include laoshifu_mcp/_runtime *
+global-exclude *.pyc *.pyo __pycache__/*

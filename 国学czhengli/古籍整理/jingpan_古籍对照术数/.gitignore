@@ -1,0 +1,12 @@
+# Logs
+logs
+*.log
+node_modules
+dist
+.DS_Store
+*.local
+.env
+server/.env
+server/holo-reject-debug.txt
+server/fixtures/holo-last-response.json
+.superpowers/

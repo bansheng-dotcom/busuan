@@ -1,0 +1,863 @@
+MERG NOT subset; don't know how to subset; dropped
+始知阁易藏文件总数: 343
+[跳过] 三命指迷赋
+[跳过] 三命通会
+[跳过] 乙巳占
+[跳过] 乾元秘旨
+[跳过] 二十四山八卦罗经图
+[跳过] 五行大义
+[跳过] 五行精纪
+[跳过] 京氏易传
+[跳过] 人伦大统赋
+[跳过] 人子须知
+[跳过] 催官篇
+[跳过] 入地眼全书
+[跳过] 公笃相法
+[OK] 六壬一字诀玉连环 (17891字, 236KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬兵占 (43056字, 405KB)
+Font MPDFAA+SimSun is missing the following glyphs: '	' (\t), '' (\ue408), '' (\ue7b5)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬大全 (289613字, 1274KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬存验 (31572字, 288KB)
+MERG NOT subset; don't know how to subset; dropped
+[跳过] 六壬寻源
+[OK] 六壬心镜 (59258字, 538KB)
+MERG NOT subset; don't know how to subset; dropped
+[跳过] 六壬拃河棹
+[跳过] 六壬括囊赋略疏
+[OK] 六壬指南 (26015字, 388KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬指南注解 (108813字, 776KB)
+Font MPDFAA+SimSun is missing the following glyphs: '	' (\t)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬断案 (91841字, 566KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬灵觉经 (82342字, 566KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬直指御定 (368939字, 1340KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue011), '' (\ue004)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬神定经 (14891字, 235KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬神将释 (24497字, 405KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue004), '' (\ue003)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬神课金口诀古本 (61335字, 502KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬秘本 (105272字, 739KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬管辂神书 (21400字, 245KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬粹言 (82157字, 523KB)
+Font MPDFAA+SimSun is missing the following glyphs: '	' (\t)
+MERG NOT subset; don't know how to subset; dropped
+[跳过] 六壬经纬
+[跳过] 六壬翠雨歌
+[跳过] 六壬苗公射覆鬼撮脚
+[跳过] 六壬论命秘要
+[跳过] 六壬金铰剪
+[跳过] 六壬银河櫂
+[跳过] 六壬集成五要权衡
+[跳过] 兰台妙选
+[跳过] 冰鉴
+[跳过] 千里命稿
+[跳过] 卜法详考
+[跳过] 卜筮全书
+[OK] 卜筮正宗 (103857字, 667KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\uec93)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 发微论 (3952字, 142KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 吴园易解 (43454字, 451KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周公解梦 (8569字, 247KB)
+Font MPDFAA+SimSun is missing the following glyphs: '	' (\t), '☰' (\u2630), '☱' (\u2631), '☲' (\u2632), '☳' (\u2633), '☴' (\u2634), '☵' (\u2635), '☶' (\u2636), '☷' (\u2637), '' (\ue14f), ... (and 22 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易尚占 (33312字, 356KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 命理探源 (54656字, 472KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 命理正宗 (1332字, 83KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue7b5), '' (\uea7b), '' (\ueb8e), '' (\uea1f), '' (\uea20), '' (\uee60), '' (\ue730), '' (\uef6e), '' (\ue27f), '' (\uecc3), ... (and 82 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 唐开元占经 (531170字, 1851KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue3c0), '' (\ue0d7), '' (\ue1cb), '' (\ue052), '' (\ue468), '' (\ue196), '' (\ue18d), '' (\ue0da), '' (\ue035), '' (\ue0d4), ... (and 13 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 地理古镜歌 (11060字, 275KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 地理辨惑 (28409字, 413KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 地理辨正 (29383字, 361KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 地理醒心录 (1680字, 114KB)
+Font MPDFAA+SimSun is missing the following glyphs: '	' (\t)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 增删卜易 (161743字, 693KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue1e0), '	' (\t)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 壬占汇选 (217519字, 972KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 壬学琐记 (18633字, 357KB)
+Font MPDFAA+SimSun is missing the following glyphs: '	' (\t)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 壬归 (33878字, 334KB)
+Font MPDFAA+SimSun is missing the following glyphs: '	' (\t), '' (\ue1a1), '' (\ue1a8), '' (\ue1a4), '' (\ue1a7), '' (\ue1a3), '' (\ue1a6), '' (\ue1a2), '' (\ue1a5), '' (\ue14f), ... (and 63 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 大易断例卜筮元龟目 (12915字, 209KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 天元五歌 (27990字, 447KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 天玉经 (26675字, 389KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 天玉经外篇 (16001字, 327KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 太乙秘书 (37684字, 264KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue749), '' (\uef69), '' (\ue3e7), '' (\ue7be), '' (\ue621), '' (\uea20), '' (\uee9d), '' (\ueb8e), '' (\uef6e), '' (\uec1b), ... (and 10 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 太乙金镜式经 (36162字, 390KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uee6e), '' (\uea20), '' (\ueabb), '' (\ue730), '' (\ue7b5), '' (\ued48), '' (\uef6e), '' (\uec4a), '' (\ue3e5), '' (\uec93), ... (and 11 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 太清神鉴 (38986字, 547KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 太玄经 (21867字, 415KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 奇门宝鉴御定 (38175字, 371KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 奇门旨归 (59143字, 636KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 奇门法窍 (125862字, 628KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 奇门遁甲元灵经 (37944字, 466KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 奇门遁甲秘笈大全 (136037字, 888KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 奇门遁甲统宗 (48922字, 507KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 子平真诠评注 (28518字, 265KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 宅法举隅 (14310字, 288KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 宅经 (6895字, 202KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 山洋指迷原本 (63626字, 489KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 平沙玉尺辨伪总括歌 (2685字, 115KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 平砂玉尺经 (29787字, 372KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 平砂玉尺辨伪 (9162字, 240KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue47c)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 开元占经 (669557字, 1907KB)
+Font MPDFAA+SimSun is missing the following glyphs: '	' (\t)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 张果星宗 (196486字, 980KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 徐氏珞琭子赋注 (2776字, 149KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ueb8e), '' (\uee60), '' (\uef6e), '' (\ue3d0), '' (\ue65d), '' (\ue730), '' (\uec4a), '' (\uea1f), '' (\ueb77), ... (and 2 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 御定星历考原 (57498字, 478KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 心相篇 (1805字, 137KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 推背图 (3535字, 187KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 插泥剑 (4252字, 187KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue638), '' (\uecde), '' (\ued41), '' (\ue880), '' (\ueb64), '' (\uea20), '' (\ue898), '' (\ue4bf), '' (\ueaa7), '' (\ue730), ... (and 12 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 撼龙经 (26469字, 453KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 撼龙经疑龙经葬法倒杖 (30642字, 447KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue052), '' (\ue0f6), '' (\ue7a0)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 数术记遗 (3476字, 126KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 文王金钱课 (5992字, 165KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 断易天机 (119245字, 705KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 断易鬼灵经 (10542字, 241KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易冒 (112800字, 754KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易林补遗 (116453字, 789KB)
+Font MPDFAA+SimSun is missing the following glyphs: '	' (\t)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易隐 (151457字, 924KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueb91), '' (\uee60), '' (\ue645), '' (\uea20), '' (\ue5ab), '' (\uee1b), '' (\ueb8e), '' (\uee9c)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 星命总括 (21073字, 306KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea20), '' (\ue730), '' (\ueee5), '' (\ue408), '' (\ue61f), '' (\uef6e), '' (\ue645), '' (\ueb64), '' (\ue880), '' (\uea84), ... (and 12 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 星命溯源 (33646字, 416KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue730), '' (\ueb0b), '' (\ue7b5), '' (\uea5b), '' (\uea20), '' (\uecde), '' (\ue645), '' (\ueeb3), '' (\ueeb2), '' (\uee4f), ... (and 64 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 星学大成 (356974字, 1486KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue2f2)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 月波洞中记 (13302字, 286KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 月谈赋 (3959字, 179KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 本地姜地理峦头诀 (5365字, 198KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 李虚中命书 (27749字, 325KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 柳庄相法 (52315字, 459KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 梅花易数 (42075字, 469KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 正易心法 (10359字, 225KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 永乐百问 (8313字, 198KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 测字秘牒 (27097字, 655KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 海底眼 (18344字, 307KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 渊海子平 (61526字, 567KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 滴天髓阐微 (139556字, 776KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 演禽通纂 (31527字, 451KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 潜虚 (1103字, 78KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 潜虚发微论 (4845字, 134KB)
+Font MPDFAA+SimSun is missing the following glyphs: '	' (\t)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 火珠林 (22694字, 310KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue7b5), '' (\ueb12), '' (\uea80), '' (\uea20), '' (\uea9f), '' (\ueded), '' (\ue5ab), '' (\ue730), '' (\ue898), '' (\uea7b), ... (and 26 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 灵台秘苑 (86443字, 643KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue37b)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 灵城精义 (27588字, 365KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\uec41), '' (\ue730), '' (\ue5e0), '' (\ue7b5), '' (\ue5d6), '' (\ue3d0), '' (\ue898), '' (\uea20), '' (\uee60), ... (and 7 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 灵棋经 (39068字, 492KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 焦氏易林 (113210字, 964KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 焦氏易林注 (408926字, 1693KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 焦氏易诂 (85327字, 614KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\uea20), '' (\ueb3c), '' (\ue3bd), '' (\ue9d5), '' (\ue68d)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 玉照定真经 (15954字, 211KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue789), '' (\ue331), '' (\ue19b), '' (\ue08f), '' (\ue569)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 玉照神应真经 (18059字, 189KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\uee25), '' (\ue730), '' (\ue5e0), '' (\uef3f), '' (\ueb64), '' (\ue645), '' (\uea20), '' (\uef6e), '' (\uec6e), ... (and 17 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 玉管照神局 (26426字, 467KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 珞琭子三命消息赋注 (25696字, 281KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea20), '' (\uea5b), '' (\uea1f), '' (\ueee5), '' (\uea36), '' (\ueb64), '' (\ue7b5), '' (\uee06), '' (\ue730), '' (\ue880), ... (and 5 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 珞琭子赋注 (30190字, 358KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 疑龙经 (10579字, 259KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 皇极经世 (90466字, 661KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 皇极经世书 (108473字, 471KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 皇极经世心易发微 (30377字, 414KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 皇极经世观物外篇衍义 (23960字, 269KB)
+Font MPDFAA+SimSun is missing the following glyphs: '	' (\t)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 神峰通考 (161425字, 838KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 神机妙算一掌经 (12454字, 220KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 神相全编 (39113字, 502KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 神相铁关刀 (34276字, 465KB)
+Font MPDFAA+SimSun is missing the following glyphs: '	' (\t)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 禽星易见 (17787字, 281KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue009), '' (\ue003)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 秘本诸葛神数 (8204字, 247KB)
+Font MPDFAA+SimSun is missing the following glyphs: '	' (\t)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 穷通宝鉴 (33246字, 316KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 红囊经 (36528字, 458KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 葬书 (15439字, 339KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 葬法倒杖 (7448字, 219KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 蒋公字字金 (7197字, 158KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 许负相法 (3548字, 137KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 辰州符咒大全 (9538字, 243KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 遁甲演义 (43070字, 436KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 遁甲符应经 (12433字, 229KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uee60), '' (\ueb8e), '' (\ueee5), '' (\uea36), '' (\uea1f), '' (\uea20), '' (\ue3d0), '' (\ue4c7), '' (\ue4c6), '' (\ue4ca), ... (and 27 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 钦定协纪辨方书 (290527字, 1088KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 阳宅指南 (2663字, 147KB)
+Font MPDFAA+SimSun is missing the following glyphs: '	' (\t)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 青乌经 (1188字, 97KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 青囊奥语 (1330字, 93KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ueee5), '' (\uee60)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 青囊序 (2124字, 134KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue183)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 马王堆汉墓帛书五星占 (7637字, 133KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 鬼谷子神奇相法全书 (35468字, 478KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 黄金策 (103216字, 730KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueeca), '' (\ue730), '' (\uea5b), '' (\uef3f), '' (\ueb91), '' (\ue786), '' (\ue787), '' (\ue5ab), '' (\uea20), '' (\uf5f6), ... (and 68 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 三易备遗 (32880字, 324KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea20), '' (\ue868), '' (\ue224), '' (\uec43), '' (\ue74c), '' (\uee6e)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 丙子学易编 (10938字, 273KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue14a)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 东坡易传 (97241字, 507KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueb91), '' (\uea5b), '' (\uea1f), '' (\ued3f), '' (\uea20), '' (\ueee5), '' (\uee6e), '' (\uef6a), '' (\uef6e), '' (\ue730), ... (and 80 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 丰川易说 (150601字, 825KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ue7b5), '' (\ue8ee), '' (\ueb91), '' (\ue018), '' (\ue3cc), '' (\ue730), '' (\ue968), '' (\ue4c6), '' (\ue4c7), ... (and 12 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 乾坤凿度 (13001字, 293KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 了斋易说 (28375字, 314KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue4d0), '' (\ue4d1), '' (\ue4ec), '' (\ue4ed), '' (\ue4d2), '' (\ue4d3), '' (\ue4f0), '' (\ue4f1), '' (\ue4da), '' (\ue4db), ... (and 104 others)
+MERG NOT subset; don't know how to subset; dropped
+[跳过] 京氏易传
+[OK] 仲氏易 (196583字, 1086KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue4ce), '' (\uea20), '' (\ue4cf), '' (\uea1f), '' (\ue4d0), '' (\uee0d), '' (\ue4d1), '' (\uee60), '' (\ue4d2), '' (\ue4d3), ... (and 72 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 伊川易传 (138628字, 723KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue730), '' (\uea5b), '' (\ue3e7), '' (\uee6e), '' (\ue645), '' (\uea20), '' (\ue4ce), '' (\ueb91), '' (\ue1a2), '' (\ue4cf), ... (and 79 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 像象管见 (155339字, 865KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueb12), '' (\uea20), '' (\ue48c), '' (\ueb91), '' (\uea5b), '' (\uee82), '' (\ue1a2), '' (\ueb5e), '' (\uef6e), '' (\ue3e7), ... (and 26 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 儿易内仪以 (93534字, 824KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueb12), '' (\uea20), '' (\uee6e), '' (\ue730), '' (\ue3e7), '' (\uec14), '' (\ueb8e), '' (\ueb91), '' (\uea1f), '' (\ue4c6), ... (and 37 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 南轩易说 (31252字, 403KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ue730), '' (\ueeca), '' (\uea20), '' (\ue8e6), '' (\ue4ce), '' (\ue4cf), '' (\ue4d0), '' (\ue4e0), '' (\ue4ea), ... (and 58 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 卦变考略 (14227字, 239KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueb94), '' (\ue4ce), '' (\ue4cf), '' (\uea20), '' (\ue4d0), '' (\ue4d1), '' (\ue4d2), '' (\ue4d3), '' (\ue7e3), '' (\ue4d4), ... (and 136 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 厚斋易学 (431613字, 1667KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\ueb94), '' (\uec8b), '' (\uea89), '' (\ueb10), '' (\ueb91), '' (\uef5b), '' (\ue730), '' (\ue4e4), '' (\ue4d5), ... (and 92 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 原本周易本义 (66708字, 532KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue4ce), '' (\ue4cf), '' (\ue4d1), '' (\ueb8e), '' (\uea20), '' (\uf543), '' (\uecae), '' (\ue4c6), '' (\ue4c7), '' (\ue4c9), ... (and 12 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 古周易 (14899字, 244KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\uee4f), '' (\uea7a), '' (\uea20), '' (\ue221), '' (\ueb91), '' (\ue4ce), '' (\ue4cf), '' (\ue4c6), '' (\ue730), ... (and 160 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 古周易订诂 (415824字, 1725KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\uef33), '' (\uea1f), '' (\ueb55), '' (\ue3e7), '' (\ueb64), '' (\ue68d), '' (\ueb91), '' (\ue4ce), '' (\uedf6), ... (and 126 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 叶八白易传 (184968字, 1325KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef6e), '' (\uea5b), '' (\uecfc), '' (\ue4ce), '' (\uea20), '' (\uedab), '' (\ue730), '' (\ue645), '' (\ue9d4), '' (\ue4cf), ... (and 155 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 合订删补大易集义粹言 (918041字, 2641KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea1f), '' (\ueeba), '' (\ue730), '' (\ue4ce), '' (\ue4cf), '' (\ue4d0), '' (\ue4d1), '' (\ue4d2), '' (\ue4d3), '' (\ue4d4), ... (and 65 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 启蒙意见 (35157字, 281KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\uee4f), '' (\uee60), '' (\ue4ce), '' (\ueee5), '' (\uef5b), '' (\ue4cf), '' (\uea1f), '' (\uea20), '' (\ueb25), ... (and 72 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 吴园周易解 (51836字, 500KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue0b3)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易 (35192字, 351KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ue7b5), '' (\ue5ab), '' (\uea1f), '' (\uea20)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易举正 (11118字, 223KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\ued6e), '' (\uecfc), '' (\uebf8), '' (\ue4bf), '' (\ue4ce), '' (\ueb91), '' (\ueeba), '' (\uea20), '' (\ue787), ... (and 95 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易义海撮要 (214743字, 1005KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\uea5b), '' (\uea20), '' (\uea89), '' (\ueb94), '' (\ueb91), '' (\uee67), '' (\ued5f), '' (\ue730), '' (\uee60), ... (and 165 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易会通 (659985字, 2090KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ue4ce), '' (\ueb91), '' (\ue4cf), '' (\ueb4a), '' (\uea1f), '' (\uea20), '' (\ue4d0), '' (\ue6a2), '' (\ue4d1), ... (and 75 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易传义合订 (158250字, 898KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\ueb12), '' (\ueb10), '' (\uebdb), '' (\ue3e7), '' (\uea89), '' (\uef5b), '' (\uea20), '' (\uee4f), '' (\ueb91), ... (and 163 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易传义大全 (616983字, 1934KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ueb91), '' (\uef33), '' (\ueafc), '' (\uedc2), '' (\ueb94), '' (\ue67a), '' (\ue730), '' (\uedb0), '' (\ueaba), ... (and 128 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易传义附录 (352413字, 1337KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\ueee5), '' (\uee4f), '' (\ueb91), '' (\ueb94), '' (\ue3e7), '' (\uecfc), '' (\uee67), '' (\uf530), '' (\uee0d), ... (and 105 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易传注 (125945字, 876KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uee6e), '' (\ue730), '' (\uea20), '' (\ue3e7), '' (\ue645), '' (\uef6a), '' (\uea1f), '' (\uee1e), '' (\uee1b), '' (\ued65), ... (and 26 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易像象述 (183247字, 913KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueb94), '' (\ueb8e), '' (\ue749), '' (\uee6e), '' (\uee0d), '' (\ue511), '' (\uea5b), '' (\ueb25), '' (\ued43), '' (\uec81), ... (and 199 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易函书约存 (630725字, 2159KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\ueb12), '' (\ue4ce), '' (\ue4cf), '' (\uea1f), '' (\uea20), '' (\ue4d5), '' (\ue4d1), '' (\ue4d2), '' (\ue4d3), ... (and 68 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易卦爻经传训解 (53703字, 441KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueee5), '' (\uea5b), '' (\ue4ce), '' (\ue4cf), '' (\uea20), '' (\ue4d0), '' (\ueb94), '' (\ue4d1), '' (\uec93), '' (\ue4d2), ... (and 75 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易参义 (127424字, 732KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue4ce), '' (\ue4cf), '' (\ue4d0), '' (\ue4d1), '' (\ue1a2), '' (\ue4e7), '' (\ue4ea), '' (\ue4ec), '' (\ue4f1), '' (\ue4f3), ... (and 3 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易口义 (221964字, 940KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea1f), '' (\uea5b), '' (\ue4ce), '' (\uecb7), '' (\ue4cf), '' (\uea20), '' (\ue4d0), '' (\ued6b), '' (\ue4d1), '' (\ue4d2), ... (and 70 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易口诀义 (56579字, 510KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\ue787), '' (\ueb91), '' (\uea20), '' (\uea55), '' (\ue786), '' (\uea89), '' (\ueacf), '' (\ued5f), '' (\ueb94), ... (and 1 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易古占法 (5471字, 152KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueb91), '' (\uef6e), '' (\uea5b), '' (\uea20), '' (\ue786), '' (\ue787), '' (\ue4c6), '' (\ue4cd), '' (\ue4cb), '' (\ue4c8), ... (and 101 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易启蒙翼传 (124551字, 910KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue4ce), '' (\ue786), '' (\ue4cf), '' (\ue787), '' (\uea20), '' (\ueb8e), '' (\ueb91), '' (\ue4d0), '' (\ue4d1), '' (\ue3bd), ... (and 107 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易图书质疑 (122789字, 751KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uecc6), '' (\ue730), '' (\ue787), '' (\ue786), '' (\uea20), '' (\ueb88)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易图说 (11793字, 222KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueb94), '' (\uef33), '' (\uea1f), '' (\ue786), '' (\ue787), '' (\uecfc), '' (\uee4f), '' (\ue4ce), '' (\uee60), '' (\uea89), ... (and 94 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易孔义集说 (311476字, 1273KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易尚氏学 (159081字, 874KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea1f), '' (\ue4fb), '' (\uee00), '' (\ue4ed), '' (\ue730), '' (\ue4de), '' (\uef3a), '' (\ue7b5), '' (\uea60), '' (\ue7da)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易干凿度 (16050字, 241KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue3e7), '' (\uea1f), '' (\ue786), '' (\uedbb), '' (\ueb94), '' (\ueee5), '' (\ued5a), '' (\uef33), '' (\uebf8), '' (\ue787), ... (and 29 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易总义 (129443字, 714KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ue4ce), '' (\ue3e7), '' (\ued35), '' (\ue4cf), '' (\uea1f), '' (\uef6e), '' (\uea20), '' (\uecc6), '' (\ue4d0), ... (and 77 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易文诠 (130620字, 783KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\ued64), '' (\uee0d), '' (\uea55), '' (\ueb32), '' (\ue4ce), '' (\uea93), '' (\ued5f), '' (\ueb94), '' (\uef5b), ... (and 72 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易新讲义 (73679字, 540KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue4ce), '' (\ue4cf), '' (\uea1f), '' (\uea20), '' (\ue4d0), '' (\ue4d1), '' (\uec6b), '' (\ue2b4), '' (\ue4d2), '' (\ue4d3), ... (and 79 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易易简说 (53109字, 467KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易本义 (81401字, 523KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ue730), '' (\ue4ce), '' (\uef6a), '' (\ue4cf), '' (\ue787), '' (\uea20), '' (\ue4d0), '' (\ue4d1), '' (\ue4d2), ... (and 68 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易本义通释 (151304字, 738KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueb91), '' (\ue4ce), '' (\ue786), '' (\uef6e), '' (\ue4cf), '' (\ue787), '' (\uea20), '' (\ue4d0), '' (\ueb48), '' (\ue4d1), ... (and 77 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易本义集成 (251002字, 1011KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\ued5a), '' (\ueb10), '' (\uee60), '' (\ueb94), '' (\uebc2), '' (\ueaa7), '' (\ueee5), '' (\uea55), '' (\uedc2), ... (and 18 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易札记（明逯中立） (36636字, 442KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ueb91), '' (\uef5b), '' (\ue645), '' (\ue898), '' (\ue4ca), '' (\ue3d0), '' (\uebf8)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易札记（清杨名时） (23046字, 355KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易杭氏学 (157172字, 828KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue110)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易正义 (290209字, 984KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ueb91), '' (\uef6e), '' (\ue730), '' (\ue4ce), '' (\uef6a), '' (\ueba7), '' (\ue4cf), '' (\uea1f), '' (\uea20), ... (and 88 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易注 (75792字, 582KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\uee0d), '' (\uea89), '' (\uebf8), '' (\uea1f), '' (\uef6e), '' (\ue4be), '' (\ued5a), '' (\ueeba), '' (\uedb2), ... (and 122 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易注疏 (277033字, 1190KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueb91), '' (\ue4c6), '' (\ue4c9), '' (\ue730), '' (\uea5b), '' (\ue7db), '' (\ue966), '' (\ue004), '' (\ue4ce), '' (\uedab), ... (and 145 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易洗心 (184941字, 982KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易浅述 (222460字, 932KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea89), '' (\ue4d0), '' (\ue4e0), '' (\ueb55), '' (\ueb91), '' (\uea93), '' (\ued78), '' (\ue4d1), '' (\uecf3), '' (\uea5b), ... (and 95 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易浅释 (105730字, 708KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\uef3f), '' (\ue898), '' (\ueeba), '' (\uebe3), '' (\ueb94), '' (\uea20), '' (\uea5b), '' (\ue7b5), '' (\ue3e7), ... (and 108 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易爻变易缊 (111107字, 875KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue3e7), '' (\ue4ce), '' (\ue4cf), '' (\uea1f), '' (\uea20), '' (\ue4d0), '' (\ue4d1), '' (\ue4d2), '' (\ue4d3), '' (\ue1a2), ... (and 68 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易玩辞 (129975字, 794KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue7b5), '' (\uea20), '' (\uedab), '' (\ue4ce), '' (\ue4cf), '' (\ued3f), '' (\ue8e5), '' (\uea76), '' (\ueeca), '' (\ue4de), ... (and 99 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易玩辞困学记 (277884字, 1465KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea20), '' (\ue645), '' (\ueeca), '' (\ue4ce), '' (\ue4cf), '' (\uea1f), '' (\ue4d0), '' (\ue4d1), '' (\ue4d2), '' (\ue4d3), ... (and 78 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易玩辞集解 (246620字, 1186KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易略例 (3854字, 113KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易禅解 (125841字, 719KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\uee60), '' (\uec10), '' (\uef33), '' (\ueb9c), '' (\ueb91), '' (\ue004), '' (\ueb94), '' (\uea20), '' (\uecae), ... (and 114 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易程朱传义折衷 (251979字, 1073KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\uee4f), '' (\uee0d), '' (\uea89), '' (\uee67), '' (\ue7b5), '' (\uebb2), '' (\ueb2b), '' (\ue730), '' (\uea35), ... (and 20 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易稗疏 (18346字, 410KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\uea5b), '' (\uee60), '' (\ueb12), '' (\uea89), '' (\ueb94), '' (\ued6a), '' (\uec78), '' (\uea20), '' (\ue4ce), ... (and 100 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易窥余 (114212字, 734KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue730), '' (\uea55), '' (\ueb94), '' (\uea89), '' (\ued64), '' (\uef5b), '' (\uef33), '' (\uea20), '' (\ueb91), '' (\uec8b), ... (and 4 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易章句外编 (8176字, 255KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\uea20), '' (\ue4ce), '' (\ue4cf), '' (\ue221), '' (\ue4d0), '' (\ue4d1), '' (\ue4d2), '' (\ue4d3), '' (\ueb37), ... (and 118 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易章句证异 (91817字, 747KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\uebe7), '' (\uea5b), '' (\uee60), '' (\ueb91), '' (\uea20), '' (\ued9b), '' (\ue3e7), '' (\uea89), '' (\uef5b), ... (and 116 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易筮述 (107129字, 823KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueb94), '' (\uef33), '' (\ueb12), '' (\ue1a2), '' (\ued64), '' (\ued5f), '' (\uee48), '' (\uee6e), '' (\uec0d), '' (\uedcd), ... (and 84 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易经传集解 (297942字, 1250KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ueb91), '' (\ue4ce), '' (\uea20), '' (\ued3f), '' (\ue4cf), '' (\uea1f), '' (\ue4d0), '' (\ue3cc), '' (\ue4d1), ... (and 98 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易衍义 (250541字, 1209KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueb12), '' (\uef33), '' (\uebe7), '' (\ueb94), '' (\uea92), '' (\uef6e), '' (\uef0c), '' (\uea1f), '' (\uea20), '' (\uee4f), ... (and 112 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易要义 (107917字, 712KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uedcd), '' (\uef69), '' (\ue4ce), '' (\uef6a), '' (\ue4cf), '' (\uea1f), '' (\uea20), '' (\ue4d0), '' (\ue4d1), '' (\ue4d2), ... (and 76 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易观彖 (104108字, 666KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ue96f), '' (\uef2a), '' (\uee4f), '' (\ue93f), '' (\uea20), '' (\ued00), '' (\ueb8e), '' (\ue8e5), '' (\uef6e), ... (and 85 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易象旨决录 (133609字, 824KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\ueb94), '' (\ued95), '' (\ue4cf), '' (\ue786), '' (\ue787), '' (\ue4c6), '' (\ue4c7), '' (\ue4c8), '' (\ue4ca), ... (and 172 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易象辞 (358707字, 1730KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\uef33), '' (\ueb94), '' (\ueda7), '' (\ueb10), '' (\ueee5), '' (\uedeb), '' (\ue4ce), '' (\uee4f), '' (\ue730), ... (and 146 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易辑闻 (180759字, 1083KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易辨录 (77730字, 614KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue749), '' (\uef33), '' (\uea20), '' (\uee6e), '' (\uee60), '' (\ue4ce), '' (\ue786), '' (\ue787), '' (\uf65e), '' (\uee67), ... (and 125 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易辨画 (259751字, 1107KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue867), '' (\ue4ce), '' (\ueb91), '' (\uea1f), '' (\uedbb), '' (\ue4cf), '' (\uea20), '' (\ue4d0), '' (\ue4d1), '' (\ue4d2), ... (and 80 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易辩录 (77601字, 615KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue4ce), '' (\ue4cf), '' (\ue4d0), '' (\ue4d1), '' (\ue4d2), '' (\ue4d3), '	' (\t), '' (\ue4d4), '' (\ue4d5), '' (\ue4d6), ... (and 44 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易述 (327238字, 1188KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef6e), '' (\uea20), '' (\ue1a2), '' (\ued3f), '' (\ueeca), '' (\ue3e7), '' (\ueb8e), '' (\uea1f), '' (\ue898)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易通论 (46258字, 417KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易郑康成注 (11032字, 288KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue250)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易阐真 (105715字, 666KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ue4ce), '' (\ueb91), '' (\ue4cf), '' (\uea1f), '' (\uea20), '' (\ue4d0), '' (\ue4d1), '' (\ue4d2), '' (\ue4d3), ... (and 86 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易集传 (94100字, 714KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\uee60), '' (\uea89), '' (\ueb91), '' (\ueb3c), '' (\uea5b), '' (\ueeca), '' (\ueb45), '' (\uef5b), '' (\ued64), ... (and 138 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易集注 (242504字, 1057KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue17e)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易集解 (183662字, 828KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uec10), '' (\ueb91), '' (\uea5b), '' (\ue4ce), '' (\ueee5), '' (\ue4cf), '' (\uea20), '' (\ue4d0), '' (\ueb94), '' (\ue4d1), ... (and 112 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易集说 (222059字, 1064KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uee4f), '' (\ue4ce), '' (\uea20), '' (\ueb94), '' (\ue9d0), '' (\ue4cf), '' (\uf185), '' (\ueade), '' (\ue4d0), '' (\uec38), ... (and 113 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易音义 (32431字, 555KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\uea20), '' (\ue881), '' (\uedb6), '' (\ue808), '' (\ue951), '' (\uea91), '' (\uec6e), '' (\ue730), '' (\uef6e), ... (and 5 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 增补郑氏周易 (16327字, 336KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue4ce), '' (\ueb91), '' (\ue4cf), '' (\uea20), '' (\ue4d0), '' (\ue4d1), '' (\ue4d2), '' (\ue4d3), '' (\ue4d4), '' (\ue4d5), ... (and 60 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 复斋易说 (26730字, 349KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueb91), '' (\uebb0), '' (\uea5b), '' (\ue4ce), '' (\uef6e), '' (\ue786), '' (\ue787), '' (\ue645), '' (\ue4cf), '' (\uea1f), ... (and 92 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 大易择言 (319525字, 1278KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ued5f), '' (\ue730), '' (\uea20), '' (\ued84), '' (\ue4c6), '' (\ueb94), '' (\ueced), '' (\ue4ce), '' (\uee4f), '' (\ueba1), ... (and 90 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 大易粹言 (448052字, 1525KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ue730), '' (\ued8b), '' (\uea20), '' (\ue4d0), '' (\ue4d1), '' (\ue4d2), '' (\ue4d3), '' (\ue4d4), '' (\ue4d5), ... (and 92 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 大易缉说 (156998字, 816KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 大易象数钩深图 (21265字, 282KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueb91), '' (\uea89), '' (\uee60), '' (\ueb94), '' (\uef33), '' (\ueb3c), '' (\ued5a), '' (\ueebb), '' (\uea1f), '' (\ueeca), ... (and 130 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 大易通解 (347600字, 1253KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue4cf), '' (\ue4d0), '' (\ue4d1), '' (\ue4d2), '' (\ue4d3), '' (\ue4d4), '' (\ue4d5), '' (\ue4d6), '' (\ue4d7), '' (\ue4d8), ... (and 54 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 子夏易传 (85918字, 527KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\uea89), '' (\uee6e), '' (\uf530), '' (\ued43), '' (\ue786), '' (\ue787), '' (\uea1f), '' (\ue4c6), '' (\ue4c7), ... (and 89 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 学易初津 (31488字, 386KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\uee0d), '' (\ueb91), '' (\uef33), '' (\ueb94), '' (\uef5b), '' (\uea20), '' (\uebe7), '' (\ue4ce), '' (\uee4f), ... (and 97 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 学易记 (177732字, 935KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 御纂周易折中 (584454字, 1786KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue4ce), '' (\ue4cf), '' (\uea20), '' (\ue4d0), '' (\ue4d1), '' (\ue4d2), '' (\ue4d3), '' (\uef6a), '' (\ue4d4), '' (\ue4d5), ... (and 75 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 御纂周易述义 (130339字, 793KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueb8e), '' (\uea20), '' (\uea1f), '' (\uebf7), '' (\ued3f), '' (\ue8b5), '' (\uef3f), '' (\ue73b), '' (\ue9a0), '' (\ue1a2), ... (and 17 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 惠氏易说 (54246字, 642KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue730), '' (\ue4d8), '' (\ue4f6), '' (\ue4d9), '' (\ue4f7), '' (\ue4e1), '' (\ue4fa), '' (\ue50b), '' (\ue4fb), '' (\uea20), ... (and 59 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 推易始末 (21055字, 252KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueb7c), '' (\ue730), '' (\uee08), '' (\ueb8e), '' (\uef6e), '' (\uea89), '' (\uee28), '' (\uf75e), '' (\ueb94), '' (\ue3e7), ... (and 125 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 文公易说 (292517字, 1232KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue514)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 新本郑氏周易 (19374字, 336KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\uea1f), '' (\ue0aa), '' (\uee60), '' (\ue787), '' (\ue786), '' (\ue3e7), '' (\ue730), '' (\ue4e4), '' (\ue4d5), ... (and 122 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 日讲易经解义 (300677字, 1294KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\ueb12), '' (\ueee5), '' (\uea20), '' (\uee60), '' (\uee0d), '' (\uef3f), '' (\ued41), '' (\ued9e), '' (\ue730), ... (and 119 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易义古象通 (108354字, 921KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue4c9), '' (\ue4cc), '' (\ue4c7), '' (\uea20), '' (\ue3e7), '' (\ue7b5)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易传灯 (24547字, 303KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ue730), '' (\uea20), '' (\ue951), '' (\uef6e), '' (\ued6e), '' (\uea1f), '' (\ue004), '' (\ue1a2), '' (\uecc6), ... (and 11 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易例 (29791字, 376KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\ued5a), '' (\ueee5), '' (\uea5b), '' (\uea20), '' (\ue4ce), '' (\ue4cf), '' (\ue4d0), '' (\ue4d2), '' (\ue4d4), ... (and 81 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易俟 (141915字, 878KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\uee4f), '' (\ueb12), '' (\uecf0), '' (\uee67), '' (\ued6c), '' (\uef6e), '' (\uecfc), '' (\uea20), '' (\ueaa1), ... (and 162 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易像钞 (161991字, 1058KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易原 (140063字, 786KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea2b), '' (\uee6e), '' (\ue4ce), '' (\uef6e), '' (\ue3bd), '' (\ueb91), '' (\uef6a), '' (\ue4cf), '' (\uea1f), '' (\uea20), ... (and 81 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易原就正 (163211字, 830KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ueb91), '' (\ue4ce), '' (\ue4cf), '' (\ueb3c), '' (\uea20), '' (\ue4d0), '' (\ue4d1), '' (\ue4d2), '' (\ue4d3), ... (and 67 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易变体义 (96177字, 583KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue787), '' (\ue4e5), '' (\ue4f9), '' (\ue4d4), '' (\ue4da), '' (\ue4dc), '' (\ue4d7), '' (\ue4dd), '' (\ue4d6), '' (\ue4d5), ... (and 55 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易图明辨 (104739字, 761KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ue4c6), '' (\ue4d8), '' (\ue4ef), '' (\ue4d6), '' (\ue4d2), '' (\ue4db), '' (\ue4e7), '' (\ue4f8), '' (\ue4ce), ... (and 67 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易图说 (10586字, 158KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueb07), '' (\uea5b), '' (\uec0c), '' (\uea20), '' (\ueb91), '' (\uee6e), '' (\ueb8e), '' (\uef3f), '' (\ue3e7), '' (\ue730), ... (and 22 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易图通变 (30643字, 334KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ueb91), '' (\uea20), '' (\ueb8e), '' (\uea1f), '' (\uef6e), '' (\uef6a), '' (\ue898), '' (\ue3e7), '' (\ueeca), ... (and 9 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易学变通 (38696字, 352KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uee60), '' (\uea5b), '' (\uef33), '' (\uef6e), '' (\uecfc), '' (\uee4f), '' (\uea20), '' (\ueb91), '' (\uef5b), '' (\ueb55), ... (and 51 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易学启蒙小传 (10517字, 204KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ueb91), '' (\ue4ce), '' (\ue4f8), '' (\ue4db), '' (\ue4ef), '' (\ue4d6), '' (\ue4d2), '' (\ue4e7), '' (\ue4d8), ... (and 63 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易学启蒙通释 (59446字, 381KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易学滥觞 (10557字, 240KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\uea84), '' (\ueb45), '' (\ueb91), '' (\uea20), '' (\ue1a2), '' (\uedcc), '' (\ue4c6), '' (\ue4c7), '' (\ue4c8), ... (and 95 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易学象数论 (69831字, 537KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易学辨惑 (7012字, 270KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\uee48), '' (\uebe7), '' (\ue4ce), '' (\ue4ec), '' (\ue4cf), '' (\ue4ee), '' (\ue4d0), '' (\ue4f0), '' (\ue4d2), ... (and 99 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易小传 (114158字, 649KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef3f), '' (\uea23), '' (\ue7b5), '' (\uea20), '' (\ue4dd), '' (\ue4e3), '' (\ue50a), '' (\ue4e5), '' (\ue4e0), '' (\ue730), ... (and 15 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易小帖 (35445字, 455KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易数钩深图 (14582字, 182KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ue7b5), '' (\ue730), '' (\ueb12), '' (\ue4ce), '' (\ue4f9), '' (\ue4ee), '' (\ue4d9), '' (\ue4e4), '' (\ue4f0), ... (and 3 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易数钩隐图 (14688字, 213KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ue7b5), '' (\uea20), '' (\ue730), '' (\ue898), '' (\ueb8e), '' (\uf70f), '' (\ue786), '' (\ue787), '' (\uea1f)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易汉学 (43273字, 484KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ueb91), '' (\ue4ce), '' (\ue4cf), '' (\ue4ea), '' (\ue4eb), '' (\ue4e8), '' (\ue4e9), '' (\ue50a), '' (\ue50b), ... (and 82 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易源奥义 (121738字, 725KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ue4d3), '' (\ue4d4), '' (\ue4e2), '' (\ue4f3), '' (\ue4f4), '' (\ue4d1), '' (\ue4f0), '' (\ue4f1), '' (\ue4d5), ... (and 60 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易璇玑 (18038字, 274KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\ueb91), '' (\uea5b), '' (\ue4ce), '' (\ued5a), '' (\uee4f), '' (\ue4cf), '' (\uea93), '' (\uea1f), '' (\uea20), ... (and 65 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易用 (57890字, 575KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易童子问 (9935字, 169KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\uebe7), '' (\uee4f), '' (\ueb91), '' (\ue5ab), '' (\ue4ce), '' (\uea89), '' (\ueb64), '' (\ueb94), '' (\ued5f), ... (and 130 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易笺 (140245字, 858KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue094)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易筮通变 (16122字, 224KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ueb12), '' (\uef6c), '' (\ue4ce), '' (\ue5ab), '' (\uedab), '' (\ueb91), '' (\uea1f), '' (\ue4cf), '' (\uea20), ... (and 79 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易精蕴大义 (127621字, 707KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ue786), '' (\ue787), '' (\ue4c6), '' (\ue4cd), '' (\ue4cb), '' (\ue4c8), '' (\ue4c9), '' (\ue4ca), '' (\ue4cc), ... (and 95 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易纂言 (206062字, 990KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\uef6e), '' (\uea20), '' (\ue880), '' (\ue9d4), '' (\ueb8e), '' (\ue5aa), '' (\ueefe), '' (\ue4bf), '' (\ue730), ... (and 13 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易纂言外翼 (55758字, 514KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易纂言外翼洛书说 (1478字, 67KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易纬乾元序制记 (3660字, 113KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易纬坤灵图 (839字, 58KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易纬是类谋 (7888字, 211KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易纬略义 (6747字, 91KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ueb91), '' (\ue7b5), '' (\ue730), '' (\uf5f6), '' (\ued6a)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易纬稽览图 (18779字, 241KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易纬辨终备 (1870字, 108KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue7b5)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易纬通卦验 (13878字, 278KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue4ce), '' (\ue786), '' (\ue787), '' (\uea5b), '' (\uee60), '' (\ue68d), '' (\ue645), '' (\uea20), '' (\ued0e), '' (\ue4cf), ... (and 106 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易经存疑 (249944字, 1155KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea81), '' (\uecd8), '' (\uea93), '' (\ueb32), '' (\ueb94), '' (\uea20), '' (\uecfc), '' (\ue4ce), '' (\ueebb), '' (\ue787), ... (and 154 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易经蒙引 (464907字, 1674KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ueb91), '' (\uea20), '' (\ue7b5), '' (\ue1a2), '' (\ue730), '' (\ue3e7), '' (\ue898), '' (\uea1f), '' (\ueeca)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易经衷论 (35332字, 416KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易经证释 (97116字, 485KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uec4d), '' (\uea20), '' (\uef33), '' (\uea33), '' (\uee60), '' (\uee0d), '' (\uee4f), '' (\ued5a), '' (\ueb94), '' (\uea50), ... (and 100 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易经通注 (105451字, 787KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ued3f), '' (\ue4ce), '' (\uea20), '' (\ued5a), '' (\ueb3c), '' (\ue4cf), '' (\uea1f), '' (\ueb25), '' (\uea55), '' (\ue4d0), ... (and 80 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易翼传 (59604字, 504KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue4ce), '' (\ued5a), '' (\ue786), '' (\ued5f), '' (\ued43), '' (\uef33), '' (\uea20), '' (\uef5b), '' (\ue749), '' (\uef0c), ... (and 100 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易翼宗 (100446字, 728KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea20), '' (\uea1f), '' (\ueb91), '' (\uee6e), '' (\ueee5), '' (\ue730), '' (\ue888), '' (\ue514), '' (\ueb8e), '' (\uf589), ... (and 89 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易翼说 (118948字, 777KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue004), '' (\ueb91), '' (\uea5b), '' (\ued3f), '' (\ue4ce), '' (\ue645), '' (\ue4cf), '' (\uea1f), '' (\uea20), '' (\ue4d0), ... (and 74 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易翼述信 (194172字, 969KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue730), '' (\ue7b5), '' (\ue4ce), '' (\ue4cf), '' (\ue4e8), '' (\ue50b), '' (\ue4ea), '' (\ue4e9), '' (\ue50a), '' (\ue4eb), ... (and 60 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易裨传 (14408字, 203KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\ueb94), '' (\uea5b), '' (\ued43), '' (\ueee5), '' (\ueb12), '' (\uee67), '' (\ued1d), '' (\uea20), '' (\ue730), ... (and 94 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易象义 (179586字, 847KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueb91), '' (\uea5b), '' (\uef6e), '' (\uee82), '' (\ueeca), '' (\ued65)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易象大意存解 (15857字, 308KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueb12), '' (\ue786), '' (\ue787), '' (\uef33), '' (\uf5f6), '' (\ueb91), '' (\ue4c6), '' (\ue4c7), '' (\uee60), '' (\uebf8), ... (and 7 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易象意言 (9309字, 167KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\uea89), '' (\ueb91), '' (\uea55), '' (\ue7b5), '' (\ue950), '' (\uec23), '' (\uea5b), '' (\uf75e), '' (\ue1a1), ... (and 126 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易象正 (280366字, 1490KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueb91), '' (\ue4bf), '' (\uea20), '' (\ue4ce), '' (\uef6a), '' (\ue4cf), '' (\ue898), '' (\ued6a), '' (\ue4d0), '' (\ue4d1), ... (and 76 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易象钩解 (42873字, 468KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue4ce), '' (\uecb7), '' (\ue4cf), '' (\uea1f), '' (\uea20), '' (\ue4d0), '' (\ue4e3), '' (\ue4d2), '' (\ue4d3), '' (\ue1a2), ... (and 66 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易通 (65958字, 487KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\uea89), '' (\uee0d), '' (\uedbb), '' (\ueb94), '' (\uea5b), '' (\uee4f), '' (\ueb91), '' (\ue004), '' (\uef6e), ... (and 132 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易酌 (252783字, 1262KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\uee4f), '' (\ued5f), '' (\uea4c), '' (\uea5b), '' (\ueb91), '' (\ue4ce), '' (\ue4c6), '' (\ue4c7), '' (\ueb94), ... (and 110 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易附录纂注 (205675字, 963KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue4e1), '' (\ue4d9), '' (\uecc6), '' (\ue730), '' (\ue4e0), '' (\ue4d0), '' (\ue4d5), '' (\ue4db), '' (\ue4ce), '' (\ue4df), ... (and 31 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 春秋占筮书 (16919字, 313KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueb10), '' (\uebaf), '' (\ueb94), '' (\ue4ce), '' (\uea93), '' (\uee0d), '' (\ued5a), '' (\ueee7), '' (\uea55), '' (\uef5b), ... (and 81 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 杨氏易传 (124148字, 706KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 横渠易说 (72893字, 506KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\uef33), '' (\ueb91), '' (\uea89), '' (\uef3f), '' (\ueee5), '' (\ueb94), '' (\uebe7), '' (\uedb0), '' (\ue11b), ... (and 134 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 汉上易传 (224159字, 1055KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\uea20), '' (\ue4ce), '' (\ue4ed), '' (\ue4cf), '' (\ue4ef), '' (\ue4d1), '' (\ue4f1), '' (\ue4d3), '' (\ue4f3), ... (and 81 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 淙山读周易 (192301字, 850KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueb12), '' (\uec25), '' (\ue730), '' (\uea20), '' (\ue4ce), '' (\ue4cf), '' (\uea1f), '' (\ue4d0), '' (\ue4d1), '' (\ue4d2), ... (and 67 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 温公易说 (45993字, 496KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uf5f6), '' (\ueb10), '' (\uea5b), '' (\ueb91), '' (\ue3e7), '' (\ue4ce), '' (\uecb7), '' (\uea20), '' (\ue4cf), '' (\uea1f), ... (and 89 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 用易详解 (126246字, 806KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea20), '' (\ueb8e), '' (\ue730), '' (\ue787), '' (\ue786), '' (\ue4e4), '' (\ue4d5), '' (\ue4dd), '' (\ue4dc), '' (\ue4d4), ... (and 93 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 田间易学 (305791字, 1313KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue3e7), '' (\ued3f), '' (\ue4ce), '' (\ue4cf), '' (\uea1f), '' (\ued43), '' (\uea20), '' (\ue4d0), '' (\ue4d1), '' (\uef6e), ... (and 100 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 童溪易传 (225103字, 1037KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\uef33), '' (\ued6e), '' (\ue4ce), '' (\uea89), '' (\ueb45), '' (\ued5a), '' (\ueb4a), '' (\uea93), '' (\uef5b), ... (and 113 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 紫岩易传 (153620字, 809KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue3cc), '' (\uef6e), '' (\uea20), '' (\ue730), '' (\ue3e7), '' (\ue5ab), '' (\uebac), '' (\ue966), '' (\ue4ce), '' (\uee6e), ... (and 66 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 西谿易说 (86670字, 650KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue4ce), '' (\ue4d9), '' (\ue50c), '' (\uea20), '' (\ue4c6), '' (\ue4cf), '' (\uea1f), '' (\ue4d0), '' (\ue4d1), '' (\ue4d2), ... (and 77 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 诚斋易传 (147669字, 893KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\uea5b), '' (\ueb12), '' (\uee60), '' (\ueb3c), '' (\ue730), '' (\ueee5), '' (\uee0d), '' (\ueb25), '' (\uebdd), ... (and 65 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 读易举要 (42581字, 461KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea89), '' (\uea5b), '' (\uef33), '' (\uea1f), '' (\uef3f), '' (\ueb12), '' (\uef5b), '' (\ueb91), '' (\ueb94), '' (\ueee5), ... (and 39 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 读易余言 (52943字, 607KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\uec43), '' (\ued92), '' (\ueb91), '' (\uea89), '' (\uef6e), '' (\uea55), '' (\ued43), '' (\ue4ce), '' (\uea5b), ... (and 91 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 读易大旨 (82235字, 641KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue4ce), '' (\ue787), '' (\uec8c), '' (\ue4cf), '' (\uea1f), '' (\uecc6), '' (\uea20), '' (\ue4d0), '' (\ue4d1), '' (\ue867), ... (and 78 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 读易日钞 (151874字, 805KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\ueb91), '' (\uee4f), '' (\uee0d), '' (\uea5b)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 读易私言 (4027字, 125KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueb91), '' (\uea5b), '' (\uea1f), '' (\uea20), '' (\uee1e), '' (\ueb9d), '' (\ue1a2), '' (\uea23), '' (\uec14), '' (\uef6e), ... (and 19 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 读易纪闻 (97008字, 763KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uea5b), '' (\ueb12), '' (\ueb3f), '' (\ue786), '' (\ue787)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 读易考原 (14610字, 168KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueb91), '' (\ue4ce), '' (\uec93), '' (\uea20), '' (\uef6e), '' (\uea33), '' (\ue4cf), '' (\uea1f), '' (\ue4d0), '' (\ue4d1), ... (and 124 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 读易详说 (111393字, 769KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\uef33), '' (\uee60), '' (\uee4f), '' (\uea89), '' (\uea55), '' (\ueee5), '' (\ue4ce), '' (\uea20), '' (\ueb94), '' (\ueb55), ... (and 126 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 读易述 (324002字, 1328KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ueeca), '' (\ueb12), '' (\uea20), '' (\ue730), '' (\uebcc), '' (\uee1d), '' (\ue5e2), '' (\ue5e0), '' (\ue4bf), '' (\ue3e7)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 赵氏易说 (37148字, 353KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 连山易 (11290字, 238KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ued5a), '' (\ue4ce), '' (\uea20), '' (\uef5b), '' (\ueb91), '' (\ue4cf), '' (\uea1f), '' (\ue4d0), '' (\ue4d1), '' (\ueaba), ... (and 80 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 郭氏传家易说 (159388字, 801KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue4cf), '' (\ue4d0), '' (\ue4d1), '' (\ue4d3), '' (\ue4d4), '' (\ue4d6), '' (\ue4d7), '' (\ue4d8), '' (\ue4d9), '' (\ue4da), ... (and 50 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 陆氏易解 (7289字, 188KB)
+======================
+重下载完成: 314 本

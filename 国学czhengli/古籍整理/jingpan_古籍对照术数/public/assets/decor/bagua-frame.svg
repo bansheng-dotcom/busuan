@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label=")kf">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#C8A967" stop-opacity=".2"/>
+      <stop offset="100%" stop-color="#C8A967" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="200" cy="200" r="198" fill="url(#g)"/>
+  <circle cx="200" cy="200" r="188" fill="none" stroke="#3A2E5C" stroke-opacity=".25"/>
+  <circle cx="200" cy="200" r="118" fill="none" stroke="#C8A967" stroke-opacity=".55"/>
+  <!-- -�*� -->
+  <g transform="translate(200 200)">
+    <circle r="48" fill="#2c2416"/>
+    <path d="M0-48a48 48 0 0 1 0 96 24 24 0 0 1 0-48 24 24 0 0 0 0-48z" fill="#f7f0de"/>
+    <circle cy="-24" r="8" fill="#f7f0de"/>
+    <circle cy="24" r="8" fill="#2c2416"/>
+  </g>
+  <!-- kf;�dQ~Nn�W�E
+ -->
+  <g fill="#2c2416" font-family="serif" font-size="14" text-anchor="middle">
+    <g transform="translate(200 48)">
+      <text y="-8" fill="#C8A967">�</text>
+      <rect x="-16" y="0" width="32" height="5"/><rect x="-16" y="9" width="12" height="5"/><rect x="4" y="9" width="12" height="5"/><rect x="-16" y="18" width="32" height="5"/>
+    </g>
+    <g transform="translate(302 90)">
+      <text y="-8" fill="#C8A967">d</text>
+      <rect x="-16" y="0" width="12" height="5"/><rect x="4" y="0" width="12" height="5"/><rect x="-16" y="9" width="12" height="5"/><rect x="4" y="9" width="12" height="5"/><rect x="-16" y="18" width="12" height="5"/><rect x="4" y="18" width="12" height="5"/>
+    </g>
+    <g transform="translate(340 200)">
+      <text y="-8" fill="#C8A967">L</text>
+      <rect x="-16" y="0" width="32" height="5"/><rect x="-16" y="9" width="32" height="5"/><rect x="-16" y="18" width="12" height="5"/><rect x="4" y="18" width="12" height="5"/>
+    </g>
+    <g transform="translate(302 310)">
+      <text y="-8" fill="#C8A967">~</text>
+      <rect x="-16" y="0" width="32" height="5"/><rect x="-16" y="9" width="32" height="5"/><rect x="-16" y="18" width="32" height="5"/>
+    </g>
+    <g transform="translate(200 340)">
+      <text y="-8" fill="#C8A967">N</text>
+      <rect x="-16" y="0" width="12" height="5"/><rect x="4" y="0" width="12" height="5"/><rect x="-16" y="9" width="32" height="5"/><rect x="-16" y="18" width="12" height="5"/><rect x="4" y="18" width="12" height="5"/>
+    </g>
+    <g transform="translate(98 310)">
+      <text y="-8" fill="#C8A967">n</text>
+      <rect x="-16" y="0" width="12" height="5"/><rect x="4" y="0" width="12" height="5"/><rect x="-16" y="9" width="12" height="5"/><rect x="4" y="9" width="12" height="5"/><rect x="-16" y="18" width="32" height="5"/>
+    </g>
+    <g transform="translate(60 200)">
+      <text y="-8" fill="#C8A967"></text>
+      <rect x="-16" y="0" width="32" height="5"/><rect x="-16" y="9" width="12" height="5"/><rect x="4" y="9" width="12" height="5"/><rect x="-16" y="18" width="12" height="5"/><rect x="4" y="18" width="12" height="5"/>
+    </g>
+    <g transform="translate(98 90)">
+      <text y="-8" fill="#C8A967">�</text>
+      <rect x="-16" y="0" width="12" height="5"/><rect x="4" y="0" width="12" height="5"/><rect x="-16" y="9" width="32" height="5"/><rect x="-16" y="18" width="32" height="5"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,246 @@
+MERG NOT subset; don't know how to subset; dropped
+术数类书: 155
+已有(去重后): 48
+待下载: 115
+[OK] 乙巳占 (182KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue03d), '' (\ue049), '' (\ue052)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 乾元秘旨 (301KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 二十四山八卦罗经图 (99KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue020)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 五行大义 (155KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 五行精纪 (179KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 人子须知 (204KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 入地眼全书 (345KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 公笃相法 (200KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬一字诀玉连环 (251KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬兵占 (420KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬存验 (304KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬寻源 (277KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬心镜 (554KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬拃河棹 (313KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬括囊赋略疏 (211KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬指南 (400KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬指南注解 (182KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬断案 (139KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬灵觉经 (133KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬直指御定 (160KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue011), '' (\ue004)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬神定经 (251KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬神将释 (421KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬神课金口诀古本 (132KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬秘本 (156KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬管辂神书 (260KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬粹言 (144KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬经纬 (342KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬翠雨歌 (327KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬苗公射覆鬼撮脚 (298KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬论命秘要 (215KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬金铰剪 (473KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬银河櫂 (568KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 六壬集成五要权衡 (386KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 兰台妙选 (328KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 冰鉴 (181KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 千里命稿 (188KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 卜筮全书 (158KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 卜筮正宗 (166KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 吴园易解 (464KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周公解梦 (262KB)
+Font MPDFAA+SimSun is missing the following glyphs: '☰' (\u2630), '☱' (\u2631), '☲' (\u2632), '☳' (\u2633), '☴' (\u2634), '☵' (\u2635), '☶' (\u2636), '☷' (\u2637), '' (\ue14f), '' (\ue160), ... (and 21 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 周易尚占 (370KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 命理探源 (489KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 命理正宗 (106KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue3c0), '' (\ue0d7), '' (\ue1cb), '' (\ue052), '' (\ue468), '' (\ue196), '' (\ue18d), '' (\ue0da), '' (\ue035), '' (\ue0d4), ... (and 13 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 地理古镜歌 (290KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 地理辨惑 (425KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 地理辨正 (378KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 地理醒心录 (136KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 增删卜易 (143KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue1e0)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 壬占汇选 (126KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 壬学琐记 (367KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 壬归 (348KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue1a1), '' (\ue1a8), '' (\ue1a4), '' (\ue1a7), '' (\ue1a3), '' (\ue1a6), '' (\ue1a2), '' (\ue1a5), '' (\ue14f), '' (\ue160), ... (and 62 others)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 大易断例卜筮元龟目 (224KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 天元五歌 (460KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 天玉经外篇 (339KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 太乙秘书 (281KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 奇门宝鉴御定 (385KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 奇门旨归 (652KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 奇门法窍 (137KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 奇门遁甲元灵经 (481KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 奇门遁甲秘笈大全 (152KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 奇门遁甲统宗 (524KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 子平真诠评注 (281KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 宅法举隅 (303KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 山洋指迷原本 (183KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 平沙玉尺辨伪总括歌 (136KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 平砂玉尺经 (389KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 平砂玉尺辨伪 (253KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 开元占经 (160KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 张果星宗 (138KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 徐氏珞琭子赋注 (167KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 心相篇 (156KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 推背图 (204KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 插泥剑 (204KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 撼龙经疑龙经葬法倒杖 (460KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue052), '' (\ue0f6), '' (\ue7a0)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 数术记遗 (145KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 文王金钱课 (182KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 断易天机 (149KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 断易鬼灵经 (256KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易冒 (182KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易林补遗 (201KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 易隐 (194KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 月谈赋 (198KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 本地姜地理峦头诀 (213KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 柳庄相法 (473KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 正易心法 (240KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 永乐百问 (214KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 测字秘牒 (670KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 海底眼 (320KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 渊海子平 (145KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 滴天髓阐微 (159KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 潜虚发微论 (151KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 火珠林 (325KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 焦氏易林注 (156KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 焦氏易诂 (153KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue789), '' (\ue331), '' (\ue19b), '' (\ue08f), '' (\ue569)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 玉照神应真经 (208KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 疑龙经 (274KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 皇极经世 (108KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 皇极经世心易发微 (423KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 神峰通考 (162KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 神机妙算一掌经 (235KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 神相全编 (513KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 神相铁关刀 (477KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue009), '' (\ue003)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 秘本诸葛神数 (261KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 穷通宝鉴 (331KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 红囊经 (471KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 葬法倒杖 (235KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 蒋公字字金 (177KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 许负相法 (156KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 辰州符咒大全 (255KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 遁甲符应经 (241KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 阳宅指南 (166KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 青乌经 (119KB)
+Font MPDFAA+SimSun is missing the following glyphs: '' (\ue183)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 马王堆汉墓帛书五星占 (152KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 鬼谷子神奇相法全书 (489KB)
+MERG NOT subset; don't know how to subset; dropped
+[OK] 黄金策 (123KB)
+======================
+本次完成: 115 本

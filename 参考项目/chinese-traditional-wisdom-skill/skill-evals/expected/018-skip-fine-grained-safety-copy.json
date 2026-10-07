@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "1.0.0",
+  "caseId": "018-skip-fine-grained-safety-copy",
+  "assertions": [
+    {
+      "path": "text",
+      "operator": "contains-text",
+      "value": "fine-grained safety-copy scanner"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 400" role="img" aria-label="�L�">
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#C8A967"/>
+    </marker>
+  </defs>
+  <!-- k�4( ��� -->
+  <polygon points="210,68 334,158 286,304 134,304 86,158" fill="none" stroke="#C8A967" stroke-opacity=".35"/>
+  <g stroke="#C8A967" stroke-width="1.4" fill="none" marker-end="url(#a)" stroke-dasharray="6 8">
+    <line x1="210" y1="102" x2="300" y2="168"/>
+    <line x1="312" y1="180" x2="276" y2="268"/>
+    <line x1="260" y1="304" x2="160" y2="304"/>
+    <line x1="148" y1="280" x2="112" y2="190"/>
+    <line x1="120" y1="168" x2="186" y2="110"/>
+  </g>
+  <g font-family="serif" font-size="26" text-anchor="middle">
+    <circle cx="210" cy="68" r="34" fill="#fbf4e4" stroke="#8b3a2a" stroke-width="2"/><text x="210" y="78" fill="#8b3a2a">k</text>
+    <circle cx="334" cy="158" r="34" fill="#fbf4e4" stroke="#8a6a32" stroke-width="2"/><text x="334" y="168" fill="#8a6a32"></text>
+    <circle cx="286" cy="304" r="34" fill="#fbf4e4" stroke="#C8A967" stroke-width="2"/><text x="286" y="314" fill="#8a6a32">�</text>
+    <circle cx="134" cy="304" r="34" fill="#fbf4e4" stroke="#2c4a6e" stroke-width="2"/><text x="134" y="314" fill="#2c4a6e">4</text>
+    <circle cx="86" cy="158" r="34" fill="#fbf4e4" stroke="#2f5d3a" stroke-width="2"/><text x="86" y="168" fill="#2f5d3a">(</text>
+  </g>
+</svg>

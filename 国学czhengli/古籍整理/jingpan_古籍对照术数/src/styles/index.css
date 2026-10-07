@@ -1,0 +1,135 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+:root {
+  --zw-primary: #3a2e5c;
+  --zw-gold: #c8a967;
+  --zw-bg: #f3e6c9;
+  --zw-paper: #fbf4e4;
+  --zw-ink: #2c2416;
+  --zw-muted: #6b5e4a;
+  --zw-line: rgba(58, 46, 92, 0.18);
+  --zw-quote: #efe4cc;
+  --zw-paper-gold: #f0e5cb;
+  --zw-font-size: 18px;
+}
+
+html.theme-nightsky,
+html.dark {
+  --zw-primary: #c8a967;
+  --zw-gold: #c8a967;
+  --zw-bg: #0b1020;
+  --zw-paper: #141a2e;
+  --zw-ink: #f3ebd8;
+  --zw-muted: #b8a98a;
+  --zw-line: rgba(200, 169, 103, 0.22);
+  --zw-quote: #1c243c;
+  --zw-paper-gold: #2a2840;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+  background: var(--zw-bg);
+  color: var(--zw-ink);
+  font-family: 'Songti SC', 'STSong', 'SimSun', 'PingFang SC', 'Microsoft YaHei', serif;
+}
+
+html {
+  /* clip 不会像 hidden 那样把 fixed 顶栏“卷走” */
+  overflow-x: clip;
+}
+
+body {
+  overflow-x: clip;
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(200, 169, 103, 0.12), transparent 36%),
+    radial-gradient(circle at 88% 92%, rgba(58, 46, 92, 0.08), transparent 42%);
+}
+
+.app-shell {
+  width: 100%;
+  max-width: 100%;
+  /* 不要对壳层设 overflow，否则 sticky/fixed 易失效 */
+  overflow: visible;
+}
+
+.app-shell > main {
+  min-width: 0;
+  max-width: 100%;
+}
+
+html.theme-nightsky body {
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(200, 169, 103, 0.08), transparent 30%),
+    radial-gradient(1px 1px at 20% 30%, rgba(255, 255, 255, 0.35), transparent),
+    radial-gradient(1px 1px at 70% 18%, rgba(255, 255, 255, 0.25), transparent),
+    radial-gradient(1px 1px at 40% 70%, rgba(255, 255, 255, 0.2), transparent);
+}
+
+.page-container {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+  min-height: calc(100vh - 180px);
+  font-size: var(--zw-font-size);
+  box-sizing: border-box;
+}
+
+/* PC / H5 全局区分 */
+.app-shell.is-h5 .page-container {
+  padding: 16px 14px 88px;
+}
+.app-shell.is-h5 .site-footer {
+  padding: 14px 12px calc(14px + env(safe-area-inset-bottom));
+  font-size: 11px;
+}
+.app-shell.is-pc .page-container {
+  padding: 28px 24px 56px;
+}
+
+/* 底部弹层打开时锁住页面滚动 */
+html.sheet-open,
+html.sheet-open body {
+  overscroll-behavior: none;
+}
+
+.classic-prose {
+  font-size: 1em;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+}
+
+.quote-block {
+  border-left: 3px solid var(--zw-gold);
+  background: var(--zw-quote);
+  padding: 12px 16px;
+  margin: 12px 0;
+}
+
+.song-card {
+  border: 1px solid var(--zw-gold);
+  background: color-mix(in srgb, var(--zw-paper) 88%, var(--zw-gold));
+  padding: 12px 16px;
+  margin: 12px 0;
+  white-space: pre-line;
+}
+
+.site-footer {
+  border-top: 1px solid var(--zw-line);
+  padding: 16px;
+  font-size: 12px;
+  color: var(--zw-muted);
+  line-height: 1.7;
+  text-align: center;
+}
+
+.el-button--primary {
+  --el-button-bg-color: #3a2e5c;
+  --el-button-border-color: #3a2e5c;
+  --el-button-hover-bg-color: #4d3d73;
+  --el-button-hover-border-color: #4d3d73;
+}
