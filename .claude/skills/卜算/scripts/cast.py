@@ -160,7 +160,13 @@ def main():
         if html:
             htmlpan.meihua_html(r, f"梅花易数_{_dt.datetime.now().strftime('%Y%m%d_%H%M%S')}.html")
     elif cmd == "xiaoliuren":
-        xiaoliuren.cast(dt)
+        gong = xiaoliuren.cast(dt)
+        print()
+        print(xiaoliuren.summary(gong))
+        if json_out:
+            print()
+            print("【盘面事实层 JSON】schema=xiaoliuren-panfact-v1（机读，与上方散文并存）")
+            print(json.dumps(xiaoliuren.pan_json(gong), ensure_ascii=False, indent=2))
     elif cmd == "liuyao":
         q = a[1] if len(a) > 1 else "通用"
         ben, bian, dong, r = liuyao.cast(dt, question=q)
@@ -233,7 +239,14 @@ def main():
     elif cmd == "jinkoujue":
         # 大六壬·金口诀：jinkoujue [地分/方位]（地分缺省取时支，可传子/午/北/南等）
         difen = a[1] if len(a) > 1 else None
-        jinkoujue.print_pan(jinkoujue.cast(dt, difen))
+        r = jinkoujue.cast(dt, difen)
+        jinkoujue.print_pan(r)
+        print()
+        print(jinkoujue.summary(r))
+        if json_out:
+            print()
+            print("【盘面事实层 JSON】schema=jinkoujue-panfact-v1（机读，与上方散文并存）")
+            print(json.dumps(jinkoujue.pan_json(r), ensure_ascii=False, indent=2))
     elif cmd == "qimen":
         r = qimen.cast(dt)
         print()
@@ -260,6 +273,12 @@ def main():
             else:
                 i += 1
         r = taiyi.cast(dt, ji_style=ji_style, method=method, game=game, full=full)
+        print()
+        print(taiyi.summary(r))
+        if json_out:
+            print()
+            print("【盘面事实层 JSON】schema=taiyi-panfact-v1（机读，与上方散文并存）")
+            print(json.dumps(taiyi.pan_json(r), ensure_ascii=False, indent=2))
         if html and r:
             htmlpan.taiyi_html(r, f"太乙神数_{_dt.datetime.now().strftime('%Y%m%d_%H%M%S')}.html")
     elif cmd == "zhiwei":
@@ -327,6 +346,12 @@ def main():
         gender = a[3] if len(a) > 3 else "男"
         r = fengshui.fengshui_pan(year, direction, gender)
         print(fengshui.format_output(r))
+        print()
+        print(fengshui.summary(r))
+        if json_out:
+            print()
+            print("【盘面事实层 JSON】schema=fengshui-panfact-v1（机读，与上方散文并存）")
+            print(json.dumps(fengshui.pan_json(r), ensure_ascii=False, indent=2))
     elif cmd == "zeri":
         # 择日·建除黄道神煞（可 --time 指定查询日；[事项] 婚嫁/开业/动土/出行/搬家/考试/求医/祭祀）
         event = a[1] if len(a) > 1 else "general"
@@ -337,6 +362,12 @@ def main():
             y, m, d, h = now.year, now.month, now.day, now.hour
         r = zeri.get_day_summary(y, m, d, event, h)
         print(zeri.format_output(r, event))
+        print()
+        print(zeri.summary(r))
+        if json_out:
+            print()
+            print("【盘面事实层 JSON】schema=zeri-panfact-v1（机读，与上方散文并存）")
+            print(json.dumps(zeri.pan_json(r), ensure_ascii=False, indent=2))
         # 老黄历补全（彭祖百忌/值神/吉神方位/胎神/冲煞/宜忌，出处《协纪辨方书》）
         print()
         print(almanac.format_almanac(almanac.almanac(y, m, d)))

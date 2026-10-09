@@ -356,3 +356,19 @@ if __name__ == "__main__":
             except ValueError:
                 continue
     print_pan(cast(dt, args.difen))
+
+
+def summary(r):
+    """一眼摘要卡：日时干支/四位/用爻（借鉴八字/紫微升级的「一眼看懂」层）。"""
+    sw = r.get("四位", {})
+    sw_s = "  ".join(f"{k}{v.get('符号', '')}({v.get('五行', '')})" for k, v in sw.items())
+    return "\n".join([
+        f"【一眼摘要】金口诀 · {r.get('日干支', '')} {r.get('时干支', '')}",
+        f"  四位：{sw_s}",
+        f"  用爻：{r.get('用爻', '')}",
+    ])
+
+
+def pan_json(r):
+    """盘面事实层 JSON（机读，schema=jinkoujue-panfact-v1）。"""
+    return {"schema": "jinkoujue-panfact-v1", **r}
