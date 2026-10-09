@@ -25,3 +25,20 @@ def cast(dt=None, y=None, m=None, d=None, h=None):
     print(f"月->{GONG[(m - 1) % 6]}  日->{GONG[(m - 1 + d - 1) % 6]}  时->{GONG[pos]}")
     print(f"落宫: {GONG[pos]}")
     return GONG[pos]
+
+
+_XLR_JX = {"大安": ("吉", "安稳顺遂，宜守宜静"), "留连": ("凶", "纠缠拖延，防口舌是非"),
+           "速喜": ("吉", "快而喜，宜速行"), "赤口": ("凶", "口舌破财，防争斗"),
+           "小吉": ("吉", "小有喜，宜周旋"), "空亡": ("凶", "落空，劳而无功")}
+
+
+def summary(gong):
+    """一眼摘要卡：落宫/吉凶（借鉴八字/紫微升级的「一眼看懂」层）。"""
+    jx, duan = _XLR_JX.get(gong, ("？", ""))
+    return "\n".join([f"【一眼摘要】小六壬 · 落宫：{gong}", f"  吉凶：{jx} · {duan}"])
+
+
+def pan_json(gong):
+    """盘面事实层 JSON（机读，schema=xiaoliuren-panfact-v1）。"""
+    jx, duan = _XLR_JX.get(gong, ("？", ""))
+    return {"schema": "xiaoliuren-panfact-v1", "落宫": gong, "吉凶": jx, "断": duan}

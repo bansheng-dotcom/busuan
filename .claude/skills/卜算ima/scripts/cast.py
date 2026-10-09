@@ -50,6 +50,7 @@ sys.path.insert(0, LIB)
 import meihua
 import xiaoliuren
 import liuyao
+import liuyao_knowledge
 import bazi
 import liuren
 import liuren_regress
@@ -70,13 +71,14 @@ import almanac
 import ziwei_horoscope
 import trend
 import bazi_liunian
+import bazi_json
 import mingli_eval
 import shefu_portrait
 
 
 def _parse_time(args):
-    """提取 --time/-t 占时、--lon 经度、--dst 夏令时回拨、--html 可视化、--ref 校验、--zishi 子时换日，返回(剩余参数, dt|None, lon|None, dst_bool, html_bool, ref_bool, zishi)"""
-    dt, lon, dst, html, ref, zishi = None, None, False, False, False, "same"
+    """提取 --time/-t 占时、--lon 经度、--dst 夏令时回拨、--html 可视化、--ref 校验、--zishi 子时换日、--json 结构化双轨、--range 时间不确定枚举"""
+    dt, lon, dst, html, ref, zishi, json_out, time_range = None, None, False, False, False, "same", False, None
     out = []
     i = 0
     while i < len(args):
@@ -107,21 +109,39 @@ def _parse_time(args):
         elif args[i] == "--zishi" and i + 1 < len(args):
             zishi = args[i + 1]
             i += 2
+        elif args[i] == "--json":
+            json_out = True
+            i += 1
+        elif args[i] == "--range" and i + 1 < len(args):
+            time_range = args[i + 1]
+            i += 2
         else:
             out.append(args[i])
             i += 1
-    return out, dt, lon, dst, html, ref, zishi
+    return out, dt, lon, dst, html, ref, zishi, json_out, time_range
 
 
 def main():
-    a, dt, lon, dst, html, ref, zishi = _parse_time(sys.argv[1:])
+    a, dt, lon, dst, html, ref, zishi, json_out, time_range = _parse_time(sys.argv[1:])
     cmd = a[0] if a else "meihua-time"
     if cmd in ("meihua-time", "meihua"):
         r = meihua.cast_time(dt)
+        print()
+        print(meihua.summary(r))
+        if json_out:
+            print()
+            print("【盘面事实层 JSON】schema=meihua-panfact-v1（机读，与上方散文并存）")
+            print(json.dumps(meihua.pan_json(r), ensure_ascii=False, indent=2))
         if html:
             htmlpan.meihua_html(r, f"梅花易数_{_dt.datetime.now().strftime('%Y%m%d_%H%M%S')}.html")
     elif cmd == "meihua-num":
         r = meihua.cast_num(a[1:])
+        print()
+        print(meihua.summary(r))
+        if json_out:
+            print()
+            print("【盘面事实层 JSON】schema=meihua-panfact-v1（机读，与上方散文并存）")
+            print(json.dumps(meihua.pan_json(r), ensure_ascii=False, indent=2))
         if html:
             htmlpan.meihua_html(r, f"梅花易数_{_dt.datetime.now().strftime('%Y%m%d_%H%M%S')}.html")
     elif cmd == "meihua-guanwu":
@@ -141,31 +161,76 @@ def main():
         if html:
             htmlpan.meihua_html(r, f"梅花易数_{_dt.datetime.now().strftime('%Y%m%d_%H%M%S')}.html")
     elif cmd == "xiaoliuren":
-        xiaoliuren.cast(dt)
+        gong = xiaoliuren.cast(dt)
+        print()
+        print(xiaoliuren.summary(gong))
+        if json_out:
+            print()
+            print("【盘面事实层 JSON】schema=xiaoliuren-panfact-v1（机读，与上方散文并存）")
+            print(json.dumps(xiaoliuren.pan_json(gong), ensure_ascii=False, indent=2))
     elif cmd == "liuyao":
-        ben, bian, dong, r = liuyao.cast(dt, question=a[1] if len(a) > 1 else "通用")
+        q = a[1] if len(a) > 1 else "通用"
+        ben, bian, dong, r = liuyao.cast(dt, question=q)
+        # 一眼摘要卡 + 结构化双轨（借鉴八字/紫微升级）
+        print()
+        print(liuyao.summary(ben, bian, dong, r, q))
+        if json_out:
+            print()
+            print("【盘面事实层 JSON】schema=liuyao-panfact-v1（机读，与上方散文并存）")
+            print(json.dumps(liuyao.pan_json(ben, bian, dong, r, q), ensure_ascii=False, indent=2))
         if html:
             htmlpan.liuyao_html(r, ben, bian, dong,
                                 f"六爻卦图_{_dt.datetime.now().strftime('%Y%m%d_%H%M%S')}.html")
     elif cmd == "bazi":
         args = [int(x) for x in a[1:]]
         gender = args[6] if len(args) > 6 else 1
-        if args:
-            b = bazi.cast(*args, lon=lon, dst=dst, zishi=zishi)
+        # 时间不确定：逐分钟枚举候选（--range "HH:MM-HH:MM"），标稳定柱/变化柱
+        if time_range and len(args) >= 3:
+            print(bazi_json._fmt_range(bazi_json.enumerate_range(
+                args[0], args[1], args[2], time_range,
+                args[3] if len(args) > 3 else 1, lon=lon, dst=dst)))
         else:
-            b = bazi.cast(lon=lon, dst=dst, zishi=zishi)
-        # P1：旺衰量化得分 + 格局成破救应 + 干支合化判断
-        if len(args) >= 3:
-            print()
-            bazi_liunian.mingli_analysis(args[0], args[1], args[2],
-                                         args[3] if len(args) > 3 else 12,
-                                         args[4] if len(args) > 4 else 0,
-                                         args[5] if len(args) > 5 else 0,
-                                         gender)
-        if html:
-            htmlpan.bazi_html(b, gender, f"八字命盘_{_dt.datetime.now().strftime('%Y%m%d_%H%M%S')}.html")
+            if args:
+                b = bazi.cast(*args, lon=lon, dst=dst, zishi=zishi)
+            else:
+                b = bazi.cast(lon=lon, dst=dst, zishi=zishi)
+            # 一眼摘要卡（五行统计/宫位/大运地势吉凶，借鉴卜易居/元亨利贞的「看得懂」层）
+            if len(args) >= 3:
+                print()
+                print(bazi_json._fmt_summary(bazi_json.summary_card(
+                    args[0], args[1], args[2],
+                    args[3] if len(args) > 3 else 12,
+                    args[4] if len(args) > 4 else 0,
+                    args[5] if len(args) > 5 else 0,
+                    gender, lon=lon, dst=dst)))
+            # P1：旺衰量化得分 + 格局成破救应 + 干支合化判断
+            if len(args) >= 3:
+                print()
+                bazi_liunian.mingli_analysis(args[0], args[1], args[2],
+                                             args[3] if len(args) > 3 else 12,
+                                             args[4] if len(args) > 4 else 0,
+                                             args[5] if len(args) > 5 else 0,
+                                             gender)
+            # 结构化双轨：盘面事实层 JSON（--json，与散文并存，机读可校验）
+            if json_out and len(args) >= 3:
+                print()
+                print("【盘面事实层 JSON】schema=bazi-panfact-v1（机读，与上方散文并存）")
+                print(bazi_json._fmt_json(bazi_json.cast_json(
+                    args[0], args[1], args[2],
+                    args[3] if len(args) > 3 else 12,
+                    args[4] if len(args) > 4 else 0,
+                    args[5] if len(args) > 5 else 0,
+                    gender, lon=lon, dst=dst)))
+            if html:
+                htmlpan.bazi_html(b, gender, f"八字命盘_{_dt.datetime.now().strftime('%Y%m%d_%H%M%S')}.html")
     elif cmd == "liuren":
         r = liuren.cast(dt)
+        print()
+        print(liuren.summary(r))
+        if json_out:
+            print()
+            print("【盘面事实层 JSON】schema=liuren-panfact-v1（机读，与上方散文并存）")
+            print(json.dumps(liuren.pan_json(r), ensure_ascii=False, indent=2))
         if html:
             htmlpan.liuren_html(r, f"大六壬_{_dt.datetime.now().strftime('%Y%m%d_%H%M%S')}.html")
         if ref:
@@ -175,9 +240,22 @@ def main():
     elif cmd == "jinkoujue":
         # 大六壬·金口诀：jinkoujue [地分/方位]（地分缺省取时支，可传子/午/北/南等）
         difen = a[1] if len(a) > 1 else None
-        jinkoujue.print_pan(jinkoujue.cast(dt, difen))
+        r = jinkoujue.cast(dt, difen)
+        jinkoujue.print_pan(r)
+        print()
+        print(jinkoujue.summary(r))
+        if json_out:
+            print()
+            print("【盘面事实层 JSON】schema=jinkoujue-panfact-v1（机读，与上方散文并存）")
+            print(json.dumps(jinkoujue.pan_json(r), ensure_ascii=False, indent=2))
     elif cmd == "qimen":
         r = qimen.cast(dt)
+        print()
+        print(qimen.summary(r))
+        if json_out:
+            print()
+            print("【盘面事实层 JSON】schema=qimen-panfact-v1（机读，与上方散文并存）")
+            print(json.dumps(qimen.pan_json(r), ensure_ascii=False, indent=2))
         if html:
             htmlpan.qimen_html(r.get("時家奇門", {}), f"奇门遁甲_{_dt.datetime.now().strftime('%Y%m%d_%H%M%S')}.html")
     elif cmd == "taiyi":
@@ -196,13 +274,30 @@ def main():
             else:
                 i += 1
         r = taiyi.cast(dt, ji_style=ji_style, method=method, game=game, full=full)
+        print()
+        print(taiyi.summary(r))
+        if json_out:
+            print()
+            print("【盘面事实层 JSON】schema=taiyi-panfact-v1（机读，与上方散文并存）")
+            print(json.dumps(taiyi.pan_json(r), ensure_ascii=False, indent=2))
         if html and r:
             htmlpan.taiyi_html(r, f"太乙神数_{_dt.datetime.now().strftime('%Y%m%d_%H%M%S')}.html")
     elif cmd == "zhiwei":
         args = [int(x) for x in a[1:]]
         r = zhiwei.cast(args[0], args[1], args[2], args[3], args[4] if len(args) > 4 else 1, lon=lon, dst=dst)
         zhiwei.print_pan(r)
-        # 格局判定（结构化规则，出处《紫微斗数全书》，断卦按格局名 Grep 原文佐证）
+        # 一眼摘要卡（命宫/身宫/四化/三方四正，借鉴八字升级的「一眼看懂」层）
+        print()
+        print(zhiwei.summary(r))
+        # 飞星四化全景（循环忌/忌冲，借鉴 mingli-skills）
+        print()
+        print(zhiwei.format_feixing(zhiwei.feixing_panorama(r)))
+        # 结构化双轨：盘面事实层 JSON（--json，机读可校验，与散文并存）
+        if json_out:
+            print()
+            print("【盘面事实层 JSON】schema=ziwei-panfact-v1（机读，与上方散文并存）")
+            print(json.dumps({"schema": "ziwei-panfact-v1", **r}, ensure_ascii=False, indent=2))
+        # 格局判定（结构化规则，出处《紫微斗数全书》，断卦按格局名 search_txt.py 原文佐证）
         _hits = ziwei_geju.judge_patterns(r)
         print()
         print("[紫微格局] " + ziwei_geju.format_patterns(_hits))
@@ -233,6 +328,13 @@ def main():
         s = dt.strftime("%Y-%m-%d %H:%M") if dt else None
         r = qizheng.qizheng_pan(s, lon=lon) if lon is not None else qizheng.qizheng_pan(s)
         print(qizheng.format_output(r))
+        # 一眼摘要卡 + 结构化双轨（借鉴八字/紫微升级）
+        print()
+        print(qizheng.summary(r))
+        if json_out:
+            print()
+            print("【盘面事实层 JSON】schema=qizheng-panfact-v1（机读，与上方散文并存）")
+            print(json.dumps({"schema": "qizheng-panfact-v1", **r}, ensure_ascii=False, indent=2))
     elif cmd == "qizheng-liunian":
         # 七政四余·流年大限小限：<出生年> <命宫地支> [流年年份]
         birth_year = int(a[1]) if len(a) > 1 else _dt.datetime.now().year
@@ -248,6 +350,12 @@ def main():
         gender = a[3] if len(a) > 3 else "男"
         r = fengshui.fengshui_pan(year, direction, gender)
         print(fengshui.format_output(r))
+        print()
+        print(fengshui.summary(r))
+        if json_out:
+            print()
+            print("【盘面事实层 JSON】schema=fengshui-panfact-v1（机读，与上方散文并存）")
+            print(json.dumps(fengshui.pan_json(r), ensure_ascii=False, indent=2))
     elif cmd == "zeri":
         # 择日·建除黄道神煞（可 --time 指定查询日；[事项] 婚嫁/开业/动土/出行/搬家/考试/求医/祭祀）
         event = a[1] if len(a) > 1 else "general"
@@ -258,6 +366,12 @@ def main():
             y, m, d, h = now.year, now.month, now.day, now.hour
         r = zeri.get_day_summary(y, m, d, event, h)
         print(zeri.format_output(r, event))
+        print()
+        print(zeri.summary(r))
+        if json_out:
+            print()
+            print("【盘面事实层 JSON】schema=zeri-panfact-v1（机读，与上方散文并存）")
+            print(json.dumps(zeri.pan_json(r), ensure_ascii=False, indent=2))
         # 老黄历补全（彭祖百忌/值神/吉神方位/胎神/冲煞/宜忌，出处《协纪辨方书》）
         print()
         print(almanac.format_almanac(almanac.almanac(y, m, d)))
@@ -316,6 +430,18 @@ def main():
             if _i + 1 < len(a):
                 _filter = a[_i + 1]
         mingli_eval.analyze(cat_filter=_filter)
+    elif cmd == "liuyao-knowledge":
+        # 六爻理法知识包（王虎应体系，MCP 未连接时离线 RAG 回退）
+        q = a[1] if len(a) > 1 else ""
+        if not q:
+            print(liuyao_knowledge.__doc__)
+        else:
+            print(f"[六爻理法知识包] 检索「{q}」\n")
+            for r in liuyao_knowledge.search(q):
+                jx = f"（{r['吉凶']}）" if r["吉凶"] != "—" else ""
+                print(f"[{r['score']:.1f}] ({r['类型']}) {r['名称']}{jx}")
+                print(f"    {r['断语']}")
+                print(f"    〔原文〕{r['原文']}  — {r['出处']}")
     elif cmd == "shefu":
         # 射覆特征画像：shefu liuren 青龙 朱雀 天后 / shefu meihua 离 兑
         sub = a[1] if len(a) > 1 else ""

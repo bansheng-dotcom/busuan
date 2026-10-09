@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """典籍 txt 全文检索（grep 等价，纯离线、零依赖）。
 
-ima 环境无 Grep 工具，用本脚本按关键词检索 `D:\\卜算\\国学czhengli\\txt\\` 全库
+ima 环境无 search_txt.py 工具，用本脚本按关键词检索 `D:\\卜算\\国学czhengli\\txt\\` 全库
 （含「案例库」子目录）的原文，输出「文件名:行号: 匹配行」，等价 grep。
 
 用法:

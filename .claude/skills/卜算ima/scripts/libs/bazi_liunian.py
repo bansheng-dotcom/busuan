@@ -300,8 +300,35 @@ def mingli_analysis(y, mo, d, hh=12, mi=0, ss=0, gender=1):
         for wx in sorted(xi):
             vals += _WX_ADVICE[wx][k]
         print(f"  {_ADVICE_ICON[k]} 吉利{k}：{'、'.join(dict.fromkeys(vals))}")
+    by = bingyao(ws, cj, sorted(xi), sorted(ji))
+    print()
+    print(f"【病药框架】{by}")
     return {"旺衰": ws, "格局": cj, "合化": hh_report,
-            "喜": sorted(xi), "忌": sorted(ji), "综合评分": score}
+            "喜": sorted(xi), "忌": sorted(ji), "综合评分": score, "病药": by}
+
+
+def bingyao(ws, cj, xi, ji):
+    """病药框架（借鉴 yueyuan-bazi）：病在X、药为Y。"""
+    dx = ws.get("档次", "")
+    gj = cj.get("格局", "") if isinstance(cj, dict) else str(cj)
+    if dx in ("弱", "偏弱"):
+        if "伤官" in gj:
+            bing, yao = "伤官旺泄身、日主身弱", "印星生身制伤（伤官佩印）"
+        elif "杀" in gj or "偏官" in gj:
+            bing, yao = "七杀重而日主身弱", "印星化杀生身"
+        elif "财" in gj:
+            bing, yao = "财多身弱（富屋贫人）", "印比帮身任财"
+        elif "官" in gj:
+            bing, yao = "官重而日主身弱", "印星化官生身"
+        elif "食" in gj or "伤" in gj:
+            bing, yao = "食伤泄身、日主身弱", "印星制食伤生身"
+        else:
+            bing, yao = f"日主身弱、忌{'、'.join(ji)}当令", f"印比生扶（喜{'、'.join(xi)}）"
+    elif dx in ("强", "偏强"):
+        bing, yao = f"日主身强、{'、'.join(ji)}过旺", f"财官食伤泄耗（喜{'、'.join(xi)}）"
+    else:
+        bing, yao = "中和、无明显之病", "顺格局调候取用"
+    return f"病在{bing}，药为{yao}"
 
 
 def _pillars(b):

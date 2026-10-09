@@ -690,5 +690,19 @@ def main():
             print(format_output(result, args.event))
 
 
+def summary(r):
+    """一眼摘要卡：日期/建除/黄道/评分（借鉴八字/紫微升级的「一眼看懂」层）。"""
+    return "\n".join([
+        f"【一眼摘要】择日 · {r.get('日期', '')} · {r.get('干支', '')}",
+        f"  建除{r.get('建除', '')} · 黄道{r.get('黄道', '')} · {r.get('二十八宿', '')}",
+        f"  评分 {r.get('综合评分', '')}/100 {r.get('等级', '')}",
+    ])
+
+
+def pan_json(r):
+    """盘面事实层 JSON（机读，schema=zeri-panfact-v1）。"""
+    return {"schema": "zeri-panfact-v1", **r}
+
+
 if __name__ == '__main__':
     main()

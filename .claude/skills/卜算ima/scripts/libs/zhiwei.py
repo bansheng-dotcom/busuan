@@ -359,3 +359,71 @@ def print_pan(r):
             tag += "·空"
         dx = f"{p['大限'][0]}-{p['大限'][1]}" if p["大限"] else "—"
         print(f"{p['宫']:<6}{gz:<6}{main:<28}{fu:<30}{dx}  {tag}")
+
+
+def summary(r):
+    """一眼摘要卡：命宫/身宫/五行局/四化/三方四正（借鉴八字升级的「一眼看懂」层，不牺牲可复核）。"""
+    mg = next((p for p in r["十二宫"] if p["命"]), None)
+    sg = next((p for p in r["十二宫"] if p["身"]), None)
+
+    def _stars(p):
+        if not p or not p["主星"]:
+            return "空宫"
+        return " ".join(f"{n}({b}{s})" if s else f"{n}({b})" for n, b, s in p["主星"])
+
+    mg_line = f"命宫 {mg['干']}{mg['支']}({_stars(mg)})" if mg else "命宫 —"
+    sg_line = f"身宫 {sg['干']}{sg['支']}({_stars(sg)})" if sg else "身宫 —"
+    return "\n".join([
+        f"【一眼摘要】紫微斗数 · {r.get('四柱', '')}",
+        f"  {mg_line} · {sg_line} · 五行局 {r.get('五行局', '')}",
+        f"  四化：{r.get('四化', '')}",
+        f"  三方四正：{'、'.join(r.get('命宫三方四正', []))}",
+    ])
+
+
+_DUIGONG = {"命宫": "迁移宫", "迁移宫": "命宫", "兄弟宫": "交友宫", "交友宫": "兄弟宫",
+            "夫妻宫": "官禄宫", "官禄宫": "夫妻宫", "子女宫": "田宅宫", "田宅宫": "子女宫",
+            "财帛宫": "福德宫", "福德宫": "财帛宫", "疾厄宫": "父母宫", "父母宫": "疾厄宫"}
+
+
+def feixing_panorama(r):
+    """飞星四化全景（借鉴 mingli-skills）：循环忌 + 忌冲命/身宫。"""
+    ggs = r.get("宫干四化", [])
+    ji_map = {}
+    for f in ggs:
+        if f.get("四化") == "忌":
+            ji_map.setdefault(f["宫"], []).append(f["飞入"])
+    xunhuan, zihua, checked = [], [], set()
+    for a, bs in ji_map.items():
+        for b in bs:
+            if b == a:
+                zihua.append(a)  # 自化忌（化忌飞入本宫）
+            elif b in ji_map and a in ji_map[b] and (b, a) not in checked:
+                xunhuan.append(f"{a}↔{b}")
+                checked.add((a, b))
+    chong = []
+    ming_gong = next((p["宫"] for p in r.get("十二宫", []) if p.get("命")), "命宫")
+    shen_gong = next((p["宫"] for p in r.get("十二宫", []) if p.get("身")), None)
+    for a, bs in ji_map.items():
+        for b in bs:
+            if _DUIGONG.get(b) == ming_gong:
+                chong.append(f"{a}忌冲命宫（飞{b}冲{_DUIGONG[b]}）")
+            if shen_gong and _DUIGONG.get(b) == shen_gong:
+                chong.append(f"{a}忌冲身宫（飞{b}冲{_DUIGONG[b]}）")
+    return {"循环忌": xunhuan, "自化忌": zihua, "忌冲": chong, "忌入": ji_map}
+
+
+def format_feixing(pan):
+    """格式化飞星四化全景（循环忌/自化忌/忌冲）。"""
+    lines = ["【飞星四化全景】宫干四化·循环忌/自化忌/忌冲（飞星派，断法标[规则推演]）"]
+    if pan["循环忌"]:
+        lines.append("  ⚠ 循环忌：" + "  ".join(pan["循环忌"]) + "（两宫互忌，情势纠缠）")
+    else:
+        lines.append("  · 无循环忌（宫干忌无互飞闭环）")
+    if pan["自化忌"]:
+        lines.append("  ⚠ 自化忌：" + "  ".join(pan["自化忌"]) + "（化忌飞入本宫，自耗自缚）")
+    if pan["忌冲"]:
+        lines.append("  ⚠ 忌冲：" + "  ".join(pan["忌冲"]))
+    else:
+        lines.append("  · 无忌冲命/身宫")
+    return "\n".join(lines)

@@ -41,3 +41,19 @@ def cast(dt=None, question="通用"):
     najia.print_zhuang(r, yaos)
     najia.print_yongshen(r, question)
     return ben, bian, dong, r
+
+
+def summary(ben, bian, dong, r, question="通用"):
+    """一眼摘要卡：本卦变卦/问事用神/世应/评分吉凶（借鉴八字/紫微升级的「一眼看懂」层）。"""
+    a = najia.yongshen_analysis(r, question)
+    return "\n".join([
+        f"【一眼摘要】六爻 · {ben} → {bian}  动爻:{dong or '无(静卦)'}",
+        f"  问事：{question} · 用神：{a['用神']} · 落：{a['落爻']} · 世{r['世爻']} 应{r['应爻']}",
+        f"  评分：{a['评分']}/100({a['吉凶']}) · 用神{a['旺衰']['等级']} · {a['世应'][0]}({a['世应'][1]})",
+    ])
+
+
+def pan_json(ben, bian, dong, r, question="通用"):
+    """盘面事实层 JSON（机读，schema=liuyao-panfact-v1）。"""
+    return {"schema": "liuyao-panfact-v1", "问事": question, "本卦": ben, "变卦": bian,
+            "动爻": dong, "装卦": r, "分析": najia.yongshen_analysis(r, question)}

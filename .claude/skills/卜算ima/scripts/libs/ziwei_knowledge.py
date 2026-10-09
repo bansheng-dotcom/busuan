@@ -2,7 +2,7 @@
 """紫微斗数 · 结构化断语知识包（星曜 / 十二宫 / 四化，可检索、可导出 JSON）。
 
 对标 x-iztro 的 KnowledgePack：排盘引擎只判事实，断语文本放在代码外的数据层，
-本模块即「断语层」——每条断语都附出处，断卦仍须按星名/宫名/四化 Grep
+本模块即「断语层」——每条断语都附出处，断卦仍须按星名/宫名/四化 search_txt.py
 《紫微斗数全书》txt 原文佐证（双重保证），不得凭本表直接下断。
 
 用法：
@@ -115,7 +115,7 @@ def _all_entries():
 
 def search(term, k=5):
     """模糊检索知识包：名称精确(1.0) > 名称包含(0.8) > 断语(0.5) > 原文(0.45)。
-    供紫微断卦补断语依据（星曜/宫位/四化/格局），断卦仍须 Grep 原文佐证。"""
+    供紫微断卦补断语依据（星曜/宫位/四化/格局），断卦仍须 search_txt.py 原文佐证。"""
     term = (term or "").strip()
     scored = []
     for e in _all_entries():
@@ -154,7 +154,7 @@ if __name__ == "__main__":
     if "--json" in sys.argv:
         print(to_json())
     else:
-        print(f"【紫微斗数·断语知识包】（出处{SRC}，断卦按星名/宫名 Grep 原文佐证）")
+        print(f"【紫微斗数·断语知识包】（出处{SRC}，断卦按星名/宫名 search_txt.py 原文佐证）")
         for term in ("巨门", "七杀", "化忌", "财帛宫", "君臣庆会"):
             r = lookup(term)
             if r:

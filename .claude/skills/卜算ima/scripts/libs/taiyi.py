@@ -190,3 +190,23 @@ def cast(dt=None, ji_style=0, method=0, game=False, full=False):
     else:
         _print_summary(r, ji_style, method, game)
     return r
+
+
+def summary(r):
+    """一眼摘要卡：局式/太乙落宫/主客算/胜负（借鉴八字/紫微升级的「一眼看懂」层）。"""
+    ju = r.get("局式", {})
+    ju_s = ju.get("文", str(ju)) if isinstance(ju, dict) else str(ju)
+
+    def _suan(x):
+        return str(x[0]) if isinstance(x, list) and x else str(x)
+
+    return "\n".join([
+        f"【一眼摘要】太乙神数 · {ju_s}",
+        f"  太乙落宫 {r.get('太乙落宮', '')} · 主算{_suan(r.get('主算'))} 客算{_suan(r.get('客算'))}",
+        f"  胜负：{r.get('推多少以占勝負', '')}",
+    ])
+
+
+def pan_json(r):
+    """盘面事实层 JSON（机读，schema=taiyi-panfact-v1）。"""
+    return {"schema": "taiyi-panfact-v1", **r}

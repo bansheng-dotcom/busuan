@@ -6,7 +6,7 @@
   2. 命中神煞（驿马/桃花/华盖/劫煞/灾煞/岁煞/日德/日禄/羊刃/天乙/月德/天喜/红鸾/旬空）
   3. 毕法赋条目检索建议（liuren_bifa，按格局/神煞关键词）
 
-以上均为「结构化判定层 + 出处指针」，断卦时仍须按条目名/神煞名 Grep 原文佐证（双重保证）。
+以上均为「结构化判定层 + 出处指针」，断卦时仍须按条目名/神煞名 search_txt.py 原文佐证（双重保证）。
 """
 import datetime
 from lunar_python import Solar
@@ -92,8 +92,8 @@ def cast(dt=None):
     print("\n【命中神煞】")
     print(liuren_shensha.format_shensha(hits))
 
-    # —— 毕法赋检索建议（按格局/神煞关键词，供 Grep 原文佐证）——
-    print("\n【毕法赋关联条目】（结构化索引，断卦按条名 Grep 原文佐证）")
+    # —— 毕法赋检索建议（按格局/神煞关键词，供 search_txt.py 原文佐证）——
+    print("\n【毕法赋关联条目】（结构化索引，断卦按条名 search_txt.py 原文佐证）")
     kws = set()
     for ju in r.get('格局', []):
         kws.add(_JU_ALIAS.get(ju, ju))
@@ -114,3 +114,25 @@ def cast(dt=None):
     r["_天将"] = {k: liuren_shensha.tianjiang(_TIANJIANG_ALIAS.get(v[1], v[1]))
                   for k, v in t.items() if v}
     return r
+
+
+def summary(r):
+    """一眼摘要卡：日期节气/格局/三传/日马（借鉴八字/紫微升级的「一眼看懂」层）。"""
+    sc = r.get("三傳", {})
+
+    def _chuan(x):
+        if not x:
+            return "—"
+        return f"{x[0]}({x[1]}·{x[2]})" if len(x) >= 3 else str(x)
+
+    geju = "、".join(r.get("格局", [])) if r.get("格局") else "—"
+    return "\n".join([
+        f"【一眼摘要】大六壬 · {r.get('日期', '')} · {r.get('節氣', '')}",
+        f"  格局：{geju} · 日马{r.get('日馬', '')}",
+        f"  三传：初{_chuan(sc.get('初傳'))} → 中{_chuan(sc.get('中傳'))} → 末{_chuan(sc.get('末傳'))}",
+    ])
+
+
+def pan_json(r):
+    """盘面事实层 JSON（机读，schema=liuren-panfact-v1）。"""
+    return {"schema": "liuren-panfact-v1", **r}

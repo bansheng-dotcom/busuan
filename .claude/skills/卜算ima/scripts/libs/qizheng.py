@@ -274,7 +274,7 @@ class QiZhengPan:
     def check_ge_ju(cls, stars: Dict[str, float], ming_gong_index: int = 0) -> List[Dict]:
         """检查星盘格局（ming_gong_index 为命宫地支序 0=子…11=亥）。
 
-        格局属经验规则层（HEURISTIC），给出处指针；断卦仍须 Grep《果老星宗》《星学大成》原文佐证。
+        格局属经验规则层（HEURISTIC），给出处指针；断卦仍须 search_txt.py《果老星宗》《星学大成》原文佐证。
         星神三则（日月夹命/禄存/火铃夹命）与 stem-branch seven-governors 同口径，出处标果老星宗。
         """
         ge_ju = []
@@ -745,6 +745,25 @@ def format_output(result: Dict) -> str:
             output.append(f"• {duan}")
 
     return "\n".join(output)
+
+
+def summary(result: Dict) -> str:
+    """一眼摘要卡：命宫/七政庙旺落宫/四余/相位吉凶概览（借鉴八字/紫微升级的「一眼看懂」层）。"""
+    mg = result.get("命宫", {})
+    lines = [
+        f"【一眼摘要】七政四余 · {result.get('农历四柱', '').strip()}",
+        f"  命宫：{mg.get('宫名', '')}（{mg.get('地支', '')}宫 / {mg.get('星座', '')}）",
+    ]
+    qz = result.get("七政", {})
+    stars = "  ".join(f"{n}({v.get('庙旺', '')}·{v.get('宫名', '')})" for n, v in qz.items())
+    lines.append(f"  七政：{stars}")
+    sy = result.get("四余", {})
+    yu = "  ".join(f"{n}({v.get('宫名', '')})" for n, v in sy.items())
+    lines.append(f"  四余：{yu}")
+    xw = result.get("相位分析", {})
+    if xw:
+        lines.append(f"  相位：吉{xw.get('吉相数量', 0)} 凶{xw.get('凶相数量', 0)} · {xw.get('综合判断', '')}")
+    return "\n".join(lines)
 
 
 def main():

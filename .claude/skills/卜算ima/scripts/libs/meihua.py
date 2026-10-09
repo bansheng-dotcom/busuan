@@ -182,7 +182,42 @@ def _build(shang, xia, dong, note="", month_zhi=None):
         "上卦": GUA[shang], "下卦": GUA[xia], "上卦数": shang, "下卦数": xia,
         "体卦": GUA[ti], "体五行": WX[ti],
         "用卦": GUA[yong], "用五行": WX[yong],
-        "体用关系": sheng,
+        "体用关系": sheng, "月令": month_zhi,
     }
     _print_enhance(r, month_zhi)
     return r
+
+
+def _analysis(r):
+    """体用生克 + 卦气旺衰 + 概率 + 评分（供 summary/pan_json 复用）。"""
+    from rules import meihua as _mh, meihua_wangshuai as _mhw, meihua_probability as _mhp
+    ti_wx, yong_wx = r["体五行"], r["用五行"]
+    mh = _mh(ti_wx, yong_wx)
+    wangshuai = _mhw(ti_wx, r.get("月令")) if r.get("月令") else None
+    prob = _mhp(ti_wx, yong_wx)
+    score = {"吉": 82, "中": 55, "凶": 30}.get(mh["judgment"], 50)
+    if wangshuai:
+        score += {"旺": 10, "相": 6, "休": -4, "衰": -14}.get(wangshuai["judgment"], 0)
+    score = max(10, min(95, score))
+    jx = "吉" if score >= 70 else ("中" if score >= 45 else "凶")
+    return {"体用": mh, "卦气": wangshuai, "概率": prob, "评分": score, "吉凶": jx}
+
+
+def summary(r):
+    """一眼摘要卡：本卦变卦/体用生克/卦气/评分吉凶（借鉴八字/紫微升级的「一眼看懂」层）。"""
+    a = _analysis(r)
+    qixi = a["卦气"]["judgment"] if a["卦气"] else "—"
+    return "\n".join([
+        f"【一眼摘要】梅花易数 · {r['本卦']} → {r['变卦']}  动爻第{r['动爻']}",
+        f"  互卦 {r['互卦']} · 体={r['体卦']}({r['体五行']}) 用={r['用卦']}({r['用五行']}) · {r['体用关系']}",
+        f"  评分：{a['评分']}/100({a['吉凶']}) · 卦气{qixi} · {a['概率']['judgment']}",
+    ])
+
+
+def pan_json(r):
+    """盘面事实层 JSON（机读，schema=meihua-panfact-v1）。"""
+    a = _analysis(r)
+    return {"schema": "meihua-panfact-v1", **r,
+            "分析": {"体用生克": a["体用"]["judgment"], "卦气旺衰": a["卦气"]["judgment"] if a["卦气"] else None,
+                     "概率": a["概率"]["judgment"], "评分": a["评分"], "吉凶": a["吉凶"],
+                     "应期": f"卦数{r['上卦数'] + r['下卦数']}日/周/月"}}

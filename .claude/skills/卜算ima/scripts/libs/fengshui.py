@@ -431,5 +431,18 @@ def main():
         print(format_output(result))
 
 
+def summary(r):
+    """一眼摘要卡：命卦/东西命（借鉴八字/紫微升级的「一眼看懂」层）。"""
+    return "\n".join([
+        f"【一眼摘要】风水堪舆 · 命卦{r.get('命卦', '')} · {r.get('东西命', '')}",
+        f"  游年九星/流年飞星/煞气见盘面，布局建议见断语",
+    ])
+
+
+def pan_json(r):
+    """盘面事实层 JSON（机读，schema=fengshui-panfact-v1）。"""
+    return {"schema": "fengshui-panfact-v1", **r}
+
+
 if __name__ == '__main__':
     main()
