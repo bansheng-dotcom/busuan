@@ -140,6 +140,26 @@ def meihua_wangshuai(wx, month_zhi=""):
     return _r("休", "中", "R-MH-04", f"体卦{wx}于月令{month_zhi}（{mwx}）休囚，宜守")
 
 
+# 梅花「以变卦断物」（变卦式八则）——五行→物类
+_BIANYAO_WULEI = {
+    "金": "铁器、金属、铜钱、破磁盘瓦石（刚硬；天泽履断铁器、泽天夬断破磁盘、雷泽归妹断铁）",
+    "木": "软物、文章之体、竹草木（地雷复「木是用爻断软物文章之体」）",
+    "土": "土物、瓦石（泽火革「用金体火夏火旺出土必土物」）",
+    "火": "火类、光明、文书、彩绘（离，近日远取雉）",
+    "水": "水类、柔软、流动（坎）",
+}
+
+
+def meihua_bianyao_shefu(bian_yao_wx):
+    """梅花「以变卦断物」（变卦式八则）。R-MH-05
+    测物/断物除体用外，取「变出何卦、变爻属何五行，即以该五行断物类」——变爻五行 → 物类候选。
+    出处《梅花易数》·变卦式八则，断卦 Grep 卦名原文佐证。"""
+    val = _BIANYAO_WULEI.get(bian_yao_wx)
+    if not val:
+        return _r("中", "低", "R-MH-05", f"变爻五行「{bian_yao_wx}」无物类映射")
+    return _r(val, "高", "R-MH-05", f"变爻{bian_yao_wx} → {val}（《梅花易数》·变卦式八则）")
+
+
 # —— 八字旺衰（第一维：得令） ——
 def bazi_deling(day_gan, month_zhi):
     """八字旺衰·得令。R-BZ-01"""
@@ -499,6 +519,84 @@ def jinkoujue_wudong(renyuan_wx, guishen_wx, jiang_wx, difen_wx):
         j = "中"
     return _r(j, "高", "R-JK-01",
               f"五动爻：{detail}（出处《六壬神课金口诀古本》·五动爻诵，断卦 Grep 动爻名原文佐证）")
+
+
+# —— 大六壬金口诀·射覆门（射覆歌 + 十干颜色 + 数目 + 射物所在）——
+# 射覆是「测物/来意」，返回值是物类候选不是吉凶，故用 result 键（与 miaogong_shefu 一致），
+# 供断卦降分辨率出「特征画像」，不押物名。
+_JK_SHEFU_ZHILEI = {
+    "寅": "衣服（木）", "卯": "草木（东园）", "辰": "药类", "巳": "文章（火雀）",
+    "午": "红果文信", "未": "食、衣、黄", "申": "钱纸（金）", "酉": "珍宝光（金）",
+    "戌": "谷瓦类（土）", "亥": "绳带细长", "子": "黑文毛墨（水）", "丑": "铁五谷刚（土）",
+}
+
+_JK_SHEFU_GUISHEN = {
+    "青龙": "钱财、铁、木", "螣蛇": "灰、花、砖瓦", "腾蛇": "灰、花、砖瓦",
+    "朱雀": "文书、毛羽兽类、红花锦绣衣", "六合": "器物、草、竹木盘盒",
+    "勾陈": "土、泥土砖瓦、破碎伤", "天空": "壶瓶瓦罐（空）",
+    "贵人": "牛角、镜、石钱、光明圆滑金", "贵神": "牛角、镜、石钱、光明圆滑金", "天乙": "牛角、镜、石钱、光明圆滑金",
+    "天后": "疋缎丝绵、衣帛采绳（见水）", "太阴": "手帕、纸、钱、妇人刀尺耳珠环",
+    "玄武": "笔墨、墨斗、石灰木灰木匙", "太常": "饮食、妇人衣、甘美黄白",
+    "白虎": "纸布、铜、鼠、骨瓶磁瓶",
+}
+
+_JK_SHIGAN_YANSE = {"甲": "青", "乙": "碧", "丙": "赤", "丁": "紫", "戊": "黄",
+                    "己": "绛红", "庚": "白", "辛": "灰", "壬": "黑", "癸": "绿"}
+
+_JK_GANZHI_SHU = {"甲": 9, "己": 9, "乙": 8, "庚": 8, "丙": 7, "辛": 7,
+                  "丁": 6, "壬": 6, "戊": 5, "癸": 5}
+_JK_ZHI_SHU = {"子": 9, "午": 9, "丑": 8, "未": 8, "寅": 7, "申": 7,
+               "卯": 6, "酉": 6, "辰": 5, "戌": 5, "巳": 4, "亥": 4}
+_JK_WX_SHU = {"水": 1, "火": 2, "木": 3, "金": 4, "土": 5}
+_JK_GAN_HE = {"甲": "己", "己": "甲", "乙": "庚", "庚": "乙", "丙": "辛", "辛": "丙",
+              "丁": "壬", "壬": "丁", "戊": "癸", "癸": "戊"}
+
+
+def _jk_res(result, conf, ev, basis):
+    return {"result": result, "confidence": conf, "evidence": ev, "basis": basis}
+
+
+def jinkoujue_shefu_zhilei(difen_zhi):
+    """金口诀射覆门·射覆歌其一：十二地支 → 物类。R-JK-02
+    出处《六壬神课金口诀古本》·射覆门·射覆歌，断卦 Grep 支名原文佐证。"""
+    val = _JK_SHEFU_ZHILEI.get(difen_zhi)
+    if not val:
+        return _jk_res(None, "低", "R-JK-02", f"地支「{difen_zhi}」无射覆歌映射")
+    return _jk_res(val, "高", "R-JK-02",
+                   f"射覆歌：{difen_zhi}为{val}（《六壬神课金口诀古本》·射覆门）")
+
+
+def jinkoujue_shefu_guishen(guishen_name):
+    """金口诀射覆门·射覆歌其二：十二贵神 → 物类。R-JK-03
+    出处《六壬神课金口诀古本》·射覆门·射覆歌，断卦 Grep 神名原文佐证。"""
+    val = _JK_SHEFU_GUISHEN.get(guishen_name)
+    if not val:
+        return _jk_res(None, "低", "R-JK-03", f"贵神「{guishen_name}」无射覆歌映射")
+    return _jk_res(val, "高", "R-JK-03",
+                   f"射覆歌：{guishen_name}为{val}（《六壬神课金口诀古本》·射覆门）")
+
+
+def jinkoujue_shefu_yanse_shumu(renyuan_gan, yong_zhi="", yong_wx=""):
+    """金口诀射覆门：十干颜色 + 支干数目 + 五行数目 + 射物所在。R-JK-04
+    renyuan_gan 人元干；yong_zhi 用爻地支（支干数目）；yong_wx 用爻五行（五行数目）。
+    出处《六壬神课金口诀古本》·射覆门·十干颜色/支干数目/五行数目/射物所在。"""
+    parts = []
+    yan = _JK_SHIGAN_YANSE.get(renyuan_gan)
+    if yan:
+        parts.append(f"十干颜色：{renyuan_gan}主{yan}")
+    if renyuan_gan in _JK_GANZHI_SHU:
+        parts.append(f"干数目：{renyuan_gan}数{_JK_GANZHI_SHU[renyuan_gan]}")
+    if yong_zhi in _JK_ZHI_SHU:
+        parts.append(f"支数目：{yong_zhi}数{_JK_ZHI_SHU[yong_zhi]}")
+    if yong_wx in _JK_WX_SHU:
+        parts.append(f"五行数目：{yong_wx}数{_JK_WX_SHU[yong_wx]}")
+    he = _JK_GAN_HE.get(renyuan_gan)
+    if he:
+        parts.append(f"射物所在：见{renyuan_gan}物在{he}之下（天干合处）")
+    if not parts:
+        return _jk_res(None, "低", "R-JK-04", "缺人元干/用爻，颜色数目所在难定")
+    return _jk_res("；".join(parts), "高", "R-JK-04",
+                   f"{'；'.join(parts)}（《六壬神课金口诀古本》·射覆门）")
 
 
 # —— 太乙神数 ——

@@ -3,7 +3,7 @@
     "version": "0.1",
     "updated": "2026-10-08",
     "source": "六壬神将释·十二天将 + 梅花易数·八卦万物类象 + 现代映射",
-    "total_validations": 3,
+    "total_validations": 4,
     "description": "结构化「信号→特征」映射库。每条值带 confidence(0-1) 与 source，供特征画像引擎读取；每轮射覆复盘后由 libs/shefu_portrait.py update_kb 回填。"
   },
   "天将": {
@@ -13,8 +13,9 @@
         "颜色": [
           {
             "value": "黄/紫",
-            "confidence": 0.6,
-            "source": "贵人尊贵之色"
+            "confidence": 0.5,
+            "source": "贵人尊贵之色",
+            "validations": 1
           }
         ],
         "材质": [
@@ -436,6 +437,11 @@
             "confidence": 0.6,
             "source": "太阴主金银",
             "validations": 1
+          },
+          {
+            "value": "塑料/电子件外壳",
+            "confidence": 0.55,
+            "source": "现代映射:金=塑料电子件"
           }
         ],
         "形态": [
@@ -452,6 +458,11 @@
             "confidence": 0.7,
             "source": "六壬神将释",
             "validations": 1
+          },
+          {
+            "value": "电子配件/收纳",
+            "confidence": 0.5,
+            "source": "现代映射:金=电子配件"
           }
         ],
         "性质": [
@@ -520,6 +531,11 @@
             "value": "金属/玉/宝石",
             "confidence": 0.88,
             "source": "说卦传:金玉"
+          },
+          {
+            "value": "塑料硬壳",
+            "confidence": 0.5,
+            "source": "现代映射:金=塑料壳"
           }
         ],
         "形态": [
@@ -567,6 +583,11 @@
             "value": "金属",
             "confidence": 0.8,
             "source": "兑属金"
+          },
+          {
+            "value": "塑料壳/电子金属件",
+            "confidence": 0.55,
+            "source": "现代映射:金=塑料电子件"
           }
         ],
         "形态": [
@@ -628,6 +649,11 @@
             "value": "火/电/照明/文书/屏幕",
             "confidence": 0.85,
             "source": "说卦传:火+电 + 现代映射"
+          },
+          {
+            "value": "电池/发热/充电",
+            "confidence": 0.55,
+            "source": "现代映射:火=电池发热"
           }
         ],
         "结构": [

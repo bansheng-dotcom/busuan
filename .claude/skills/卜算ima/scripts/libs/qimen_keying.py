@@ -3,7 +3,7 @@
 
 出处：《奇门遁甲秘笈大全》卷之三「十干克应」（原文见 `国学czhengli/txt/[易藏] 奇门遁甲秘笈大全.txt`）。
 甲遁于戊（甲子戊），故 9 天盘干 × 9 地盘干 = 81 条。格局名以原文为准（异名不取别家）。
-断卦时 `lookup` 命中格局 → 按 `SOURCE` 去 txt search_txt.py 原文佐证（结构化判定层 + 原文检索层并存）。
+断卦时 `lookup` 命中格局 → 按 `SOURCE` 去 txt Grep 原文佐证（结构化判定层 + 原文检索层并存）。
 
 用法：
   from qimen_keying import lookup, KEYING

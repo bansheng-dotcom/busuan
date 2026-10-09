@@ -3,7 +3,7 @@
 
 借鉴 ziwei_knowledge.py 的结构：结构化断语 + 原文出处，供 liuyao MCP 未连接时离线 RAG 检索。
 六类：用神取用 / 旺衰(月建日辰) / 原神忌神 / 应期 / 六神 / 世应。
-每条含「断语 + 原文 + 出处」，断卦仍须按出处 search_txt.py 原文佐证（双重保证）。
+每条含「断语 + 原文 + 出处」，断卦仍须按出处 Grep 原文佐证（双重保证）。
 
 用法:
   python libs/liuyao_knowledge.py --json       # 导出全量喂 RAG

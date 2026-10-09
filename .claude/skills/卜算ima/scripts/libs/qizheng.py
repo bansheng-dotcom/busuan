@@ -274,7 +274,7 @@ class QiZhengPan:
     def check_ge_ju(cls, stars: Dict[str, float], ming_gong_index: int = 0) -> List[Dict]:
         """检查星盘格局（ming_gong_index 为命宫地支序 0=子…11=亥）。
 
-        格局属经验规则层（HEURISTIC），给出处指针；断卦仍须 search_txt.py《果老星宗》《星学大成》原文佐证。
+        格局属经验规则层（HEURISTIC），给出处指针；断卦仍须 Grep《果老星宗》《星学大成》原文佐证。
         星神三则（日月夹命/禄存/火铃夹命）与 stem-branch seven-governors 同口径，出处标果老星宗。
         """
         ge_ju = []

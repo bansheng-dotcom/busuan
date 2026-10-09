@@ -3,7 +3,7 @@
 
 出处：《六壬大全》《六壬指南》《毕法赋》《六壬神将释》等（原文见 `国学czhengli/txt/`）。
 本模块为结构化判定层：给出确定性神煞命中 + 吉凶 + 出处指针；断卦时仍须按神煞名
-search_txt.py 原文佐证（双重保证）。
+Grep 原文佐证（双重保证）。
 
 用法：
   from liuren_shensha import tianjiang, compute_shensha

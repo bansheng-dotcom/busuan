@@ -22,7 +22,7 @@ _KE = {"木": "土", "土": "水", "水": "火", "火": "金", "金": "木"}
 _ZHI_WX = {"寅": "木", "卯": "木", "巳": "火", "午": "火", "申": "金", "酉": "金",
            "亥": "水", "子": "水", "辰": "土", "戌": "土", "丑": "土", "未": "土"}
 
-# 典籍出处指针（断卦时仍须按此 search_txt.py 原文佐证，双重保证）
+# 典籍出处指针（断卦时仍须按此 Grep 原文佐证，双重保证）
 _SRC_XJBFS = "《钦定协纪辨方书》"
 _SRC_XLK = "《御定星历考原》"
 
@@ -101,12 +101,12 @@ _MEIHUA_18LEI = {
 def meihua_18lei(lei, wx_body, wx_yong):
     """梅花十八类占：按类取「体/用」角色 + 生克快断。R-MH-03
     lei=类名（人事/家宅/婚姻/求财/失物/疾病/官讼…），wx_body=体卦五行，wx_yong=用卦五行。
-    出处《梅花易数》卷二十八类占，断卦按类名 search_txt.py 原文佐证。"""
+    出处《梅花易数》卷二十八类占，断卦按类名 Grep 原文佐证。"""
     info = _MEIHUA_18LEI.get(lei)
     if not info:
         return _r("中", "低", "R-MH-03", f"「{lei}」非十八类占之一")
     if "special" in info:
-        return _r("中", "高", "R-MH-03", f"天时占：{info['special']}（出处《梅花易数·天时占第一》，断卦 search_txt.py「天时占」原文）")
+        return _r("中", "高", "R-MH-03", f"天时占：{info['special']}（出处《梅花易数·天时占第一》，断卦 Grep「天时占」原文）")
     if _KE.get(wx_yong) == wx_body:
         rel = "用克体"
     elif _KE.get(wx_body) == wx_yong:
@@ -119,7 +119,7 @@ def meihua_18lei(lei, wx_body, wx_yong):
         rel = "比和"
     j, m = info[rel]
     return _r(j, "高", "R-MH-03",
-              f"{lei}占（体={info['ti']}，用={info['yong']}）：{rel}（{wx_yong}vs{wx_body}）→ {m}（出处《梅花易数·{lei}占》，断卦 search_txt.py「{lei}占」原文）")
+              f"{lei}占（体={info['ti']}，用={info['yong']}）：{rel}（{wx_yong}vs{wx_body}）→ {m}（出处《梅花易数·{lei}占》，断卦 Grep「{lei}占」原文）")
 
 
 def meihua_wangshuai(wx, month_zhi=""):
@@ -138,6 +138,26 @@ def meihua_wangshuai(wx, month_zhi=""):
     if _KE.get(mwx) == wx:
         return _r("衰", "高", "R-MH-04", f"体卦{wx}受月令克（{month_zhi}属{mwx}克{wx}），衰而逢克则凶甚")
     return _r("休", "中", "R-MH-04", f"体卦{wx}于月令{month_zhi}（{mwx}）休囚，宜守")
+
+
+# 梅花「以变卦断物」（变卦式八则）——五行→物类
+_BIANYAO_WULEI = {
+    "金": "铁器、金属、铜钱、破磁盘瓦石（刚硬；天泽履断铁器、泽天夬断破磁盘、雷泽归妹断铁）",
+    "木": "软物、文章之体、竹草木（地雷复「木是用爻断软物文章之体」）",
+    "土": "土物、瓦石（泽火革「用金体火夏火旺出土必土物」）",
+    "火": "火类、光明、文书、彩绘（离，近日远取雉）",
+    "水": "水类、柔软、流动（坎）",
+}
+
+
+def meihua_bianyao_shefu(bian_yao_wx):
+    """梅花「以变卦断物」（变卦式八则）。R-MH-05
+    测物/断物除体用外，取「变出何卦、变爻属何五行，即以该五行断物类」——变爻五行 → 物类候选。
+    出处《梅花易数》·变卦式八则，断卦 Grep 卦名原文佐证。"""
+    val = _BIANYAO_WULEI.get(bian_yao_wx)
+    if not val:
+        return _r("中", "低", "R-MH-05", f"变爻五行「{bian_yao_wx}」无物类映射")
+    return _r(val, "高", "R-MH-05", f"变爻{bian_yao_wx} → {val}（《梅花易数》·变卦式八则）")
 
 
 # —— 八字旺衰（第一维：得令） ——
@@ -257,33 +277,33 @@ def zeri_huangdao(huangdao):
     return _r("中", "低", "R-ZR-02", f"「{huangdao}」未明")
 
 
-# —— 老黄历补全（结构化判定层：给出方向 + 出处指针，原文仍由 search_txt.py 检索佐证） ——
+# —— 老黄历补全（结构化判定层：给出方向 + 出处指针，原文仍由 Grep 检索佐证） ——
 def zeri_zhishen(zhi_shen):
     """老黄历·十二值神吉凶（协纪辨方书精确起法）。R-ZR-03"""
     g = _HUANGDAO.get(zhi_shen)
     if g == "吉":
         return _r("吉", "高", "R-ZR-03",
-                  f"值神「{zhi_shen}」黄道吉神（出处：{_SRC_XJBFS}·十二值神，断卦按值神名 search_txt.py 原文佐证）")
+                  f"值神「{zhi_shen}」黄道吉神（出处：{_SRC_XJBFS}·十二值神，断卦按值神名 Grep 原文佐证）")
     if g == "凶":
         return _r("凶", "高", "R-ZR-03",
-                  f"值神「{zhi_shen}」黑道凶神（出处：{_SRC_XJBFS}·十二值神，断卦按值神名 search_txt.py 原文佐证）")
+                  f"值神「{zhi_shen}」黑道凶神（出处：{_SRC_XJBFS}·十二值神，断卦按值神名 Grep 原文佐证）")
     return _r("中", "低", "R-ZR-03", f"值神「{zhi_shen}」未明")
 
 
 def zeri_pengzu(gan_ji, zhi_ji):
     """老黄历·彭祖百忌（当日禁忌，非吉凶定档，标「避」）。R-ZR-04"""
     return _r("中", "高", "R-ZR-04",
-              f"彭祖百忌：{gan_ji}；{zhi_ji}——当日所忌之事宜避（出处：{_SRC_XJBFS}·彭祖百忌，断卦 search_txt.py「彭祖百忌」原文佐证）")
+              f"彭祖百忌：{gan_ji}；{zhi_ji}——当日所忌之事宜避（出处：{_SRC_XJBFS}·彭祖百忌，断卦 Grep「彭祖百忌」原文佐证）")
 
 
 def zeri_fangwei(fw):
     """老黄历·吉神方位（喜神/财神/福神/阳贵/阴贵，供趋吉择向）。R-ZR-05"""
     parts = " ".join(f"{k}{fw.get(k, '')}" for k in ("喜神", "财神", "福神", "阳贵", "阴贵") if fw.get(k))
     return _r("吉", "高", "R-ZR-05",
-              f"吉神方位：{parts}——求财谒贵宜向财神/贵人方（出处：{_SRC_XJBFS}·吉神方位，断卦按「喜神/财神/福神/贵人」search_txt.py 原文佐证）")
+              f"吉神方位：{parts}——求财谒贵宜向财神/贵人方（出处：{_SRC_XJBFS}·吉神方位，断卦按「喜神/财神/福神/贵人」Grep 原文佐证）")
 
 
-# —— 奇门遁甲（结构化规则：判定 + 典籍出处指针，原文仍由 search_txt.py 检索佐证） ——
+# —— 奇门遁甲（结构化规则：判定 + 典籍出处指针，原文仍由 Grep 检索佐证） ——
 _QIMEN_MEN = {"开": ("吉", "宜开创、出行、远行"), "休": ("吉", "宜休养、求财、交易"),
               "生": ("吉", "宜求财、经营、种植"), "伤": ("凶", "宜捕猎、讨债，余事忌"),
               "杜": ("中", "宜藏形、躲避，主阻隔"), "景": ("中", "宜上书、考试、广告"),
@@ -407,13 +427,13 @@ def qimen_angan(shi_gan, zhishi_gong, yinyang, dipan=None):
               f"（值使加时干阳顺阴逆飞九宫，出处：《奇门遁甲秘笈大全》「飞干」、《御定奇门宝鉴》）")
 
 
-# —— 大六壬（结构化判定：十二天将/神煞/毕法赋，原文仍由 search_txt.py 佐证） ——
+# —— 大六壬（结构化判定：十二天将/神煞/毕法赋，原文仍由 Grep 佐证） ——
 def liuren_tianjiang(name):
     """大六壬十二天将吉凶。R-LR-01"""
     r = liuren_shensha.tianjiang(name)
     j = "吉" if r["吉凶"] == "吉" else ("凶" if r["吉凶"] == "凶" else "中")
     return _r(j, "高", "R-LR-01",
-              f"天将「{name}」{r['主事']}（出处：{r['出处']}，断卦 search_txt.py 天将名原文佐证）")
+              f"天将「{name}」{r['主事']}（出处：{r['出处']}，断卦 Grep 天将名原文佐证）")
 
 
 def liuren_shensha_rule(name, zhi=""):
@@ -426,7 +446,7 @@ def liuren_shensha_rule(name, zhi=""):
           "岁破": "凶", "月破": "凶", "天罗": "凶", "地网": "凶", "天赦": "吉", "四废": "凶"}.get(name, "中")
     where = f"临{zhi}" if zhi else ""
     return _r(jx, "高", "R-LR-02",
-              f"神煞「{name}」{where}（{jx}，出处《六壬大全》《六壬指南》，断卦 search_txt.py 神煞名原文佐证）")
+              f"神煞「{name}」{where}（{jx}，出处《六壬大全》《六壬指南》，断卦 Grep 神煞名原文佐证）")
 
 
 def liuren_bifa_rule(ju):
@@ -437,7 +457,7 @@ def liuren_bifa_rule(ju):
                   f"毕法赋无「{ju}」直接条目，按课体推演并标 [规则推演]")
     h = hits[0]
     return _r(h["吉凶"], "高", "R-LR-03",
-              f"毕法赋「{h['句']}」主{h['主断']}（出处：{h['出处']}，断卦 search_txt.py 条名原文佐证）")
+              f"毕法赋「{h['句']}」主{h['主断']}（出处：{h['出处']}，断卦 Grep 条名原文佐证）")
 
 
 def liuren_bifa_resolve(hits):
@@ -472,7 +492,7 @@ _JK_WUDONG_JX = {
 def jinkoujue_wudong(renyuan_wx, guishen_wx, jiang_wx, difen_wx):
     """金口诀五动爻判定。R-JK-01
     输入四位五行（人元/贵神/将神/地分），返回命中的动爻与综合倾向。
-    出处《六壬神课金口诀古本》·五动爻诵，断卦按动爻名 search_txt.py 原文佐证。"""
+    出处《六壬神课金口诀古本》·五动爻诵，断卦按动爻名 Grep 原文佐证。"""
     hits = []
     if _KE.get(renyuan_wx) == difen_wx:
         hits.append("妻动")
@@ -498,7 +518,85 @@ def jinkoujue_wudong(renyuan_wx, guishen_wx, jiang_wx, difen_wx):
     else:
         j = "中"
     return _r(j, "高", "R-JK-01",
-              f"五动爻：{detail}（出处《六壬神课金口诀古本》·五动爻诵，断卦 search_txt.py 动爻名原文佐证）")
+              f"五动爻：{detail}（出处《六壬神课金口诀古本》·五动爻诵，断卦 Grep 动爻名原文佐证）")
+
+
+# —— 大六壬金口诀·射覆门（射覆歌 + 十干颜色 + 数目 + 射物所在）——
+# 射覆是「测物/来意」，返回值是物类候选不是吉凶，故用 result 键（与 miaogong_shefu 一致），
+# 供断卦降分辨率出「特征画像」，不押物名。
+_JK_SHEFU_ZHILEI = {
+    "寅": "衣服（木）", "卯": "草木（东园）", "辰": "药类", "巳": "文章（火雀）",
+    "午": "红果文信", "未": "食、衣、黄", "申": "钱纸（金）", "酉": "珍宝光（金）",
+    "戌": "谷瓦类（土）", "亥": "绳带细长", "子": "黑文毛墨（水）", "丑": "铁五谷刚（土）",
+}
+
+_JK_SHEFU_GUISHEN = {
+    "青龙": "钱财、铁、木", "螣蛇": "灰、花、砖瓦", "腾蛇": "灰、花、砖瓦",
+    "朱雀": "文书、毛羽兽类、红花锦绣衣", "六合": "器物、草、竹木盘盒",
+    "勾陈": "土、泥土砖瓦、破碎伤", "天空": "壶瓶瓦罐（空）",
+    "贵人": "牛角、镜、石钱、光明圆滑金", "贵神": "牛角、镜、石钱、光明圆滑金", "天乙": "牛角、镜、石钱、光明圆滑金",
+    "天后": "疋缎丝绵、衣帛采绳（见水）", "太阴": "手帕、纸、钱、妇人刀尺耳珠环",
+    "玄武": "笔墨、墨斗、石灰木灰木匙", "太常": "饮食、妇人衣、甘美黄白",
+    "白虎": "纸布、铜、鼠、骨瓶磁瓶",
+}
+
+_JK_SHIGAN_YANSE = {"甲": "青", "乙": "碧", "丙": "赤", "丁": "紫", "戊": "黄",
+                    "己": "绛红", "庚": "白", "辛": "灰", "壬": "黑", "癸": "绿"}
+
+_JK_GANZHI_SHU = {"甲": 9, "己": 9, "乙": 8, "庚": 8, "丙": 7, "辛": 7,
+                  "丁": 6, "壬": 6, "戊": 5, "癸": 5}
+_JK_ZHI_SHU = {"子": 9, "午": 9, "丑": 8, "未": 8, "寅": 7, "申": 7,
+               "卯": 6, "酉": 6, "辰": 5, "戌": 5, "巳": 4, "亥": 4}
+_JK_WX_SHU = {"水": 1, "火": 2, "木": 3, "金": 4, "土": 5}
+_JK_GAN_HE = {"甲": "己", "己": "甲", "乙": "庚", "庚": "乙", "丙": "辛", "辛": "丙",
+              "丁": "壬", "壬": "丁", "戊": "癸", "癸": "戊"}
+
+
+def _jk_res(result, conf, ev, basis):
+    return {"result": result, "confidence": conf, "evidence": ev, "basis": basis}
+
+
+def jinkoujue_shefu_zhilei(difen_zhi):
+    """金口诀射覆门·射覆歌其一：十二地支 → 物类。R-JK-02
+    出处《六壬神课金口诀古本》·射覆门·射覆歌，断卦 Grep 支名原文佐证。"""
+    val = _JK_SHEFU_ZHILEI.get(difen_zhi)
+    if not val:
+        return _jk_res(None, "低", "R-JK-02", f"地支「{difen_zhi}」无射覆歌映射")
+    return _jk_res(val, "高", "R-JK-02",
+                   f"射覆歌：{difen_zhi}为{val}（《六壬神课金口诀古本》·射覆门）")
+
+
+def jinkoujue_shefu_guishen(guishen_name):
+    """金口诀射覆门·射覆歌其二：十二贵神 → 物类。R-JK-03
+    出处《六壬神课金口诀古本》·射覆门·射覆歌，断卦 Grep 神名原文佐证。"""
+    val = _JK_SHEFU_GUISHEN.get(guishen_name)
+    if not val:
+        return _jk_res(None, "低", "R-JK-03", f"贵神「{guishen_name}」无射覆歌映射")
+    return _jk_res(val, "高", "R-JK-03",
+                   f"射覆歌：{guishen_name}为{val}（《六壬神课金口诀古本》·射覆门）")
+
+
+def jinkoujue_shefu_yanse_shumu(renyuan_gan, yong_zhi="", yong_wx=""):
+    """金口诀射覆门：十干颜色 + 支干数目 + 五行数目 + 射物所在。R-JK-04
+    renyuan_gan 人元干；yong_zhi 用爻地支（支干数目）；yong_wx 用爻五行（五行数目）。
+    出处《六壬神课金口诀古本》·射覆门·十干颜色/支干数目/五行数目/射物所在。"""
+    parts = []
+    yan = _JK_SHIGAN_YANSE.get(renyuan_gan)
+    if yan:
+        parts.append(f"十干颜色：{renyuan_gan}主{yan}")
+    if renyuan_gan in _JK_GANZHI_SHU:
+        parts.append(f"干数目：{renyuan_gan}数{_JK_GANZHI_SHU[renyuan_gan]}")
+    if yong_zhi in _JK_ZHI_SHU:
+        parts.append(f"支数目：{yong_zhi}数{_JK_ZHI_SHU[yong_zhi]}")
+    if yong_wx in _JK_WX_SHU:
+        parts.append(f"五行数目：{yong_wx}数{_JK_WX_SHU[yong_wx]}")
+    he = _JK_GAN_HE.get(renyuan_gan)
+    if he:
+        parts.append(f"射物所在：见{renyuan_gan}物在{he}之下（天干合处）")
+    if not parts:
+        return _jk_res(None, "低", "R-JK-04", "缺人元干/用爻，颜色数目所在难定")
+    return _jk_res("；".join(parts), "高", "R-JK-04",
+                   f"{'；'.join(parts)}（《六壬神课金口诀古本》·射覆门）")
 
 
 # —— 太乙神数 ——
@@ -509,7 +607,7 @@ _TAIYI_SUAN_XIONG = ("無天", "無地", "無人", "純陽", "純陰", "雜陽",
 def taiyi_suan(suan):
     """太乙主算/客算/定算的算数吉凶。R-TY-01
     suan 为引擎返回的 list：[算数, [断语...]]，如 [16, ["三才足數", "下和"]]。
-    出处《太乙金镜式经》主客算论，断卦按断语 search_txt.py 原文佐证。"""
+    出处《太乙金镜式经》主客算论，断卦按断语 Grep 原文佐证。"""
     tags = []
     if isinstance(suan, list) and len(suan) > 1 and isinstance(suan[1], list):
         tags = [str(t) for t in suan[1]]
@@ -555,12 +653,12 @@ _TAIYI_GEJU_XIONG = ("掩", "迫", "關", "囚", "擊", "格", "對", "閉")
 def taiyi_geju(text):
     """太乙格局（掩/迫/关/囚/击/格/对）吉凶。R-TY-03
     text 可为文昌带格局（如「始擊掩」）、釋格局 dict 的 key、或断语文本。
-    出处《太乙秘书》掩格、《太乙金镜式经》格局，断卦按格局名 search_txt.py 原文佐证。"""
+    出处《太乙秘书》掩格、《太乙金镜式经》格局，断卦按格局名 Grep 原文佐证。"""
     s = str(text)
     hits = [g for g in _TAIYI_GEJU_XIONG if g in s]
     if hits:
         return _r("凶", "高", "R-TY-03",
-                  f"犯凶格「{'、'.join(hits)}」：谋事受阻/受制/被动（出处《太乙秘书》，断卦 search_txt.py 格局名原文佐证）")
+                  f"犯凶格「{'、'.join(hits)}」：谋事受阻/受制/被动（出处《太乙秘书》，断卦 Grep 格局名原文佐证）")
     return _r("中", "低", "R-TY-03", f"未见掩迫关囚击格对凶格（text={s[:40]}）")
 
 

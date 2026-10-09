@@ -74,6 +74,9 @@ import bazi_liunian
 import bazi_json
 import mingli_eval
 import shefu_portrait
+import rules
+import miaogong_shefu
+import shiwu_xunren
 
 
 def _parse_time(args):
@@ -244,6 +247,16 @@ def main():
         jinkoujue.print_pan(r)
         print()
         print(jinkoujue.summary(r))
+        # 射覆门（测物/来意，不押物名；断卦以用爻为准，此处按地分/贵神/人元干展示原始信号）
+        _four = r["四位"]
+        _df_zhi = _four["地分"]["符号"]
+        _gs_name = _four["贵神"]["名"]
+        _ry_gan = _four["人元"]["符号"]
+        print()
+        print("【射覆门】（测物/来意，不押物名）")
+        print(f"  地支类象：{rules.jinkoujue_shefu_zhilei(_df_zhi)['result'] or '—'}")
+        print(f"  贵神类象：{rules.jinkoujue_shefu_guishen(_gs_name)['result'] or '—'}")
+        print(f"  颜色/数目/所在：{rules.jinkoujue_shefu_yanse_shumu(_ry_gan, _df_zhi, _four['将神']['五行'])['result']}")
         if json_out:
             print()
             print("【盘面事实层 JSON】schema=jinkoujue-panfact-v1（机读，与上方散文并存）")
@@ -443,15 +456,46 @@ def main():
                 print(f"    {r['断语']}")
                 print(f"    〔原文〕{r['原文']}  — {r['出处']}")
     elif cmd == "shefu":
-        # 射覆特征画像：shefu liuren 青龙 朱雀 天后 / shefu meihua 离 兑
+        # 射覆：shefu liuren <天将...> / shefu meihua <卦...> / shefu miaogong <日干> <发用支> <发用天将> [课体] [旺相] [五行]
         sub = a[1] if len(a) > 1 else ""
         sig = a[2:]
         if sub == "liuren":
             print(shefu_portrait._fmt(shefu_portrait.portrait_liuren(sig)))
         elif sub == "meihua":
             print(shefu_portrait._fmt(shefu_portrait.portrait_meihua(sig)))
+        elif sub == "miaogong":
+            # 苗公射覆画像（大六壬：天将临辰物类 + 课体物性 + 形状/颜色/新旧/五行物类）
+            if len(sig) < 3:
+                print("用法：shefu miaogong <日干> <发用支> <发用天将> [课体] [旺相] [五行]")
+            else:
+                keti = sig[3] if len(sig) > 3 else ""
+                ws = sig[4] if len(sig) > 4 else ""
+                wx = sig[5] if len(sig) > 5 else ""
+                print(miaogong_shefu._fmt(miaogong_shefu.portrait_liuren(sig[0], sig[1], sig[2], keti, ws, wx)))
         else:
             print(shefu_portrait._fmt(shefu_portrait.portrait([(x, 1.0) for x in sig])))
+    elif cmd == "shiwu":
+        # 失物·寻人：shiwu xiaoliuren <落宫> / shiwu liuyao <卦宫> <财爻状态> <官鬼状态> [子孙状态] [财爻五行] / shiwu jinkoujue <地支> [生克]
+        sub = a[1] if len(a) > 1 else ""
+        sig = a[2:]
+        if sub == "xiaoliuren":
+            print(shiwu_xunren._fmt(shiwu_xunren.portrait_shiwu("xiaoliuren", 落宫=sig[0] if sig else "")))
+        elif sub == "jinkoujue":
+            print(shiwu_xunren._fmt(shiwu_xunren.portrait_shiwu(
+                "jinkoujue", 地支=sig[0] if sig else "", 生克=sig[1] if len(sig) > 1 else "")))
+        elif sub == "liuyao":
+            gong = sig[0] if sig else ""
+            cai = sig[1] if len(sig) > 1 else ""
+            gui = sig[2] if len(sig) > 2 else ""
+            zisun = sig[3] if len(sig) > 3 else ""
+            cai_wx = sig[4] if len(sig) > 4 else ""
+            print(shiwu_xunren._fmt({
+                "综合断": shiwu_xunren.liuyao_shiwu_duan(cai, gui, zisun, gong),
+                "方位": shiwu_xunren.liuyao_shiwu_fangwei(gong) if gong else None,
+                "藏处": shiwu_xunren.liuyao_shiwu_cangchu(cai_wx) if cai_wx else None,
+            }))
+        else:
+            print("用法：shiwu xiaoliuren <落宫> / shiwu liuyao <卦宫> <财爻状态> <官鬼状态> [子孙状态] [财爻五行] / shiwu jinkoujue <地支> [生克]")
     else:
         print(__doc__)
 

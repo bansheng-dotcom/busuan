@@ -1,6 +1,6 @@
 # 奇门遁甲 · 吉凶格局速查表
 
-> 本表是**结构化速查层**：断卦时按「格局名/门/星/神/天盘干+地盘干」search_txt.py 典籍原文佐证，两层并存。
+> 本表是**结构化速查层**：断卦时按「格局名/门/星/神/天盘干+地盘干」search 典籍原文佐证，两层并存。
 > 主出处：《奇门遁甲秘笈大全》·十干克应、《奇门遁甲统宗》、《烟波钓叟歌句解》（txt 路径 `txt\[易藏] *.txt`）。
 > 十干克应 81 格局全表已结构化在 `scripts/libs/qimen_keying.py`（`lookup(天盘干, 地盘干)`），`tests` 锁定 81 条无遗漏。
 
@@ -21,7 +21,7 @@
 | 日月并行 | 丙+乙 | 吉 | 公谋私为皆吉 |
 | 天乙会合 | 癸+戊 | 吉 | 财喜婚姻，吉人赞助成合 |
 
-> 出处：《奇门遁甲秘笈大全》·十干克应。断卦 `rules.qimen_geju(天盘干, 地盘干)` 命中后按格局名 search_txt.py 原文佐证。
+> 出处：《奇门遁甲秘笈大全》·十干克应。断卦 `rules.qimen_geju(天盘干, 地盘干)` 命中后按格局名 search 原文佐证。
 
 ---
 
@@ -75,7 +75,7 @@
 | 玉女守门 | 值使门与丁奇同宫（吉） | 《烟波钓叟歌》 |
 | 暗干（飞干） | 值使加时支飞干 | 《奇门遁甲秘笈大全》·奇门占事 |
 
-> 均已入 rules：五不遇时 `qimen_wubuyushi`（R-QM-06）、门迫 `qimen_menpo`（R-QM-04）、六仪击刑 `qimen_jixing`（R-QM-07）、奇仪入墓 `qimen_rumu`（R-QM-08）、三奇得使 `qimen_deshi`（R-QM-09）、玉女守门 `qimen_yunv`（R-QM-10）、暗干 `qimen_angan`（R-QM-11）。命中后仍按格局名 search_txt.py 原文佐证。
+> 均已入 rules：五不遇时 `qimen_wubuyushi`（R-QM-06）、门迫 `qimen_menpo`（R-QM-04）、六仪击刑 `qimen_jixing`（R-QM-07）、奇仪入墓 `qimen_rumu`（R-QM-08）、三奇得使 `qimen_deshi`（R-QM-09）、玉女守门 `qimen_yunv`（R-QM-10）、暗干 `qimen_angan`（R-QM-11）。命中后仍按格局名 search 原文佐证。
 
 ---
 

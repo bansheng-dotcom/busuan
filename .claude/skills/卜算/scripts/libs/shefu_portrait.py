@@ -110,6 +110,15 @@ def _fmt(p):
         vals = p["dimensions"][dim]
         s = " / ".join(f"{v[1]} {v[0]}" for v in vals)
         lines.append(f"  {dim}  {s}")
+    # 候选参考：取材质+形态+功能 top 值拼成候选类别（降分辨率给候选，不点名）
+    cand = []
+    for dim in ("材质", "形态", "功能"):
+        vals = p["dimensions"].get(dim, [])
+        if vals and vals[0][0] != "—":
+            cand.append(vals[0][0])
+    if cand:
+        lines.append(f"💡 候选参考：{' + '.join(cand)}（候选类别，非点名）")
+    lines.append("结束语：以上是根据卦象展开的特征画像，并非确定性结论。")
     return "\n".join(lines)
 
 
