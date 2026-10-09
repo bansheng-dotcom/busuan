@@ -8,7 +8,7 @@ import najia
 NAMES = ["初爻", "二爻", "三爻", "四爻", "五爻", "上爻"]
 
 
-def cast(dt=None):
+def cast(dt=None, question="通用"):
     dt = dt or datetime.datetime.now()
     from lunar_python import Solar
     solar = Solar.fromYmdHms(dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second)
@@ -38,5 +38,6 @@ def cast(dt=None):
     print(f"本卦: {ben}  变卦: {bian}  动爻: {dong or '无(静卦)'}")
     print(f"占时: {lunar.toString()}  {day_gz}日  月建{month_gz}")
     r = najia.zhuang(ben, bian, dong, day_gz, month_gz)
-    najia.print_zhuang(r)
+    najia.print_zhuang(r, yaos)
+    najia.print_yongshen(r, question)
     return ben, bian, dong, r

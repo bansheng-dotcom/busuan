@@ -1,0 +1,2549 @@
+{
+ "corpus": "D:\\卜算\\国学czhengli\\txt",
+ "books": {
+  "七政推步": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[术数] 七政推步.txt",
+   "category": "术数",
+   "lines": 1935,
+   "sha1": "37da3c829dba"
+  },
+  "三命指迷赋": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 三命指迷赋.txt",
+   "category": "易藏",
+   "lines": 64,
+   "sha1": "14196c4c31fa"
+  },
+  "三命通会": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 三命通会.txt",
+   "category": "易藏",
+   "lines": 6645,
+   "sha1": "1d6e55db70e8"
+  },
+  "三易备遗": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 三易备遗.txt",
+   "category": "易藏",
+   "lines": 1351,
+   "sha1": "053d1f1d1f93"
+  },
+  "三易洞璣": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[术数] 三易洞璣.txt",
+   "category": "术数",
+   "lines": 4934,
+   "sha1": "558d30fe88b7"
+  },
+  "丙子学易编": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 丙子学易编.txt",
+   "category": "易藏",
+   "lines": 294,
+   "sha1": "53d94bc14c9d"
+  },
+  "东坡易传": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 东坡易传.txt",
+   "category": "易藏",
+   "lines": 2461,
+   "sha1": "4bc527e87b5f"
+  },
+  "中天紫微星真宝忏": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 中天紫微星真宝忏.txt",
+   "category": "道藏",
+   "lines": 36,
+   "sha1": "6a2eec90ff1b"
+  },
+  "丰川易说": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 丰川易说.txt",
+   "category": "易藏",
+   "lines": 2561,
+   "sha1": "6461787f0fcc"
+  },
+  "乙巳占": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 乙巳占.txt",
+   "category": "易藏",
+   "lines": 4675,
+   "sha1": "d40f563d7f3b"
+  },
+  "乾元秘旨": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 乾元秘旨.txt",
+   "category": "易藏",
+   "lines": 145,
+   "sha1": "6fe42b066fb2"
+  },
+  "乾坤凿度": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 乾坤凿度.txt",
+   "category": "易藏",
+   "lines": 183,
+   "sha1": "66202fdcc3f1"
+  },
+  "了斋易说": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 了斋易说.txt",
+   "category": "易藏",
+   "lines": 8,
+   "sha1": "061e2dd60be5"
+  },
+  "二十四山八卦罗经图": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 二十四山八卦罗经图.txt",
+   "category": "易藏",
+   "lines": 136,
+   "sha1": "20e668f5b531"
+  },
+  "五行大义": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 五行大义.txt",
+   "category": "易藏",
+   "lines": 270,
+   "sha1": "42e056cdd6cb"
+  },
+  "五行精纪": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 五行精纪.txt",
+   "category": "易藏",
+   "lines": 4430,
+   "sha1": "3bdfb6a2e2cf"
+  },
+  "京氏易传": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 京氏易传.txt",
+   "category": "易藏",
+   "lines": 109,
+   "sha1": "cc5b7410b394"
+  },
+  "人伦大统赋": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 人伦大统赋.txt",
+   "category": "易藏",
+   "lines": 87,
+   "sha1": "f0f7cf5ba4e1"
+  },
+  "人子须知": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 人子须知.txt",
+   "category": "易藏",
+   "lines": 5113,
+   "sha1": "e3fcc17c1299"
+  },
+  "仲氏易": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 仲氏易.txt",
+   "category": "易藏",
+   "lines": 1972,
+   "sha1": "2ba6289700d2"
+  },
+  "伊川易传": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 伊川易传.txt",
+   "category": "易藏",
+   "lines": 2576,
+   "sha1": "93c309072f8a"
+  },
+  "催官篇": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 催官篇.txt",
+   "category": "易藏",
+   "lines": 470,
+   "sha1": "ea847ad94cd0"
+  },
+  "像象管见": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 像象管见.txt",
+   "category": "易藏",
+   "lines": 1324,
+   "sha1": "e5d101339330"
+  },
+  "儒门崇理折衷堪舆完孝录": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 儒门崇理折衷堪舆完孝录.txt",
+   "category": "道藏",
+   "lines": 1188,
+   "sha1": "e34b1c366e6c"
+  },
+  "儿易内仪以": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 儿易内仪以.txt",
+   "category": "易藏",
+   "lines": 1558,
+   "sha1": "469a07b6843b"
+  },
+  "元包經傳": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[术数] 元包經傳.txt",
+   "category": "术数",
+   "lines": 780,
+   "sha1": "c32f6a3d7ca7"
+  },
+  "元辰章醮立成历": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 元辰章醮立成历.txt",
+   "category": "道藏",
+   "lines": 141,
+   "sha1": "decac8179954"
+  },
+  "入地眼全书": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 入地眼全书.txt",
+   "category": "易藏",
+   "lines": 292,
+   "sha1": "6f098be9486a"
+  },
+  "全史日至源流": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[术数] 全史日至源流.txt",
+   "category": "术数",
+   "lines": 7983,
+   "sha1": "cedd31eab294"
+  },
+  "公笃相法": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 公笃相法.txt",
+   "category": "易藏",
+   "lines": 1913,
+   "sha1": "77c01549f634"
+  },
+  "六十甲子本命元辰历": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 六十甲子本命元辰历.txt",
+   "category": "道藏",
+   "lines": 65,
+   "sha1": "d4dde44555ba"
+  },
+  "六壬一字诀玉连环": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬一字诀玉连环.txt",
+   "category": "易藏",
+   "lines": 446,
+   "sha1": "73692205b4bc"
+  },
+  "六壬兵占": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬兵占.txt",
+   "category": "易藏",
+   "lines": 821,
+   "sha1": "b958b3c8b822"
+  },
+  "六壬大全": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬大全.txt",
+   "category": "易藏",
+   "lines": 7017,
+   "sha1": "9eabe5deaaec"
+  },
+  "六壬存验": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬存验.txt",
+   "category": "易藏",
+   "lines": 970,
+   "sha1": "4f191a4c4f5d"
+  },
+  "六壬寻源": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬寻源.txt",
+   "category": "易藏",
+   "lines": 456,
+   "sha1": "11e1347d02b7"
+  },
+  "六壬心镜": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬心镜.txt",
+   "category": "易藏",
+   "lines": 1340,
+   "sha1": "65649a650732"
+  },
+  "六壬拃河棹": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬拃河棹.txt",
+   "category": "易藏",
+   "lines": 518,
+   "sha1": "3629e415d8b3"
+  },
+  "六壬括囊赋略疏": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬括囊赋略疏.txt",
+   "category": "易藏",
+   "lines": 143,
+   "sha1": "cdd55d089396"
+  },
+  "六壬指南": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬指南.txt",
+   "category": "易藏",
+   "lines": 798,
+   "sha1": "703b511fd7be"
+  },
+  "六壬指南注解": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬指南注解.txt",
+   "category": "易藏",
+   "lines": 2752,
+   "sha1": "650c06fbb3f7"
+  },
+  "六壬断案": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬断案.txt",
+   "category": "易藏",
+   "lines": 2332,
+   "sha1": "418aff7348b3"
+  },
+  "六壬灵觉经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬灵觉经.txt",
+   "category": "易藏",
+   "lines": 1446,
+   "sha1": "73e8d1c91ec3"
+  },
+  "六壬直指御定": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬直指御定.txt",
+   "category": "易藏",
+   "lines": 6478,
+   "sha1": "92dd170e566b"
+  },
+  "六壬神定经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬神定经.txt",
+   "category": "易藏",
+   "lines": 351,
+   "sha1": "bec380bd52f8"
+  },
+  "六壬神将释": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬神将释.txt",
+   "category": "易藏",
+   "lines": 380,
+   "sha1": "f502910285e3"
+  },
+  "六壬神课金口诀古本": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬神课金口诀古本.txt",
+   "category": "易藏",
+   "lines": 2353,
+   "sha1": "7acc97d7fc79"
+  },
+  "六壬秘本": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬秘本.txt",
+   "category": "易藏",
+   "lines": 5719,
+   "sha1": "37b10c11d9cd"
+  },
+  "六壬管辂神书": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬管辂神书.txt",
+   "category": "易藏",
+   "lines": 549,
+   "sha1": "f740b33ea508"
+  },
+  "六壬粹言": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬粹言.txt",
+   "category": "易藏",
+   "lines": 1368,
+   "sha1": "e74946300da6"
+  },
+  "六壬经纬": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬经纬.txt",
+   "category": "易藏",
+   "lines": 535,
+   "sha1": "8643531c485e"
+  },
+  "六壬翠雨歌": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬翠雨歌.txt",
+   "category": "易藏",
+   "lines": 812,
+   "sha1": "9f5fa9f0edfc"
+  },
+  "六壬苗公射覆鬼撮脚": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬苗公射覆鬼撮脚.txt",
+   "category": "易藏",
+   "lines": 250,
+   "sha1": "444a35c08b8d"
+  },
+  "六壬论命秘要": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬论命秘要.txt",
+   "category": "易藏",
+   "lines": 108,
+   "sha1": "94c0c686f16b"
+  },
+  "六壬诸赋": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬诸赋.txt",
+   "category": "易藏",
+   "lines": 1418,
+   "sha1": "e93cd23efdd3"
+  },
+  "六壬课经集": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬课经集.txt",
+   "category": "易藏",
+   "lines": 2279,
+   "sha1": "7f3896c9902e"
+  },
+  "六壬金铰剪": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬金铰剪.txt",
+   "category": "易藏",
+   "lines": 1199,
+   "sha1": "f7615eed0cd0"
+  },
+  "六壬银河櫂": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬银河櫂.txt",
+   "category": "易藏",
+   "lines": 1291,
+   "sha1": "9285ab5293d3"
+  },
+  "六壬集成五要权衡": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 六壬集成五要权衡.txt",
+   "category": "易藏",
+   "lines": 280,
+   "sha1": "5149bc931902"
+  },
+  "兰台妙选": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 兰台妙选.txt",
+   "category": "易藏",
+   "lines": 450,
+   "sha1": "2927a386c5d0"
+  },
+  "兵要望江南": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[术数] 兵要望江南.txt",
+   "category": "术数",
+   "lines": 756,
+   "sha1": "cf4a04731867"
+  },
+  "冰鉴": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 冰鉴.txt",
+   "category": "易藏",
+   "lines": 64,
+   "sha1": "044a8fe80f2f"
+  },
+  "千里命稿": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 千里命稿.txt",
+   "category": "易藏",
+   "lines": 4178,
+   "sha1": "258ea19695f0"
+  },
+  "南轩易说": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 南轩易说.txt",
+   "category": "易藏",
+   "lines": 388,
+   "sha1": "4a85b8155bbf"
+  },
+  "卜法详考": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 卜法详考.txt",
+   "category": "易藏",
+   "lines": 1595,
+   "sha1": "11f6dcec75d6"
+  },
+  "卜筮全书": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 卜筮全书.txt",
+   "category": "易藏",
+   "lines": 10462,
+   "sha1": "291025fb4969"
+  },
+  "卜筮正宗": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 卜筮正宗.txt",
+   "category": "易藏",
+   "lines": 3668,
+   "sha1": "c0012f2a23bb"
+  },
+  "卦变考略": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 卦变考略.txt",
+   "category": "易藏",
+   "lines": 325,
+   "sha1": "450e8935d2a6"
+  },
+  "历算全书": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[术数] 历算全书.txt",
+   "category": "术数",
+   "lines": 20504,
+   "sha1": "69c421bfe3ec"
+  },
+  "厚斋易学": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 厚斋易学.txt",
+   "category": "易藏",
+   "lines": 10216,
+   "sha1": "ffbc55f46fba"
+  },
+  "原本周易本义": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 原本周易本义.txt",
+   "category": "易藏",
+   "lines": 447,
+   "sha1": "1785ff79ce99"
+  },
+  "发微论": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 发微论.txt",
+   "category": "易藏",
+   "lines": 51,
+   "sha1": "f54593f92487"
+  },
+  "古今律历考": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[术数] 古今律历考.txt",
+   "category": "术数",
+   "lines": 8296,
+   "sha1": "29a7f6a32222"
+  },
+  "古周易": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 古周易.txt",
+   "category": "易藏",
+   "lines": 315,
+   "sha1": "86f9f6d521c5"
+  },
+  "古周易订诂": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 古周易订诂.txt",
+   "category": "易藏",
+   "lines": 1994,
+   "sha1": "14926bf78716"
+  },
+  "叶八白易传": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 叶八白易传.txt",
+   "category": "易藏",
+   "lines": 673,
+   "sha1": "66194b42b88b"
+  },
+  "合订删补大易集义粹言": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 合订删补大易集义粹言.txt",
+   "category": "易藏",
+   "lines": 6477,
+   "sha1": "fa11629340ee"
+  },
+  "启蒙意见": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 启蒙意见.txt",
+   "category": "易藏",
+   "lines": 1358,
+   "sha1": "2385626a9e01"
+  },
+  "吴园周易解": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 吴园周易解.txt",
+   "category": "易藏",
+   "lines": 2703,
+   "sha1": "eb72840d5870"
+  },
+  "吴园易解": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 吴园易解.txt",
+   "category": "易藏",
+   "lines": 53,
+   "sha1": "b029e900f874"
+  },
+  "周公解梦": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周公解梦.txt",
+   "category": "易藏",
+   "lines": 320,
+   "sha1": "df9eca97c9aa"
+  },
+  "周易": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易.txt",
+   "category": "易藏",
+   "lines": 1387,
+   "sha1": "65728f047e55"
+  },
+  "周易举正": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易举正.txt",
+   "category": "易藏",
+   "lines": 150,
+   "sha1": "4782226fd9a5"
+  },
+  "周易义海撮要": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易义海撮要.txt",
+   "category": "易藏",
+   "lines": 1790,
+   "sha1": "a1fbe6cd8246"
+  },
+  "周易会通": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易会通.txt",
+   "category": "易藏",
+   "lines": 1027,
+   "sha1": "a308b8fadeeb"
+  },
+  "周易传义合订": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易传义合订.txt",
+   "category": "易藏",
+   "lines": 2116,
+   "sha1": "f54afbbf575e"
+  },
+  "周易传义大全": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易传义大全.txt",
+   "category": "易藏",
+   "lines": 4021,
+   "sha1": "8e4c37ba6775"
+  },
+  "周易传义附录": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易传义附录.txt",
+   "category": "易藏",
+   "lines": 4741,
+   "sha1": "b03ab7a2eac2"
+  },
+  "周易传注": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易传注.txt",
+   "category": "易藏",
+   "lines": 1660,
+   "sha1": "31cd149d1c2f"
+  },
+  "周易像象述": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易像象述.txt",
+   "category": "易藏",
+   "lines": 1255,
+   "sha1": "88eebeb6b87f"
+  },
+  "周易函书约存": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易函书约存.txt",
+   "category": "易藏",
+   "lines": 7423,
+   "sha1": "c377b579eb95"
+  },
+  "周易卦爻经传训解": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易卦爻经传训解.txt",
+   "category": "易藏",
+   "lines": 1962,
+   "sha1": "653e315f650f"
+  },
+  "周易参义": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易参义.txt",
+   "category": "易藏",
+   "lines": 2179,
+   "sha1": "e55f9613c34f"
+  },
+  "周易参同契": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 周易参同契.txt",
+   "category": "道藏",
+   "lines": 95,
+   "sha1": "3970d2e42ef1"
+  },
+  "周易口义": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易口义.txt",
+   "category": "易藏",
+   "lines": 313,
+   "sha1": "4635685a32d0"
+  },
+  "周易口诀义": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易口诀义.txt",
+   "category": "易藏",
+   "lines": 1131,
+   "sha1": "9c083d90c15b"
+  },
+  "周易古占法": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易古占法.txt",
+   "category": "易藏",
+   "lines": 110,
+   "sha1": "83f9bad7611d"
+  },
+  "周易启蒙翼传": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易启蒙翼传.txt",
+   "category": "易藏",
+   "lines": 1707,
+   "sha1": "06eaab9a4a12"
+  },
+  "周易图书质疑": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易图书质疑.txt",
+   "category": "易藏",
+   "lines": 4302,
+   "sha1": "f8c53d74ffaa"
+  },
+  "周易图说": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易图说.txt",
+   "category": "易藏",
+   "lines": 480,
+   "sha1": "4781595056d1"
+  },
+  "周易孔义集说": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易孔义集说.txt",
+   "category": "易藏",
+   "lines": 2146,
+   "sha1": "7e728156e6a5"
+  },
+  "周易尚占": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易尚占.txt",
+   "category": "易藏",
+   "lines": 1482,
+   "sha1": "7a59e8ca240e"
+  },
+  "周易尚氏学": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易尚氏学.txt",
+   "category": "易藏",
+   "lines": 1687,
+   "sha1": "753fcd796ead"
+  },
+  "周易干凿度": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易干凿度.txt",
+   "category": "易藏",
+   "lines": 29,
+   "sha1": "9258121f1165"
+  },
+  "周易总义": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易总义.txt",
+   "category": "易藏",
+   "lines": 2484,
+   "sha1": "cd21dfda4b7c"
+  },
+  "周易文诠": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易文诠.txt",
+   "category": "易藏",
+   "lines": 2767,
+   "sha1": "1463369450a0"
+  },
+  "周易新讲义": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易新讲义.txt",
+   "category": "易藏",
+   "lines": 848,
+   "sha1": "5432114a81b4"
+  },
+  "周易易简说": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易易简说.txt",
+   "category": "易藏",
+   "lines": 1735,
+   "sha1": "4789afae1a0e"
+  },
+  "周易本义": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易本义.txt",
+   "category": "易藏",
+   "lines": 2049,
+   "sha1": "e1512d6f5b73"
+  },
+  "周易本义通释": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易本义通释.txt",
+   "category": "易藏",
+   "lines": 2550,
+   "sha1": "bdda57cea48b"
+  },
+  "周易本义集成": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易本义集成.txt",
+   "category": "易藏",
+   "lines": 344,
+   "sha1": "8e1075ce2110"
+  },
+  "周易札记（明逯中立）": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易札记（明逯中立）.txt",
+   "category": "易藏",
+   "lines": 615,
+   "sha1": "8730955ef489"
+  },
+  "周易札记（清杨名时）": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易札记（清杨名时）.txt",
+   "category": "易藏",
+   "lines": 305,
+   "sha1": "86daa1e72754"
+  },
+  "周易杭氏学": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易杭氏学.txt",
+   "category": "易藏",
+   "lines": 913,
+   "sha1": "a909f0afddcf"
+  },
+  "周易正义": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易正义.txt",
+   "category": "易藏",
+   "lines": 2998,
+   "sha1": "8e2ea618882c"
+  },
+  "周易注": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易注.txt",
+   "category": "易藏",
+   "lines": 276,
+   "sha1": "bf597bdf30e0"
+  },
+  "周易注疏": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易注疏.txt",
+   "category": "易藏",
+   "lines": 1567,
+   "sha1": "1911efc4439d"
+  },
+  "周易洗心": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易洗心.txt",
+   "category": "易藏",
+   "lines": 1134,
+   "sha1": "d77f32f48047"
+  },
+  "周易浅述": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易浅述.txt",
+   "category": "易藏",
+   "lines": 3548,
+   "sha1": "ea0a6eaabfdc"
+  },
+  "周易浅释": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易浅释.txt",
+   "category": "易藏",
+   "lines": 1105,
+   "sha1": "b5c414ca4cd5"
+  },
+  "周易爻变易缊": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易爻变易缊.txt",
+   "category": "易藏",
+   "lines": 1336,
+   "sha1": "45d416e19e14"
+  },
+  "周易玩辞": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易玩辞.txt",
+   "category": "易藏",
+   "lines": 2235,
+   "sha1": "517d402fba3f"
+  },
+  "周易玩辞困学记": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易玩辞困学记.txt",
+   "category": "易藏",
+   "lines": 3766,
+   "sha1": "00bd5cef28af"
+  },
+  "周易玩辞集解": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易玩辞集解.txt",
+   "category": "易藏",
+   "lines": 2086,
+   "sha1": "9fb89af2e9ec"
+  },
+  "周易略例": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易略例.txt",
+   "category": "易藏",
+   "lines": 75,
+   "sha1": "84cb366fc637"
+  },
+  "周易禅解": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易禅解.txt",
+   "category": "易藏",
+   "lines": 2552,
+   "sha1": "0a640540b983"
+  },
+  "周易程朱传义折衷": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易程朱传义折衷.txt",
+   "category": "易藏",
+   "lines": 2620,
+   "sha1": "955b082c6a96"
+  },
+  "周易稗疏": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易稗疏.txt",
+   "category": "易藏",
+   "lines": 203,
+   "sha1": "f1402a7ef8c7"
+  },
+  "周易窥余": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易窥余.txt",
+   "category": "易藏",
+   "lines": 1630,
+   "sha1": "c15733549849"
+  },
+  "周易章句外编": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易章句外编.txt",
+   "category": "易藏",
+   "lines": 134,
+   "sha1": "162cf2e0dbd3"
+  },
+  "周易章句证异": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易章句证异.txt",
+   "category": "易藏",
+   "lines": 2392,
+   "sha1": "c545ecf6a32c"
+  },
+  "周易筮述": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易筮述.txt",
+   "category": "易藏",
+   "lines": 1724,
+   "sha1": "b181b3452692"
+  },
+  "周易经传集解": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易经传集解.txt",
+   "category": "易藏",
+   "lines": 1981,
+   "sha1": "e62c72b4d5d6"
+  },
+  "周易衍义": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易衍义.txt",
+   "category": "易藏",
+   "lines": 1634,
+   "sha1": "87a65fd76a19"
+  },
+  "周易要义": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易要义.txt",
+   "category": "易藏",
+   "lines": 1508,
+   "sha1": "e0ac29705dc7"
+  },
+  "周易观彖": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易观彖.txt",
+   "category": "易藏",
+   "lines": 2590,
+   "sha1": "aeb0104b7eef"
+  },
+  "周易象旨决录": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易象旨决录.txt",
+   "category": "易藏",
+   "lines": 1834,
+   "sha1": "1c4a5e8379b9"
+  },
+  "周易象辞": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易象辞.txt",
+   "category": "易藏",
+   "lines": 3793,
+   "sha1": "1470bf484262"
+  },
+  "周易辑闻": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易辑闻.txt",
+   "category": "易藏",
+   "lines": 3247,
+   "sha1": "8bf72c64f139"
+  },
+  "周易辨录": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易辨录.txt",
+   "category": "易藏",
+   "lines": 226,
+   "sha1": "b1f8a69176c3"
+  },
+  "周易辨画": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易辨画.txt",
+   "category": "易藏",
+   "lines": 2972,
+   "sha1": "d98cbb9adf60"
+  },
+  "周易辩录": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易辩录.txt",
+   "category": "易藏",
+   "lines": 273,
+   "sha1": "415bc5ed797f"
+  },
+  "周易述": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易述.txt",
+   "category": "易藏",
+   "lines": 1072,
+   "sha1": "cd3f60085a00"
+  },
+  "周易通论": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易通论.txt",
+   "category": "易藏",
+   "lines": 247,
+   "sha1": "b26db9f821af"
+  },
+  "周易郑康成注": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易郑康成注.txt",
+   "category": "易藏",
+   "lines": 155,
+   "sha1": "18247f90b5e2"
+  },
+  "周易阐真": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易阐真.txt",
+   "category": "易藏",
+   "lines": 3388,
+   "sha1": "8ccb5b3b49ab"
+  },
+  "周易集传": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易集传.txt",
+   "category": "易藏",
+   "lines": 773,
+   "sha1": "a29dd4b7b4b7"
+  },
+  "周易集注": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易集注.txt",
+   "category": "易藏",
+   "lines": 3856,
+   "sha1": "769586340441"
+  },
+  "周易集解": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易集解.txt",
+   "category": "易藏",
+   "lines": 8015,
+   "sha1": "032d54a54fd2"
+  },
+  "周易集说": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易集说.txt",
+   "category": "易藏",
+   "lines": 3374,
+   "sha1": "bba4152e0edc"
+  },
+  "周易音义": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 周易音义.txt",
+   "category": "易藏",
+   "lines": 2086,
+   "sha1": "575baeeecaaf"
+  },
+  "命理探源": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 命理探源.txt",
+   "category": "易藏",
+   "lines": 1403,
+   "sha1": "14d3b5121266"
+  },
+  "命理正宗": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 命理正宗.txt",
+   "category": "易藏",
+   "lines": 50,
+   "sha1": "9ddec0d92c74"
+  },
+  "唐开元占经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 唐开元占经.txt",
+   "category": "易藏",
+   "lines": 7550,
+   "sha1": "2d9024a619fe"
+  },
+  "四圣真君灵签": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 四圣真君灵签.txt",
+   "category": "道藏",
+   "lines": 488,
+   "sha1": "ad09ab268591"
+  },
+  "圣寿万年历": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[术数] 圣寿万年历.txt",
+   "category": "术数",
+   "lines": 2090,
+   "sha1": "5f48b93d3879"
+  },
+  "地理古镜歌": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 地理古镜歌.txt",
+   "category": "易藏",
+   "lines": 186,
+   "sha1": "121b51e16439"
+  },
+  "地理辨惑": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 地理辨惑.txt",
+   "category": "易藏",
+   "lines": 294,
+   "sha1": "0f34c602145e"
+  },
+  "地理辨正": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 地理辨正.txt",
+   "category": "易藏",
+   "lines": 485,
+   "sha1": "6cf99f2f3e43"
+  },
+  "地理醒心录": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 地理醒心录.txt",
+   "category": "易藏",
+   "lines": 4,
+   "sha1": "8a860e9f1151"
+  },
+  "增删卜易": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 增删卜易.txt",
+   "category": "易藏",
+   "lines": 3696,
+   "sha1": "37fc90a931f4"
+  },
+  "增补郑氏周易": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 增补郑氏周易.txt",
+   "category": "易藏",
+   "lines": 829,
+   "sha1": "0b44d46b85c9"
+  },
+  "壬占汇选": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 壬占汇选.txt",
+   "category": "易藏",
+   "lines": 5182,
+   "sha1": "641600629e98"
+  },
+  "壬学琐记": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 壬学琐记.txt",
+   "category": "易藏",
+   "lines": 120,
+   "sha1": "db796ad0ed64"
+  },
+  "壬归": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 壬归.txt",
+   "category": "易藏",
+   "lines": 681,
+   "sha1": "b349e442adfc"
+  },
+  "复斋易说": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 复斋易说.txt",
+   "category": "易藏",
+   "lines": 1180,
+   "sha1": "b969325fb3bf"
+  },
+  "大易择言": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 大易择言.txt",
+   "category": "易藏",
+   "lines": 6048,
+   "sha1": "a336c95593af"
+  },
+  "大易断例卜筮元龟目": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 大易断例卜筮元龟目.txt",
+   "category": "易藏",
+   "lines": 542,
+   "sha1": "fa9a46863b46"
+  },
+  "大易粹言": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 大易粹言.txt",
+   "category": "易藏",
+   "lines": 4101,
+   "sha1": "b0e7c0a831be"
+  },
+  "大易缉说": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 大易缉说.txt",
+   "category": "易藏",
+   "lines": 2836,
+   "sha1": "471ed1f13e86"
+  },
+  "大易象数钩深图": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 大易象数钩深图.txt",
+   "category": "易藏",
+   "lines": 584,
+   "sha1": "19dcf29b7670"
+  },
+  "大易通解": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 大易通解.txt",
+   "category": "易藏",
+   "lines": 2356,
+   "sha1": "ba079c203418"
+  },
+  "大统历志": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[术数] 大统历志.txt",
+   "category": "术数",
+   "lines": 1188,
+   "sha1": "b7279a7a0056"
+  },
+  "大衍索隱": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[术数] 大衍索隱.txt",
+   "category": "术数",
+   "lines": 1196,
+   "sha1": "bc5faa6d62e3"
+  },
+  "天元五歌": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 天元五歌.txt",
+   "category": "易藏",
+   "lines": 1196,
+   "sha1": "d4dc52b48baa"
+  },
+  "天原發微": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[术数] 天原發微.txt",
+   "category": "术数",
+   "lines": 9486,
+   "sha1": "e38b411ac6a1"
+  },
+  "天步真原": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[术数] 天步真原.txt",
+   "category": "术数",
+   "lines": 238,
+   "sha1": "3e78b9ad8337"
+  },
+  "天玉经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 天玉经.txt",
+   "category": "易藏",
+   "lines": 462,
+   "sha1": "80d046256b06"
+  },
+  "天玉经外篇": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 天玉经外篇.txt",
+   "category": "易藏",
+   "lines": 109,
+   "sha1": "b9da91495e87"
+  },
+  "太上五星七元空常诀": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 太上五星七元空常诀.txt",
+   "category": "道藏",
+   "lines": 208,
+   "sha1": "0251ffddbbb5"
+  },
+  "太上六壬明鉴符阴经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 太上六壬明鉴符阴经.txt",
+   "category": "道藏",
+   "lines": 334,
+   "sha1": "2a8c03493cb8"
+  },
+  "太上洞真五星秘授经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 太上洞真五星秘授经.txt",
+   "category": "道藏",
+   "lines": 27,
+   "sha1": "dde7ede7b7eb"
+  },
+  "太上洞神五星诸宿日月混常经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 太上洞神五星诸宿日月混常经.txt",
+   "category": "道藏",
+   "lines": 26,
+   "sha1": "8e654e4f44e1"
+  },
+  "太上洞神五星赞": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 太上洞神五星赞.txt",
+   "category": "道藏",
+   "lines": 20,
+   "sha1": "606c3c864545"
+  },
+  "太上秘法镇宅灵符": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 太上秘法镇宅灵符.txt",
+   "category": "道藏",
+   "lines": 85,
+   "sha1": "326329eddfa7"
+  },
+  "太上紫微中天七元真经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 太上紫微中天七元真经.txt",
+   "category": "道藏",
+   "lines": 22,
+   "sha1": "f98fa22d95b5"
+  },
+  "太上老君说安宅八阳经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 太上老君说安宅八阳经.txt",
+   "category": "道藏",
+   "lines": 6,
+   "sha1": "7772fcd8d54d"
+  },
+  "太上通灵八史圣文真形图": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 太上通灵八史圣文真形图.txt",
+   "category": "道藏",
+   "lines": 49,
+   "sha1": "5d4e15133c19"
+  },
+  "太上飞步五星经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 太上飞步五星经.txt",
+   "category": "道藏",
+   "lines": 70,
+   "sha1": "566b083a95d4"
+  },
+  "太乙人道命法": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 太乙人道命法.txt",
+   "category": "易藏",
+   "lines": 2704,
+   "sha1": "2dc6ed66c1fc"
+  },
+  "太乙局": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 太乙局.txt",
+   "category": "易藏",
+   "lines": 1946,
+   "sha1": "59867e236c3e"
+  },
+  "太乙淘金歌": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 太乙淘金歌.txt",
+   "category": "易藏",
+   "lines": 345,
+   "sha1": "1210cec5a9bb"
+  },
+  "太乙秘书": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 太乙秘书.txt",
+   "category": "易藏",
+   "lines": 721,
+   "sha1": "3e23333e01b5"
+  },
+  "太乙金镜式经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 太乙金镜式经.txt",
+   "category": "易藏",
+   "lines": 887,
+   "sha1": "ec1195f4c3e2"
+  },
+  "太清神鉴": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 太清神鉴.txt",
+   "category": "易藏",
+   "lines": 210,
+   "sha1": "c88e8082aad3"
+  },
+  "太玄经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 太玄经.txt",
+   "category": "易藏",
+   "lines": 175,
+   "sha1": "e87f91347ddf"
+  },
+  "太白阴经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[术数] 太白阴经.txt",
+   "category": "术数",
+   "lines": 2768,
+   "sha1": "e1f8289d8758"
+  },
+  "奇门宝鉴御定": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 奇门宝鉴御定.txt",
+   "category": "易藏",
+   "lines": 980,
+   "sha1": "064f958db39c"
+  },
+  "奇门旨归": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 奇门旨归.txt",
+   "category": "易藏",
+   "lines": 1265,
+   "sha1": "e185c3bf9f87"
+  },
+  "奇门法窍": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 奇门法窍.txt",
+   "category": "易藏",
+   "lines": 5848,
+   "sha1": "efbb4d889f42"
+  },
+  "奇门遁甲元灵经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 奇门遁甲元灵经.txt",
+   "category": "易藏",
+   "lines": 1454,
+   "sha1": "de94675393b4"
+  },
+  "奇门遁甲秘笈大全": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 奇门遁甲秘笈大全.txt",
+   "category": "易藏",
+   "lines": 6340,
+   "sha1": "5bd19db93e6d"
+  },
+  "奇门遁甲统宗": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 奇门遁甲统宗.txt",
+   "category": "易藏",
+   "lines": 851,
+   "sha1": "16bfa1b116da"
+  },
+  "奇门遁甲阴阳遁十八局": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 奇门遁甲阴阳遁十八局.txt",
+   "category": "易藏",
+   "lines": 3646,
+   "sha1": "78f1b6d11e94"
+  },
+  "子夏易传": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 子夏易传.txt",
+   "category": "易藏",
+   "lines": 2388,
+   "sha1": "55bd95707bce"
+  },
+  "子平真诠评注": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 子平真诠评注.txt",
+   "category": "易藏",
+   "lines": 697,
+   "sha1": "071465ebb705"
+  },
+  "学易初津": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 学易初津.txt",
+   "category": "易藏",
+   "lines": 116,
+   "sha1": "274091c1578b"
+  },
+  "学易记": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 学易记.txt",
+   "category": "易藏",
+   "lines": 2634,
+   "sha1": "b048191d7211"
+  },
+  "宅法举隅": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 宅法举隅.txt",
+   "category": "易藏",
+   "lines": 179,
+   "sha1": "b3cc9c9bfe5c"
+  },
+  "宅经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 宅经.txt",
+   "category": "易藏",
+   "lines": 45,
+   "sha1": "36df0d99cbb6"
+  },
+  "小六壬": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[其他] 小六壬.txt",
+   "category": "其他",
+   "lines": 74,
+   "sha1": "189a898261d2"
+  },
+  "山洋指迷原本": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 山洋指迷原本.txt",
+   "category": "易藏",
+   "lines": 621,
+   "sha1": "682c8b026f13"
+  },
+  "平沙玉尺辨伪总括歌": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 平沙玉尺辨伪总括歌.txt",
+   "category": "易藏",
+   "lines": 92,
+   "sha1": "a5f5c3a701a3"
+  },
+  "平砂玉尺经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 平砂玉尺经.txt",
+   "category": "易藏",
+   "lines": 410,
+   "sha1": "7a49d79295cc"
+  },
+  "平砂玉尺辨伪": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 平砂玉尺辨伪.txt",
+   "category": "易藏",
+   "lines": 48,
+   "sha1": "102cc2f230a4"
+  },
+  "开元占经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 开元占经.txt",
+   "category": "易藏",
+   "lines": 9231,
+   "sha1": "321eb246eb22"
+  },
+  "张果星宗": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 张果星宗.txt",
+   "category": "易藏",
+   "lines": 1669,
+   "sha1": "6b36d8c41d5b"
+  },
+  "归藏": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 归藏.txt",
+   "category": "道藏",
+   "lines": 692,
+   "sha1": "d3aee01ae551"
+  },
+  "徐氏珞琭子赋注": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 徐氏珞琭子赋注.txt",
+   "category": "易藏",
+   "lines": 176,
+   "sha1": "c6e65f8edfbc"
+  },
+  "御制历象考成": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[术数] 御制历象考成.txt",
+   "category": "术数",
+   "lines": 14498,
+   "sha1": "fcb08a7187f8"
+  },
+  "御定星历考原": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 御定星历考原.txt",
+   "category": "易藏",
+   "lines": 912,
+   "sha1": "f220eb83746f"
+  },
+  "御定星歷考原": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[术数] 御定星歷考原.txt",
+   "category": "术数",
+   "lines": 3270,
+   "sha1": "a27f1ff69430"
+  },
+  "御纂周易折中": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 御纂周易折中.txt",
+   "category": "易藏",
+   "lines": 8034,
+   "sha1": "908f602a311e"
+  },
+  "御纂周易述义": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 御纂周易述义.txt",
+   "category": "易藏",
+   "lines": 1862,
+   "sha1": "c8b2c951a0dc"
+  },
+  "心相篇": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 心相篇.txt",
+   "category": "易藏",
+   "lines": 235,
+   "sha1": "002128e98e35"
+  },
+  "惠氏易说": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 惠氏易说.txt",
+   "category": "易藏",
+   "lines": 182,
+   "sha1": "a803532c9988"
+  },
+  "护国嘉济江东王灵签": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 护国嘉济江东王灵签.txt",
+   "category": "道藏",
+   "lines": 504,
+   "sha1": "302e4f71411a"
+  },
+  "推易始末": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 推易始末.txt",
+   "category": "易藏",
+   "lines": 574,
+   "sha1": "f2b2e4ee0b3a"
+  },
+  "推背图": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 推背图.txt",
+   "category": "易藏",
+   "lines": 365,
+   "sha1": "16f884b2b2c1"
+  },
+  "插泥剑": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 插泥剑.txt",
+   "category": "易藏",
+   "lines": 12,
+   "sha1": "911b924d5a15"
+  },
+  "撼龙经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 撼龙经.txt",
+   "category": "易藏",
+   "lines": 217,
+   "sha1": "13353586f10f"
+  },
+  "撼龙经疑龙经葬法倒杖": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 撼龙经疑龙经葬法倒杖.txt",
+   "category": "易藏",
+   "lines": 425,
+   "sha1": "6e4cd87d7e37"
+  },
+  "数术记遗": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 数术记遗.txt",
+   "category": "易藏",
+   "lines": 154,
+   "sha1": "803f613c2378"
+  },
+  "文公易说": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 文公易说.txt",
+   "category": "易藏",
+   "lines": 2967,
+   "sha1": "47a4ccfa2b6e"
+  },
+  "文王金钱课": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 文王金钱课.txt",
+   "category": "易藏",
+   "lines": 230,
+   "sha1": "e57359173bdd"
+  },
+  "断易天机": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 断易天机.txt",
+   "category": "易藏",
+   "lines": 3120,
+   "sha1": "7fa6eff7ab0e"
+  },
+  "断易鬼灵经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 断易鬼灵经.txt",
+   "category": "易藏",
+   "lines": 196,
+   "sha1": "d16ccef5eaf4"
+  },
+  "新本郑氏周易": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 新本郑氏周易.txt",
+   "category": "易藏",
+   "lines": 777,
+   "sha1": "d94318c9457f"
+  },
+  "无上三元镇宅灵箓": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 无上三元镇宅灵箓.txt",
+   "category": "道藏",
+   "lines": 86,
+   "sha1": "6704658ad65e"
+  },
+  "日家奇门": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 日家奇门.txt",
+   "category": "易藏",
+   "lines": 571,
+   "sha1": "c2c3b57e0a5d"
+  },
+  "日讲易经解义": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 日讲易经解义.txt",
+   "category": "易藏",
+   "lines": 2061,
+   "sha1": "74ebed47242e"
+  },
+  "易义古象通": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易义古象通.txt",
+   "category": "易藏",
+   "lines": 1989,
+   "sha1": "e2502e5a1c04"
+  },
+  "易传灯": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易传灯.txt",
+   "category": "易藏",
+   "lines": 182,
+   "sha1": "c89bed60e77f"
+  },
+  "易例": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易例.txt",
+   "category": "易藏",
+   "lines": 447,
+   "sha1": "0bdbfb93118f"
+  },
+  "易俟": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易俟.txt",
+   "category": "易藏",
+   "lines": 2852,
+   "sha1": "fbc42735a336"
+  },
+  "易像钞": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易像钞.txt",
+   "category": "易藏",
+   "lines": 2467,
+   "sha1": "0662240f27d9"
+  },
+  "易冒": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易冒.txt",
+   "category": "易藏",
+   "lines": 1735,
+   "sha1": "1acf7ee6d526"
+  },
+  "易原": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易原.txt",
+   "category": "易藏",
+   "lines": 3391,
+   "sha1": "f194e9039093"
+  },
+  "易原就正": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易原就正.txt",
+   "category": "易藏",
+   "lines": 2861,
+   "sha1": "fffb3c456c9b"
+  },
+  "易变体义": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易变体义.txt",
+   "category": "易藏",
+   "lines": 952,
+   "sha1": "d34166007179"
+  },
+  "易图明辨": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易图明辨.txt",
+   "category": "易藏",
+   "lines": 794,
+   "sha1": "f5e8bb53e586"
+  },
+  "易图说": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易图说.txt",
+   "category": "易藏",
+   "lines": 364,
+   "sha1": "8f6d4cba6d5f"
+  },
+  "易图通变": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易图通变.txt",
+   "category": "易藏",
+   "lines": 204,
+   "sha1": "e75443e463fa"
+  },
+  "易外别传": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 易外别传.txt",
+   "category": "道藏",
+   "lines": 130,
+   "sha1": "4550f5a5b050"
+  },
+  "易学变通": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易学变通.txt",
+   "category": "易藏",
+   "lines": 238,
+   "sha1": "35a32b6ecbdc"
+  },
+  "易学启蒙小传": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易学启蒙小传.txt",
+   "category": "易藏",
+   "lines": 300,
+   "sha1": "6f2459d1de3a"
+  },
+  "易学启蒙通释": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易学启蒙通释.txt",
+   "category": "易藏",
+   "lines": 1214,
+   "sha1": "f3550c668f1f"
+  },
+  "易学滥觞": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易学滥觞.txt",
+   "category": "易藏",
+   "lines": 89,
+   "sha1": "c77896e1eec5"
+  },
+  "易学象数论": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易学象数论.txt",
+   "category": "易藏",
+   "lines": 1762,
+   "sha1": "7baed007b1aa"
+  },
+  "易学辨惑": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易学辨惑.txt",
+   "category": "易藏",
+   "lines": 6,
+   "sha1": "ad49365861cd"
+  },
+  "易小传": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易小传.txt",
+   "category": "易藏",
+   "lines": 956,
+   "sha1": "b965481db871"
+  },
+  "易小帖": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易小帖.txt",
+   "category": "易藏",
+   "lines": 226,
+   "sha1": "d07a35993d2c"
+  },
+  "易数钩深图": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易数钩深图.txt",
+   "category": "易藏",
+   "lines": 213,
+   "sha1": "3e571e85ac76"
+  },
+  "易数钩隐图": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易数钩隐图.txt",
+   "category": "易藏",
+   "lines": 613,
+   "sha1": "dace1f0fec4f"
+  },
+  "易林": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 易林.txt",
+   "category": "道藏",
+   "lines": 6785,
+   "sha1": "0e5754aea002"
+  },
+  "易林补遗": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易林补遗.txt",
+   "category": "易藏",
+   "lines": 2411,
+   "sha1": "444032b426f0"
+  },
+  "易汉学": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易汉学.txt",
+   "category": "易藏",
+   "lines": 674,
+   "sha1": "8e5b0e94cf94"
+  },
+  "易源奥义": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易源奥义.txt",
+   "category": "易藏",
+   "lines": 1934,
+   "sha1": "7014e17e8bdf"
+  },
+  "易璇玑": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易璇玑.txt",
+   "category": "易藏",
+   "lines": 107,
+   "sha1": "4e712fe21dd8"
+  },
+  "易用": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易用.txt",
+   "category": "易藏",
+   "lines": 628,
+   "sha1": "730b5f49b24e"
+  },
+  "易童子问": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易童子问.txt",
+   "category": "易藏",
+   "lines": 88,
+   "sha1": "b1bd9685a032"
+  },
+  "易笺": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易笺.txt",
+   "category": "易藏",
+   "lines": 1050,
+   "sha1": "69f983d16b15"
+  },
+  "易筮通变": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易筮通变.txt",
+   "category": "易藏",
+   "lines": 99,
+   "sha1": "cedfc89ca771"
+  },
+  "易精蕴大义": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易精蕴大义.txt",
+   "category": "易藏",
+   "lines": 3006,
+   "sha1": "f47468bedddb"
+  },
+  "易纂言": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易纂言.txt",
+   "category": "易藏",
+   "lines": 1322,
+   "sha1": "29b46fc8c22f"
+  },
+  "易纂言外翼": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易纂言外翼.txt",
+   "category": "易藏",
+   "lines": 1252,
+   "sha1": "cc6a253cf1bd"
+  },
+  "易纂言外翼洛书说": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易纂言外翼洛书说.txt",
+   "category": "易藏",
+   "lines": 22,
+   "sha1": "8cfa744435b3"
+  },
+  "易纬乾元序制记": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易纬乾元序制记.txt",
+   "category": "易藏",
+   "lines": 109,
+   "sha1": "6fbccce6a4c8"
+  },
+  "易纬坤灵图": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易纬坤灵图.txt",
+   "category": "易藏",
+   "lines": 24,
+   "sha1": "99a85c49e38c"
+  },
+  "易纬是类谋": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易纬是类谋.txt",
+   "category": "易藏",
+   "lines": 332,
+   "sha1": "c40362619e85"
+  },
+  "易纬略义": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易纬略义.txt",
+   "category": "易藏",
+   "lines": 25,
+   "sha1": "7de3b5fd56b7"
+  },
+  "易纬稽览图": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易纬稽览图.txt",
+   "category": "易藏",
+   "lines": 252,
+   "sha1": "4d07b016cd69"
+  },
+  "易纬辨终备": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易纬辨终备.txt",
+   "category": "易藏",
+   "lines": 105,
+   "sha1": "3a397f9e5c3d"
+  },
+  "易纬通卦验": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易纬通卦验.txt",
+   "category": "易藏",
+   "lines": 87,
+   "sha1": "aeeadfb71325"
+  },
+  "易经存疑": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易经存疑.txt",
+   "category": "易藏",
+   "lines": 4112,
+   "sha1": "9df4778ae204"
+  },
+  "易经蒙引": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易经蒙引.txt",
+   "category": "易藏",
+   "lines": 3663,
+   "sha1": "9ecaae26c0ee"
+  },
+  "易经衷论": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易经衷论.txt",
+   "category": "易藏",
+   "lines": 179,
+   "sha1": "4296c467b693"
+  },
+  "易经证释": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易经证释.txt",
+   "category": "易藏",
+   "lines": 1824,
+   "sha1": "36454a110b54"
+  },
+  "易经通注": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易经通注.txt",
+   "category": "易藏",
+   "lines": 2893,
+   "sha1": "23c5b7666e62"
+  },
+  "易翼传": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易翼传.txt",
+   "category": "易藏",
+   "lines": 1141,
+   "sha1": "c8ae517fb156"
+  },
+  "易翼宗": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易翼宗.txt",
+   "category": "易藏",
+   "lines": 2007,
+   "sha1": "8227cb6b71f3"
+  },
+  "易翼说": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易翼说.txt",
+   "category": "易藏",
+   "lines": 2626,
+   "sha1": "8b64c7d01265"
+  },
+  "易翼述信": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易翼述信.txt",
+   "category": "易藏",
+   "lines": 1464,
+   "sha1": "e47798ad1dac"
+  },
+  "易裨传": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易裨传.txt",
+   "category": "易藏",
+   "lines": 335,
+   "sha1": "81066e87ec87"
+  },
+  "易象义": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易象义.txt",
+   "category": "易藏",
+   "lines": 2344,
+   "sha1": "d4297603be68"
+  },
+  "易象圖說": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[术数] 易象圖說.txt",
+   "category": "术数",
+   "lines": 1771,
+   "sha1": "ac5d8918f1e8"
+  },
+  "易象大意存解": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易象大意存解.txt",
+   "category": "易藏",
+   "lines": 253,
+   "sha1": "5f771d66ea16"
+  },
+  "易象意言": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易象意言.txt",
+   "category": "易藏",
+   "lines": 118,
+   "sha1": "5340eb611b99"
+  },
+  "易象正": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易象正.txt",
+   "category": "易藏",
+   "lines": 5125,
+   "sha1": "4389b5dc46b9"
+  },
+  "易象钩解": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易象钩解.txt",
+   "category": "易藏",
+   "lines": 1005,
+   "sha1": "293fd98749c7"
+  },
+  "易通": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易通.txt",
+   "category": "易藏",
+   "lines": 1020,
+   "sha1": "c5764960fb20"
+  },
+  "易酌": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易酌.txt",
+   "category": "易藏",
+   "lines": 3256,
+   "sha1": "f1f874d56e98"
+  },
+  "易附录纂注": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易附录纂注.txt",
+   "category": "易藏",
+   "lines": 505,
+   "sha1": "a4eb03d8d860"
+  },
+  "易隐": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 易隐.txt",
+   "category": "易藏",
+   "lines": 2674,
+   "sha1": "fc4062add3e6"
+  },
+  "星命总括": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 星命总括.txt",
+   "category": "易藏",
+   "lines": 57,
+   "sha1": "029a0618a2e6"
+  },
+  "星命溯源": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 星命溯源.txt",
+   "category": "易藏",
+   "lines": 483,
+   "sha1": "d5a91a6d0dc8"
+  },
+  "星学大成": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 星学大成.txt",
+   "category": "易藏",
+   "lines": 5811,
+   "sha1": "b131b2cf3e1b"
+  },
+  "春秋占筮书": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 春秋占筮书.txt",
+   "category": "易藏",
+   "lines": 218,
+   "sha1": "e75b2e118bc3"
+  },
+  "月波洞中记": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 月波洞中记.txt",
+   "category": "易藏",
+   "lines": 229,
+   "sha1": "0cf1d16d581a"
+  },
+  "月谈赋": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 月谈赋.txt",
+   "category": "易藏",
+   "lines": 54,
+   "sha1": "7fc3865c802a"
+  },
+  "本地姜地理峦头诀": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 本地姜地理峦头诀.txt",
+   "category": "易藏",
+   "lines": 61,
+   "sha1": "a9ae66f3a9b1"
+  },
+  "李虚中命书": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 李虚中命书.txt",
+   "category": "易藏",
+   "lines": 386,
+   "sha1": "a89473d30146"
+  },
+  "杨氏易传": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 杨氏易传.txt",
+   "category": "易藏",
+   "lines": 1237,
+   "sha1": "592e764b591b"
+  },
+  "柳庄相法": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 柳庄相法.txt",
+   "category": "易藏",
+   "lines": 1633,
+   "sha1": "7ab3af25fa40"
+  },
+  "梅花易数": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 梅花易数.txt",
+   "category": "易藏",
+   "lines": 1020,
+   "sha1": "6aac73f63000"
+  },
+  "梅花易数卷四五相字术": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 梅花易数卷四五相字术.txt",
+   "category": "易藏",
+   "lines": 81,
+   "sha1": "62fd887e0451"
+  },
+  "横渠易说": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 横渠易说.txt",
+   "category": "易藏",
+   "lines": 1004,
+   "sha1": "e8392affa646"
+  },
+  "欽定協紀辨方書": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[术数] 欽定協紀辨方書.txt",
+   "category": "术数",
+   "lines": 19647,
+   "sha1": "57492fd22258"
+  },
+  "正一醮宅仪": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 正一醮宅仪.txt",
+   "category": "道藏",
+   "lines": 27,
+   "sha1": "4396696bd8f1"
+  },
+  "正易心法": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 正易心法.txt",
+   "category": "易藏",
+   "lines": 102,
+   "sha1": "fb1df5b92eb4"
+  },
+  "毕法赋": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 毕法赋.txt",
+   "category": "易藏",
+   "lines": 497,
+   "sha1": "f160a0783a09"
+  },
+  "永乐百问": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 永乐百问.txt",
+   "category": "易藏",
+   "lines": 144,
+   "sha1": "e7877cccd559"
+  },
+  "汉上易传": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 汉上易传.txt",
+   "category": "易藏",
+   "lines": 2248,
+   "sha1": "fada1d9909e4"
+  },
+  "洞玄灵宝道士受三洞经箓法箓择日历": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 洞玄灵宝道士受三洞经箓法箓择日历.txt",
+   "category": "道藏",
+   "lines": 32,
+   "sha1": "b3f51d4fa530"
+  },
+  "洞真太上八素真经占候入定妙诀": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 洞真太上八素真经占候入定妙诀.txt",
+   "category": "道藏",
+   "lines": 31,
+   "sha1": "c6023b389344"
+  },
+  "洪恩灵济真君七政星灯仪": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 洪恩灵济真君七政星灯仪.txt",
+   "category": "道藏",
+   "lines": 104,
+   "sha1": "e606c8654e8e"
+  },
+  "洪範皇極內篇": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[术数] 洪範皇極內篇.txt",
+   "category": "术数",
+   "lines": 1240,
+   "sha1": "91ea8209f3b2"
+  },
+  "测字秘牒": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 测字秘牒.txt",
+   "category": "易藏",
+   "lines": 1320,
+   "sha1": "7ac981a0ed23"
+  },
+  "海底眼": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 海底眼.txt",
+   "category": "易藏",
+   "lines": 1150,
+   "sha1": "7c219a83c162"
+  },
+  "淙山读周易": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 淙山读周易.txt",
+   "category": "易藏",
+   "lines": 1675,
+   "sha1": "75a09b17f5db"
+  },
+  "渊海子平": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 渊海子平.txt",
+   "category": "易藏",
+   "lines": 2551,
+   "sha1": "e0d48d2e217d"
+  },
+  "温公易说": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 温公易说.txt",
+   "category": "易藏",
+   "lines": 1826,
+   "sha1": "e73b501c41cc"
+  },
+  "滴天髓阐微": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 滴天髓阐微.txt",
+   "category": "易藏",
+   "lines": 7608,
+   "sha1": "3f9a6a9508e1"
+  },
+  "演禽通纂": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 演禽通纂.txt",
+   "category": "易藏",
+   "lines": 845,
+   "sha1": "a8bf99b2c3b9"
+  },
+  "潜虚": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 潜虚.txt",
+   "category": "易藏",
+   "lines": 14,
+   "sha1": "7a97cc6b808b"
+  },
+  "潜虚发微论": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 潜虚发微论.txt",
+   "category": "易藏",
+   "lines": 22,
+   "sha1": "eb842e4971d3"
+  },
+  "火珠林": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 火珠林.txt",
+   "category": "易藏",
+   "lines": 600,
+   "sha1": "d166a9e2c4eb"
+  },
+  "灵台秘苑": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 灵台秘苑.txt",
+   "category": "易藏",
+   "lines": 1321,
+   "sha1": "622e854d805c"
+  },
+  "灵台经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 灵台经.txt",
+   "category": "道藏",
+   "lines": 46,
+   "sha1": "b11c56d8af4d"
+  },
+  "灵城精义": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 灵城精义.txt",
+   "category": "易藏",
+   "lines": 200,
+   "sha1": "5465c346a288"
+  },
+  "灵宝六丁秘法": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 灵宝六丁秘法.txt",
+   "category": "道藏",
+   "lines": 68,
+   "sha1": "d08a5ab033d2"
+  },
+  "灵棋本章正经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 灵棋本章正经.txt",
+   "category": "道藏",
+   "lines": 842,
+   "sha1": "b895257582b2"
+  },
+  "灵棋经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 灵棋经.txt",
+   "category": "易藏",
+   "lines": 899,
+   "sha1": "647b87d6d26d"
+  },
+  "烟波钓叟歌句解": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 烟波钓叟歌句解.txt",
+   "category": "易藏",
+   "lines": 366,
+   "sha1": "347eb303afbd"
+  },
+  "焦氏易林": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 焦氏易林.txt",
+   "category": "易藏",
+   "lines": 5333,
+   "sha1": "6316b81e6f7a"
+  },
+  "焦氏易林注": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 焦氏易林注.txt",
+   "category": "易藏",
+   "lines": 4223,
+   "sha1": "2f8a1cdf9984"
+  },
+  "焦氏易诂": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 焦氏易诂.txt",
+   "category": "易藏",
+   "lines": 749,
+   "sha1": "fb04bf1ddb6b"
+  },
+  "玄圃山灵秘录": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 玄圃山灵秘录.txt",
+   "category": "道藏",
+   "lines": 307,
+   "sha1": "83ef28ac4404"
+  },
+  "玄真灵应宝签": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 玄真灵应宝签.txt",
+   "category": "道藏",
+   "lines": 1111,
+   "sha1": "8c762991edda"
+  },
+  "玉照定真经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 玉照定真经.txt",
+   "category": "易藏",
+   "lines": 30,
+   "sha1": "e85538f2cec1"
+  },
+  "玉照神应真经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 玉照神应真经.txt",
+   "category": "易藏",
+   "lines": 1005,
+   "sha1": "1870aa5c1dc1"
+  },
+  "玉管照神局": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 玉管照神局.txt",
+   "category": "易藏",
+   "lines": 564,
+   "sha1": "ada8a155efed"
+  },
+  "珞琭子三命消息赋注": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 珞琭子三命消息赋注.txt",
+   "category": "易藏",
+   "lines": 159,
+   "sha1": "8f205afdd32d"
+  },
+  "珞琭子赋注": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 珞琭子赋注.txt",
+   "category": "易藏",
+   "lines": 211,
+   "sha1": "87e7b5e3aacb"
+  },
+  "用易详解": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 用易详解.txt",
+   "category": "易藏",
+   "lines": 1947,
+   "sha1": "d9004e6e1359"
+  },
+  "田间易学": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 田间易学.txt",
+   "category": "易藏",
+   "lines": 3522,
+   "sha1": "1b135fe222ac"
+  },
+  "疑龙经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 疑龙经.txt",
+   "category": "易藏",
+   "lines": 106,
+   "sha1": "f029599a7c21"
+  },
+  "皇极经世": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 皇极经世.txt",
+   "category": "易藏",
+   "lines": 7281,
+   "sha1": "6895c6a33bcc"
+  },
+  "皇极经世书": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 皇极经世书.txt",
+   "category": "易藏",
+   "lines": 5495,
+   "sha1": "b0d8a7eb9834"
+  },
+  "皇极经世心易发微": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 皇极经世心易发微.txt",
+   "category": "易藏",
+   "lines": 416,
+   "sha1": "f1c752e4d3c4"
+  },
+  "皇极经世观物外篇衍义": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 皇极经世观物外篇衍义.txt",
+   "category": "易藏",
+   "lines": 433,
+   "sha1": "5f7e729ac72d"
+  },
+  "皇極經世索隱": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[术数] 皇極經世索隱.txt",
+   "category": "术数",
+   "lines": 1112,
+   "sha1": "ae50b6d5bdc6"
+  },
+  "神峰通考": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 神峰通考.txt",
+   "category": "易藏",
+   "lines": 3036,
+   "sha1": "769ab693bcc1"
+  },
+  "神机妙算一掌经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 神机妙算一掌经.txt",
+   "category": "易藏",
+   "lines": 383,
+   "sha1": "32f7be94766f"
+  },
+  "神相全编": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 神相全编.txt",
+   "category": "易藏",
+   "lines": 1281,
+   "sha1": "b881649a16d9"
+  },
+  "神相铁关刀": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 神相铁关刀.txt",
+   "category": "易藏",
+   "lines": 710,
+   "sha1": "e850a175b8fc"
+  },
+  "禽星易见": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 禽星易见.txt",
+   "category": "易藏",
+   "lines": 341,
+   "sha1": "3c0db631742e"
+  },
+  "秘本诸葛神数": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 秘本诸葛神数.txt",
+   "category": "易藏",
+   "lines": 268,
+   "sha1": "c9375608f1d3"
+  },
+  "秘藏通玄变化六阴洞微遁甲真经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 秘藏通玄变化六阴洞微遁甲真经.txt",
+   "category": "道藏",
+   "lines": 301,
+   "sha1": "4eca6eedfa45"
+  },
+  "秤星灵台秘要经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 秤星灵台秘要经.txt",
+   "category": "道藏",
+   "lines": 31,
+   "sha1": "e6e95deea371"
+  },
+  "穷通宝鉴": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 穷通宝鉴.txt",
+   "category": "易藏",
+   "lines": 1370,
+   "sha1": "1ef17543a33f"
+  },
+  "童溪易传": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 童溪易传.txt",
+   "category": "易藏",
+   "lines": 1371,
+   "sha1": "2eecd3ab715d"
+  },
+  "素问入式运气论奥": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 素问入式运气论奥.txt",
+   "category": "道藏",
+   "lines": 196,
+   "sha1": "3441f9039416"
+  },
+  "紫岩易传": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 紫岩易传.txt",
+   "category": "易藏",
+   "lines": 1622,
+   "sha1": "fe6b2cc6d363"
+  },
+  "紫微斗数": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[术数] 紫微斗数.txt",
+   "category": "术数",
+   "lines": 1478,
+   "sha1": "0370cb0c48bb"
+  },
+  "紫微斗数全书": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[术数] 紫微斗数全书.txt",
+   "category": "术数",
+   "lines": 1531,
+   "sha1": "125ad896c69a"
+  },
+  "红囊经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 红囊经.txt",
+   "category": "易藏",
+   "lines": 389,
+   "sha1": "14f4afbfa15e"
+  },
+  "葬书": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 葬书.txt",
+   "category": "易藏",
+   "lines": 314,
+   "sha1": "cff4b4a53ac9"
+  },
+  "葬法倒杖": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 葬法倒杖.txt",
+   "category": "易藏",
+   "lines": 211,
+   "sha1": "bf8207e787e2"
+  },
+  "蒋公字字金": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 蒋公字字金.txt",
+   "category": "易藏",
+   "lines": 424,
+   "sha1": "57e1cca206b7"
+  },
+  "西谿易说": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 西谿易说.txt",
+   "category": "易藏",
+   "lines": 1262,
+   "sha1": "55aa7b20c4a6"
+  },
+  "许真君玉匣记": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 许真君玉匣记.txt",
+   "category": "道藏",
+   "lines": 50,
+   "sha1": "d45e99031689"
+  },
+  "许负相法": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 许负相法.txt",
+   "category": "易藏",
+   "lines": 219,
+   "sha1": "e27d1a40c8af"
+  },
+  "诚斋易传": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 诚斋易传.txt",
+   "category": "易藏",
+   "lines": 1506,
+   "sha1": "5817bba60053"
+  },
+  "读易举要": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 读易举要.txt",
+   "category": "易藏",
+   "lines": 600,
+   "sha1": "f183d5bb9d7b"
+  },
+  "读易余言": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 读易余言.txt",
+   "category": "易藏",
+   "lines": 686,
+   "sha1": "2d6f71c68ba6"
+  },
+  "读易大旨": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 读易大旨.txt",
+   "category": "易藏",
+   "lines": 367,
+   "sha1": "ea05038b040b"
+  },
+  "读易日钞": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 读易日钞.txt",
+   "category": "易藏",
+   "lines": 2613,
+   "sha1": "a5575f6503a6"
+  },
+  "读易私言": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 读易私言.txt",
+   "category": "易藏",
+   "lines": 63,
+   "sha1": "238058e67c76"
+  },
+  "读易纪闻": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 读易纪闻.txt",
+   "category": "易藏",
+   "lines": 395,
+   "sha1": "df33493d7a6d"
+  },
+  "读易考原": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 读易考原.txt",
+   "category": "易藏",
+   "lines": 303,
+   "sha1": "046133065062"
+  },
+  "读易详说": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 读易详说.txt",
+   "category": "易藏",
+   "lines": 1589,
+   "sha1": "23219dbc0fa8"
+  },
+  "读易述": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 读易述.txt",
+   "category": "易藏",
+   "lines": 3283,
+   "sha1": "27b4b8da0aa5"
+  },
+  "赤松子章历": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 赤松子章历.txt",
+   "category": "道藏",
+   "lines": 1212,
+   "sha1": "94308172a5dc"
+  },
+  "赵氏易说": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 赵氏易说.txt",
+   "category": "易藏",
+   "lines": 205,
+   "sha1": "8427bd947c05"
+  },
+  "辰州符咒大全": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 辰州符咒大全.txt",
+   "category": "易藏",
+   "lines": 268,
+   "sha1": "ed91de8aee46"
+  },
+  "连山易": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 连山易.txt",
+   "category": "易藏",
+   "lines": 162,
+   "sha1": "fe1e62a16ea1"
+  },
+  "通占大象历星经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 通占大象历星经.txt",
+   "category": "道藏",
+   "lines": 194,
+   "sha1": "9b314e3fb307"
+  },
+  "遁甲演义": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 遁甲演义.txt",
+   "category": "易藏",
+   "lines": 962,
+   "sha1": "c1a2a8c3b000"
+  },
+  "遁甲符应经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 遁甲符应经.txt",
+   "category": "易藏",
+   "lines": 544,
+   "sha1": "8e960800fd64"
+  },
+  "邓天君玄灵八门报应内旨": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 邓天君玄灵八门报应内旨.txt",
+   "category": "道藏",
+   "lines": 125,
+   "sha1": "71031abd4391"
+  },
+  "郭氏传家易说": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 郭氏传家易说.txt",
+   "category": "易藏",
+   "lines": 1780,
+   "sha1": "43fe00c2da0c"
+  },
+  "金锁玉关": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 金锁玉关.txt",
+   "category": "道藏",
+   "lines": 687,
+   "sha1": "41739857fa31"
+  },
+  "钦定协纪辨方书": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 钦定协纪辨方书.txt",
+   "category": "易藏",
+   "lines": 16909,
+   "sha1": "18aecf6ba534"
+  },
+  "阳宅指南": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 阳宅指南.txt",
+   "category": "易藏",
+   "lines": 15,
+   "sha1": "45c964f0f5b5"
+  },
+  "陆氏易解": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 陆氏易解.txt",
+   "category": "易藏",
+   "lines": 379,
+   "sha1": "bc6805b87430"
+  },
+  "雨阳气候亲机": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 雨阳气候亲机.txt",
+   "category": "道藏",
+   "lines": 148,
+   "sha1": "0770005bb61b"
+  },
+  "青乌经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 青乌经.txt",
+   "category": "易藏",
+   "lines": 58,
+   "sha1": "656bf0199880"
+  },
+  "青囊奥语": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 青囊奥语.txt",
+   "category": "易藏",
+   "lines": 98,
+   "sha1": "5ef525b3e738"
+  },
+  "青囊序": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 青囊序.txt",
+   "category": "易藏",
+   "lines": 24,
+   "sha1": "867250adf509"
+  },
+  "马王堆汉墓帛书五星占": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 马王堆汉墓帛书五星占.txt",
+   "category": "易藏",
+   "lines": 67,
+   "sha1": "66ec66af5f4d"
+  },
+  "鬼谷子天髓灵文": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 鬼谷子天髓灵文.txt",
+   "category": "道藏",
+   "lines": 219,
+   "sha1": "c981f256711e"
+  },
+  "鬼谷子神奇相法全书": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 鬼谷子神奇相法全书.txt",
+   "category": "易藏",
+   "lines": 592,
+   "sha1": "0ac3ae76951d"
+  },
+  "魁罡六锁秘法": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 魁罡六锁秘法.txt",
+   "category": "道藏",
+   "lines": 69,
+   "sha1": "f6e0701e97b7"
+  },
+  "鲁班全书": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 鲁班全书.txt",
+   "category": "道藏",
+   "lines": 477,
+   "sha1": "5cc1e71ce447"
+  },
+  "黄帝太乙八门入式秘诀": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 黄帝太乙八门入式秘诀.txt",
+   "category": "道藏",
+   "lines": 86,
+   "sha1": "ecdd04fa9d5f"
+  },
+  "黄帝太乙八门入式诀": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 黄帝太乙八门入式诀.txt",
+   "category": "道藏",
+   "lines": 128,
+   "sha1": "f8ff144b9f79"
+  },
+  "黄帝太乙八门逆顺生死诀": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 黄帝太乙八门逆顺生死诀.txt",
+   "category": "道藏",
+   "lines": 182,
+   "sha1": "6790428084f1"
+  },
+  "黄帝宅经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 黄帝宅经.txt",
+   "category": "道藏",
+   "lines": 24,
+   "sha1": "cb8be850c8f5"
+  },
+  "黄帝授三子玄女经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 黄帝授三子玄女经.txt",
+   "category": "道藏",
+   "lines": 19,
+   "sha1": "281b216f9b5f"
+  },
+  "黄帝金匮玉衡经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 黄帝金匮玉衡经.txt",
+   "category": "道藏",
+   "lines": 30,
+   "sha1": "8a53f54fa487"
+  },
+  "黄帝龙首经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 黄帝龙首经.txt",
+   "category": "道藏",
+   "lines": 279,
+   "sha1": "45b2c010185d"
+  },
+  "黄庭遁甲缘身经": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[道藏] 黄庭遁甲缘身经.txt",
+   "category": "道藏",
+   "lines": 53,
+   "sha1": "a315839b25de"
+  },
+  "黄金策": {
+   "file": "D:\\卜算\\国学czhengli\\txt\\[易藏] 黄金策.txt",
+   "category": "易藏",
+   "lines": 3904,
+   "sha1": "2c6e6b8887c1"
+  }
+ }
+}

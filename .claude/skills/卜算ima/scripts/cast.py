@@ -143,7 +143,7 @@ def main():
     elif cmd == "xiaoliuren":
         xiaoliuren.cast(dt)
     elif cmd == "liuyao":
-        ben, bian, dong, r = liuyao.cast(dt)
+        ben, bian, dong, r = liuyao.cast(dt, question=a[1] if len(a) > 1 else "通用")
         if html:
             htmlpan.liuyao_html(r, ben, bian, dong,
                                 f"六爻卦图_{_dt.datetime.now().strftime('%Y%m%d_%H%M%S')}.html")

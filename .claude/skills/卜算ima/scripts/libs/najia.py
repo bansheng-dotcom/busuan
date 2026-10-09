@@ -180,16 +180,154 @@ def zhuang(ben_name, bian_name, dong, day_gz, month_gz=""):
     }
 
 
-def print_zhuang(r):
-    """打印装卦表"""
+def print_zhuang(r, yaos=None):
+    """打印装卦表。yaos 为爻画列表（1=阳,0=阴，自下而上）；None 则据纳甲地支兜底。"""
     print(f"[装卦] {r['宫']}  月建:{r['月建'] or '—'}  日辰:{r['日辰']}  旬空:{r['旬空']}")
     print(f"       世爻:第{r['世爻']}爻  应爻:第{r['应爻']}爻")
     if r.get("伏神"):
         fs = "；".join(f"{f['六亲']}{f['干支']}伏{f['伏爻']}(飞{f['飞神']})" for f in r["伏神"])
         print(f"       伏神: {fs}")
-    print(f"{'六神':<6}{'爻位':<5}{'本卦(六亲 干支)':<16}{'变卦(六亲 干支)':<16}{'标'}")
-    for x in r["六爻"]:
+    print(f"{'六神':<5}{'爻位':<5}{'爻画':<6}{'本卦(六亲 干支)':<16}{'变卦(六亲 干支)':<16}{'标'}")
+    for i, x in enumerate(r["六爻"]):
         b = x["本卦"]
         v = x["变卦"] or "—"
+        if yaos is not None:
+            yang = yaos[i]
+        else:
+            yang = b.split()[1][-1] in "子寅辰午申戌"
+        hua = ("━━━" if yang else "━ ━") + ("○" if x["动"] else " ")
         tag = x["世应"] + x["动"] + x["空"] + x["破"] + x["冲"] + x["化"]
-        print(f"{x['六神']:<6}{x['爻']:<5}{b:<16}{v:<16}{tag}")
+        print(f"{x['六神']:<5}{x['爻']:<5}{hua:<6}{b:<16}{v:<16}{tag}")
+
+
+# ======================================================================
+# 用神分析 + 断卦分析 + 趋吉避凶（[规则推演] 只给方向，不作铁断）
+# ======================================================================
+
+# 问事 → 用神六亲（子串匹配；婚姻默认按男测婚取妻财，女测婚取官鬼需另注）
+_YONGSHEN_KEYWORDS = [
+    ("妻财", ["求财", "财运", "财", "生意", "投资", "货物", "妻"]),
+    ("官鬼", ["官", "事业", "工作", "求职", "升职", "官司", "官非", "疾病", "病", "夫"]),
+    ("父母", ["文书", "考", "学", "证件", "房产", "车", "合同", "长辈", "父"]),
+    ("子孙", ["子女", "求子", "晚辈", "出行", "娱乐", "宠物", "健康"]),
+    ("兄弟", ["兄弟", "合作", "合伙", "朋友", "竞争"]),
+]
+# 六爻原神 / 忌神（生用神 / 克用神）
+_YUANSHEN = {"父母": "官鬼", "兄弟": "父母", "子孙": "兄弟", "妻财": "子孙", "官鬼": "妻财"}
+_JISHEN = {"父母": "妻财", "兄弟": "官鬼", "子孙": "父母", "妻财": "兄弟", "官鬼": "子孙"}
+
+
+def yongshen_for(question):
+    """问事 → 用神六亲。未知问事默认看世爻（自身）。"""
+    q = question or "通用"
+    for yong, kws in _YONGSHEN_KEYWORDS:
+        if any(k in q for k in kws):
+            return yong
+    return "世"
+
+
+def _wx_level(zhi, month_zhi, day_zhi):
+    """用神地支在月建/日辰下的旺衰（旺相平衰死）。[规则推演]"""
+    wx = ZHI_WX[zhi]
+    notes, score = [], 0
+    for label, ref in (("月建", month_zhi), ("日辰", day_zhi)):
+        if not ref:
+            continue
+        rwx = ZHI_WX[ref]
+        if wx == rwx:
+            notes.append(f"{label}同气"); score += 2
+        elif SHENG.get(rwx) == wx:
+            notes.append(f"{label}生我"); score += 2
+        elif SHENG.get(wx) == rwx:
+            notes.append(f"我生{label}"); score -= 1
+        elif KE.get(rwx) == wx:
+            notes.append(f"{label}克我"); score -= 2
+        elif KE.get(wx) == rwx:
+            notes.append(f"我克{label}"); score -= 1
+    level = "旺" if score >= 3 else ("相" if score >= 1 else
+             ("平" if score >= -1 else ("衰" if score >= -3 else "死")))
+    return {"等级": level, "说明": notes, "分数": score}
+
+
+def yongshen_analysis(r, question):
+    """用神分析 + 断卦分析。返回 dict（[规则推演] 只给方向）。"""
+    ys = yongshen_for(question)
+    lines = r["六爻"]
+    target = [x for x in lines if (x["世应"] == "世" if ys == "世" else x["本卦"].split()[0] == ys)]
+    fushen = None
+    if not target and ys != "世":
+        for f in r.get("伏神", []):
+            if f.get("六亲") == ys:
+                fushen = f
+                break
+    if target:
+        t = target[0]
+        zhi = t["本卦"].split()[1][-1]
+        pos = t["爻"]
+    elif fushen:
+        zhi = fushen["干支"][-1]
+        pos = f"伏{fushen['伏爻']}"
+    else:
+        zhi, pos = None, "不现"
+    lv = _wx_level(zhi, r["月建"], r["日辰"]) if zhi else {"等级": "不现", "说明": ["用神不上卦，看伏神或待出空"], "分数": 0}
+
+    shi_x = next(x for x in lines if x["世应"] == "世")
+    ying_x = next(x for x in lines if x["世应"] == "应")
+    swx, ywx = ZHI_WX[shi_x["本卦"].split()[1][-1]], ZHI_WX[ying_x["本卦"].split()[1][-1]]
+    if SHENG.get(ywx) == swx:
+        shi_ying = ("应生世", "吉", "外境/对方来助我，顺遂")
+    elif SHENG.get(swx) == ywx:
+        shi_ying = ("世生应", "泄", "我付出多回报少，宜守")
+    elif KE.get(ywx) == swx:
+        shi_ying = ("应克世", "凶", "对方克我，压力阻力大")
+    elif KE.get(swx) == ywx:
+        shi_ying = ("世克应", "小吉", "我制彼，费力可成")
+    else:
+        shi_ying = ("世应比和", "平", "同心同力，成败在己")
+
+    dim = {}
+    dim["用神旺衰"] = {"旺": 20, "相": 12, "平": 0, "衰": -12, "死": -20, "不现": -15}.get(lv["等级"], 0)
+    dim["世应关系"] = {"应生世": 15, "世克应": 8, "世应比和": 10, "世生应": -8, "应克世": -15}[shi_ying[0]]
+    if ys != "世":
+        for x in lines:
+            if x["动"]:
+                qin = x["本卦"].split()[0]
+                if _YUANSHEN.get(ys) == qin:
+                    dim.setdefault("原神动生", 15)
+                elif _JISHEN.get(ys) == qin:
+                    dim.setdefault("忌神动克", -15)
+    if zhi:
+        if zhi in r["旬空"]:
+            dim.setdefault("用神旬空", -10)
+        if r["月建"] and zhi == CHONG.get(r["月建"]):
+            dim.setdefault("用神月破", -12)
+    score = max(10, min(90, 50 + sum(dim.values())))
+    jx = "吉" if score >= 65 else ("平" if score >= 45 else "凶")
+    return {"用神": ys, "落爻": pos, "旺衰": lv, "世应": shi_ying,
+            "评分": score, "分项": dim, "吉凶": jx}
+
+
+def print_yongshen(r, question):
+    """打印 用神分析 + 断卦分析 + 趋吉避凶。"""
+    a = yongshen_analysis(r, question)
+    print()
+    print(f"【用神分析】问事：{question or '通用'}  →  用神：{a['用神']}  落：{a['落爻']}")
+    print(f"    用神旺衰：{a['旺衰']['等级']}（{'、'.join(a['旺衰']['说明']) or '—'}）")
+    print(f"    世应关系：{a['世应'][0]}（{a['世应'][1]}）— {a['世应'][2]}")
+    print(f"【断卦分析】吉凶评分 {a['评分']}/100  →  {a['吉凶']}")
+    print(f"    分项：{'；'.join(f'{k} {v:+d}' for k, v in a['分项'].items())}")
+    print("【趋吉避凶】")
+    if a["吉凶"] == "吉":
+        print("  ✓ 用神旺相、世应得宜，可进宜主动，把握时机")
+    elif a["吉凶"] == "平":
+        print("  → 卦象平稳，宜守不宜攻，等待时机、多方核实")
+    else:
+        print("  ✗ 用神衰/受克或世应不利，宜缓守、换时机方位，忌硬碰")
+    if a["旺衰"]["等级"] in ("衰", "死", "不现"):
+        print("  · 用神衰弱：待月建/日辰生扶之日再动，忌冲动")
+    if a["世应"][0] == "应克世":
+        print("  · 应克世：防对方施压，宜退让换框架")
+    if "用神旬空" in a["分项"]:
+        print("  · 用神旬空：事虚待出空，暂勿定论")
+    if "忌神动克" in a["分项"]:
+        print("  · 忌神动克用神：防对应之失，原神可解")

@@ -31,3 +31,25 @@ def cast(dt=None):
         s = "  ".join(f"{_GONG_GUA[g]}{pan.get(g, '')}" for g in (4, 9, 2, 3, 5, 7, 8, 1, 6))
         print(f"暗干: {s}（值使加时干「{shi_gan}」阳顺阴逆飞九宫）")
     return r
+
+
+def summary(r):
+    """一眼摘要卡：局/节气/干支/值符值使/三吉门/天乙（借鉴八字/紫微升级的「一眼看懂」层）。"""
+    sj = r.get("時家奇門", {})
+    zf = sj.get("值符值使", {})
+    xing, xing_gong = zf.get("值符星宮", ["", ""])
+    men, men_gong = zf.get("值使門宮", ["", ""])
+    men_map = sj.get("門", {})
+    ji = "  ".join(f"{g}{m}" for g, m in men_map.items() if m in ("開", "休", "生"))
+    xk = sj.get("旬空", {})
+    xk_s = f"日{xk.get('日空', '')} 时{xk.get('時空', '')}" if isinstance(xk, dict) else str(xk)
+    return "\n".join([
+        f"【一眼摘要】奇门遁甲 · {sj.get('排局', '')} · {sj.get('節氣', '')}",
+        f"  干支：{sj.get('干支', '')} · 值符{xing}({xing_gong}) 值使{men}({men_gong})",
+        f"  三吉门：{ji} · 天乙{sj.get('天乙', '')} · 旬空 {xk_s}",
+    ])
+
+
+def pan_json(r):
+    """盘面事实层 JSON（机读，schema=qimen-panfact-v1）。"""
+    return {"schema": "qimen-panfact-v1", **r}

@@ -359,3 +359,23 @@ def print_pan(r):
             tag += "·空"
         dx = f"{p['大限'][0]}-{p['大限'][1]}" if p["大限"] else "—"
         print(f"{p['宫']:<6}{gz:<6}{main:<28}{fu:<30}{dx}  {tag}")
+
+
+def summary(r):
+    """一眼摘要卡：命宫/身宫/五行局/四化/三方四正（借鉴八字升级的「一眼看懂」层，不牺牲可复核）。"""
+    mg = next((p for p in r["十二宫"] if p["命"]), None)
+    sg = next((p for p in r["十二宫"] if p["身"]), None)
+
+    def _stars(p):
+        if not p or not p["主星"]:
+            return "空宫"
+        return " ".join(f"{n}({b}{s})" if s else f"{n}({b})" for n, b, s in p["主星"])
+
+    mg_line = f"命宫 {mg['干']}{mg['支']}({_stars(mg)})" if mg else "命宫 —"
+    sg_line = f"身宫 {sg['干']}{sg['支']}({_stars(sg)})" if sg else "身宫 —"
+    return "\n".join([
+        f"【一眼摘要】紫微斗数 · {r.get('四柱', '')}",
+        f"  {mg_line} · {sg_line} · 五行局 {r.get('五行局', '')}",
+        f"  四化：{r.get('四化', '')}",
+        f"  三方四正：{'、'.join(r.get('命宫三方四正', []))}",
+    ])
