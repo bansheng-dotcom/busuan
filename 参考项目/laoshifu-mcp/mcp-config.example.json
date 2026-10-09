@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "laoshifu": {
-      "command": "uvx",
-      "args": ["laoshifu-mcp"]
-    }
-  }
-}

@@ -1,8 +1,0 @@
-# Python offline cross-check dependencies installed by scripts/setup.*.
-# They are not required to install, publish, or run the Dashboard or CLI.
-# They must never replace the authoritative TypeScript
-# Agent/Dashboard calculation path.
-
-lunar-python==1.4.8
-iztro-py==0.5.0
-requests==2.32.5

@@ -15,3 +15,7 @@ Thumbs.db
 
 # Nested git history kept as local backup (not uploaded)
 .git.bak/
+
+# liuyao MCP 本地环境（接入王虎应六爻 MCP 时生成）
+.venv-liuyao/
+*.whl

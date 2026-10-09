@@ -1,0 +1,857 @@
+{
+  "_meta": {
+    "version": "0.1",
+    "updated": "2026-10-08",
+    "source": "六壬神将释·十二天将 + 梅花易数·八卦万物类象 + 现代映射",
+    "total_validations": 3,
+    "description": "结构化「信号→特征」映射库。每条值带 confidence(0-1) 与 source，供特征画像引擎读取；每轮射覆复盘后由 libs/shefu_portrait.py update_kb 回填。"
+  },
+  "天将": {
+    "贵人": {
+      "五行": "土",
+      "dimensions": {
+        "颜色": [
+          {
+            "value": "黄/紫",
+            "confidence": 0.6,
+            "source": "贵人尊贵之色"
+          }
+        ],
+        "材质": [
+          {
+            "value": "织物/丝帛",
+            "confidence": 0.6,
+            "source": "贵人衣冠"
+          }
+        ],
+        "功能": [
+          {
+            "value": "掌权/庇护/尊贵",
+            "confidence": 0.85,
+            "source": "六壬神将释"
+          }
+        ],
+        "形态": [
+          {
+            "value": "端正/直立",
+            "confidence": 0.6,
+            "source": "贵人威仪"
+          }
+        ],
+        "性质": [
+          {
+            "value": "尊贵/得助",
+            "confidence": 0.8,
+            "source": "天乙贵神"
+          }
+        ]
+      }
+    },
+    "螣蛇": {
+      "五行": "火",
+      "dimensions": {
+        "颜色": [
+          {
+            "value": "赤/红紫",
+            "confidence": 0.7,
+            "source": "火"
+          }
+        ],
+        "材质": [
+          {
+            "value": "细软/缠绕物",
+            "confidence": 0.7,
+            "source": "蛇形"
+          }
+        ],
+        "形态": [
+          {
+            "value": "细长/盘绕",
+            "confidence": 0.85,
+            "source": "螣蛇盘绕"
+          }
+        ],
+        "功能": [
+          {
+            "value": "缠绕/惊扰/怪异",
+            "confidence": 0.85,
+            "source": "六壬神将释"
+          }
+        ],
+        "性质": [
+          {
+            "value": "虚惊/不安/怪异",
+            "confidence": 0.8,
+            "source": "六壬神将释"
+          }
+        ]
+      }
+    },
+    "朱雀": {
+      "五行": "火",
+      "dimensions": {
+        "颜色": [
+          {
+            "value": "赤/红",
+            "confidence": 0.95,
+            "source": "朱雀属火",
+            "validations": 1
+          }
+        ],
+        "材质": [
+          {
+            "value": "纸/文书",
+            "confidence": 0.7,
+            "source": "朱雀主文书"
+          }
+        ],
+        "形态": [
+          {
+            "value": "尖/飞翼/细小",
+            "confidence": 0.6,
+            "source": "鸟形"
+          }
+        ],
+        "功能": [
+          {
+            "value": "文书/口舌/说话/信息",
+            "confidence": 0.85,
+            "source": "六壬神将释"
+          },
+          {
+            "value": "屏幕/显示",
+            "confidence": 0.5,
+            "source": "现代映射:文书=屏幕"
+          }
+        ],
+        "结构": [
+          {
+            "value": "中空/展开",
+            "confidence": 0.5,
+            "source": "鸟翼"
+          }
+        ],
+        "性质": [
+          {
+            "value": "赤色/口/明",
+            "confidence": 0.75,
+            "source": "六壬神将释"
+          }
+        ]
+      }
+    },
+    "六合": {
+      "五行": "木",
+      "dimensions": {
+        "颜色": [
+          {
+            "value": "青/绿",
+            "confidence": 0.7,
+            "source": "木"
+          }
+        ],
+        "材质": [
+          {
+            "value": "竹/木/绳线",
+            "confidence": 0.7,
+            "source": "六合属木"
+          }
+        ],
+        "形态": [
+          {
+            "value": "成双/连接",
+            "confidence": 0.8,
+            "source": "六合成双"
+          }
+        ],
+        "功能": [
+          {
+            "value": "和合/婚姻/中介/交易",
+            "confidence": 0.85,
+            "source": "六壬神将释"
+          }
+        ],
+        "性质": [
+          {
+            "value": "和合/连接",
+            "confidence": 0.8,
+            "source": "六壬神将释"
+          }
+        ]
+      }
+    },
+    "勾陈": {
+      "五行": "土",
+      "dimensions": {
+        "颜色": [
+          {
+            "value": "黄",
+            "confidence": 0.7,
+            "source": "土"
+          }
+        ],
+        "材质": [
+          {
+            "value": "土/石",
+            "confidence": 0.75,
+            "source": "勾陈属土"
+          }
+        ],
+        "形态": [
+          {
+            "value": "方正/滞重",
+            "confidence": 0.7,
+            "source": "勾陈滞重"
+          }
+        ],
+        "功能": [
+          {
+            "value": "田土/争讼/纠缠/迟滞",
+            "confidence": 0.75,
+            "source": "六壬神将释",
+            "validations": 1
+          }
+        ],
+        "性质": [
+          {
+            "value": "纠缠/迟滞",
+            "confidence": 0.8,
+            "source": "六壬神将释"
+          }
+        ]
+      }
+    },
+    "青龙": {
+      "五行": "木",
+      "dimensions": {
+        "颜色": [
+          {
+            "value": "青/绿",
+            "confidence": 0.9,
+            "source": "青龙属木",
+            "validations": 1
+          }
+        ],
+        "材质": [
+          {
+            "value": "玉/珍宝/草木",
+            "confidence": 0.75,
+            "source": "六壬神将释:珍宝"
+          }
+        ],
+        "形态": [
+          {
+            "value": "长条/贵重",
+            "confidence": 0.6,
+            "source": "龙形"
+          }
+        ],
+        "功能": [
+          {
+            "value": "财喜/喜庆/升迁",
+            "confidence": 0.75,
+            "source": "六壬神将释",
+            "validations": 1
+          },
+          {
+            "value": "饮食/酒食",
+            "confidence": 0.55,
+            "source": "青龙主酒食"
+          }
+        ],
+        "性质": [
+          {
+            "value": "珍贵/喜庆/贵气",
+            "confidence": 0.8,
+            "source": "六壬神将释"
+          }
+        ]
+      }
+    },
+    "天空": {
+      "五行": "土",
+      "dimensions": {
+        "颜色": [
+          {
+            "value": "白/空",
+            "confidence": 0.6,
+            "source": "天空虚"
+          }
+        ],
+        "功能": [
+          {
+            "value": "空想/闲散/虚耗",
+            "confidence": 0.85,
+            "source": "六壬神将释"
+          }
+        ],
+        "性质": [
+          {
+            "value": "虚/空/诈",
+            "confidence": 0.85,
+            "source": "六壬神将释"
+          }
+        ]
+      }
+    },
+    "白虎": {
+      "五行": "金",
+      "dimensions": {
+        "颜色": [
+          {
+            "value": "白",
+            "confidence": 0.8,
+            "source": "白虎属金"
+          }
+        ],
+        "材质": [
+          {
+            "value": "金属/刀兵",
+            "confidence": 0.8,
+            "source": "白虎主金刀"
+          }
+        ],
+        "形态": [
+          {
+            "value": "锐利/硬",
+            "confidence": 0.7,
+            "source": "虎爪刀"
+          }
+        ],
+        "功能": [
+          {
+            "value": "威猛/伤/急速/忙碌",
+            "confidence": 0.85,
+            "source": "六壬神将释"
+          }
+        ],
+        "性质": [
+          {
+            "value": "凶猛/伤/操劳",
+            "confidence": 0.8,
+            "source": "六壬神将释"
+          }
+        ]
+      }
+    },
+    "太常": {
+      "五行": "土",
+      "dimensions": {
+        "颜色": [
+          {
+            "value": "黄/白",
+            "confidence": 0.6,
+            "source": "太常衣冠"
+          }
+        ],
+        "材质": [
+          {
+            "value": "织物/衣",
+            "confidence": 0.75,
+            "source": "太常主衣冠"
+          }
+        ],
+        "形态": [
+          {
+            "value": "端正/平整",
+            "confidence": 0.6,
+            "source": "礼仪端正"
+          }
+        ],
+        "功能": [
+          {
+            "value": "衣冠/饮食/礼仪",
+            "confidence": 0.85,
+            "source": "六壬神将释"
+          }
+        ],
+        "性质": [
+          {
+            "value": "饮食/礼仪/装扮",
+            "confidence": 0.8,
+            "source": "六壬神将释"
+          }
+        ]
+      }
+    },
+    "玄武": {
+      "五行": "水",
+      "dimensions": {
+        "颜色": [
+          {
+            "value": "黑",
+            "confidence": 0.8,
+            "source": "玄武属水"
+          }
+        ],
+        "材质": [
+          {
+            "value": "水/液体",
+            "confidence": 0.8,
+            "source": "玄武属水"
+          }
+        ],
+        "形态": [
+          {
+            "value": "流动/暗/无定形",
+            "confidence": 0.7,
+            "source": "水形"
+          }
+        ],
+        "功能": [
+          {
+            "value": "暗昧/盗骗/私密/污秽",
+            "confidence": 0.85,
+            "source": "六壬神将释"
+          },
+          {
+            "value": "睡眠/休息",
+            "confidence": 0.5,
+            "source": "现代映射"
+          }
+        ],
+        "性质": [
+          {
+            "value": "暗昧/污秽/水",
+            "confidence": 0.8,
+            "source": "六壬神将释"
+          }
+        ]
+      }
+    },
+    "太阴": {
+      "五行": "金",
+      "dimensions": {
+        "颜色": [
+          {
+            "value": "白/银",
+            "confidence": 0.8,
+            "source": "太阴属金",
+            "validations": 1
+          }
+        ],
+        "材质": [
+          {
+            "value": "金属/首饰/细腻",
+            "confidence": 0.6,
+            "source": "太阴主金银",
+            "validations": 1
+          }
+        ],
+        "形态": [
+          {
+            "value": "细/美/圆",
+            "confidence": 0.7,
+            "source": "太阴柔美",
+            "validations": 1
+          }
+        ],
+        "功能": [
+          {
+            "value": "美容/私密/阴柔",
+            "confidence": 0.7,
+            "source": "六壬神将释",
+            "validations": 1
+          }
+        ],
+        "性质": [
+          {
+            "value": "阴柔/细腻/私密",
+            "confidence": 0.8,
+            "source": "六壬神将释"
+          }
+        ]
+      }
+    },
+    "天后": {
+      "五行": "水",
+      "dimensions": {
+        "颜色": [
+          {
+            "value": "黑/蓝",
+            "confidence": 0.7,
+            "source": "天后属水"
+          }
+        ],
+        "材质": [
+          {
+            "value": "织物/水",
+            "confidence": 0.6,
+            "source": "天后妇人"
+          }
+        ],
+        "形态": [
+          {
+            "value": "柔/圆",
+            "confidence": 0.6,
+            "source": "天后柔顺"
+          }
+        ],
+        "功能": [
+          {
+            "value": "恩泽/婚喜/饮食/休息",
+            "confidence": 0.85,
+            "source": "六壬神将释"
+          }
+        ],
+        "性质": [
+          {
+            "value": "柔和/恩泽/妇女",
+            "confidence": 0.8,
+            "source": "六壬神将释"
+          }
+        ]
+      }
+    }
+  },
+  "八卦": {
+    "乾": {
+      "五行": "金",
+      "dimensions": {
+        "颜色": [
+          {
+            "value": "大赤/金/银白",
+            "confidence": 0.85,
+            "source": "说卦传:大赤"
+          }
+        ],
+        "材质": [
+          {
+            "value": "金属/玉/宝石",
+            "confidence": 0.88,
+            "source": "说卦传:金玉"
+          }
+        ],
+        "形态": [
+          {
+            "value": "圆/球/圆柱",
+            "confidence": 0.88,
+            "source": "说卦传:圜"
+          }
+        ],
+        "功能": [
+          {
+            "value": "贵重/计时/刚健",
+            "confidence": 0.75,
+            "source": "说卦传:健"
+          }
+        ],
+        "结构": [
+          {
+            "value": "完整/独立/对称",
+            "confidence": 0.75,
+            "source": "乾健自完"
+          }
+        ],
+        "性质": [
+          {
+            "value": "刚健/贵重",
+            "confidence": 0.85,
+            "source": "说卦传:健"
+          }
+        ]
+      }
+    },
+    "兑": {
+      "五行": "金",
+      "dimensions": {
+        "颜色": [
+          {
+            "value": "白/银",
+            "confidence": 0.75,
+            "source": "兑属金"
+          }
+        ],
+        "材质": [
+          {
+            "value": "金属",
+            "confidence": 0.8,
+            "source": "兑属金"
+          }
+        ],
+        "形态": [
+          {
+            "value": "带口/开口/缺",
+            "confidence": 0.85,
+            "source": "说卦传:口+缺"
+          }
+        ],
+        "功能": [
+          {
+            "value": "发声/悦/开合",
+            "confidence": 0.75,
+            "source": "说卦传:口+悦"
+          }
+        ],
+        "结构": [
+          {
+            "value": "开口/破损/废缺",
+            "confidence": 0.8,
+            "source": "梅花:毁折之物"
+          }
+        ],
+        "性质": [
+          {
+            "value": "悦/口/缺",
+            "confidence": 0.8,
+            "source": "说卦传"
+          }
+        ]
+      }
+    },
+    "离": {
+      "五行": "火",
+      "dimensions": {
+        "颜色": [
+          {
+            "value": "红赤/紫",
+            "confidence": 0.85,
+            "source": "梅花:红赤紫色"
+          }
+        ],
+        "材质": [
+          {
+            "value": "干燥/有壳",
+            "confidence": 0.7,
+            "source": "梅花:干燥物/有壳"
+          }
+        ],
+        "形态": [
+          {
+            "value": "中空/丽",
+            "confidence": 0.8,
+            "source": "离中虚"
+          }
+        ],
+        "功能": [
+          {
+            "value": "火/电/照明/文书/屏幕",
+            "confidence": 0.85,
+            "source": "说卦传:火+电 + 现代映射"
+          }
+        ],
+        "结构": [
+          {
+            "value": "中虚/中空",
+            "confidence": 0.85,
+            "source": "离中虚"
+          }
+        ],
+        "性质": [
+          {
+            "value": "明/丽/热",
+            "confidence": 0.8,
+            "source": "说卦传:明"
+          }
+        ]
+      }
+    },
+    "震": {
+      "五行": "木",
+      "dimensions": {
+        "颜色": [
+          {
+            "value": "青碧/绿",
+            "confidence": 0.8,
+            "source": "梅花:青碧绿色"
+          }
+        ],
+        "材质": [
+          {
+            "value": "竹/草木/木",
+            "confidence": 0.85,
+            "source": "说卦传:竹+萑苇"
+          }
+        ],
+        "形态": [
+          {
+            "value": "仰盂/长/中空",
+            "confidence": 0.75,
+            "source": "震仰盂"
+          }
+        ],
+        "功能": [
+          {
+            "value": "动/发声/震动",
+            "confidence": 0.8,
+            "source": "说卦传:动+鸣"
+          }
+        ],
+        "性质": [
+          {
+            "value": "动/起/声",
+            "confidence": 0.8,
+            "source": "说卦传:动"
+          }
+        ]
+      }
+    },
+    "巽": {
+      "五行": "木",
+      "dimensions": {
+        "颜色": [
+          {
+            "value": "青白",
+            "confidence": 0.6,
+            "source": "巽风"
+          }
+        ],
+        "材质": [
+          {
+            "value": "绳/木/羽毛/扇",
+            "confidence": 0.75,
+            "source": "说卦传:绳+工"
+          }
+        ],
+        "形态": [
+          {
+            "value": "细长/入",
+            "confidence": 0.75,
+            "source": "说卦传:入"
+          }
+        ],
+        "功能": [
+          {
+            "value": "风/入/工巧",
+            "confidence": 0.75,
+            "source": "说卦传"
+          }
+        ],
+        "性质": [
+          {
+            "value": "入/顺/散",
+            "confidence": 0.75,
+            "source": "说卦传:入"
+          }
+        ]
+      }
+    },
+    "坎": {
+      "五行": "水",
+      "dimensions": {
+        "颜色": [
+          {
+            "value": "黑",
+            "confidence": 0.85,
+            "source": "梅花:黑色"
+          }
+        ],
+        "材质": [
+          {
+            "value": "水/液体",
+            "confidence": 0.85,
+            "source": "坎为水"
+          }
+        ],
+        "形态": [
+          {
+            "value": "凹/中满/弓轮",
+            "confidence": 0.8,
+            "source": "坎中满+弓轮"
+          }
+        ],
+        "功能": [
+          {
+            "value": "水/暗昧/盗/睡眠/污秽",
+            "confidence": 0.8,
+            "source": "说卦传:水+盗 + 现代映射"
+          }
+        ],
+        "结构": [
+          {
+            "value": "中满/凹陷",
+            "confidence": 0.8,
+            "source": "坎中满"
+          }
+        ],
+        "性质": [
+          {
+            "value": "险/暗/水",
+            "confidence": 0.8,
+            "source": "说卦传:险"
+          }
+        ]
+      }
+    },
+    "艮": {
+      "五行": "土",
+      "dimensions": {
+        "颜色": [
+          {
+            "value": "黄",
+            "confidence": 0.75,
+            "source": "梅花:黄色"
+          }
+        ],
+        "材质": [
+          {
+            "value": "土/石",
+            "confidence": 0.8,
+            "source": "艮为山"
+          }
+        ],
+        "形态": [
+          {
+            "value": "覆碗/山/止",
+            "confidence": 0.8,
+            "source": "艮覆碗"
+          }
+        ],
+        "功能": [
+          {
+            "value": "止/门/手/果蓏",
+            "confidence": 0.75,
+            "source": "说卦传:止+手+门"
+          }
+        ],
+        "性质": [
+          {
+            "value": "止/静/阻",
+            "confidence": 0.8,
+            "source": "说卦传:止"
+          }
+        ]
+      }
+    },
+    "坤": {
+      "五行": "土",
+      "dimensions": {
+        "颜色": [
+          {
+            "value": "黄/黑",
+            "confidence": 0.75,
+            "source": "说卦传:其于地也为黑"
+          }
+        ],
+        "材质": [
+          {
+            "value": "布/土/瓦/柔",
+            "confidence": 0.8,
+            "source": "说卦传:布+釜"
+          }
+        ],
+        "形态": [
+          {
+            "value": "方/柔/顺/六断",
+            "confidence": 0.8,
+            "source": "坤六断+方"
+          }
+        ],
+        "功能": [
+          {
+            "value": "容/藏/饮食/衣物",
+            "confidence": 0.75,
+            "source": "说卦传:藏+文"
+          }
+        ],
+        "性质": [
+          {
+            "value": "柔/顺/容",
+            "confidence": 0.8,
+            "source": "说卦传:顺"
+          }
+        ]
+      }
+    }
+  }
+}

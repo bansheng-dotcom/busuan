@@ -1,6 +1,0 @@
-{
-  "client_id": "在此填入你的 ima Client ID",
-  "api_key": "在此填入你的 ima API Key",
-  "kb_id": "在此填入典籍知识库的 knowledge_base_id",
-  "txt_dir": "在此填入本地典籍 txt 目录（用于 --local 精确检索），如 D:\\daimajieti1\\国学czhengli\\txt"
-}
