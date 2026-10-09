@@ -288,6 +288,9 @@ def main():
         # 一眼摘要卡（命宫/身宫/四化/三方四正，借鉴八字升级的「一眼看懂」层）
         print()
         print(zhiwei.summary(r))
+        # 飞星四化全景（循环忌/忌冲，借鉴 mingli-skills）
+        print()
+        print(zhiwei.format_feixing(zhiwei.feixing_panorama(r)))
         # 结构化双轨：盘面事实层 JSON（--json，机读可校验，与散文并存）
         if json_out:
             print()
