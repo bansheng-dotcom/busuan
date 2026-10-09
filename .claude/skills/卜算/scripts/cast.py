@@ -50,6 +50,7 @@ sys.path.insert(0, LIB)
 import meihua
 import xiaoliuren
 import liuyao
+import liuyao_knowledge
 import bazi
 import liuren
 import liuren_regress
@@ -429,6 +430,18 @@ def main():
             if _i + 1 < len(a):
                 _filter = a[_i + 1]
         mingli_eval.analyze(cat_filter=_filter)
+    elif cmd == "liuyao-knowledge":
+        # 六爻理法知识包（王虎应体系，MCP 未连接时离线 RAG 回退）
+        q = a[1] if len(a) > 1 else ""
+        if not q:
+            print(liuyao_knowledge.__doc__)
+        else:
+            print(f"[六爻理法知识包] 检索「{q}」\n")
+            for r in liuyao_knowledge.search(q):
+                jx = f"（{r['吉凶']}）" if r["吉凶"] != "—" else ""
+                print(f"[{r['score']:.1f}] ({r['类型']}) {r['名称']}{jx}")
+                print(f"    {r['断语']}")
+                print(f"    〔原文〕{r['原文']}  — {r['出处']}")
     elif cmd == "shefu":
         # 射覆特征画像：shefu liuren 青龙 朱雀 天后 / shefu meihua 离 兑
         sub = a[1] if len(a) > 1 else ""
