@@ -130,7 +130,7 @@ def search(query, case_dir=CASE_DIR, k=10, method=None):
 
 def search_ziwei(query, k=5):
     """检索紫微断语知识包（星曜/宫位/四化/格局），供紫微断卦补断语依据。"""
-    import ziwei_knowledge
+    from judge import ziwei_knowledge
     return ziwei_knowledge.search(query, k=k)
 
 

@@ -86,7 +86,7 @@ def test_zhiwei_flystar():
 
 def test_ziwei_horoscope():
     print("[紫微] 运限（流年/流月/流日/流时，py-iztro）")
-    import ziwei_horoscope
+    from pan import ziwei_horoscope
     h = ziwei_horoscope.horoscope(1990, 5, 15, 8, 1, target="2026-10-07")
     check("运限·可用", h.get("可用"), True)
     check("运限·流年命宫午", h["yearly"]["命宫"], "午")
@@ -342,7 +342,7 @@ def test_liuren_struct():
 
 def test_liuren_regress():
     print("[大六壬] 720 课结构回归（四课/三传/初传不变量）")
-    import liuren_regress
+    from regress import liuren_regress
     stats = liuren_regress.sweep(subset=("秋分",))   # 辰将，60 甲子日 × 12 时 = 720 课
     check("720 课四课全部正确", len(stats["结构四课错"]), 0)
     # 以下为已知 bug 基线（kinliuren 冷门宗门边界有误判/崩溃），只报告不阻塞，
@@ -390,7 +390,7 @@ def test_jinkoujue_golden():
 
 def test_liuren_ref():
     print("[大六壬] --ref 独立九宗门交叉校验")
-    import liuren_regress
+    from regress import liuren_regress
     cc = liuren_regress.cross_check_ref(datetime.datetime(2026, 4, 25, 12, 0))
     check("交叉校验·字段齐全", all(k in cc for k in ("引擎宗门", "独立宗门", "宗门一致", "三传一致")), True)
     check("交叉校验·谷雨贼克重审一致", cc["宗门一致"] and cc["三传一致"], True)
@@ -464,7 +464,7 @@ def test_taiyi_modes():
 def test_taiyi_regress():
     print("[太乙神数] 回归不变量（结构校验 + 积年独立重算）")
     from pan import taiyi
-    import taiyi_regress
+    from regress import taiyi_regress
     dt = datetime.datetime(2026, 10, 7, 10, 0)
     t = _quiet(lambda: taiyi.cast(dt))
     # 结构不变量：合法盘应无错
@@ -496,7 +496,8 @@ def test_taiyi_jieqi():
 def test_taiyi_html():
     print("[太乙神数] HTML 盘图")
     from pan import taiyi
-    import htmlpan, tempfile, os
+    from util import htmlpan
+    import tempfile, os
     t = _quiet(lambda: taiyi.cast(datetime.datetime(2026, 10, 7, 10, 0)))
     d = tempfile.mkdtemp()
     p = os.path.join(d, "t.html")
@@ -583,10 +584,10 @@ def test_almanac():
 
 
 def test_review():
-    print("[review] 断卦后质检（三层分离/三级标注/免责/应期/趋避/冲突降级）")
+    print("[review] 断卦后质检（盘面事实/断语分离 + claim/evidence + 免责/应期/趋避/冲突降级/白话）")
     from gate import review
-    good = ("盘面事实：本卦泽地萃，动爻6。规则推演：体生用泄气。[规则推演] "
-            "现实建议：宜小步试错。[主观推断] 应期难定。趋吉：宜缓进。避凶：勿大额投入。"
+    good = ("盘面事实：本卦泽地萃，动爻6。断语：体生用泄气（《梅花易数》原文：体生用为泄气）。"
+            "结论：宜小步试错。应期难定。趋吉：宜缓进。避凶：勿大额投入。"
             "术语解读：体生用是泄气之象。问事解读：能成但费劲。今日可行的一小步：先小成本试三天。"
             "以上仅供娱乐参考，不构成任何决策依据。")
     r = review.review(good, "梅花易数")
@@ -606,12 +607,12 @@ def test_review():
     bad = "此卦大凶，不宜投资。"
     r2 = review.review(bad, "六爻纳甲")
     check("残缺断语不过", r2["pass"], False)
-    check("残缺·缺三层", any(i["id"] == "R-RV-01" for i in r2["issues"]), True)
-    check("残缺·缺三级标注", any(i["id"] == "R-RV-02" for i in r2["issues"]), True)
+    check("残缺·缺盘面事实/断语分离", any(i["id"] == "R-RV-01" for i in r2["issues"]), True)
+    check("残缺·缺claim/evidence", any(i["id"] == "R-RV-02" for i in r2["issues"]), True)
     check("残缺·缺免责", any(i["id"] == "R-RV-03" for i in r2["issues"]), True)
 
     # 冲突未降级 → R-RV-06 失败
-    c = ("盘面事实：x。规则推演：吉。[规则推演] 现实建议：信号冲突。[主观推断] "
+    c = ("盘面事实：x。断语：吉（《xx》）。结论：信号冲突。"
          "应期难定。趋吉：a。避凶：b。不构成决策依据。")
     r3 = review.review(c)
     check("冲突未降级不过", r3["pass"], False)
@@ -719,7 +720,7 @@ def test_trend():
 
 def test_liuyao_html():
     print("[六爻] 卦图 + 装卦辅助")
-    import htmlpan
+    from util import htmlpan
     from pan import najia
     check("风雷益六爻", htmlpan._hexagram_lines("风雷益"), [1, 0, 0, 0, 1, 1])
     check("水风井六爻", htmlpan._hexagram_lines("水风井"), [0, 1, 1, 0, 1, 0])
@@ -738,7 +739,7 @@ def test_liuyao_html():
 
 def test_trend_html():
     print("[八字] 流年趋势曲线")
-    import htmlpan
+    from util import htmlpan
     from judge import trend
     import tempfile
     import os
@@ -755,7 +756,7 @@ def test_trend_html():
 def test_trace():
     print("[trace] 决策追踪")
     import tempfile
-    import trace
+    from util import trace
     d = tempfile.mkdtemp()
     trace.record("跳槽", "梅花易数", "跳槽成不成", rules_hit=["R-MH-01"],
                  sources=["梅花易数"], conclusion="吉", confidence="中", dir_path=d)
@@ -772,7 +773,7 @@ def test_trace():
 def test_feedback():
     print("[feedback] 反馈契约")
     import tempfile
-    import feedback
+    from util import feedback
     d = tempfile.mkdtemp()
     feedback.record("gap", "medium", "奇门缺XX规则", tool="rules.qimen_geju", dir_path=d)
     feedback.record("clarity", "low", "字段语义歧义", dir_path=d)

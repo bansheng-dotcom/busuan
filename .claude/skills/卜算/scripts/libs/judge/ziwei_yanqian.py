@@ -11,7 +11,7 @@
 同书「岁君…与诸凶神相遇」「论大小限星辰过十二宫」。校验逻辑为 [规则推演]。
 
 用法：
-  from ziwei_yanqian import validate_events, format_validate
+  from judge.ziwei_yanqian import validate_events, format_validate
   r = validate_events(1990, 5, 15, 8, 1, [(2015, "婚"), (2018, "子"), (2022, "破财")])
   print(format_validate(r))
 """

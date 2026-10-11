@@ -50,29 +50,29 @@ sys.path.insert(0, LIB)
 from pan import meihua
 from pan import xiaoliuren
 from pan import liuyao
-import liuyao_knowledge
+from util import liuyao_knowledge
 from pan import bazi
 from pan import liuren
-import liuren_regress
+from regress import liuren_regress
 from pan import jinkoujue
 from pan import qimen
 from pan import taiyi
 from pan import zhiwei
-import ziwei_geju
-import ziwei_liunian
-import ziwei_yanqian
+from judge import ziwei_geju
+from pan import ziwei_liunian
+from judge import ziwei_yanqian
 from pan import qizheng
 from pan import liunian
 from pan import fengshui
 from pan import zeri
 from pan import hehun
-import htmlpan
+from util import htmlpan
 from lifa import almanac
-import ziwei_horoscope
+from pan import ziwei_horoscope
 from judge import trend
 from pan import bazi_liunian
 from pan import bazi_json
-import mingli_eval
+from util import mingli_eval
 from judge import shefu_portrait
 from judge import rules
 from judge import miaogong_shefu

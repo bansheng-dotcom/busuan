@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-"""断卦后质检（review）：对断语文本做「三层分离 + 三级标注 + 免责 + 应期 + 趋避」的强制 gate。
+"""断卦后质检（review）：对断语文本做「盘面事实/断语分离 + claim/evidence + 免责 + 应期 + 趋避」的强制 gate。
 
 与 precheck.py 对称：precheck 管「排盘前字段齐全」，review 管「断卦后输出合规」。
-对应 SKILL.md 第十节（输出格式三层分离 + 三级标注）、第十一节（免责）、第十三节（交叉验证/信号冲突降级）。
+对应 SKILL.md 第六节（输出格式·确定性骨架）、免责、交叉验证/信号冲突降级。
 
 每条检查返回结构化判定 {ok, detail}，规则 ID R-RV-XX 供追溯（与 rules.py 的证据编号同体系）。
 
@@ -19,33 +19,32 @@ import sys
 
 # 免责关键词（SKILL.md 第十一节）
 _DISCLAIMER_KEYS = ("免责", "仅供参考", "不构成")
-# 三层分离标记（SKILL.md 第十节）
-_LAYER_KEYS = ("盘面事实", "规则推演", "现实建议")
-# 三级标注（SKILL.md 第十节）
-_ANNOTATION_KEYS = ("[原文]", "[规则推演]", "[主观推断]")
+# 盘面事实/断语分离标记（SKILL.md 第六节·确定性骨架）
+_FACT_KEYS = ("盘面事实",)
+_DUAN_KEYS = ("断语", "结论", "解读")
+# claim/evidence 标记（断语须带证据，不再贴 [原文]/[规则推演] 标签）
+_EVIDENCE_KEYS = ("原文", "出处", "行号", "《", "Det", "确定性")
 
 
 def _check_layers(text):
-    """R-RV-01 三层分离：盘面事实/规则推演/现实建议 三层都要有。"""
-    missing = [k for k in _LAYER_KEYS if k not in text]
-    if not missing:
-        return True, "三层分离齐全"
-    return False, f"缺层：{', '.join(missing)}"
+    """R-RV-01 盘面事实/断语分离：盘面事实（DET 脚本输出）与断语（解读）分开，都要有。"""
+    has_fact = any(k in text for k in _FACT_KEYS)
+    has_duan = any(k in text for k in _DUAN_KEYS)
+    if has_fact and has_duan:
+        return True, "盘面事实与断语分离齐全"
+    missing = []
+    if not has_fact:
+        missing.append("盘面事实")
+    if not has_duan:
+        missing.append("断语/结论")
+    return False, f"缺：{', '.join(missing)}"
 
 
 def _check_annotation(text):
-    """R-RV-02 三级标注：吉凶定性须可回溯到 [原文] 或 [规则推演]。
-
-    前缀匹配以兼容带出处/规则号的写法：[原文·《梅花易数》]、[规则推演 R-MH-01]、[主观推断]。
-    """
-    has_src = "[原文" in text
-    has_rule = "[规则推演" in text
-    has_subj = "[主观推断" in text
-    if has_src or has_rule:
-        return True, "有 [原文]/[规则推演] 标注，定性可回溯"
-    if has_subj:
-        return False, "仅 [主观推断] 无 [原文]/[规则推演]，疑似凭空定性（违反「不得凭空主观推断」）"
-    return False, "缺三级标注 [原文]/[规则推演]/[主观推断]"
+    """R-RV-02 claim/evidence：断语须带证据（原文/出处/行号/DET 事实），不得凭空定性。"""
+    if any(k in text for k in _EVIDENCE_KEYS):
+        return True, "断语带证据（原文/出处/DET 事实）"
+    return False, "断语缺证据（应引原文或 DET 盘面事实，不得凭空定性）"
 
 
 def _check_disclaimer(text):
@@ -101,8 +100,8 @@ def _check_baihua(text):
 
 # 必查项（按 SKILL.md 输出要求）
 CHECKS = [
-    ("R-RV-01", "三层分离", _check_layers),
-    ("R-RV-02", "三级标注", _check_annotation),
+    ("R-RV-01", "盘面事实/断语分离", _check_layers),
+    ("R-RV-02", "claim/evidence", _check_annotation),
     ("R-RV-03", "免责声明", _check_disclaimer),
     ("R-RV-04", "应期", _check_yingqi),
     ("R-RV-05", "趋吉避凶", _check_qubi),

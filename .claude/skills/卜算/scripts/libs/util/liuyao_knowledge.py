@@ -8,7 +8,7 @@
 用法:
   python libs/liuyao_knowledge.py --json       # 导出全量喂 RAG
   python libs/liuyao_knowledge.py 求财        # 检索
-  import liuyao_knowledge as lk; lk.search("旬空", k=5); lk.lookup("妻财")
+  from util import liuyao_knowledge as lk; lk.search("旬空", k=5); lk.lookup("妻财")
 """
 import sys
 

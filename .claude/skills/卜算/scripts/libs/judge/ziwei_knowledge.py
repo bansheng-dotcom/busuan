@@ -6,7 +6,7 @@
 《紫微斗数全书》txt 原文佐证（双重保证），不得凭本表直接下断。
 
 用法：
-  from ziwei_knowledge import lookup, STARS, PALACES, SIHUA
+  from judge.ziwei_knowledge import lookup, STARS, PALACES, SIHUA
   lookup("巨门")          -> 星曜断语
   lookup("化忌")          -> 四化含义
   lookup("命宫")          -> 宫位主事
@@ -86,7 +86,7 @@ def lookup(term):
     if term in SIHUA:
         return {"类型": "四化", "名称": term, **SIHUA[term], "出处": SRC}
     # 格局（懒加载 ziwei_geju 的注册表）
-    import ziwei_geju
+    from judge import ziwei_geju
     for p in ziwei_geju._PATTERNS:
         if p["name"] == term:
             return {"类型": "格局", "名称": term, "吉凶": p["吉凶"],
@@ -106,7 +106,7 @@ def _all_entries():
     for k, v in SIHUA.items():
         entries.append({"类型": "四化", "名称": k, "断语": v["断语"],
                         "原文": v.get("原文", ""), "吉凶": v["吉凶"], "出处": SRC})
-    import ziwei_geju
+    from judge import ziwei_geju
     for p in ziwei_geju._PATTERNS:
         entries.append({"类型": "格局", "名称": p["name"], "断语": p["断语"],
                         "原文": p["原文"], "吉凶": p["吉凶"], "出处": p.get("出处", SRC)})

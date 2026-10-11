@@ -11,7 +11,7 @@
   python libs/trace.py analyze [trace.jsonl ...]
 
 也可 import 调用：
-  import trace
+  from util import trace
   trace.record(name="跳槽", method="梅花易数", question="跳槽成不成",
                rules_hit=["R-MH-01"], sources=["梅花易数"], conclusion="吉", confidence="中")
   trace.analyze([path])

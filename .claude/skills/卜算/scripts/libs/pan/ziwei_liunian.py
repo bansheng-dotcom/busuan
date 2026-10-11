@@ -10,7 +10,7 @@
   非《全书》直接原文，标 [规则推演]；断卦仍按「化忌、大限、流年」Grep 原文佐证。
 
 用法：
-  from ziwei_liunian import diji_scan, format_scan
+  from pan.ziwei_liunian import diji_scan, format_scan
   r = diji_scan(1990, 5, 15, 8, 1, 2026)
   print(format_scan(r))
 """

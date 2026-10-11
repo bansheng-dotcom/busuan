@@ -27,6 +27,11 @@ _SRC_XJBFS = "《钦定协纪辨方书》"
 _SRC_XLK = "《御定星历考原》"
 
 
+# —— 返回契约（三种形状，各司其职） ——
+# 1. 吉凶规则函数（走 _r）：{"judgment": 吉/凶/中, "confidence", "evidence", "basis"}
+# 2. 射覆/物类函数（jinkoujue_shefu_* / miaogong_shefu）：{"result": 物类内容, ...} —— result 是「内容」非「吉凶」
+# 3. 交叉验证（cross_validate / fusion_mark）：{"verdict": 一致/冲突/互补, ...} —— verdict 是「一致性结论」
+# 流派分歧（UND）一律返回 None + 标「流派分歧」，不臆造。
 def _r(j, conf, ev, basis):
     return {"judgment": j, "confidence": conf, "evidence": ev, "basis": basis}
 

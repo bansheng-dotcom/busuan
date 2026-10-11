@@ -8,7 +8,7 @@
 出处：《紫微斗数全书》（运限/四化飞星断法）。
 
 用法：
-  from ziwei_horoscope import horoscope, format_horoscope
+  from pan.ziwei_horoscope import horoscope, format_horoscope
   h = horoscope(1990, 5, 15, 8, 1, target="2026-10-07")
   print(format_horoscope(h))
 """
