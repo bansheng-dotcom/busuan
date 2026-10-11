@@ -150,10 +150,11 @@ description: 中国传统术数占卜。当用户要起卦、占卜、算卦、�
 
 - 起盘这一步**必须用脚本**，输出本卦/互卦/变卦/动爻/体用/四柱/大运/四课三传/八门九星/太乙落宫等确定性结果。
 - **依赖**（`pip install lunar_python ephem cn2an bidict drawsvg py-iztro`）：
-  - 梅花易数/小六壬/六爻：纯内置。
+  - 梅花易数/小六壬：农历换算走 `lunar_python`（`Solar.fromYmd(...).getLunar()`，缺失时退用公历并打印警告）；六爻：纯内置。
   - 八字：`lunar_python`。
   - 紫微运限：`py-iztro`（`libs/ziwei_horoscope.py`；`libs/zhiwei.py` 自写命盘/飞星不依赖它，py-iztro 仅用于流年流月流日流时运限 + 对照校验）。
   - 大六壬/奇门/太乙：`scripts/libs/` 内集成的 kentang2017 开源引擎（`engines/qimen`、`engines/taiyi`，MIT）+ `sxtwl.py` 垫片（用 lunar_python 替代寿星历，见 libs/README.md）。
+  - 太乙「博弈分析」可选：`numpy`（仅 `cast.py taiyi ... --game` 时懒加载 `engines/taiyi/game_theory.py`，缺失则报错、不影响常规起盘）。
   - 七政四余/风水/择日/神煞/刑冲合害：纯标准库（`libs/qizheng.py`、`fengshui.py`、`zeri.py`、`liunian.py`、`shensha.py`、`xingchong.py`，源自 dglijin-oss/chinese-metaphysics-skills，MIT，见 `libs/LICENSE.dglijin-oss.txt`）。
 - 通用 flag：
   - 所有时间起盘方法可加 `--time "YYYY-MM-DD HH:MM"` 指定占时（缺省用当前系统时间）。

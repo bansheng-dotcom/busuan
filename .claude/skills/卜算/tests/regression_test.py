@@ -229,7 +229,7 @@ def _quiet(fn):
 
 
 def test_meihua_golden():
-    print("[梅花易数] golden（数字起卦，无 lunardate 依赖）")
+    print("[梅花易数] golden（数字起卦 + 公历时间起卦）")
     import meihua
     # cast_num 纯数学起卦，确定性，不受农历库影响
     r = _quiet(lambda: meihua.cast_num([12, 34]))
@@ -240,14 +240,25 @@ def test_meihua_golden():
     r2 = _quiet(lambda: meihua.cast_num([7]))
     check("单数起卦·本卦", r2["本卦"], "艮为山")
     check("单数起卦·动爻", r2["动爻"], 1)
+    # cast_time 走公历→农历换算（此前 lunardate 缺失会静默退用公历算错卦）：
+    # 公历 2026-10-11 11:33 = 农历九月初二午时 → 泽天夬 动爻1 变泽风大过
+    r3 = _quiet(lambda: meihua.cast_time(datetime.datetime(2026, 10, 11, 11, 33)))
+    check("公历起卦·本卦泽天夬", r3["本卦"], "泽天夬")
+    check("公历起卦·动爻1", r3["动爻"], 1)
+    check("公历起卦·互卦乾为天", r3["互卦"], "乾为天")
+    check("公历起卦·变卦泽风大过", r3["变卦"], "泽风大过")
+    check("公历起卦·体兑用乾", r3["体卦"] + r3["用卦"], "兑乾")
 
 
 def test_xiaoliuren_golden():
-    print("[小六壬] golden（显式月日时，无 lunardate 依赖）")
+    print("[小六壬] golden（显式月日时 + 公历换算）")
     import xiaoliuren
-    # 显式传 y/m/d/h 绕开 lunardate 分支，纯掌诀确定性
+    # 显式传 y/m/d/h，纯掌诀确定性
     check("2026 八月初七巳时·落速喜", _quiet(lambda: xiaoliuren.cast(None, y=2026, m=8, d=27, h=5)), "速喜")
     check("月 1 日 1 子时·落大安", _quiet(lambda: xiaoliuren.cast(None, y=2026, m=1, d=1, h=0)), "大安")
+    # 公历→农历换算（此前 lunardate 缺失会静默退用公历、错算留连）：
+    # 公历 2026-10-11 午时 = 农历九月初二午时 → 赤口
+    check("公历九月初二午时·落赤口", _quiet(lambda: xiaoliuren.cast(dt=datetime.datetime(2026, 10, 11, 11, 33))), "赤口")
 
 
 def test_liuyao_najia():
@@ -271,12 +282,13 @@ def test_liuyao_najia():
 
 
 def test_zhiwei_leapmonth():
-    print("[紫微] 闰月作本月（lunar_python 负月归一）")
+    print("[紫微] 闰月十五日分界（day>15 作下月，对齐 iztro fixLeap=True 默认）")
     import zhiwei
-    # 1968 闰七月廿一 → 作七月；1947 闰二月初一 → 作二月。对照 iztro 47 例闰月均作本月
+    # 十五日分界：闰月 day<=15 作本月、day>15 作下月（iztro fix_leap=True 实测一致）
+    # 1968 闰七月廿一 → 作八月（命宫丁巳）；1947 闰二月初一 → 作二月（命宫乙巳）
     r = _quiet(lambda: zhiwei.cast(1968, 9, 13, 8, 0))
-    check("闰七月·命宫丙辰", r["命宫"], "丙辰")
-    check("闰七月·身宫甲子", r["身宫"], "甲子")
+    check("闰七月·命宫丁巳", r["命宫"], "丁巳")
+    check("闰七月·身宫乙丑", r["身宫"], "乙丑")
     check("闰七月·五行局土5", r["五行局"], "土5局")
     r2 = _quiet(lambda: zhiwei.cast(1947, 3, 23, 20, 0))
     check("闰二月·命宫乙巳", r2["命宫"], "乙巳")

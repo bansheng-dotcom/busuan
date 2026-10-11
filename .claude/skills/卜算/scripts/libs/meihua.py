@@ -22,10 +22,11 @@ def _month_zhi(dt=None):
     """dt → 月支（正月=寅月，农历月近似）。缺省用当前时间。"""
     now = dt or datetime.datetime.now()
     try:
-        from lunardate import LunarDate
-        m = LunarDate.from_solar_date(now.year, now.month, now.day).month
+        from lunar_python import Solar
+        m = abs(Solar.fromYmd(now.year, now.month, now.day).getLunar().getMonth())
     except Exception:
         m = now.month
+        print("[梅花易数] 警告：农历换算失败，退用公历月，卦气旺衰可能不准")
     return DIZHI[(m + 1) % 12]
 
 
@@ -58,11 +59,12 @@ def _print_enhance(r, month_zhi=""):
 def cast_time(dt=None):
     now = dt or datetime.datetime.now()
     try:
-        from lunardate import LunarDate
-        l = LunarDate.from_solar_date(now.year, now.month, now.day)
-        m, d = l.month, l.day
+        from lunar_python import Solar
+        l = Solar.fromYmd(now.year, now.month, now.day).getLunar()
+        m, d = abs(l.getMonth()), l.getDay()
     except Exception:
         m, d = now.month, now.day
+        print("[梅花易数] 警告：农历换算失败，退用公历月日，结果可能不准")
     shi = (now.hour + 1) // 2 % 12
     n_year = (now.year - 4) % 12 + 1       # 年支数(子1...亥12)
     n_shi = shi + 1

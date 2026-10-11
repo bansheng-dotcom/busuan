@@ -10,11 +10,12 @@ def cast(dt=None, y=None, m=None, d=None, h=None):
     now = dt or datetime.datetime.now()
     if y is None or m is None or d is None:
         try:
-            from lunardate import LunarDate
-            l = LunarDate.from_solar_date(now.year, now.month, now.day)
-            y, m, d = l.year, l.month, l.day
+            from lunar_python import Solar
+            l = Solar.fromYmd(now.year, now.month, now.day).getLunar()
+            y, m, d = l.getYear(), abs(l.getMonth()), l.getDay()
         except Exception:
             y, m, d = now.year, now.month, now.day
+            print("[小六壬] 警告：农历换算失败，退用公历月日，结果可能不准")
     if h is None:
         h = (now.hour + 1) // 2 % 12    # 时辰 0子...11亥
     pos = 0
