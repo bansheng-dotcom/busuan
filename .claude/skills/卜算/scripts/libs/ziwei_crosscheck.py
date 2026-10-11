@@ -27,8 +27,7 @@ except ImportError:
     _HAS_IZTRO = False
 
 from lunar_python import Solar
-import zhiwei
-
+from pan import zhiwei
 CORE_FU = {"禄存", "擎羊", "陀罗", "天马", "天魁", "天钺", "左辅", "右弼",
            "文昌", "文曲", "火星", "铃星", "地空", "地劫"}
 _JU_NUM = {"二": 2, "三": 3, "四": 4, "五": 5, "六": 6}

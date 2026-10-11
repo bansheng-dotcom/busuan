@@ -3,7 +3,7 @@
 import datetime
 import shensha
 import xingchong
-from qimen_angan import angan_from_sj
+from judge.qimen_angan import angan_from_sj
 
 _CSS = """
 * { box-sizing: border-box; margin: 0; padding: 0; }

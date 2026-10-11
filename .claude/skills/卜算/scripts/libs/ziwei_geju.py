@@ -11,8 +11,7 @@
 宫位索引约定（与 zhiwei.py 一致）：寅宫下标 0，顺时针 +1（寅0 卯1 辰2 巳3 午4
 未5 申6 酉7 戌8 亥9 子10 丑11）。地支→宫位：idx = (ZHI.index(zhi) - 2) % 12。
 """
-import zhiwei
-
+from pan import zhiwei
 ZHI = zhiwei.ZHI
 SRC = "《紫微斗数全书》"
 

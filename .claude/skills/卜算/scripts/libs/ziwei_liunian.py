@@ -16,8 +16,7 @@
 """
 import datetime
 from lunar_python import Solar
-import zhiwei
-
+from pan import zhiwei
 SRC = "《紫微斗数全书》"
 
 SHA_STARS = ["擎羊", "陀罗", "火星", "铃星", "地空", "地劫"]

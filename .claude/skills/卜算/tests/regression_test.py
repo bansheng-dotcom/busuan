@@ -46,7 +46,7 @@ def test_bazi():
 
 def test_zhiwei():
     print("[紫微斗数] 命宫身宫五行局")
-    import zhiwei
+    from pan import zhiwei
     r = zhiwei.cast(1990, 5, 15, 8, 1)
     check("命宫", r["命宫"], "己丑")
     check("身宫", r["身宫"], "乙酉")
@@ -55,7 +55,7 @@ def test_zhiwei():
 
 def test_zhiwei_palaces():
     print("[紫微] 十二宫逆时针方向（命宫丑起）")
-    import zhiwei
+    from pan import zhiwei
     r = zhiwei.cast(1990, 5, 15, 8, 1)
     by_zhi = {p["支"]: p["宫"] for p in r["十二宫"]}
     check("命宫在丑", by_zhi["丑"], "命宫")
@@ -74,7 +74,7 @@ def test_zhiwei_palaces():
 
 def test_zhiwei_flystar():
     print("[紫微] 四化飞星（庚午年 1990-5-15）")
-    import zhiwei
+    from pan import zhiwei
     r = zhiwei.cast(1990, 5, 15, 8, 1)
     fly = {f["四化"]: (f["星"], f["宫"]) for f in r["四化飞星"]}
     check("飞星·禄=太阳", fly["禄"][0], "太阳")
@@ -131,7 +131,7 @@ def test_xingchong():
 
 def test_qimen_keying():
     print("[奇门] 十干克应 81 格局")
-    import qimen_keying
+    from judge import qimen_keying
     n, missing, extra = qimen_keying.completeness()
     check("克应总数 81", n, 81)
     check("无遗漏", missing, [])
@@ -148,23 +148,23 @@ def test_qimen_keying():
 
 def test_hehun():
     print("[合婚] 评分确定性")
-    import hehun
+    from pan import hehun
     z1 = frozenset(("午", "申"))
-    from hehun import _shengxiao_rel, _wx_rel
+    from pan.hehun import _shengxiao_rel, _wx_rel
     check("生肖午申", _shengxiao_rel("午", "申"), ("平", 0))
     check("五行金(日)见土", _wx_rel("金", "土"), ("土生金(生我)", 2))
 
 
 def test_liunian():
     print("[流年] 干支周期")
-    from bazi import _ganzhi_year
+    from pan.bazi import _ganzhi_year
     check("2026 干支", _ganzhi_year(2026), "丙午")
     check("1984 干支", _ganzhi_year(1984), "甲子")
 
 
 def test_liuyue():
     print("[八字] 流月聚合")
-    import bazi
+    from pan import bazi
     buf = io.StringIO()
     with contextlib.redirect_stdout(buf):
         b = bazi.liuyue(2000, 1, 1, 1, 2026)
@@ -176,7 +176,7 @@ def test_liuyue():
 
 def test_rules():
     print("[规则引擎] 断卦规则")
-    import rules
+    from judge import rules
     check("小六壬·赤口", rules.xiaoliuren("赤口")["judgment"], "凶")
     check("梅花·用克体(金克木)", rules.meihua("木", "金")["judgment"], "凶")
     check("梅花·用生体(水生木)", rules.meihua("木", "水")["judgment"], "吉")
@@ -199,7 +199,7 @@ def test_rules():
 
 def test_precheck():
     print("[gate] 排盘预检")
-    import precheck
+    from gate import precheck
     ok, msg = precheck.check("八字", {"四柱", "十神", "五行", "纳音", "大运"})
     check("八字·齐全", ok, True)
     ok, msg = precheck.check("八字", {"四柱", "十神"})
@@ -210,7 +210,7 @@ def test_precheck():
 
 def test_tiaohou():
     print("[八字] 调候/旺衰/格局（借自 yueyuan-bazi）")
-    import tiaohou
+    from judge import tiaohou
     check("调候·甲生寅月", tiaohou.tiao_hou_yongshen("甲", "寅"), ["丙", "癸"])
     check("调候表 120 条", sum(len(v) for v in tiaohou.TIAO_HOU.values()), 120)
     w = tiaohou.analyze_wangshuai(2000, 1, 1, 8, 1)
@@ -230,7 +230,7 @@ def _quiet(fn):
 
 def test_meihua_golden():
     print("[梅花易数] golden（数字起卦 + 公历时间起卦）")
-    import meihua
+    from pan import meihua
     # cast_num 纯数学起卦，确定性，不受农历库影响
     r = _quiet(lambda: meihua.cast_num([12, 34]))
     check("数字起卦·本卦", r["本卦"], "雷泽归妹")
@@ -252,7 +252,7 @@ def test_meihua_golden():
 
 def test_xiaoliuren_golden():
     print("[小六壬] golden（显式月日时 + 公历换算）")
-    import xiaoliuren
+    from pan import xiaoliuren
     # 显式传 y/m/d/h，纯掌诀确定性
     check("2026 八月初七巳时·落速喜", _quiet(lambda: xiaoliuren.cast(None, y=2026, m=8, d=27, h=5)), "速喜")
     check("月 1 日 1 子时·落大安", _quiet(lambda: xiaoliuren.cast(None, y=2026, m=1, d=1, h=0)), "大安")
@@ -263,7 +263,7 @@ def test_xiaoliuren_golden():
 
 def test_liuyao_najia():
     print("[六爻纳甲] golden（装卦确定性，绕开摇卦随机）")
-    import najia
+    from pan import najia
     z = najia.zhuang("风雷益", "水风井", [1, 2, 3, 6], "甲寅", "丁酉")
     check("宫·巽宫木", z["宫"], "巽宫(木)")
     check("世爻·3", z["世爻"], 3)
@@ -281,15 +281,29 @@ def test_liuyao_najia():
     check("上爻·无化", z["六爻"][5]["化"], "")
 
 
+def test_liuyao_seed():
+    print("[六爻] STO 留痕（seed 可重放，借鉴 mingyu）")
+    from pan import liuyao
+    dt = datetime.datetime(2026, 10, 7, 10, 0)
+    a = _quiet(lambda: liuyao.cast(dt, "求财", seed=42))
+    b = _quiet(lambda: liuyao.cast(dt, "求财", seed=42))
+    check("同seed同卦", (a[0], a[1]) == (b[0], b[1]), True)
+    check("返回4元组", len(a), 4)
+    check("动爻合法", all(1 <= d <= 6 for d in a[2]), True)
+
+
 def test_zhiwei_leapmonth():
-    print("[紫微] 闰月十五日分界（day>15 作下月，对齐 iztro fixLeap=True 默认）")
-    import zhiwei
-    # 十五日分界：闰月 day<=15 作本月、day>15 作下月（iztro fix_leap=True 实测一致）
-    # 1968 闰七月廿一 → 作八月（命宫丁巳）；1947 闰二月初一 → 作二月（命宫乙巳）
+    print("[紫微] 闰月流派分歧（fix_leap 两口径：十五日分界 vs 作本月，UND）")
+    from pan import zhiwei
+    # 1968 闰七月廿一：fix_leap=True（默认，iztro fixLeap=true）→ 作八月（丁巳）；
+    #                    fix_leap=False（iztro fixLeap=false）→ 作七月（丙辰）
     r = _quiet(lambda: zhiwei.cast(1968, 9, 13, 8, 0))
-    check("闰七月·命宫丁巳", r["命宫"], "丁巳")
-    check("闰七月·身宫乙丑", r["身宫"], "乙丑")
+    check("闰七月·True命宫丁巳", r["命宫"], "丁巳")
+    check("闰七月·True身宫乙丑", r["身宫"], "乙丑")
     check("闰七月·五行局土5", r["五行局"], "土5局")
+    r0 = _quiet(lambda: zhiwei.cast(1968, 9, 13, 8, 0, fix_leap=False))
+    check("闰七月·False命宫丙辰", r0["命宫"], "丙辰")
+    check("闰七月·False身宫甲子", r0["身宫"], "甲子")
     r2 = _quiet(lambda: zhiwei.cast(1947, 3, 23, 20, 0))
     check("闰二月·命宫乙巳", r2["命宫"], "乙巳")
     check("闰二月·身宫癸丑", r2["身宫"], "癸丑")
@@ -298,7 +312,7 @@ def test_zhiwei_leapmonth():
 
 def test_liuren_golden():
     print("[大六壬] golden（2026-10-07 10:00）")
-    import liuren
+    from pan import liuren
     r = _quiet(lambda: liuren.cast(datetime.datetime(2026, 10, 7, 10, 0)))
     check("格局·返吟", "返吟" in r.get("格局", []), True)
     check("格局·絕嗣", "絕嗣" in r.get("格局", []), True)
@@ -307,9 +321,9 @@ def test_liuren_golden():
 
 def test_liuren_struct():
     print("[大六壬] 毕法赋/天将/神煞结构化")
-    import liuren_bifa
-    import liuren_shensha
-    import rules
+    from judge import liuren_bifa
+    from judge import liuren_shensha
+    from judge import rules
     n, dup, empty = liuren_bifa.completeness()
     check("毕法赋条目 94", n, 94)
     check("毕法赋无重复", dup, [])
@@ -340,8 +354,8 @@ def test_liuren_regress():
 
 def test_jinkoujue_golden():
     print("[金口诀] golden（2026-04-22 12:00 丙寅日午时 申地）")
-    import jinkoujue
-    import rules
+    from pan import jinkoujue
+    from judge import rules
     r = _quiet(lambda: jinkoujue.cast(datetime.datetime(2026, 4, 22, 12, 0), "申"))
     check("月将·从魁酉", r["月将"], "从魁（酉）")
     check("四位·人元丙", r["四位"]["人元"]["符号"], "丙")
@@ -386,17 +400,20 @@ def test_liuren_ref():
 
 def test_qimen_golden():
     print("[奇门遁甲] golden（2026-10-07 10:00）")
-    import qimen
+    from pan import qimen
     q = _quiet(lambda: qimen.cast(datetime.datetime(2026, 10, 7, 10, 0)))
     sj = q.get("時家奇門", {})
     check("排盘·置闰", sj.get("排盤方式"), "置閏")
     check("排局·阴遁九局", sj.get("排局"), "陰遁九局中元")
     check("八门·坎宫生门", sj.get("門", {}).get("坎"), "生")
+    # 定局法流派分歧（UND）：拆补 vs 置闰
+    q2 = _quiet(lambda: qimen.cast(datetime.datetime(2026, 10, 7, 10, 0), paifa=1))
+    check("定局·拆补", q2.get("時家奇門", {}).get("排盤方式"), "拆補")
 
 
 def test_taiyi_golden():
     print("[太乙神数] golden（2026-10-07 10:00，年计/统宗）")
-    import taiyi
+    from pan import taiyi
     t = _quiet(lambda: taiyi.cast(datetime.datetime(2026, 10, 7, 10, 0)))
     check("太乙落宫", t.get("太乙落宮"), 3)
     check("主算", t.get("主算", [None])[0], 16)
@@ -419,7 +436,8 @@ def test_taiyi_golden():
 
 def test_taiyi_rules():
     print("[太乙神数] 规则函数 R-TY-01~04")
-    import taiyi, rules
+    from pan import taiyi
+    from judge import rules
     t = _quiet(lambda: taiyi.cast(datetime.datetime(2026, 10, 7, 10, 0)))
     check("主算吉", rules.taiyi_suan(t["主算"])["judgment"], "吉")
     check("客算凶", rules.taiyi_suan(t["客算"])["judgment"], "凶")
@@ -432,7 +450,7 @@ def test_taiyi_rules():
 
 def test_taiyi_modes():
     print("[太乙神数] 多计式/多积年法 + 引擎边界守卫")
-    import taiyi
+    from pan import taiyi
     dt = datetime.datetime(2026, 10, 7, 10, 0)
     m = _quiet(lambda: taiyi.cast(dt, ji_style=1))
     check("月计", m.get("太乙計"), "月計")
@@ -445,7 +463,8 @@ def test_taiyi_modes():
 
 def test_taiyi_regress():
     print("[太乙神数] 回归不变量（结构校验 + 积年独立重算）")
-    import taiyi, taiyi_regress
+    from pan import taiyi
+    import taiyi_regress
     dt = datetime.datetime(2026, 10, 7, 10, 0)
     t = _quiet(lambda: taiyi.cast(dt))
     # 结构不变量：合法盘应无错
@@ -476,7 +495,8 @@ def test_taiyi_jieqi():
 
 def test_taiyi_html():
     print("[太乙神数] HTML 盘图")
-    import taiyi, htmlpan, tempfile, os
+    from pan import taiyi
+    import htmlpan, tempfile, os
     t = _quiet(lambda: taiyi.cast(datetime.datetime(2026, 10, 7, 10, 0)))
     d = tempfile.mkdtemp()
     p = os.path.join(d, "t.html")
@@ -490,7 +510,7 @@ def test_taiyi_html():
 
 def test_qizheng_golden():
     print("[七政四余] golden（2026-10-08 21:10，ephem 精算 + Meeus 四余）")
-    import qizheng
+    from pan import qizheng
     r = qizheng.qizheng_pan("2026-10-08 21:10")
     check("命宫·地支申", r.get("命宫", {}).get("地支"), "申")
     check("七政·七曜齐全", len(r.get("七政", {})), 7)
@@ -520,7 +540,7 @@ def test_qizheng_golden():
 
 def test_fengshui_golden():
     print("[风水] golden（1990 坐北朝南 男）")
-    import fengshui
+    from pan import fengshui
     r = fengshui.fengshui_pan(1990, "坐北朝南", "男")
     check("命卦·坎", r.get("命卦"), "坎")
     check("东四命", r.get("东西命"), "东四命")
@@ -529,7 +549,7 @@ def test_fengshui_golden():
 
 def test_zeri_golden():
     print("[择日] golden（2026-10-07 婚嫁）")
-    import zeri
+    from pan import zeri
     r = zeri.get_day_summary(2026, 10, 7, "婚嫁", 10)
     check("建除·平", r.get("建除"), "平")
     check("黄道·天刑", r.get("黄道"), "天刑")
@@ -539,8 +559,8 @@ def test_zeri_golden():
 
 def test_almanac():
     print("[老黄历] 补全字段（2026-10-07）")
-    import almanac
-    import rules
+    from lifa import almanac
+    from judge import rules
     a = almanac.almanac(2026, 10, 7)
     check("可用", a.get("可用"), True)
     check("农历非空", bool(a.get("农历")), True)
@@ -564,7 +584,7 @@ def test_almanac():
 
 def test_review():
     print("[review] 断卦后质检（三层分离/三级标注/免责/应期/趋避/冲突降级）")
-    import review
+    from gate import review
     good = ("盘面事实：本卦泽地萃，动爻6。规则推演：体生用泄气。[规则推演] "
             "现实建议：宜小步试错。[主观推断] 应期难定。趋吉：宜缓进。避凶：勿大额投入。"
             "术语解读：体生用是泄气之象。问事解读：能成但费劲。今日可行的一小步：先小成本试三天。"
@@ -603,9 +623,93 @@ def test_review():
     check("空文本0分", r4["score"], 0)
 
 
+def test_shefu_portrait():
+    print("[射覆] 特征画像（地支节点 + 八卦万物类象 + 维度动态聚合）")
+    from judge import shefu_portrait as sp
+    kb = sp._load()
+    check("类象库地支12支", len(kb.get("地支", {})), 12)
+    check("类象库天干10干", len(kb.get("天干", {})), 10)
+    check("地支午·五行火", kb["地支"]["午"]["dimensions"]["五行"][0]["value"], "火")
+    check("天干丙·五行火", kb["天干"]["丙"]["dimensions"]["五行"][0]["value"], "火")
+    check("地支午·形状扁平", kb["地支"]["午"]["dimensions"]["形状"][0]["value"], "扁平/头孔窍")
+    check("八卦离·动物雉", kb["八卦"]["离"]["dimensions"]["动物"][0]["value"], "雉/龟/蟹/蚌")
+    check("八卦离·方位南", kb["八卦"]["离"]["dimensions"]["方位"][0]["value"], "南")
+    p = sp.portrait([("午", 1.0)])
+    check("地支午·五行", p["dimensions"]["五行"][0][0], "火")
+    check("地支午·方位", p["dimensions"]["方位"][0][0], "南")
+    check("地支午·物类", p["dimensions"]["物类"][0][0], "马")
+    check("地支午·数目", p["dimensions"]["数目"][0][0], "9")
+    check("地支午·形状", p["dimensions"]["形状"][0][0], "扁平/头孔窍")
+    p2 = sp.portrait([("午", 1.0), ("离", 0.7), ("朱雀", 0.6)])
+    check("混合·命中3信号", p2["used"], 3)
+    check("混合·含地支物类维度", "物类" in p2["dimensions"], True)
+    check("混合·含八卦动物维度", "动物" in p2["dimensions"], True)
+    # 金口诀四位多象合成
+    four = {"贵神": {"名": "青龙"}, "将神": {"名": "天罡（辰）"}, "地分": {"符号": "午"}}
+    pj = sp.portrait_jinkoujue(four)
+    check("金口诀四位·命中3信号", pj["used"], 3)
+    check("金口诀四位·含青龙", "青龙" in pj["signals"], True)
+    check("金口诀四位·含辰", "辰" in pj["signals"], True)
+    check("金口诀四位·含午", "午" in pj["signals"], True)
+    check("金口诀四位·含地支物类", "物类" in pj["dimensions"], True)
+    # 人元干（天干）接入金口诀四位
+    four2 = {"贵神": {"名": "青龙"}, "将神": {"名": "天罡（辰）"}, "地分": {"符号": "午"}, "人元": {"符号": "丙"}}
+    pj2 = sp.portrait_jinkoujue(four2)
+    check("金口诀四位·含人元干丙", "丙" in pj2["signals"], True)
+    check("金口诀四位·命中4信号", pj2["used"], 4)
+    # 大六壬三传多象合成
+    sc = {"初傳": ["子", "虎", "父", "空"], "中傳": ["亥", "常", "父", "癸"], "末傳": ["戌", "玄", "財", "壬"]}
+    pl = sp.portrait_liuren_sanchuan(sc)
+    check("大六壬三传·命中6信号", pl["used"], 6)
+    check("大六壬三传·含白虎", "白虎" in pl["signals"], True)
+    check("大六壬三传·含子", "子" in pl["signals"], True)
+    # 梅花三卦多象合成（本/互/变）
+    r = {"体卦": "兑", "用卦": "乾", "上卦": "兑", "下卦": "乾", "互卦": "乾为天", "变卦": "泽风大过"}
+    pm = sp.portrait_meihua_pan(r)
+    check("梅花三卦·去重后3卦", pm["used"], 3)
+    check("梅花三卦·含巽", "巽" in pm["signals"], True)
+    # 语境→维度选择
+    pc = sp.portrait([("午", 1.0), ("离", 0.7)], context="方位")
+    check("语境方位·仅方位维", list(pc["dimensions"].keys()), ["方位"])
+    # 金口诀来意
+    check("来意·木土口舌狱讼", sp.jinkoujue_laiyi("木", "土")["来意"], "口舌兼狱讼")
+    check("来意·比和平和", sp.jinkoujue_laiyi("火", "火")["来意"], "干将比和，谋事平和")
+    # 五行同气联象（网络化）
+    check("五行查询·午火", sp._wuxing_of("午"), "火")
+    check("五行查询·青龙木", sp._wuxing_of("青龙"), "木")
+    rel = sp.related_wuxing(["午"])
+    check("同气联象·午属火", "火" in rel, True)
+    check("同气联象·火含离", "离" in rel.get("火", []), True)
+    check("同气联象·火含朱雀", "朱雀" in rel.get("火", []), True)
+    check("同气联象·火含丙", "丙" in rel.get("火", []), True)
+
+
+def test_yongshen():
+    print("[规则] 统一用神接口（术法+问事→用神，带出处）")
+    from judge import rules
+    r = rules.yongshen("六爻", "求财")
+    check("六爻求财·妻财", r["用神"], "妻财")
+    check("六爻求财·出处火珠林", "火珠林" in r["出处"], True)
+    check("六爻求财·limitation", "不得由用神名直接定吉凶" in r["limitation"], True)
+    check("六壬盗贼·玄武", rules.yongshen("大六壬", "盗贼")["用神"], "玄武")
+    check("奇门婚姻·含庚", "庚" in rules.yongshen("奇门", "婚姻")["用神"], True)
+    check("未收录问事·None", rules.yongshen("六爻", "炒股"), None)
+    check("未收录术法·None", rules.yongshen("塔罗", "求财"), None)
+    # 确定性标注
+    det = rules.determinism("八字")
+    check("八字·四柱Det", det[0]["status"], "Det")
+    check("八字·旺衰Und", any(d["aspect"] == "旺衰量化" and d["status"] == "Und" for d in det), True)
+    check("六爻·摇卦Sto", any(d["aspect"] == "摇卦" and d["status"] == "Sto" for d in rules.determinism("六爻")), True)
+    check("无盘术法·空", rules.determinism("相术"), [])
+    # 盘面事实 limitation
+    check("梅花·limitation含不得", "不得" in rules.limitation("梅花"), True)
+    check("八字·limitation含不得推断", "不得" in rules.limitation("八字"), True)
+    check("未收录·默认limitation", "释义层" in rules.limitation("塔罗"), True)
+
+
 def test_trend():
     print("[八字] 流年趋势评分（扶抑·得令简化模型）")
-    import trend
+    from judge import trend
     t = trend.liunian_trend(2000, 1, 1, 1, 2026, 6)
     check("趋势·日主戊", t["day_gan"], "戊")
     check("趋势·旺弱为弱", t["wang"], "弱")  # 戊土生子月失令
@@ -616,7 +720,7 @@ def test_trend():
 def test_liuyao_html():
     print("[六爻] 卦图 + 装卦辅助")
     import htmlpan
-    import najia
+    from pan import najia
     check("风雷益六爻", htmlpan._hexagram_lines("风雷益"), [1, 0, 0, 0, 1, 1])
     check("水风井六爻", htmlpan._hexagram_lines("水风井"), [0, 1, 1, 0, 1, 0])
     r = najia.zhuang("风雷益", "水风井", [1, 2, 3, 6], "甲寅", "丁酉")
@@ -635,7 +739,7 @@ def test_liuyao_html():
 def test_trend_html():
     print("[八字] 流年趋势曲线")
     import htmlpan
-    import trend
+    from judge import trend
     import tempfile
     import os
     t = trend.liunian_trend(2000, 1, 1, 1, 2026, 6)
@@ -701,6 +805,7 @@ def main():
     test_meihua_golden()
     test_xiaoliuren_golden()
     test_liuyao_najia()
+    test_liuyao_seed()
     test_zhiwei_leapmonth()
     test_liuren_golden()
     test_liuren_struct()
@@ -719,6 +824,8 @@ def main():
     test_zeri_golden()
     test_almanac()
     test_review()
+    test_shefu_portrait()
+    test_yongshen()
     test_trend()
     test_liuyao_html()
     test_trend_html()

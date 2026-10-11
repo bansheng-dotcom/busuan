@@ -16,8 +16,7 @@
   print(format_validate(r))
 """
 from lunar_python import Solar
-import zhiwei
-
+from pan import zhiwei
 SRC = "《紫微斗数全书》"
 
 # 事件类型 -> (目标宫, 吉凶)

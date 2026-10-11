@@ -47,38 +47,36 @@ for _stream in (sys.stdout, sys.stderr):
 LIB = os.path.join(os.path.dirname(os.path.abspath(__file__)), "libs")
 sys.path.insert(0, LIB)
 
-import meihua
-import xiaoliuren
-import liuyao
+from pan import meihua
+from pan import xiaoliuren
+from pan import liuyao
 import liuyao_knowledge
-import bazi
-import liuren
+from pan import bazi
+from pan import liuren
 import liuren_regress
-import jinkoujue
-import qimen
-import taiyi
-import zhiwei
+from pan import jinkoujue
+from pan import qimen
+from pan import taiyi
+from pan import zhiwei
 import ziwei_geju
 import ziwei_liunian
 import ziwei_yanqian
-import qizheng
-import liunian
-import fengshui
-import zeri
-import hehun
+from pan import qizheng
+from pan import liunian
+from pan import fengshui
+from pan import zeri
+from pan import hehun
 import htmlpan
-import almanac
+from lifa import almanac
 import ziwei_horoscope
-import trend
-import bazi_liunian
-import bazi_json
+from judge import trend
+from pan import bazi_liunian
+from pan import bazi_json
 import mingli_eval
-import shefu_portrait
-import rules
-import miaogong_shefu
-import shiwu_xunren
-
-
+from judge import shefu_portrait
+from judge import rules
+from judge import miaogong_shefu
+from judge import shiwu_xunren
 def _parse_time(args):
     """提取 --time/-t 占时、--lon 经度、--dst 夏令时回拨、--html 可视化、--ref 校验、--zishi 子时换日、--json 结构化双轨、--range 时间不确定枚举"""
     dt, lon, dst, html, ref, zishi, json_out, time_range = None, None, False, False, False, "same", False, None
@@ -131,6 +129,9 @@ def main():
         r = meihua.cast_time(dt)
         print()
         print(meihua.summary(r))
+        print()
+        print("【取象画像】（本卦/互卦/变卦 三卦合成）")
+        print(shefu_portrait._fmt(shefu_portrait.portrait_meihua_pan(r)))
         if json_out:
             print()
             print("【盘面事实层 JSON】schema=meihua-panfact-v1（机读，与上方散文并存）")
@@ -230,6 +231,9 @@ def main():
         r = liuren.cast(dt)
         print()
         print(liuren.summary(r))
+        print()
+        print("【取象画像】（三传地支+天将 合成）")
+        print(shefu_portrait._fmt(shefu_portrait.portrait_liuren_sanchuan(r.get("三傳", {}))))
         if json_out:
             print()
             print("【盘面事实层 JSON】schema=liuren-panfact-v1（机读，与上方散文并存）")
@@ -257,6 +261,11 @@ def main():
         print(f"  地支类象：{rules.jinkoujue_shefu_zhilei(_df_zhi)['result'] or '—'}")
         print(f"  贵神类象：{rules.jinkoujue_shefu_guishen(_gs_name)['result'] or '—'}")
         print(f"  颜色/数目/所在：{rules.jinkoujue_shefu_yanse_shumu(_ry_gan, _df_zhi, _four['将神']['五行'])['result']}")
+        _ly = shefu_portrait.jinkoujue_laiyi(_four["人元"]["五行"], _four["将神"]["五行"])
+        print(f"  占来意：{_ly['来意']} [出处：{_ly['出处']}]")
+        print()
+        print("【多象合成画像】（四位三象源聚合：贵神+将神+地分）")
+        print(shefu_portrait._fmt(shefu_portrait.portrait_jinkoujue(_four)))
         if json_out:
             print()
             print("【盘面事实层 JSON】schema=jinkoujue-panfact-v1（机读，与上方散文并存）")
