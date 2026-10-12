@@ -208,7 +208,7 @@ description: 中国传统术数占卜。当用户要起卦、占卜、算卦、�
 **核心：盘面事实永远为真（Det），不确定只活在流派分歧（Und）和释义（Int）。** 不再「三层分离 + 四段式」混排。
 
 - **盘面事实**：`cast.py` 脚本输出，带「确定性 Det/Sto/Und」标注（`rules.determinism(术法)`）+ `limitation`（「不得由盘面推断吉凶/日期/人物」，`rules.limitation(术法)`）。可复现、可核验。
-- **断语**：自然流畅解读，每条判断带 claim（结论）+ evidence（DET 事实或原文行号）+ confidence（🟢🟡🔴）。不再每句贴 `[原文]`/`[规则推演]`/`[主观推断]` 标签，原文在关键判断处引用。
+- **断语**：自然流畅解读，每条判断带 claim（结论）+ evidence（DET 事实或原文行号）+ confidence（🟢🟡🔴）。不再每句贴 `[原文]`/`[HEURISTIC]`/`[主观推断]` 标签，原文在关键判断处引用。
 
 **输出契约以各术 `docs/` 文档「输出格式」节为准，输出时照 docs 全量执行，不删减、不降格。以下逐术列出完整段数与独有维度，不得用简略版替代**：
 
@@ -323,7 +323,7 @@ description: 中国传统术数占卜。当用户要起卦、占卜、算卦、�
 
 ## 八、规则函数库（断卦优先调用，勿心算）
 
-把「断：体用生克」这类开放提示落成可判定规则；能套规则就先套规则，套不上再推演并标 `[规则推演]`。
+把「断：体用生克」这类开放提示落成可判定规则；能套规则就先套规则，套不上再推演并标 `[HEURISTIC]`。
 
 - `libs/rules.py`：规则函数——`xiaoliuren(落宫)`、`meihua(体五行,用五行)`、`meihua_probability(体五行,用五行)`、`meihua_18lei(类名,体五行,用五行)`、`meihua_wangshuai(五行,月支)`、`meihua_bianyao_shefu(变爻五行)`（变卦式八则）、`bazi_deling(日干,月支)`、`jinkoujue_wudong(...)`、`jinkoujue_shefu_zhilei/guishen/yanse_shumu(...)`（金口诀射覆门）、`taiyi_suan/zhuke/geju/luogong_wangshuai(...)`、`zeri_jianchu(建除)`、`zeri_huangdao(黄道)`、`zeri_zhishen(值神)`、`zeri_pengzu(干忌,支忌)`、`zeri_fangwei(吉神方位)`、`qimen_men/star/shen`（八门/九星/八神吉凶）、`qimen_menpo(门,宫)`（门迫）、`qimen_geju(天盘干,地盘干)`（十干克应 81 格局，数据见 `libs/qimen_keying.py`）、`qimen_wubuyushi(日干,时干)`（五不遇时）、`liuren_tianjiang(天将)`、`liuren_shensha_rule(神煞,地支)`、`liuren_bifa_rule(赋文句/关键词)`、`ziwei_geju_resolve(...)`，每条返回 `{judgment, confidence, evidence, basis}`，`evidence` 即证据编号（R-XX-NN）。大六壬/金口诀射覆另有专用模块 `libs/miaogong_shefu.py`（苗公射覆鬼撮脚结构化：`shifu_tianjiang_linzhi` R-LR-05、`shifu_keti_wuxing` R-LR-06、`shifu_xingzhuang` R-LR-07、`shifu_yanse` R-LR-08、`shifu_xinjiu/sihuo` R-LR-09~10、`shifu_shuangwu/yuanjin/zhizhi_wuxiang/wuxing_wulei/kechi` R-LR-11，返回 `{result, confidence, evidence, basis}`，射覆出物类候选不判吉凶）。失物·寻人另有 `libs/shiwu_xunren.py`（小六壬/六爻/金口诀失物结构化：`xiaoliuren_shiwu` R-SW-01、`liuyao_shiwu_fangwei` R-SW-02、`liuyao_shiwu_cangchu` R-SW-03、`liuyao_shiwu_duan` R-SW-04、`jinkoujue_shiwu/xunren` R-SW-05；CLI `cast.py shiwu <术> <信号>`，方位/远近/能否/被盗分维输出不铁口直断）。
 - `libs/rules.cross_validate([(维度,吉凶), ...])`：多维交叉验证，返回 `信号冲突` 时须明说并降级。
