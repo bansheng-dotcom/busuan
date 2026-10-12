@@ -73,8 +73,9 @@ def _check_qubi(text):
 
 
 def _check_conflict(text):
-    """R-RV-06 信号冲突降级：出现「冲突」须明说降级/仅供参考/不确定。"""
-    if "冲突" not in text:
+    """R-RV-06 信号冲突降级：出现「信号冲突」（多法/多维结论矛盾）须明说降级/仅供参考/不确定。
+    只匹配专门术语「信号冲突」，不匹配「六冲主冲突」普通词义，也不匹配「无信号冲突」否定句。"""
+    if "信号冲突" not in text or "无信号冲突" in text or "未见信号冲突" in text:
         return True, "无信号冲突（不适用）"
     if any(k in text for k in ("降级", "仅供参考", "不确定")):
         return True, "信号冲突已降级"
