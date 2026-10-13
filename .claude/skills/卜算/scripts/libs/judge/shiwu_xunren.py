@@ -173,9 +173,7 @@ def _fmt(p):
     """失物寻人画像输出（降分辨率，分维 + 置信度，不铁口直断）。"""
     lines = ["🔍 失物寻人画像（降分辨率，不铁口直断）"]
     for k, v in p.items():
-        if isinstance(v, dict) and v and v.get("result"):
-            lines.append(f"  {k}  [{v['confidence']}] {v['result']}")
-        elif v and isinstance(v, dict) and v.get("result"):
+        if v and isinstance(v, dict) and v.get("result"):
             lines.append(f"  {k}  [{v['confidence']}] {v['result']}")
     lines.append("  诚实边界：方位为八卦/落宫粗指，非精确坐标；具体何日找回、是否必在某处不作铁断。")
     return "\n".join(lines)

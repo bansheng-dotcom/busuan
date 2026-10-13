@@ -33,10 +33,10 @@ def _load():
 
 def _conf_level(c):
     if c >= 0.7:
-        return "🟢"
+        return "高"
     if c >= 0.4:
-        return "🟡"
-    return "🔴"
+        return "中"
+    return "低"
 
 
 _CONTEXT_DIMS = {
@@ -240,11 +240,12 @@ def related_wuxing(names):
 
 
 def update_kb(round_json):
-    """后验回填：round_json = {"命中":[{"类":"天将/八卦","名":"朱雀","维度":"颜色","值":"红"}],
-       "错误":[...]}。命中 confidence+0.1(上限1)、validations+1；错误 confidence-0.1(下限0)。"""
+    """后验回填（递进调整，禁止单例大改）：round_json = {"命中":[...], "遗漏":[...], "错误":[...]}。
+    每条 {"类":"天将/八卦/地支/天干","名":"朱雀","维度":"颜色","值":"红"}。
+    命中 confidence+0.05、遗漏 +0.02、错误 −0.10（上下限 0.95/0.10），validations+1。
+    借鉴 shefu v0.3.0：小步递进、区分三类，避免「对一个答案把某信号拉满」的过拟合。"""
     kb = _load()
-    for tag in ("命中", "错误"):
-        delta = 0.1 if tag == "命中" else -0.1
+    for tag, delta in (("命中", 0.05), ("遗漏", 0.02), ("错误", -0.10)):
         for item in round_json.get(tag, []):
             kind = item.get("类", "天将")
             name = item.get("名")
@@ -254,7 +255,7 @@ def update_kb(round_json):
                 continue
             for v in kb[kind][name].get("dimensions", {}).get(dim, []):
                 if v["value"] == val:
-                    v["confidence"] = round(max(0.0, min(1.0, v["confidence"] + delta)), 2)
+                    v["confidence"] = round(max(0.10, min(0.95, v["confidence"] + delta)), 2)
                     v["validations"] = v.get("validations", 0) + 1
     kb["_meta"]["total_validations"] = kb["_meta"].get("total_validations", 0) + 1
     with open(KB_PATH, "w", encoding="utf-8") as f:
@@ -265,7 +266,7 @@ def update_kb(round_json):
 def _fmt(p):
     lines = [f"🔬 特征画像（命中信号 {p['used']}/{len(p['signals'])}）"]
     for dim, vals in p["dimensions"].items():
-        s = " / ".join(f"{v[1]} {v[0]}" for v in vals)
+        s = " / ".join(f"[{v[1]}] {v[0]}" for v in vals)
         lines.append(f"  {dim}  {s}")
     # 候选参考：取材质+形态+功能+物类 top 值拼成候选类别（降分辨率给候选，不点名）
     cand = []
