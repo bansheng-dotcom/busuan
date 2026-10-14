@@ -16,6 +16,9 @@ import os
 import sys
 from collections import Counter, defaultdict
 
+# 让 libs/ 可导入（judge/pan 等），供 chain_bench 调 bazi_chain
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+
 CASE_DIR = r"D:\卜算\国学czhengli\txt\案例库"
 BAZI_DIR = os.path.join(CASE_DIR, "八字紫微")
 
@@ -125,6 +128,60 @@ def analyze(case_dir=None, cat_filter=None):
     return rows, stat
 
 
+def chain_bench(case_dir=None):
+    """八字推演链（bazi_chain）对 benchmark 全部四柱的确定性标尺。
+
+    解析每个 八字紫微 案例「盘面（八字）/四柱」行的四柱，跑 bazi_chain 的旺衰五档
+    + 用神五法（用喜忌仇闲），输出一览表 + 旺衰/用神分布。
+
+    这是「每次改规则后重跑一遍」的持续标尺：确定性链同输入必同输出，改权重/阈值后
+    重跑，就能看到哪些盘面的旺衰/用神变了——是工程取值变化，不是 LLM 随机。与
+    SKILL.md 记录的旧四指标「弱/中和/强」三档对照，分歧处即旧四指标「系统性压向身弱」
+    偏倚所在。
+    """
+    import re
+    from judge import bazi_chain
+    base = case_dir or BAZI_DIR
+    if not os.path.isdir(base):
+        print(f"[chain_bench] 案例目录不存在：{base}")
+        return []
+    GZ = "甲乙丙丁戊己庚辛壬癸"
+    ZHI = "子丑寅卯辰巳午未申酉戌亥"
+    pat = re.compile(rf"([{GZ}][{ZHI}])\s+([{GZ}][{ZHI}])\s+([{GZ}][{ZHI}])\s+([{GZ}][{ZHI}])")
+    rows = []
+    for f in sorted(os.listdir(base)):
+        if not f.endswith(".md"):
+            continue
+        try:
+            txt = open(os.path.join(base, f), encoding="utf-8").read()
+        except Exception:
+            continue
+        m = None
+        for line in txt.splitlines():
+            if "盘面" in line or "四柱" in line:
+                m = pat.search(line)
+                if m:
+                    break
+        if not m:
+            continue
+        quad = {"year": (m.group(1)[0], m.group(1)[1]), "month": (m.group(2)[0], m.group(2)[1]),
+                "day": (m.group(3)[0], m.group(3)[1]), "hour": (m.group(4)[0], m.group(4)[1])}
+        s = bazi_chain.day_master_strength(quad)
+        y = bazi_chain.select(quad)
+        rows.append({"案例": f, "四柱": " ".join(f"{g}{z}" for g, z in quad.values()),
+                     "旺衰": s.label, "ratio": s.ratio, "用神": y.yong,
+                     "喜": y.xi, "忌": y.ji, "格局": y.evidence[1], "取用": y.method})
+    print(f"[八字推演链·持续标尺] 解析 {len(rows)} 个四柱（确定性链，同输入必同输出）")
+    print(f"  {'四柱':<20}{'旺衰':<6}{'ratio':>7}{'用神':<6}{'喜':<5}{'忌':<5}{'格局'}")
+    for r in rows:
+        print(f"  {r['四柱']:<20}{r['旺衰']:<6}{r['ratio']:>7.3f}{r['用神']:<6}{r['喜']:<5}{r['忌']:<5}{r['格局']}")
+    ws = Counter(r["旺衰"] for r in rows)
+    ys = Counter(r["用神"] for r in rows)
+    print(f"  旺衰分布：{dict(sorted(ws.items()))}")
+    print(f"  用神分布：{dict(sorted(ys.items()))}")
+    return rows
+
+
 if __name__ == "__main__":
     for s in (sys.stdout, sys.stderr):
         try:
@@ -133,8 +190,12 @@ if __name__ == "__main__":
             pass
     _filter = None
     args = sys.argv[1:]
-    if "--cat" in args:
+    if "--chain" in args:
+        chain_bench()
+    elif "--cat" in args:
         i = args.index("--cat")
         if i + 1 < len(args):
             _filter = args[i + 1]
-    analyze(cat_filter=_filter)
+        analyze(cat_filter=_filter)
+    else:
+        analyze()

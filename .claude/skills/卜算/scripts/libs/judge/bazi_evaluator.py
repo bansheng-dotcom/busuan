@@ -92,12 +92,18 @@ def derive_from_pillars(pillars):
     shi = sum(1 for g in (g_y, g_m, g_h) if WX[g] == day_wx)
 
     score = ling * 3 + di + sheng + shi * 2  # 得令×3 为主，其余为辅
-    if score >= 14:
-        wangshuai = "强"
-    elif score >= 8:
-        wangshuai = "中和偏弱"
+    # 五档（本包取值，可调）。刻意保持与 bazi_chain 成分加权模型不同的独立启发式，
+    # 这样两链结论一致才更可信；分界按得令×3 + 得地 + 得生 + 得势×2 的粗粒度分值标定。
+    if score >= 16:
+        wangshuai = "身旺"
+    elif score >= 13:
+        wangshuai = "偏旺"
+    elif score >= 9:
+        wangshuai = "中和"
+    elif score >= 6:
+        wangshuai = "偏弱"
     else:
-        wangshuai = "弱"
+        wangshuai = "身弱"
 
     # 格局：月支藏干透干取格
     mg = None
@@ -109,9 +115,9 @@ def derive_from_pillars(pillars):
         mg = _shishen(g_d, CANG[z_m][0])
     geju = mg + "格"
 
-    # 喜忌：弱/中和偏弱 喜印比；强 喜财官食伤
+    # 喜忌：身弱/偏弱/中和 喜印比（扶）；身旺/偏旺 喜财官食伤（抑）
     fu_yin_bi = [x for x in "木火土金水" if SHENG[x] == day_wx or x == day_wx]
-    if wangshuai in ("弱", "中和偏弱"):
+    if wangshuai in ("身弱", "偏弱", "中和"):
         xi, ji = fu_yin_bi, [x for x in "木火土金水" if x not in fu_yin_bi]
     else:
         ji, xi = fu_yin_bi, [x for x in "木火土金水" if x not in fu_yin_bi]
@@ -143,11 +149,16 @@ def derive_from_solar(y, mo, d, h, mi=0, s=0, sex=1, lon=None):
 def cross_check(main, indep, dims=("旺衰", "格局")):
     """逐维比对主判与独立判，返回 [{维度, 主, 独立, 状态}]。状态: 一致/边界差异/冲突。
 
-    旺衰：强 vs 弱 = 冲突；弱 vs 中和偏弱 = 边界差异；其余 = 一致。
+    旺衰（五档 → 三态）：身旺/偏旺=旺、身弱/偏弱=弱、中和=中和；
+    旺 vs 弱 = 冲突；旺 vs 中和 / 中和 vs 弱 = 边界差异；其余 = 一致。
     """
     def _lv(s):
         s = str(s)
-        return "强" if "强" in s else ("弱" if "弱" in s else s)
+        if any(k in s for k in ("身旺", "偏旺", "强")):
+            return "旺"
+        if any(k in s for k in ("身弱", "偏弱", "弱")):
+            return "弱"
+        return "中和"
 
     out = []
     for d in dims:
@@ -158,7 +169,7 @@ def cross_check(main, indep, dims=("旺衰", "格局")):
             mq, iq = _lv(m), _lv(i)
             if mq == iq:
                 st = "一致"
-            elif {mq, iq} == {"强", "弱"}:
+            elif {mq, iq} == {"旺", "弱"}:
                 st = "冲突"
             else:
                 st = "边界差异"
@@ -166,6 +177,34 @@ def cross_check(main, indep, dims=("旺衰", "格局")):
             st = "一致" if str(m).replace("格", "") == str(i).replace("格", "") else "冲突"
         out.append({"维度": d, "主": str(m), "独立": str(i), "状态": st})
     return out
+
+
+def cross_check_chain(quad):
+    """八字推演链（bazi_chain 五档）vs 独立评估者（旺相休囚死启发式）交叉验证。
+
+    主判 = bazi_chain 的成分加权五档 + 用神五法；
+    独立判 = 本模块旺相休囚死 + 得地得生得势 的独立五档启发式。
+    旺衰按 cross_check 的三态映射比对；用神/喜忌另列（两链取用口径不同，只并列不强行比吉凶）。
+
+    quad = {year:(干,支), month:.., day:.., hour:..}
+    返回 {旺衰比对: [...], 主用神, 主喜忌, 独立旺衰, 独立喜忌, 结论}。
+    """
+    from judge import bazi_chain
+    pillars = [quad[p] for p in ("year", "month", "day", "hour")]
+    indep = derive_from_pillars(pillars)
+    main = bazi_chain.select(quad)
+    cmp_ = cross_check(
+        {"旺衰": main.evidence[0].replace("旺衰·", ""), "格局": main.evidence[1].replace("格·", "")},
+        {"旺衰": indep["旺衰"], "格局": indep["格局"]},
+    )
+    conflict = any(x["状态"] == "冲突" for x in cmp_)
+    return {
+        "旺衰比对": cmp_,
+        "主旺衰": main.evidence[0].replace("旺衰·", ""),
+        "主用神": main.yong, "主喜忌": f"喜{main.xi} 忌{main.ji}",
+        "独立旺衰": indep["旺衰"], "独立喜忌": f"喜{''.join(indep['喜'])} 忌{''.join(indep['忌'])}",
+        "结论": "信号冲突，仅供参考" if conflict else "一致/边界差异",
+    }
 
 
 def main():

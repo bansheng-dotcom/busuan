@@ -77,6 +77,9 @@ from judge import shefu_portrait
 from judge import rules
 from judge import miaogong_shefu
 from judge import shiwu_xunren
+from judge import bazi_chain
+from judge import liuyao_duanyu
+from judge import liuren_zhanshi
 def _parse_time(args):
     """提取 --time/-t 占时、--lon 经度、--dst 夏令时回拨、--html 可视化、--ref 校验、--zishi 子时换日、--json 结构化双轨、--range 时间不确定枚举"""
     dt, lon, dst, html, ref, zishi, json_out, time_range = None, None, False, False, False, "same", False, None
@@ -178,6 +181,15 @@ def main():
         # 一眼摘要卡 + 结构化双轨（借鉴八字/紫微升级）
         print()
         print(liuyao.summary(ben, bian, dong, r, q))
+        # 13 类用神断语编译（tianzhi-core 式：断语→JSON规则→判定条件→命中/跳过）
+        if q != "通用":
+            print()
+            print("【用神断语编译】典籍断语逐条判定（能判的判、判不了的标 skip）")
+            hits, skipped = liuyao_duanyu.find_liuyao(r, q)
+            for h in hits:
+                print(f"  [{h['verdict']}] {h['text']}（{h['src']}）")
+            if not hits:
+                print("  （无命中断语）")
         if json_out:
             print()
             print("【盘面事实层 JSON】schema=liuyao-panfact-v1（机读，与上方散文并存）")
@@ -215,6 +227,11 @@ def main():
                                              args[4] if len(args) > 4 else 0,
                                              args[5] if len(args) > 5 else 0,
                                              gender)
+            # 推演链（tianzhi-core 式）：五行力量量化 → 旺衰五档 → 用神五法
+            # 与上方「四指标加权」互补：本链是权威推演链，四指标作交叉印证
+            if args:
+                print()
+                bazi_chain.print_chain_report(bazi_chain.quad_from_eightchar(b))
             # 结构化双轨：盘面事实层 JSON（--json，与散文并存，机读可校验）
             if json_out and len(args) >= 3:
                 print()
@@ -228,9 +245,25 @@ def main():
             if html:
                 htmlpan.bazi_html(b, gender, f"八字命盘_{_dt.datetime.now().strftime('%Y%m%d_%H%M%S')}.html")
     elif cmd == "liuren":
+        q = a[1] if len(a) > 1 else ""
         r = liuren.cast(dt)
         print()
         print(liuren.summary(r))
+        # 11 类类神分类占断（tianzhi-core 式：取类神→专条→三传始终→急迟应期）
+        if q in liuren_zhanshi.SHI:
+            print()
+            res = liuren_zhanshi.zhanshi_from_dt(dt, r, q)
+            print(f"【分类占断】问事={q} 总分{res['score']:+d} 趋势={res['trend']}")
+            _ls = "、".join(f"{x['name']}({x['where']},{x['qi']})" for x in res["leishen"])
+            print(f"  类神：{_ls}")
+            for f in res["facts"]:
+                print(f"    [{f['tone']:+d}] {f['code']}（{f['src']}）")
+            for c in res["course"]:
+                print(f"    [{c['tone']:+d}] {c['code']} {c['args'].get('shape','')}（{c['src']}）")
+            if res["pace"]:
+                print(f"    急迟：{res['pace']['code']}")
+            if res["timing"]:
+                print(f"    应期：{'、'.join(t['code'] for t in res['timing'])}")
         print()
         print("【取象画像】（三传地支+天将 合成）")
         print(shefu_portrait._fmt(shefu_portrait.portrait_liuren_sanchuan(r.get("三傳", {}))))
