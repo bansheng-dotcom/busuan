@@ -25,7 +25,7 @@
 | 七杀 | 庙 | 旺 | 庙 | 平 | 旺 | 庙 | 庙 | 旺 | 庙 | 平 | 旺 | 庙 |
 | 破军 | 得 | 陷 | 旺 | 平 | 庙 | 旺 | 得 | 陷 | 旺 | 平 | 庙 | 旺 |
 
-> 与 `scripts/libs/zhiwei.py` 的 `BRIGHTNESS` 表同源，已由 `scripts/libs/ziwei_crosscheck.py` 对照 iztro 校验（亮度不判对错，仅提示流派差异）。
+> 与 `scripts/libs/pan/zhiwei.py` 的 `BRIGHTNESS` 表同源，已由 `scripts/libs/judge/ziwei_crosscheck.py` 对照 iztro 校验（亮度不判对错，仅提示流派差异）。
 
 ---
 
@@ -55,7 +55,7 @@
 - **命宫**：一生根基、性格主格。**身宫**：后天作为、随年龄加重（与命宫合参）。
 - **夫妻宫**主婚姻、**财帛宫**主钱财、**官禄宫**主事业、**疾厄宫**主体质、**子女宫**主子嗣。
 
-> 十二宫逆时针方向已由 `scripts/libs/ziwei_crosscheck.py` 对照 iztro 锁定，勿改。
+> 十二宫逆时针方向已由 `scripts/libs/judge/ziwei_crosscheck.py` 对照 iztro 锁定，勿改。
 
 ---
 

@@ -24,7 +24,7 @@ description: 中国传统术数占卜。当用户要起卦、占卜、算卦、�
 
 ## 二、典籍库（只用 txt，全文检索）
 
-**唯一检索目录**：`D:\卜算\国学czhengli\txt\`（423 份干净 txt，命名 `[术数]/[易藏]/[道藏]/[其他] 书名.txt`；繁简重复已备份至 `D:\卜算\国学czhengli\_去重备份\`）；**案例库**在 `D:\卜算\国学czhengli\txt\案例库\`（1300 则古籍占验案例 + 现代补充层，按术分类：六爻/大六壬/天文占/梅花/八字紫微/小六壬，与典籍 txt 同目录，不随技能上传）。**语义检索相似案例**：先跑 `python scripts/libs/case_search.py "占事" [术法] [k]`（`libs/case_search.py`，TF-IDF + 字符 n-gram，纯离线零依赖），再 Grep 原文佐证。
+**唯一检索目录**：`D:\卜算\国学czhengli\txt\`（423 份干净 txt，命名 `[术数]/[易藏]/[道藏]/[其他] 书名.txt`；繁简重复已备份至 `D:\卜算\国学czhengli\_去重备份\`）；**案例库**在 `D:\卜算\国学czhengli\txt\案例库\`（1300 则古籍占验案例 + 现代补充层，按术分类：六爻/大六壬/天文占/梅花/八字紫微/小六壬，与典籍 txt 同目录，不随技能上传）。**语义检索相似案例**：先跑 `python scripts/libs/util/case_search.py "占事" [术法] [k]`（`libs/util/case_search.py`，TF-IDF + 字符 n-gram，纯离线零依赖），再 Grep 原文佐证。
 
 > 路径如与实际不符（目录可能被重命名），先用 `Glob D:\卜算\**\txt\*.txt` 定位，再检索。
 
@@ -152,18 +152,18 @@ description: 中国传统术数占卜。当用户要起卦、占卜、算卦、�
 - **依赖**（`pip install lunar_python ephem cn2an bidict drawsvg py-iztro`）：
   - 梅花易数/小六壬：农历换算走 `lunar_python`（`Solar.fromYmd(...).getLunar()`，缺失时退用公历并打印警告）；六爻：纯内置。
   - 八字：`lunar_python`。
-  - 紫微运限：`py-iztro`（`libs/ziwei_horoscope.py`；`libs/zhiwei.py` 自写命盘/飞星不依赖它，py-iztro 仅用于流年流月流日流时运限 + 对照校验）。
+  - 紫微运限：`py-iztro`（`libs/pan/ziwei_horoscope.py`；`libs/pan/zhiwei.py` 自写命盘/飞星不依赖它，py-iztro 仅用于流年流月流日流时运限 + 对照校验）。
   - 大六壬/奇门/太乙：`scripts/libs/` 内集成的 kentang2017 开源引擎（`engines/qimen`、`engines/taiyi`，MIT）+ `sxtwl.py` 垫片（用 lunar_python 替代寿星历，见 libs/README.md）。
   - 太乙「博弈分析」可选：`numpy`（仅 `cast.py taiyi ... --game` 时懒加载 `engines/taiyi/game_theory.py`，缺失则报错、不影响常规起盘）。
-  - 七政四余/风水/择日/神煞/刑冲合害：纯标准库（`libs/qizheng.py`、`fengshui.py`、`zeri.py`、`liunian.py`、`shensha.py`、`xingchong.py`，源自 dglijin-oss/chinese-metaphysics-skills，MIT，见 `libs/LICENSE.dglijin-oss.txt`）。
+  - 七政四余/风水/择日/神煞/刑冲合害：纯标准库（`libs/pan/qizheng.py`、`libs/pan/fengshui.py`、`libs/pan/zeri.py`、`libs/pan/liunian.py`、`libs/shensha.py`、`libs/xingchong.py`，源自 dglijin-oss/chinese-metaphysics-skills，MIT，见 `libs/LICENSE.dglijin-oss.txt`）。
 - 通用 flag：
   - 所有时间起盘方法可加 `--time "YYYY-MM-DD HH:MM"` 指定占时（缺省用当前系统时间）。
   - 八字/紫微/七政四余可加 `--lon 经度`（真太阳时校正，东经 120° 为基准）与 `--dst`（1986-91 中国夏令时回拨 1 小时）；出生时刻临近节气会提示「月柱可能跨节」建议双盘对照。
   - 八字可加 `--zishi same|next`：出生在晚子时（23:00-24:00）时选「子时换日」口径（`same`=00:00 换日主流默认，`next`=晚子时换日推进次日），无论哪种都会打印流派分歧提示。
   - `--html` 生成自包含 HTML 可视化（水墨风，可截图分享）：八字命盘、紫微命盘、六爻卦图、梅花三卦图、奇门九宫格、大六壬四课三传图、太乙神数盘图、`bazi-liunian` 流年趋势曲线。可视化是「叠加」不是「替代」——文字断语（考据层＋白话两层）永远是主体，图只辅助「看得懂盘面」。
-  - `--ref`（仅大六壬）：排盘后加一道**独立九宗门实现交叉校验**（`libs/liuren_regress.py::cross_check_ref`，含涉害深浅独立重算），对比引擎与独立实现的宗门/三传，不一致即标「宗门/三传存疑」，提示按《六壬大全》原文复核——涉害/比用/返吟/八专边界易误判，命中存疑课时断卦须降级。
-  - `--json`（仅八字）：结构化双轨输出——散文之外，另给一份**盘面事实层 JSON**（`schema=bazi-panfact-v1`，`libs/bazi_json.py`），四柱/十神/藏干/纳音/地势/空亡/大运/旺衰/格局/喜忌全字段机读可校验，与散文并存（借鉴 taibu-core content/structuredContent）。
-  - `--range "HH:MM-HH:MM"`（仅八字）：出生时间只记得范围时**逐分钟枚举候选**（`libs/bazi_json.enumerate_range`），标出稳定柱/变化柱与结论稳定性——时柱随候选变化则涉及时柱/子女/晚年结论降级（借鉴 chinese-fortune）。
+  - `--ref`（仅大六壬）：排盘后加一道**独立九宗门实现交叉校验**（`libs/regress/liuren_regress.py::cross_check_ref`，含涉害深浅独立重算），对比引擎与独立实现的宗门/三传，不一致即标「宗门/三传存疑」，提示按《六壬大全》原文复核——涉害/比用/返吟/八专边界易误判，命中存疑课时断卦须降级。
+  - `--json`（仅八字）：结构化双轨输出——散文之外，另给一份**盘面事实层 JSON**（`schema=bazi-panfact-v1`，`libs/pan/bazi_json.py`），四柱/十神/藏干/纳音/地势/空亡/大运/旺衰/格局/喜忌全字段机读可校验，与散文并存（借鉴 taibu-core content/structuredContent）。
+  - `--range "HH:MM-HH:MM"`（仅八字）：出生时间只记得范围时**逐分钟枚举候选**（`libs/pan/bazi_json.enumerate_range`），标出稳定柱/变化柱与结论稳定性——时柱随候选变化则涉及时柱/子女/晚年结论降级（借鉴 chinese-fortune）。
 - 各术具体起盘命令见 `docs/` 对应文档「起盘」节。
 
 ## 六、输出规范（强制）
@@ -330,7 +330,7 @@ description: 中国传统术数占卜。当用户要起卦、占卜、算卦、�
 
 每术起盘后、断卦前，按对应 `docs/` 文档「排盘自检」节自查，防「漏排、错排、跳步」。**这是硬性 gate：任一必查项缺失或存疑，即停下补齐，不得跳过直接断卦。**（相术/天文占/测字/其他为无盘纯文本断法，跳过排盘 gate。）
 
-> gate 可用 `libs/precheck.py` 校验：`precheck.check(术名, 已具备字段集合)` 返回是否通过、缺哪些项。
+> gate 可用 `libs/gate/precheck.py` 校验：`precheck.check(术名, 已具备字段集合)` 返回是否通过、缺哪些项。
 
 **降级处置（借鉴 yueyuan 30 秒校验）**：缺字段不硬断，按以下降级并明说——
 - 时辰未知 → 年月日三柱，标注「时柱未知，涉及子女/晚年/时柱应期结论降级」；
@@ -338,7 +338,7 @@ description: 中国传统术数占卜。当用户要起卦、占卜、算卦、�
 - 大运缺失 → 标注「大运缺失」，能排则补；
 - 四柱干支不合法 → 先请用户核对，不强行分析。
 
-**断卦后质检（与排盘前 gate 对称，强制）**：断语写完后、交付前，用 `libs/review.py` 自查七项，任一不过即退回补，不得直接交付——
+**断卦后质检（与排盘前 gate 对称，强制）**：断语写完后、交付前，用 `libs/gate/review.py` 自查七项，任一不过即退回补，不得直接交付——
 - 盘面事实/断语分离（盘面事实与断语分开）
 - claim/evidence（每条判断带 claim + evidence，不凭空定性）
 - 免责声明（末尾必附）
@@ -352,16 +352,16 @@ description: 中国传统术数占卜。当用户要起卦、占卜、算卦、�
 
 把「断：体用生克」这类开放提示落成可判定规则；能套规则就先套规则，套不上再推演并标 `[HEURISTIC]`。
 
-- `libs/rules.py`：规则函数——`xiaoliuren(落宫)`、`meihua(体五行,用五行)`、`meihua_probability(体五行,用五行)`、`meihua_18lei(类名,体五行,用五行)`、`meihua_wangshuai(五行,月支)`、`meihua_bianyao_shefu(变爻五行)`（变卦式八则）、`bazi_deling(日干,月支)`、`jinkoujue_wudong(...)`、`jinkoujue_shefu_zhilei/guishen/yanse_shumu(...)`（金口诀射覆门）、`taiyi_suan/zhuke/geju/luogong_wangshuai(...)`、`zeri_jianchu(建除)`、`zeri_huangdao(黄道)`、`zeri_zhishen(值神)`、`zeri_pengzu(干忌,支忌)`、`zeri_fangwei(吉神方位)`、`qimen_men/star/shen`（八门/九星/八神吉凶）、`qimen_menpo(门,宫)`（门迫）、`qimen_geju(天盘干,地盘干)`（十干克应 81 格局，数据见 `libs/qimen_keying.py`）、`qimen_wubuyushi(日干,时干)`（五不遇时）、`liuren_tianjiang(天将)`、`liuren_shensha_rule(神煞,地支)`、`liuren_bifa_rule(赋文句/关键词)`、`ziwei_geju_resolve(...)`，每条返回 `{judgment, confidence, evidence, basis}`，`evidence` 即证据编号（R-XX-NN）。大六壬/金口诀射覆另有专用模块 `libs/miaogong_shefu.py`（苗公射覆鬼撮脚结构化：`shifu_tianjiang_linzhi` R-LR-05、`shifu_keti_wuxing` R-LR-06、`shifu_xingzhuang` R-LR-07、`shifu_yanse` R-LR-08、`shifu_xinjiu/sihuo` R-LR-09~10、`shifu_shuangwu/yuanjin/zhizhi_wuxiang/wuxing_wulei/kechi` R-LR-11，返回 `{result, confidence, evidence, basis}`，射覆出物类候选不判吉凶）。失物·寻人另有 `libs/shiwu_xunren.py`（小六壬/六爻/金口诀失物结构化：`xiaoliuren_shiwu` R-SW-01、`liuyao_shiwu_fangwei` R-SW-02、`liuyao_shiwu_cangchu` R-SW-03、`liuyao_shiwu_duan` R-SW-04、`jinkoujue_shiwu/xunren` R-SW-05；CLI `cast.py shiwu <术> <信号>`，方位/远近/能否/被盗分维输出不铁口直断）。
-- `libs/rules.cross_validate([(维度,吉凶), ...])`：多维交叉验证，返回 `信号冲突` 时须明说并降级。
-- `libs/rules.fusion_mark(判甲, 判乙, same_aspect)`：双法同参三态标记——一致 / 冲突 / 互补（借鉴 laoshifu-mcp；六爻断成败 + 奇门断时机方位属「互补」，不强行比吉凶）。
-- `libs/bazi_evaluator.py`：八字独立评估者（对抗性第二意见）——用「旺相休囚死＋得地得生得势」这条与主路径四指标加权**独立**的规则链，从原始四柱重推旺衰/格局/喜忌，与 cast.py 主判逐维比对；`cross_check(主判, 独立判)` 返回 一致 / 边界差异 / 冲突，冲突即标「信号冲突，仅供参考」并降级。`python libs/bazi_evaluator.py --pillars 辛巳 丁酉 戊子 甲寅` 直接跑。
-- `libs/precheck.py`：排盘 gate，断前必查。
-- `libs/review.py`：断卦后质检 gate，`review(text)` 返回七项检查（盘面事实/断语分离/免责/应期/趋避/冲突降级/白话层），未过按 `issues` 补齐。
-- `libs/tiaohou.py`（借自 yueyuan-bazi，MIT）：`tiao_hou_yongshen(日干,月支)` 调候用神、`analyze_wangshuai(...)` 旺衰四指标（得令/得地/得生/得助）、`ding_ge(...)` 月令定格、`GE_JU_JIU_YING` 格局成败救应表。
+- `libs/judge/rules.py`：规则函数——`xiaoliuren(落宫)`、`meihua(体五行,用五行)`、`meihua_probability(体五行,用五行)`、`meihua_18lei(类名,体五行,用五行)`、`meihua_wangshuai(五行,月支)`、`meihua_bianyao_shefu(变爻五行)`（变卦式八则）、`bazi_deling(日干,月支)`、`jinkoujue_wudong(...)`、`jinkoujue_shefu_zhilei/guishen/yanse_shumu(...)`（金口诀射覆门）、`taiyi_suan/zhuke/geju/luogong_wangshuai(...)`、`zeri_jianchu(建除)`、`zeri_huangdao(黄道)`、`zeri_zhishen(值神)`、`zeri_pengzu(干忌,支忌)`、`zeri_fangwei(吉神方位)`、`qimen_men/star/shen`（八门/九星/八神吉凶）、`qimen_menpo(门,宫)`（门迫）、`qimen_geju(天盘干,地盘干)`（十干克应 81 格局，数据见 `libs/judge/qimen_keying.py`）、`qimen_wubuyushi(日干,时干)`（五不遇时）、`liuren_tianjiang(天将)`、`liuren_shensha_rule(神煞,地支)`、`liuren_bifa_rule(赋文句/关键词)`、`ziwei_geju_resolve(...)`，每条返回 `{judgment, confidence, evidence, basis}`，`evidence` 即证据编号（R-XX-NN）。大六壬/金口诀射覆另有专用模块 `libs/judge/miaogong_shefu.py`（苗公射覆鬼撮脚结构化：`shifu_tianjiang_linzhi` R-LR-05、`shifu_keti_wuxing` R-LR-06、`shifu_xingzhuang` R-LR-07、`shifu_yanse` R-LR-08、`shifu_xinjiu/sihuo` R-LR-09~10、`shifu_shuangwu/yuanjin/zhizhi_wuxiang/wuxing_wulei/kechi` R-LR-11，返回 `{result, confidence, evidence, basis}`，射覆出物类候选不判吉凶）。失物·寻人另有 `libs/judge/shiwu_xunren.py`（小六壬/六爻/金口诀失物结构化：`xiaoliuren_shiwu` R-SW-01、`liuyao_shiwu_fangwei` R-SW-02、`liuyao_shiwu_cangchu` R-SW-03、`liuyao_shiwu_duan` R-SW-04、`jinkoujue_shiwu/xunren` R-SW-05；CLI `cast.py shiwu <术> <信号>`，方位/远近/能否/被盗分维输出不铁口直断）。
+- `libs/judge/rules.cross_validate([(维度,吉凶), ...])`：多维交叉验证，返回 `信号冲突` 时须明说并降级。
+- `libs/judge/rules.fusion_mark(判甲, 判乙, same_aspect)`：双法同参三态标记——一致 / 冲突 / 互补（借鉴 laoshifu-mcp；六爻断成败 + 奇门断时机方位属「互补」，不强行比吉凶）。
+- `libs/judge/bazi_evaluator.py`：八字独立评估者（对抗性第二意见）——用「旺相休囚死＋得地得生得势」这条与主路径四指标加权**独立**的规则链，从原始四柱重推旺衰/格局/喜忌，与 cast.py 主判逐维比对；`cross_check(主判, 独立判)` 返回 一致 / 边界差异 / 冲突，冲突即标「信号冲突，仅供参考」并降级。`python libs/judge/bazi_evaluator.py --pillars 辛巳 丁酉 戊子 甲寅` 直接跑。
+- `libs/gate/precheck.py`：排盘 gate，断前必查。
+- `libs/gate/review.py`：断卦后质检 gate，`review(text)` 返回七项检查（盘面事实/断语分离/免责/应期/趋避/冲突降级/白话层），未过按 `issues` 补齐。
+- `libs/judge/tiaohou.py`（借自 yueyuan-bazi，MIT）：`tiao_hou_yongshen(日干,月支)` 调候用神、`analyze_wangshuai(...)` 旺衰四指标（得令/得地/得生/得助）、`ding_ge(...)` 月令定格、`GE_JU_JIU_YING` 格局成败救应表。
 - `cases/manage.py new "<问事>" <术>` 建案例；`stats` 统计；断卦前先写预注册预测，应期后回填后验。
-- `libs/trace.py` 断卦决策追踪：`record` 记录规则命中/引文出处/结论/置信度到 `cases/traces/trace.jsonl`，`feedback` 回填后验，`analyze` 统计复盘（哪些规则/出处用得多、置信度分布）。
-- `libs/feedback.py` 结构化反馈契约 feedback-v1：`record` 采集问题（error/gap/conflict/friction/clarity 五类）到 `cases/feedback/feedback.jsonl`，`analyze` 统计；隐私边界（不采集出生数据/卦题/命盘/对话原文）见文件头。
+- `libs/util/trace.py` 断卦决策追踪：`record` 记录规则命中/引文出处/结论/置信度到 `cases/traces/trace.jsonl`，`feedback` 回填后验，`analyze` 统计复盘（哪些规则/出处用得多、置信度分布）。
+- `libs/util/feedback.py` 结构化反馈契约 feedback-v1：`record` 采集问题（error/gap/conflict/friction/clarity 五类）到 `cases/feedback/feedback.jsonl`，`analyze` 统计；隐私边界（不采集出生数据/卦题/命盘/对话原文）见文件头。
 
 ## 九、证据分级与规则层级（借鉴 yueyuan-bazi，MIT）
 
@@ -394,7 +394,7 @@ description: 中国传统术数占卜。当用户要起卦、占卜、算卦、�
 
 **诚实边界（判断停在哪，不硬断、不投票）**：每个盘/卦结尾写「判断停在哪」——明确**哪些条件成立、哪些有分歧、判断停在哪一步**（如「本盘能确定『伤官佩印、先难后成』，但『某年赚多少/是否必某职业/学历高低』不在有信号范围，给不出确定答案」）。几本书说法相反时**并列呈现 + 标适用条件，不按条数投票、不替用户挑**；证据不足输出「不确定」，禁止语言润色制造假共识。
 
-**能力边界（MingLi-Bench 160 题实测 36.2%，随机线 25%；各类别实测命中率如下）**：此数字可用 `python scripts/cast.py mingli-eval`（`libs/mingli_eval.py`）本地复现——解析案例库「八字紫微」benchmark 表，实时算分品类/总体命中率 + 随机基线(25%) + 众数基线。
+**能力边界（MingLi-Bench 160 题实测 36.2%，随机线 25%；各类别实测命中率如下）**：此数字可用 `python scripts/cast.py mingli-eval`（`libs/util/mingli_eval.py`）本地复现——解析案例库「八字紫微」benchmark 表，实时算分品类/总体命中率 + 随机基线(25%) + 众数基线。
 
 **有信号组（可给方向，实测显著高于随机）**：
 - **健康**（17 题命中 52.9%）——五行/十神断病有信号，可给「哪方面健康需注意」的方向，但**慎断具体病名、具体年份**；
@@ -413,7 +413,7 @@ description: 中国传统术数占卜。当用户要起卦、占卜、算卦、�
 
 每术断卦时，多维度结论须互相印证；**不一致就明说「信号冲突，仅供参考」并降级**，不得只取有利一维硬下结论。各术的交叉验证维度见对应 `docs/` 文档「交叉验证」节。
 
-**独立评估者（对抗性第二意见，非 self-eval）**：断完主判后，用一条独立规则链从原始数据重推核心判断再比对——八字用 `libs/bazi_evaluator.py`（旺相休囚死重推旺衰/格局/喜忌），大六壬用 `--ref`（独立九宗门），紫微用 `libs/ziwei_crosscheck.py`；主判与独立判不一致即标「信号冲突/边界差异」并降级，不取有利一维硬下结论。
+**独立评估者（对抗性第二意见，非 self-eval）**：断完主判后，用一条独立规则链从原始数据重推核心判断再比对——八字用 `libs/judge/bazi_evaluator.py`（旺相休囚死重推旺衰/格局/喜忌），大六壬用 `--ref`（独立九宗门），紫微用 `libs/judge/ziwei_crosscheck.py`；主判与独立判不一致即标「信号冲突/边界差异」并降级，不取有利一维硬下结论。
 
 ### 多术互参（同一问事，多术交叉验证，16 术全覆盖）
 
