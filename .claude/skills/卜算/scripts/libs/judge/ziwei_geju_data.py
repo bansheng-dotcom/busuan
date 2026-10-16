@@ -127,9 +127,14 @@ class GejuAdapter(BaseAdapter):
             idx = self._idx(c["at"])
             b = self._star_brightness(idx, c["star"])
             return b in c["in"]
-        if "sihua" in c:  # 某宫某星化某四化；不指定 star 则任意星化该四化即真
-            idx = self._idx(c["at"])
+        if "sihua" in c:  # 某宫(或三方四正)某星化某四化；不指定 star 则任意星化该四化即真
             si = c["si"]
+            if "sanfang" in c:  # 命三方四正有化某四化
+                zs = zhiwei.sanfang_sizheng(self._idx(c["sanfang"]))
+                if "star" in c:
+                    return any(self._star_sihua(q, c["star"]) == si for q in zs)
+                return any(s == si for q in zs for n, b, s in self.palaces[q]["主星"])
+            idx = self._idx(c["at"])
             if "star" in c:
                 return self._star_sihua(idx, c["star"]) == si
             return any(s == si for n, b, s in self.palaces[idx]["主星"])
@@ -448,6 +453,15 @@ GEJU_RULES = [
      "topic": "格局", "src": S,
      "cond": {"same_palace": ["天刑", "廉贞"]},
      "reading": "天刑廉贞同宫"},
+
+    {"id": "geju-sanqi", "name": "三奇嘉会", "verdict": "吉",
+     "text": "科權祿拱名譽昭彰；科明祿暗位列三台",
+     "note": "化科化权化禄三奇会命三方四正，主名誉昭彰、科甲名扬、位列三台",
+     "topic": "格局", "src": S,
+     "cond": {"and": [{"sihua": {"sanfang": "命", "si": "科"}},
+                      {"sihua": {"sanfang": "命", "si": "权"}},
+                      {"sihua": {"sanfang": "命", "si": "禄"}}]},
+     "reading": "命三方四正化科化权化禄三奇会"},
 ]
 
 
