@@ -62,6 +62,20 @@ class GejuAdapter(BaseAdapter):
                 return self.palaces[i]["支"]
         return None
 
+    def _star_brightness(self, idx, star):
+        """该宫某主星的庙旺（庙/旺/得/利/平/不/陷，无则 None）。"""
+        for n, b, s in self.palaces[idx]["主星"]:
+            if n == star:
+                return b
+        return None
+
+    def _star_sihua(self, idx, star):
+        """该宫某主星的四化（禄/权/科/忌，无则 None）。"""
+        for n, b, s in self.palaces[idx]["主星"]:
+            if n == star:
+                return s
+        return None
+
     def test(self, c):
         mode = c.get("mode", "all")
         if "stars" in c and "at" in c:
@@ -100,6 +114,23 @@ class GejuAdapter(BaseAdapter):
             if self.by_zhi["巳"] in tai and self.by_zhi["酉"] in yin:
                 return True
             return False
+        if "jia" in c:  # 夹：stars 分列某宫前后两宫（各至少一星在侧）
+            idx = self._idx(c["jia"])
+            front = self._stars((idx - 1) % 12)
+            back = self._stars((idx + 1) % 12)
+            stars = set(c["stars"])
+            union = front | back
+            return all(s in union for s in stars) and bool(stars & front) and bool(stars & back)
+        if "miaowang" in c:  # 某星在某宫且庙旺落在 in 列表
+            idx = self._idx(c["at"])
+            b = self._star_brightness(idx, c["star"])
+            return b in c["in"]
+        if "sihua" in c:  # 某宫某星化某四化；不指定 star 则任意星化该四化即真
+            idx = self._idx(c["at"])
+            si = c["si"]
+            if "star" in c:
+                return self._star_sihua(idx, c["star"]) == si
+            return any(s == si for n, b, s in self.palaces[idx]["主星"])
         raise ValueError(f"不认识的条件：{c!r}")
 
 
@@ -208,7 +239,7 @@ GEJU_RULES = [
      "reading": "紫微天府同宫"},
 
     {"id": "geju-fubi", "name": "辅弼拱主", "verdict": "吉",
-     "text": "辅弼拱主 紫微守命二星来拱是也",
+     "text": "輔弼拱主 紫微守命二星來拱是也",
      "note": "左辅右弼拱护紫微，主左右得人、助力强、事业有靠",
      "topic": "格局", "src": S,
      "cond": {"and": [{"stars": ["紫微"], "at": "命"},
@@ -242,6 +273,132 @@ GEJU_RULES = [
      "topic": "格局", "src": S,
      "cond": {"same_palace": ["巨门", "天机"]},
      "reading": "巨门天机同宫"},
+
+    {"id": "geju-tianliang-wu", "name": "天梁午", "verdict": "吉",
+     "text": "梁居午位官资清显",
+     "note": "天梁在午守命，主清贵、官资清显、刚正不阿",
+     "topic": "格局", "src": S,
+     "cond": {"and": [{"stars": ["天梁"], "at": "命"}, {"zhi": "命", "in": ["午"]}]},
+     "reading": "天梁在午守命"},
+
+    {"id": "geju-wutan", "name": "武贪同行", "verdict": "中",
+     "text": "先貧後富武貪同身命之宮；貪武同行威鎮邊夷",
+     "note": "武曲贪狼同宫，主先贫后富、武职威权、白手起家",
+     "topic": "格局", "src": S,
+     "cond": {"same_palace": ["武曲", "贪狼"]},
+     "reading": "武曲贪狼同宫"},
+
+    {"id": "geju-lianqisha", "name": "廉贞七杀", "verdict": "中",
+     "text": "廉貞七殺反為積富之人；廉貞七殺流蕩天涯",
+     "note": "廉贞七杀同宫两面：庙旺有制则积富，陷地无制则流荡天涯（多面并列，不锁死）",
+     "topic": "格局", "src": S,
+     "cond": {"same_palace": ["廉贞", "七杀"]},
+     "reading": "廉贞七杀同宫（积富/流荡两面，看庙旺陷地）"},
+
+    {"id": "geju-huotan", "name": "火贪格", "verdict": "吉",
+     "text": "貪狼火星居廟旺名鎮諸邦",
+     "note": "贪狼火星同宫，主横发暴富、名镇一方、异路功名",
+     "topic": "格局", "src": S,
+     "cond": {"same_palace": ["贪狼", "火星"]},
+     "reading": "贪狼火星同宫"},
+
+    {"id": "geju-kuiyue", "name": "魁钺拱命", "verdict": "吉",
+     "text": "天魁天鉞蓋世文章",
+     "note": "天魁天钺拱照命宫，主贵人提携、文名盖世、机遇多",
+     "topic": "格局", "src": S,
+     "cond": {"sanfang": "命", "stars": ["天魁", "天钺"], "mode": "any"},
+     "reading": "天魁天钺会命三方四正"},
+
+    {"id": "geju-fuxiang-yin", "name": "府相寅", "verdict": "吉",
+     "text": "寅逢府相位登一品之榮",
+     "note": "天府天相在寅守命，主位登一品、财荫夹印、富贵荣显",
+     "topic": "格局", "src": S,
+     "cond": {"stars": ["天府", "天相"], "at": "寅", "mode": "any"},
+     "reading": "天府或天相在寅"},
+
+    {"id": "geju-changqu", "name": "昌曲拱命", "verdict": "吉",
+     "text": "昌曲夾墀男命貴而且顯；左輔文昌會吉星尊居八座",
+     "note": "文昌文曲拱照命宫，主文采出众、科名显达、贵而且显",
+     "topic": "格局", "src": S,
+     "cond": {"sanfang": "命", "stars": ["文昌", "文曲"], "mode": "any"},
+     "reading": "文昌文曲会命三方四正"},
+
+    {"id": "geju-jincan", "name": "金灿光辉", "verdict": "吉",
+     "text": "金燦光輝 太陽單守，命在午宮是也",
+     "note": "太阳单守命在午（日丽中天），主光明显赫、富贵声扬",
+     "topic": "格局", "src": S,
+     "cond": {"and": [{"stars": ["太阳"], "at": "命"}, {"zhi": "命", "in": ["午"]}]},
+     "reading": "太阳单守命在午"},
+
+    {"id": "geju-wuqu-shouyuan", "name": "武曲守垣", "verdict": "吉",
+     "text": "武曲守垣 武守命卯宮是也，余不是",
+     "note": "武曲单守命在卯，主武职威权、财帛丰足（原文「余不是」，仅卯宫成格）",
+     "topic": "格局", "src": S,
+     "cond": {"and": [{"stars": ["武曲"], "at": "命"}, {"zhi": "命", "in": ["卯"]}]},
+     "reading": "武曲单守命在卯"},
+
+    {"id": "geju-caiqiu", "name": "财与囚仇", "verdict": "凶",
+     "text": "財與囚仇 武貞同守身命是也",
+     "note": "武曲廉贞同守身命，主财星与囚星相仇，先富后败、是非破财",
+     "topic": "格局", "src": S,
+     "cond": {"same_palace": ["武曲", "廉贞"]},
+     "reading": "武曲廉贞同宫"},
+
+    {"id": "geju-gupin", "name": "一生孤贫", "verdict": "凶",
+     "text": "一生孤貧 謂破守命星陷地是也",
+     "note": "破军守命陷地，主一生孤贫、破耗无成（陷地方论，旺地不同）",
+     "topic": "格局", "src": S,
+     "cond": {"stars": ["破军"], "at": "命"},
+     "reading": "破军守命（陷地孤贫，旺地另论）"},
+
+    {"id": "geju-caiyin", "name": "财荫夹印", "verdict": "吉",
+     "text": "財蔭夾印 相守命武梁來夾是也，田宅宮亦然",
+     "note": "天相守命，武曲天梁夹命，主财荫夹印、富贵双全、一生财禄丰足",
+     "topic": "格局", "src": S,
+     "cond": {"and": [{"stars": ["天相"], "at": "命"}, {"jia": "命", "stars": ["武曲", "天梁"]}]},
+     "reading": "天相守命，武曲天梁夹命"},
+
+    {"id": "geju-riyuejiacai", "name": "日月夹财", "verdict": "吉",
+     "text": "日月夾財 武守命日月來夾是也，財帛宮亦然",
+     "note": "武曲守命，太阳太阴夹命，主财帛丰足、富贵之格",
+     "topic": "格局", "src": S,
+     "cond": {"and": [{"stars": ["武曲"], "at": "命"}, {"jia": "命", "stars": ["太阳", "太阴"]}]},
+     "reading": "武曲守命，太阳太阴夹命"},
+
+    {"id": "geju-cailujiama", "name": "财禄夹马", "verdict": "吉",
+     "text": "財祿夾馬 馬守命武祿來夾是也，逢生旺尤妙",
+     "note": "天马守命，武曲禄存夹命，主禄马交驰、发财远郡、奔波得财",
+     "topic": "格局", "src": S,
+     "cond": {"and": [{"stars": ["天马"], "at": "命"}, {"jia": "命", "stars": ["武曲", "禄存"]}]},
+     "reading": "天马守命，武曲禄存夹命"},
+
+    {"id": "geju-jinyu", "name": "金舆扶驾", "verdict": "吉",
+     "text": "金輿扶駕 紫微守命前後有日月來夾是也",
+     "note": "紫微守命，日月前后夹命，主贵气扶驾、位极人臣",
+     "topic": "格局", "src": S,
+     "cond": {"and": [{"stars": ["紫微"], "at": "命"}, {"jia": "命", "stars": ["太阳", "太阴"]}]},
+     "reading": "紫微守命，太阳太阴前后夹命"},
+
+    {"id": "geju-riyuejiaming", "name": "日月夹命", "verdict": "吉",
+     "text": "日月夾命 不坐空亡遇逢本宮有吉星是也",
+     "note": "太阳太阴夹命（本宫有吉星、不坐空亡方论），主贵气、福泽深厚",
+     "topic": "格局", "src": S,
+     "cond": {"jia": "命", "stars": ["太阳", "太阴"]},
+     "reading": "太阳太阴夹命"},
+
+    {"id": "geju-caiyinjialu", "name": "财印夹禄", "verdict": "吉",
+     "text": "財印夾祿 祿守命梁相來夾是也，入財亦然",
+     "note": "禄存守命，天梁天相夹命，主财印夹禄、财禄丰足",
+     "topic": "格局", "src": S,
+     "cond": {"and": [{"stars": ["禄存"], "at": "命"}, {"jia": "命", "stars": ["天梁", "天相"]}]},
+     "reading": "禄存守命，天梁天相夹命"},
+
+    {"id": "geju-quanlu", "name": "权禄生逢", "verdict": "吉",
+     "text": "權祿生逢 二星守命廟旺是也，陷不是",
+     "note": "命宫化权化禄二星守命，主掌权得禄、名利双收（原文要求庙旺，陷地不论）",
+     "topic": "格局", "src": S,
+     "cond": {"and": [{"sihua": {"at": "命", "si": "权"}}, {"sihua": {"at": "命", "si": "禄"}}]},
+     "reading": "命宫化权星与化禄星同守（庙旺方论）"},
 ]
 
 
