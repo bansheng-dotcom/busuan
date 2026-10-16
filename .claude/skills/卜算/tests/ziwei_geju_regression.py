@@ -37,6 +37,7 @@ def main():
     tables = [
         ("格局", ZG.GEJU_RULES, ZG.find_geju),
         ("落宫", ZG.STAR_GONG, ZG.find_star_gong),
+        ("命诀", ZG.MING_JU, ZG.find_ming_ju),
     ]
     all_ok = True
 

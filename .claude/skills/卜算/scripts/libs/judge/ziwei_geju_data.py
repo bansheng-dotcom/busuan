@@ -1081,6 +1081,119 @@ def find_star_gong(chart):
     return find(STAR_GONG, GejuAdapter(chart))[0]
 
 
+# —— 入命诀·凶格（诸星同垣：某星守命 + 凶星组合 = 凶）——
+# 出处：《紫微斗数全书》每星「入男命/入女命吉凶诀」歌诀中「星守命 + 凶星」的断语。
+# 与落宫（星在某地支）不同，这里判「星守命（不指定地支）+ 凶星同宫/三方」的组合凶格。
+MING_JU = [
+    {"id": "mj-ziwei-ersha", "star": "紫微", "verdict": "凶",
+     "text": "紫微守命最为良，二杀逢之寿不长，羊陀火铃来相会，只好空门礼梵王。",
+     "note": "紫微守命逢擎羊陀罗（二杀），主寿不长、宜空门",
+     "topic": "命诀", "src": S,
+     "cond": {"and": [{"stars": ["紫微"], "at": "命"},
+                      {"sanfang": "命", "stars": ["擎羊", "陀罗"], "mode": "any"}]},
+     "reading": "紫微守命 + 擎羊陀罗会命"},
+
+    {"id": "mj-ziwei-qisha", "star": "紫微", "verdict": "凶",
+     "text": "火铃羊陀来相会，七杀同宫多不贵，欺人孤独更刑伤，若是空门为吉利。",
+     "note": "紫微守命逢火铃羊陀七杀，主不贵、孤独刑伤",
+     "topic": "命诀", "src": S,
+     "cond": {"and": [{"stars": ["紫微"], "at": "命"}, {"same_palace": ["紫微", "七杀"]},
+                      {"sanfang": "命", "stars": ["火星", "铃星", "擎羊", "陀罗"], "mode": "any"}]},
+     "reading": "紫微守命 + 七杀同宫 + 火铃羊陀会"},
+
+    {"id": "mj-tianji-huaji", "star": "天机", "verdict": "凶",
+     "text": "天机化忌落闲宫，纵有财官亦不荣，退尽家财兼寿夭，飘蓬僧道住山中。",
+     "note": "天机化忌落闲宫，主退财、寿夭、宜僧道",
+     "topic": "命诀", "src": S,
+     "cond": {"and": [{"stars": ["天机"], "at": "命"}, {"sihua": {"at": "命", "star": "天机", "si": "忌"}}]},
+     "reading": "天机守命且化忌"},
+
+    {"id": "mj-taiyang-huaji", "star": "太阳", "verdict": "凶",
+     "text": "失陷太阳居反背，化忌逢之多蹇昧，又遭横事破家财，命强化禄也无益。",
+     "note": "太阳陷地又化忌，主蹇昧、破财（命强化禄也无益）",
+     "topic": "命诀", "src": S,
+     "cond": {"and": [{"stars": ["太阳"], "at": "命"}, {"sihua": {"at": "命", "star": "太阳", "si": "忌"}}]},
+     "reading": "太阳守命且化忌"},
+
+    {"id": "mj-tiantong-huoling", "star": "天同", "verdict": "凶",
+     "text": "天同守命落闲宫，火铃杀凑更为凶，天机梁月来相会，只好空门度岁终。",
+     "note": "天同守命落闲宫逢火铃杀，主凶、宜空门",
+     "topic": "命诀", "src": S,
+     "cond": {"and": [{"stars": ["天同"], "at": "命"},
+                      {"sanfang": "命", "stars": ["火星", "铃星"], "mode": "any"}]},
+     "reading": "天同守命 + 火铃会命"},
+
+    {"id": "mj-lianzhen-sha", "star": "廉贞", "verdict": "凶",
+     "text": "廉贞坐命落闲宫，贪破羊火忌相逢，纵有财官也不美，平生何以得从容。",
+     "note": "廉贞坐命落闲宫逢贪破羊火忌，主不美、不从容",
+     "topic": "命诀", "src": S,
+     "cond": {"and": [{"stars": ["廉贞"], "at": "命"},
+                      {"sanfang": "命", "stars": ["贪狼", "破军", "擎羊", "火星"], "mode": "any"}]},
+     "reading": "廉贞守命 + 贪破羊火会命"},
+
+    {"id": "mj-tianfu-huoling", "star": "天府", "verdict": "凶",
+     "text": "火铃羊陀三方会，为人奸诈多劳碌，空劫同垣不为佳，只宜空门享福人。",
+     "note": "天府守命逢火铃羊陀三方会，主奸诈劳碌、宜空门",
+     "topic": "命诀", "src": S,
+     "cond": {"and": [{"stars": ["天府"], "at": "命"},
+                      {"sanfang": "命", "stars": ["火星", "铃星", "擎羊", "陀罗"], "mode": "any"}]},
+     "reading": "天府守命 + 火铃羊陀三方会"},
+
+    {"id": "mj-tanlang-yangtuo", "star": "贪狼", "verdict": "凶",
+     "text": "贪狼守命擎羊逢，陀杀交加必困穷，武破廉贞同杀劫，百艺防身度岁终。",
+     "note": "贪狼守命逢擎羊陀罗杀，主困穷、百艺防身",
+     "topic": "命诀", "src": S,
+     "cond": {"and": [{"stars": ["贪狼"], "at": "命"},
+                      {"sanfang": "命", "stars": ["擎羊", "陀罗"], "mode": "any"}]},
+     "reading": "贪狼守命 + 擎羊陀罗会命"},
+
+    {"id": "mj-jumen-yangtuo", "star": "巨门", "verdict": "凶",
+     "text": "巨门守命遇擎羊，火铃逢之事不祥，为人性急多颠倒，百事茫茫乱主张。",
+     "note": "巨门守命逢擎羊火铃，主不祥、性急颠倒",
+     "topic": "命诀", "src": S,
+     "cond": {"and": [{"stars": ["巨门"], "at": "命"},
+                      {"sanfang": "命", "stars": ["擎羊", "火星", "铃星"], "mode": "any"}]},
+     "reading": "巨门守命 + 擎羊火铃会命"},
+
+    {"id": "mj-tianxiang-sha", "star": "天相", "verdict": "凶",
+     "text": "天相之星武破同，羊陀火铃更为凶，或作技术经商辈，若在空门享福隆。",
+     "note": "天相守命逢武破羊陀火铃，主凶、宜技术经商或空门",
+     "topic": "命诀", "src": S,
+     "cond": {"and": [{"stars": ["天相"], "at": "命"},
+                      {"sanfang": "命", "stars": ["武曲", "破军", "擎羊", "陀罗", "火星", "铃星"], "mode": "any"}]},
+     "reading": "天相守命 + 武破羊陀火铃会命"},
+
+    {"id": "mj-tianliang-huo", "star": "天梁", "verdict": "凶",
+     "text": "天梁遇火落闲宫，陀杀重逢更是凶，孤刑带疾破家财，空门技艺可营工。",
+     "note": "天梁落闲宫逢火陀杀，主孤刑带疾破财",
+     "topic": "命诀", "src": S,
+     "cond": {"and": [{"stars": ["天梁"], "at": "命"},
+                      {"sanfang": "命", "stars": ["火星", "陀罗"], "mode": "any"}]},
+     "reading": "天梁守命 + 火陀会命"},
+
+    {"id": "mj-qisha-xian", "star": "七杀", "verdict": "凶",
+     "text": "杀居陷地不堪言，凶祸犹如伴虎眠，若是杀强无制伏，少年恶死到黄泉。",
+     "note": "七杀居陷地无制，主凶祸、少年恶死",
+     "topic": "命诀", "src": S,
+     "cond": {"and": [{"stars": ["七杀"], "at": "命"},
+                      {"miaowang": {"at": "命", "star": "七杀", "in": ["陷", "不", "平"]}}]},
+     "reading": "七杀守命陷地"},
+
+    {"id": "mj-pojun-sha", "star": "破军", "verdict": "凶",
+     "text": "破军不喜在身宫，廉贞火羊陀会凶，不见伤残定寿夭，只宜僧道度平生。",
+     "note": "破军守身逢廉贞火羊陀，主伤残寿夭、宜僧道",
+     "topic": "命诀", "src": S,
+     "cond": {"and": [{"stars": ["破军"], "at": "身"},
+                      {"sanfang": "身", "stars": ["廉贞", "火星", "擎羊", "陀罗"], "mode": "any"}]},
+     "reading": "破军守身 + 廉贞火羊陀会"},
+]
+
+
+def find_ming_ju(chart):
+    """判定入命诀凶格，返回命中的 [{id,star,verdict,text,note,src,reading}]。"""
+    return find(MING_JU, GejuAdapter(chart))[0]
+
+
 if __name__ == "__main__":
     import sys
     for s in (sys.stdout, sys.stderr):
