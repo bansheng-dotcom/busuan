@@ -131,6 +131,14 @@ class GejuAdapter(BaseAdapter):
             if "star" in c:
                 return self._star_sihua(idx, c["star"]) == si
             return any(s == si for n, b, s in self.palaces[idx]["主星"])
+        if "kongwang" in c:  # 某宫支 / 某星落宫支 在生年旬空（空亡）支里
+            kong = set(self.chart.get("空亡", []))
+            kw = c["kongwang"]
+            if "star" in kw:
+                z = self._star_at(kw["star"])
+                return z in kong
+            idx = self._idx(kw["at"])
+            return self.palaces[idx]["支"] in kong
         raise ValueError(f"不认识的条件：{c!r}")
 
 
@@ -399,6 +407,41 @@ GEJU_RULES = [
      "topic": "格局", "src": S,
      "cond": {"and": [{"sihua": {"at": "命", "si": "权"}}, {"sihua": {"at": "命", "si": "禄"}}]},
      "reading": "命宫化权星与化禄星同守（庙旺方论）"},
+
+    {"id": "geju-shengbufengshi", "name": "生不逢时", "verdict": "凶",
+     "text": "生不逢時 命坐空亡逢廉貞是也",
+     "note": "廉贞守命又命坐空亡，主生不逢时、怀才不遇、际遇蹇滞",
+     "topic": "格局", "src": S,
+     "cond": {"and": [{"stars": ["廉贞"], "at": "命"}, {"kongwang": {"at": "命"}}]},
+     "reading": "廉贞守命，命宫坐空亡"},
+
+    {"id": "geju-lufengliangsha", "name": "禄逢两杀", "verdict": "凶",
+     "text": "祿逢兩殺 祿坐空亡又逢空劫殺星是也",
+     "note": "禄存坐空亡又逢空劫杀星，主财禄虚耗、富贵难守",
+     "topic": "格局", "src": S,
+     "cond": {"kongwang": {"star": "禄存"}},
+     "reading": "禄存落宫坐空亡"},
+
+    {"id": "geju-maluokongwang", "name": "马落空亡", "verdict": "凶",
+     "text": "馬落空亡 馬既落亡雖祿沖會無用主奔波",
+     "note": "天马落空亡，主终身奔波劳碌、虽禄冲会亦无用",
+     "topic": "格局", "src": S,
+     "cond": {"kongwang": {"star": "天马"}},
+     "reading": "天马落宫坐空亡"},
+
+    {"id": "geju-liangchonghuagai", "name": "两重华盖", "verdict": "凶",
+     "text": "兩重華蓋 謂祿存化祿坐命遇空劫是也",
+     "note": "禄存化禄坐命又遇地空地劫，主孤高不群、财禄虚花、六亲缘薄",
+     "topic": "格局", "src": S,
+     "cond": {"and": [{"stars": ["禄存"], "at": "命"}, {"stars": ["地空", "地劫"], "at": "命", "mode": "any"}]},
+     "reading": "禄存坐命且命宫见地空地劫"},
+
+    {"id": "geju-xingqiu", "name": "刑囚夹印", "verdict": "中",
+     "text": "刑囚夾印 天刑廉貞同臨身命主武勇之人",
+     "note": "天刑廉贞同临身命，主武勇、刑权、掌兵（刑囚夹印，主武勇之人）",
+     "topic": "格局", "src": S,
+     "cond": {"same_palace": ["天刑", "廉贞"]},
+     "reading": "天刑廉贞同宫"},
 ]
 
 

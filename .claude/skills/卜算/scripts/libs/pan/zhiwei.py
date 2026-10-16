@@ -188,6 +188,10 @@ def cast(sy, sm, sd, hour, gender, lon=None, dst=False, fix_leap=True):
     soul_zhi = ZHI[(soul + 2) % 12]
     soul_gan = GAN[(GAN.index(TIGER_RULE[year_gan]) + soul) % 10]
 
+    # 生年旬空（空亡）：生年干支所在旬空亡的两地支（甲子旬空戌亥等）
+    xunshou = (ZHI.index(year_zhi) - GAN.index(year_gan)) % 12
+    xunkong = [ZHI[(xunshou - 1) % 12], ZHI[(xunshou - 2) % 12]]
+
     # 五行局
     wx, ju = wuxing_ju(soul_gan, soul_zhi)
 
@@ -248,6 +252,8 @@ def cast(sy, sm, sd, hour, gender, lon=None, dst=False, fix_leap=True):
     # 红鸾天喜
     hl, tx = _luanxi(year_zhi)
     add_fu(hl, "红鸾"); add_fu(tx, "天喜")
+    # 天刑（杂曜）：从酉宫起正月，顺数至生月（安天刑天姚星诀）
+    add_fu((_zhi_palace("酉") + lmonth - 1) % 12, "天刑")
 
     # 大限（阳男阴女顺行，阴男阳女逆行；阴阳以年支定）
     yang_zhi = ZHI.index(year_zhi) % 2 == 0
@@ -301,6 +307,7 @@ def cast(sy, sm, sd, hour, gender, lon=None, dst=False, fix_leap=True):
         "四柱": f"{year_gan}{year_zhi}  {lunar.getMonthInGanZhi()}  {lunar.getDayInGanZhi()}  {lunar.getTimeInGanZhi()}",
         "农历": lunar.toString(),
         "命宫": f"{soul_gan}{soul_zhi}",
+        "空亡": xunkong,
         "身宫": f"{GAN[(GAN.index(TIGER_RULE[year_gan]) + body) % 10]}{ZHI[(body + 2) % 12]}",
         "五行局": f"{wx}{ju}局",
         "局数": ju,
