@@ -153,8 +153,8 @@ def portrait_liuren_sanchuan(sanchuan):
 
 
 def portrait_meihua_pan(r):
-    """梅花射覆：本卦上下 + 互卦上下 + 变卦上下 六卦多象合成。
-    r: meihua.cast() 的返回 dict（含 体卦/用卦/上卦/下卦/互卦/变卦）。"""
+    """梅花射覆：本/互/变 + 错/综/复 六观多象合成。
+    r: meihua.cast() 的返回 dict（含 体卦/用卦/上卦/下卦/互卦/变卦/错卦/综卦/复卦上/复卦下）。"""
     sig = []
     seen = set()
 
@@ -167,8 +167,10 @@ def portrait_meihua_pan(r):
     add(r.get("用卦"), 0.8)
     add(r.get("上卦"), 0.6)
     add(r.get("下卦"), 0.6)
-    for name, w in ((r.get("互卦"), 0.5), (r.get("变卦"), 0.7)):
-        pair = _NAME_TO_GUA.get(name)
+    # 六观会合：互/变/错/综/复 各取上下卦纳入（权重：体用 > 变 > 互/错/综 > 复）
+    for name, w in (("互卦", 0.5), ("变卦", 0.7), ("错卦", 0.5), ("综卦", 0.5),
+                    ("复卦上", 0.4), ("复卦下", 0.4)):
+        pair = _NAME_TO_GUA.get(r.get(name))
         if pair:
             add(GUA[pair[0]], w)
             add(GUA[pair[1]], w)

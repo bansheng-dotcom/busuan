@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """梅花易数：时间起卦 / 数字起卦"""
 import datetime
-from gua import GUA, YAO, WX, gua_num, hexagram_name, tri_to_num, wx_rel
+from gua import GUA, YAO, WX, gua_num, hexagram_name, tri_to_num, wx_rel, cuo, zong, fu, name_of
 
 DIZHI = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥']
 
@@ -168,6 +168,11 @@ def _build(shang, xia, dong, note="", month_zhi=None):
     bian_xia = tri_to_num(tuple(liu2[:3]))
     bian_shang = tri_to_num(tuple(liu2[3:]))
     bian = hexagram_name(bian_shang, bian_xia)
+    # 错综复三观（补齐射覆取象不全，会合参证见 judge/meihua_cuozongfu.py）
+    cuo_n = name_of(cuo(liu))                     # 错卦=六爻全变
+    zong_n = name_of(zong(liu))                   # 综卦=上下颠倒
+    fu_shang_n = name_of(fu(liu, "上"))           # 复上=上体翻对体（外伏）
+    fu_xia_n = name_of(fu(liu, "下"))             # 复下=下体翻对体（内伏）
     yong, ti = (xia, shang) if dong <= 3 else (shang, xia)  # 动为用、静为体
     sheng = wx_rel(WX[yong], WX[ti])
     if month_zhi is None:
@@ -177,10 +182,12 @@ def _build(shang, xia, dong, note="", month_zhi=None):
     print(f"动爻: 第{dong}爻")
     print(f"互卦: {hu}")
     print(f"变卦: {bian}")
+    print(f"错综复: 错={cuo_n} 综={zong_n} 复上={fu_shang_n} 复下={fu_xia_n}")
     print(f"体用: 体={GUA[ti]}({WX[ti]}) 用={GUA[yong]}({WX[yong]})  -> {sheng}")
     r = {
         "note": note,
         "本卦": ben, "互卦": hu, "变卦": bian, "动爻": dong,
+        "错卦": cuo_n, "综卦": zong_n, "复卦上": fu_shang_n, "复卦下": fu_xia_n,
         "上卦": GUA[shang], "下卦": GUA[xia], "上卦数": shang, "下卦数": xia,
         "体卦": GUA[ti], "体五行": WX[ti],
         "用卦": GUA[yong], "用五行": WX[yong],

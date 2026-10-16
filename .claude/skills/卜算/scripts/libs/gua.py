@@ -50,3 +50,38 @@ def wx_rel(yong_wx, ti_wx):
     if ke.get(ti_wx) == yong_wx:
         return "体克用(小吉)"
     return "体用比和(吉)"
+
+
+# ---------------------------------------------------------------------------
+# 卦变（错/综/复）纯函数 —— 供「错综复三观 + 会合参证」与梅花射覆复用。
+# 六爻列表 liu 一律自下而上（[初,二,三,四,五,上]），1 阳 0 阴，与 YAO/meihua 同口径。
+# ---------------------------------------------------------------------------
+def liu_of(shang, xia):
+    """上下卦数(1-8) -> 六爻列表(自下而上，1阳0阴)。"""
+    return YAO[xia] + YAO[shang]
+
+
+def name_of(liu):
+    """六爻列表(自下而上) -> 卦名。"""
+    xia = tri_to_num(tuple(liu[:3]))
+    shang = tri_to_num(tuple(liu[3:]))
+    return hexagram_name(shang, xia)
+
+
+def cuo(liu):
+    """错卦（对体）：六爻阴阳全变。乾错坤、泰错否、离错坎。"""
+    return [x ^ 1 for x in liu]
+
+
+def zong(liu):
+    """综卦（反体）：卦画上下颠倒。泰综否、既济综未济；乾/坤/坎/离/颐/大过/中孚/小过 综=自身。"""
+    return list(reversed(liu))
+
+
+def fu(liu, which="上"):
+    """复卦（伏）：上体/下体各自翻为对体（偏变，非六爻全变）。which='上'变上三爻，'下'变下三爻。"""
+    liu2 = list(liu)
+    idx = (3, 4, 5) if which == "上" else (0, 1, 2)
+    for i in idx:
+        liu2[i] ^= 1
+    return liu2
