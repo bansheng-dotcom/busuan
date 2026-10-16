@@ -32,6 +32,7 @@ class GejuAdapter(BaseAdapter):
         self.by_zhi = {p["支"]: i for i, p in enumerate(self.palaces)}
         self.ming = next((i for i, p in enumerate(self.palaces) if p.get("命")), 0)
         self.year_gan = chart.get("年干")
+        self.gender = chart.get("性别")
 
     def _stars(self, idx):
         p = self.palaces[idx]
@@ -142,6 +143,8 @@ class GejuAdapter(BaseAdapter):
             return self.palaces[idx]["支"] in kong
         if "gan" in c:  # 生年干在列表内
             return self.year_gan in c["gan"]
+        if "gender" in c:  # 性别（男/女）
+            return self.gender == c["gender"]
         raise ValueError(f"不认识的条件：{c!r}")
 
 
@@ -1186,6 +1189,101 @@ MING_JU = [
      "cond": {"and": [{"stars": ["破军"], "at": "身"},
                       {"sanfang": "身", "stars": ["廉贞", "火星", "擎羊", "陀罗"], "mode": "any"}]},
      "reading": "破军守身 + 廉贞火羊陀会"},
+
+    # —— 入命诀·吉格 ——
+    {"id": "mj-taiyang-quanlu", "star": "太阳", "verdict": "吉",
+     "text": "命里逢阳福寿浓，更兼权禄两相逢，魁昌左右来相凑，富贵双全比石崇。",
+     "note": "太阳守命更会权禄魁昌左右，主福寿、富贵双全",
+     "topic": "命诀", "src": S,
+     "cond": {"and": [{"stars": ["太阳"], "at": "命"},
+                      {"sanfang": "命", "stars": ["天魁", "文昌", "左辅", "右弼"], "mode": "any"}]},
+     "reading": "太阳守命 + 魁昌左右会命"},
+
+    {"id": "mj-tianfu-quanlu", "star": "天府", "verdict": "吉",
+     "text": "天府之星守命宫，加之权禄喜相逢，魁昌左右来相会，附凤攀龙上九重。",
+     "note": "天府守命更会权禄魁昌左右，主富贵、附凤攀龙",
+     "topic": "命诀", "src": S,
+     "cond": {"and": [{"stars": ["天府"], "at": "命"},
+                      {"sanfang": "命", "stars": ["天魁", "文昌", "左辅", "右弼"], "mode": "any"}]},
+     "reading": "天府守命 + 魁昌左右会命"},
+
+    {"id": "mj-ziwei-tianfu-shen", "star": "紫微", "verdict": "吉",
+     "text": "紫微女命守身宫，天府尊星同到宫，更得吉星同主照，金冠封赠福滔滔。",
+     "note": "紫微守身宫与天府同宫（女命），主封赠福厚",
+     "topic": "命诀", "src": S,
+     "cond": {"and": [{"stars": ["紫微"], "at": "身"}, {"same_palace": ["紫微", "天府"]},
+                      {"gender": "女"}]},
+     "reading": "紫微守身 + 天府同宫 + 女命"},
+
+    {"id": "mj-wuqu-tianfu-nv", "star": "武曲", "verdict": "吉",
+     "text": "女人武曲命中逢，天府加之志气雄，左右禄存相逢聚，富贵双全美无穷。",
+     "note": "武曲守命与天府同宫（女命），主志气、富贵双全",
+     "topic": "命诀", "src": S,
+     "cond": {"and": [{"stars": ["武曲"], "at": "命"}, {"same_palace": ["武曲", "天府"]},
+                      {"gender": "女"}]},
+     "reading": "武曲守命 + 天府同宫 + 女命"},
+
+    # —— 入命诀·女命凶格 ——
+    {"id": "mj-tiantong-taiyin-nv", "star": "天同", "verdict": "凶",
+     "text": "天同若与太阴同，女命逢之淫巧容，衣禄虽丰终不美，偏房侍妾与人通。",
+     "note": "天同太阴同宫（女命），主淫巧、衣禄不美、偏房",
+     "topic": "命诀", "src": S,
+     "cond": {"and": [{"same_palace": ["天同", "太阴"]}, {"gender": "女"}]},
+     "reading": "天同太阴同宫 + 女命"},
+
+    {"id": "mj-lianzhen-tanpo-nv", "star": "廉贞", "verdict": "凶",
+     "text": "廉贞贪破曲相逢，陀火交加极贱庸，定主刑夫并克子，只好偏房娼婢容。",
+     "note": "廉贞守命逢贪破曲陀火（女命），主刑夫克子、偏房",
+     "topic": "命诀", "src": S,
+     "cond": {"and": [{"stars": ["廉贞"], "at": "命"},
+                      {"sanfang": "命", "stars": ["贪狼", "破军", "陀罗", "火星"], "mode": "any"},
+                      {"gender": "女"}]},
+     "reading": "廉贞守命 + 贪破陀火会 + 女命"},
+
+    {"id": "mj-taiyin-xian-sha", "star": "太阴", "verdict": "凶",
+     "text": "太阴陷在命和身，不喜三方恶杀侵，克害夫君又夭寿，更虚血气少精神。",
+     "note": "太阴陷地守命身又三方恶杀（女命），主克夫夭寿",
+     "topic": "命诀", "src": S,
+     "cond": {"and": [{"stars": ["太阴"], "at": "命"},
+                      {"miaowang": {"at": "命", "star": "太阴", "in": ["陷", "不"]}},
+                      {"gender": "女"}]},
+     "reading": "太阴守命陷地 + 女命"},
+
+    {"id": "mj-tanlang-xian-nv", "star": "贪狼", "verdict": "凶",
+     "text": "贪狼陷地女非祥，衣食虽丰也不良，克害良人并男女，又教衾枕守孤孀。",
+     "note": "贪狼陷地（女命），主克害、孤孀",
+     "topic": "命诀", "src": S,
+     "cond": {"and": [{"stars": ["贪狼"], "at": "命"},
+                      {"miaowang": {"at": "命", "star": "贪狼", "in": ["陷"]}},
+                      {"gender": "女"}]},
+     "reading": "贪狼守命陷地 + 女命"},
+
+    {"id": "mj-jumen-xian-nv", "star": "巨门", "verdict": "凶",
+     "text": "巨门命陷主淫娼，侍女偏房免灾殃，相貌清奇多近宠，不然寿夭或凶亡。",
+     "note": "巨门陷地（女命），主淫娼、偏房或凶亡",
+     "topic": "命诀", "src": S,
+     "cond": {"and": [{"stars": ["巨门"], "at": "命"},
+                      {"miaowang": {"at": "命", "star": "巨门", "in": ["陷", "不"]}},
+                      {"gender": "女"}]},
+     "reading": "巨门守命陷地 + 女命"},
+
+    {"id": "mj-qisha-tanhuo-nv", "star": "七杀", "verdict": "凶",
+     "text": "七杀孤星贪宿逢，火陀凑合非为贵，女人得此性不良，只好偏房为使婢。",
+     "note": "七杀守命逢贪狼火陀（女命），主性不良、偏房",
+     "topic": "命诀", "src": S,
+     "cond": {"and": [{"stars": ["七杀"], "at": "命"},
+                      {"sanfang": "命", "stars": ["贪狼", "火星", "陀罗"], "mode": "any"},
+                      {"gender": "女"}]},
+     "reading": "七杀守命 + 贪狼火陀会 + 女命"},
+
+    {"id": "mj-pojun-qingyang-nv", "star": "破军", "verdict": "凶",
+     "text": "破军女命不宜逢，擎羊加陷便为凶，克害良人非一次，须教悲哭度朝昏。",
+     "note": "破军守命（女命）逢擎羊陷，主克害、悲哭",
+     "topic": "命诀", "src": S,
+     "cond": {"and": [{"stars": ["破军"], "at": "命"},
+                      {"sanfang": "命", "stars": ["擎羊"], "mode": "any"},
+                      {"gender": "女"}]},
+     "reading": "破军守命 + 擎羊会 + 女命"},
 ]
 
 

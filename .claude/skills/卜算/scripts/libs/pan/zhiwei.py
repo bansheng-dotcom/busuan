@@ -306,6 +306,7 @@ def cast(sy, sm, sd, hour, gender, lon=None, dst=False, fix_leap=True):
         **pan_meta("紫微"),
         "四柱": f"{year_gan}{year_zhi}  {lunar.getMonthInGanZhi()}  {lunar.getDayInGanZhi()}  {lunar.getTimeInGanZhi()}",
         "年干": year_gan,
+        "性别": "男" if gender else "女",
         "农历": lunar.toString(),
         "命宫": f"{soul_gan}{soul_zhi}",
         "空亡": xunkong,
