@@ -50,6 +50,30 @@ _JU_ALIAS = {
 }
 
 
+def correct_three_pass(r, lr, day_gan, day_zhi, hour_zhi, moongeneral):
+    """独立九宗门交叉修正三传：kinliuren 边界课型（比用/昴星/八专/返吟井栏射）易误判初传，
+    以规则推导 `regress.liuren_regress.ref_zongmen_chuchuan` 为准修正三传地支，并重算天将/六亲/旬空。
+
+    返回是否修正过。kinliuren 的宗门函数是硬编码分支森林，这里不动它，只在校验层兜底——
+    与《六壬大全》课经起例对拍不符时，以规则推导的三传覆盖，并在盘面标注 `_三传修正`。
+    """
+    from regress import liuren_regress as _lr_reg
+    ref = _lr_reg.ref_zongmen_chuchuan(moongeneral, hour_zhi, day_gan, day_zhi)
+    if not ref or not ref[2]:
+        return False
+    kin = [r["三傳"]["初傳"][0], r["三傳"]["中傳"][0], r["三傳"]["末傳"][0]]
+    if kin == ref[2]:
+        return False
+    g2 = lr.guiren_order_list(1)
+    for key, zhi in zip(("初傳", "中傳", "末傳"), ref[2]):
+        jiang = g2.get(zhi)
+        liuqin = lr.liuqing_dict.get(lr.multi_key_dict_get(
+            lr.wuxing_relation_2, lr.Ganzhiwuxing(day_gan) + lr.Ganzhiwuxing(zhi)))
+        r["三傳"][key] = [zhi, jiang, liuqin[0], lr.shunkong(lr.daygangzhi, zhi)]
+    r["_三传修正"] = {"原三传": kin, "修正为": ref[2], "依据": "独立九宗门规则推导(liuren_regress)"}
+    return True
+
+
 def cast(dt=None):
     dt = dt or datetime.datetime.now()
     solar = Solar.fromYmdHms(dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second)
@@ -68,6 +92,9 @@ def cast(dt=None):
     # 归一化引擎的 debug 后缀（"涉害1"->"涉害"、"蒿矢11"->"蒿矢"、"知一1"->"知一"、"間傳1"->"間傳"），
     # 这些是 kinliuren 硬编码分支里的调试尾巴，漏进课体/宗门名里污染输出。
     r["格局"] = [j.rstrip("0123456789") if isinstance(j, str) else j for j in (r.get("格局") or [])]
+
+    # 独立九宗门交叉修正：边界课型初传易误判，以规则推导兜底（详见 correct_three_pass 注释）
+    correct_three_pass(r, lr, day_gan, day_zhi, hour_gz[1], lr.moongeneral())
 
     print(f"[大六壬] {lunar.toString()} {jieqi}  {day_gz}日{hour_gz}时")
     print(f"格局: {'、'.join(r.get('格局', []))}")

@@ -134,11 +134,11 @@ def ref_zongmen_chuchuan(jiang, shi_zhi, day_gan, day_zhi):
 
     # 伏吟 / 返吟（天地盘特判）
     if jiang == shi_zhi:
-        # 伏吟：三传取日干寄宫上神，顺取天盘（本实现给基础伏吟，课体自任/自信从略）
-        return ("伏吟", "伏吟", _fuyin_chuan(e2s, day_gan))
+        # 伏吟：无克，刚日(自任)取干上神、柔日(自信)取支上神
+        return ("伏吟", "伏吟", _fuyin_chuan(e2s, day_gan, day_zhi))
     if jiang == _ZHI[(_ZHI.index(shi_zhi) + 6) % 12]:
-        # 返吟：三传 = 初传(唯一克课或日支上神)，中传末传取冲
-        return ("返吟", "返吟", _fanyin_chuan(e2s, day_zhi, sike, rels))
+        # 返吟：有克取克课、无克为井栏射（丑未日）
+        return ("返吟", "返吟", _fanyin_chuan(e2s, day_zhi, sike, rels, day_gan))
 
     # 贼克 / 比用 / 涉害（下贼上优先于上克下）
     if zeke:
@@ -161,16 +161,21 @@ def ref_zongmen_chuchuan(jiang, shi_zhi, day_gan, day_zhi):
         # 无克 → 八专 / 遥克 / 昴星 / 别责
         # 八专：干支同位（寄宫==日支）且四课无克（须在无克分支内判，勿提前到有克前）
         if _JIGONG[day_gan] == day_zhi:
-            return ("八专", "八专", None)   # 三传规则复杂，标出宗门不校三传
-        # 遥克：日干克四课上神(弹射) 或 上神克日干(蒿矢)
+            return ("八专", "八专", _bazhuan_chuan(e2s, day_gan, day_zhi))
+        # 遥克：先蒿矢(上神克日)后弹射(日克上神)，多个取与日干比者（阳日阳阴日阴）
         shangshen = [k[0] for k in sike]
         tan = [i for i, s in enumerate(shangshen) if _KE.get(wx(s)) == wx(day_gan)]   # 上神克干 -> 蒿矢
         she = [i for i, s in enumerate(shangshen) if _KE.get(wx(day_gan)) == wx(s)]    # 干克上神 -> 弹射
-        if she:
-            return ("遥克", "弹射", _shun_chuan(e2s, shangshen[she[0]]))
         if tan:
-            return ("遥克", "蒿矢", _shun_chuan(e2s, shangshen[tan[0]]))
-        return ("昴星", "昴星", None)   # 昴星/别责三传特殊，标出宗门不校三传
+            bi = [i for i in tan if yinyang(shangshen[i]) == yinyang(day_gan)]
+            return ("遥克", "蒿矢", _shun_chuan(e2s, shangshen[bi[0] if bi else tan[0]]))
+        if she:
+            bi = [i for i in she if yinyang(shangshen[i]) == yinyang(day_gan)]
+            return ("遥克", "弹射", _shun_chuan(e2s, shangshen[bi[0] if bi else she[0]]))
+        # 别责：四课不备（上神去重<4）且无克无遥克
+        if len({k[0] for k in sike}) < 4:
+            return ("别责", "别责", _bieze_chuan(e2s, day_gan, day_zhi))
+        return ("昴星", "昴星", _maoxing_chuan(e2s, day_gan, day_zhi))
 
 
 def _shun_chuan(e2s, first):
@@ -235,21 +240,61 @@ def _shehai_v2(e2s, sike, idxs, day_gan, day_zhi, day_yy):
     return _shun_chuan(e2s, first)
 
 
-def _fuyin_chuan(e2s, day_gan):
-    """伏吟：初传=寄宫上神，中传=天盘(初传)，末传=天盘(中传)（简化，自任/自信从略）。"""
-    first = e2s[_JIGONG[day_gan]]
+def _fuyin_chuan(e2s, day_gan, day_zhi):
+    """伏吟：无克，刚日(自任)取干上神、柔日(自信)取支上神为初传。"""
+    if yinyang(day_gan) == "阳":
+        first = e2s[_JIGONG[day_gan]]
+    else:
+        first = e2s[day_zhi]
     return _shun_chuan(e2s, first)
 
 
-def _fanyin_chuan(e2s, day_zhi, sike, rels):
-    """返吟：初传=克课或日支上神，中末传取冲（简化，无依/元胎从略）。"""
+def _fanyin_chuan(e2s, day_zhi, sike, rels, day_gan):
+    """返吟：有克取克课初传、中末取冲；无克为井栏射（丑日取巳上神、未日取亥上神）。"""
     chong = lambda z: _ZHI[(_ZHI.index(z) + 6) % 12]
     for i, r in enumerate(rels):
         if r in ("下贼上", "上克下"):
             first = sike[i][0]
             return [first, chong(first), first]
-    first = e2s[day_zhi]
-    return [first, chong(first), first]
+    # 无克 → 井栏射（返吟无克惟丑未日）：丑日取巳上神、未日取亥上神；中传支上神、末传干上神
+    if day_zhi == "丑":
+        first = e2s["巳"]
+    elif day_zhi == "未":
+        first = e2s["亥"]
+    else:
+        first = e2s[day_zhi]
+    return [first, e2s[day_zhi], e2s[_JIGONG[day_gan]]]
+
+
+def _maoxing_chuan(e2s, day_gan, day_zhi):
+    """昴星（虎视）：刚日取酉上神、柔日取酉下神为初传。
+    刚日：初=酉上神，中=支上神，末=干上神；柔日：初=酉下神，中=干上神，末=支上神。"""
+    e2s_inv = {v: k for k, v in e2s.items()}
+    if yinyang(day_gan) == "阳":
+        return [e2s["酉"], e2s[day_zhi], e2s[_JIGONG[day_gan]]]
+    return [e2s_inv["酉"], e2s[_JIGONG[day_gan]], e2s[day_zhi]]
+
+
+def _bazhuan_chuan(e2s, day_gan, day_zhi):
+    """八专：刚日干上神顺数三辰、柔日支上神逆数三辰为初传，中末皆干上神。"""
+    ganshang = e2s[_JIGONG[day_gan]]
+    if yinyang(day_gan) == "阳":
+        first = _ZHI[(_ZHI.index(ganshang) + 2) % 12]
+    else:
+        first = _ZHI[(_ZHI.index(e2s[day_zhi]) - 2) % 12]
+    return [first, ganshang, ganshang]
+
+
+def _bieze_chuan(e2s, day_gan, day_zhi):
+    """别责：刚日取干合之干寄宫上神、柔日取支三合前一辰(支+4)上神为初传，中末皆干上神。"""
+    ganshang = e2s[_JIGONG[day_gan]]
+    if yinyang(day_gan) == "阳":
+        he = {"甲": "己", "己": "甲", "乙": "庚", "庚": "乙", "丙": "辛",
+              "辛": "丙", "丁": "壬", "壬": "丁", "戊": "癸", "癸": "戊"}
+        first = e2s[_JIGONG[he[day_gan]]]
+    else:
+        first = e2s[_ZHI[(_ZHI.index(day_zhi) + 4) % 12]]
+    return [first, ganshang, ganshang]
 
 
 # —— 交叉校验：独立九宗门实现 vs kinliuren 引擎 ——
