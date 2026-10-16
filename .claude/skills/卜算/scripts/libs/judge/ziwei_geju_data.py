@@ -31,6 +31,7 @@ class GejuAdapter(BaseAdapter):
         self.by_name = {p["宫"]: i for i, p in enumerate(self.palaces)}
         self.by_zhi = {p["支"]: i for i, p in enumerate(self.palaces)}
         self.ming = next((i for i, p in enumerate(self.palaces) if p.get("命")), 0)
+        self.year_gan = chart.get("年干")
 
     def _stars(self, idx):
         p = self.palaces[idx]
@@ -139,6 +140,8 @@ class GejuAdapter(BaseAdapter):
                 return z in kong
             idx = self._idx(kw["at"])
             return self.palaces[idx]["支"] in kong
+        if "gan" in c:  # 生年干在列表内
+            return self.year_gan in c["gan"]
         raise ValueError(f"不认识的条件：{c!r}")
 
 
@@ -448,6 +451,71 @@ GEJU_RULES = [
 def find_geju(chart):
     """判定紫微格局，返回命中的 [{id,name,verdict,text,note,src,reading}]。"""
     return find(GEJU_RULES, GejuAdapter(chart))[0]
+
+
+# —— 诸星同垣·星落宫断语（每星在某宫 + 同度星 + 生年干 = 吉凶格）——
+# 出处：《紫微斗数全书》卷三「论诸星分属南北斗化吉凶」每星总论下的十二宫落宫断语。
+# 与格局（星曜组合）不同，这类断语把「生年干」作为判定条件，是断命的核心细分。
+STAR_GONG = [
+    {"id": "sg-ziwei-zi", "star": "紫微", "verdict": "吉",
+     "text": "子宫喜丁己庚生人贵格，壬癸生人不耐久",
+     "note": "紫微在子宫，丁己庚生年干者贵格",
+     "topic": "落宫", "src": S,
+     "cond": {"and": [{"stars": ["紫微"], "at": "子"}, {"gan": ["丁", "己", "庚"]}]},
+     "reading": "紫微在子 + 丁己庚生年干"},
+
+    {"id": "sg-ziwei-wu", "star": "紫微", "verdict": "吉",
+     "text": "午宫入庙喜甲丁己生人财官格，丙戊生人成败带疾",
+     "note": "紫微在午入庙，甲丁己生年干者财官格",
+     "topic": "落宫", "src": S,
+     "cond": {"and": [{"stars": ["紫微"], "at": "午"}, {"gan": ["甲", "丁", "己"]}]},
+     "reading": "紫微在午 + 甲丁己生年干"},
+
+    {"id": "sg-ziwei-maoyou", "star": "紫微", "verdict": "中",
+     "text": "卯酉宫贪狼同度，乙辛甲庚生人贵不耐久",
+     "note": "紫微在卯酉与贪狼同度，乙辛甲庚生年干者贵不耐久",
+     "topic": "落宫", "src": S,
+     "cond": {"and": [{"or": [{"stars": ["紫微"], "at": "卯"}, {"stars": ["紫微"], "at": "酉"}]},
+                      {"same_palace": ["紫微", "贪狼"]}, {"gan": ["乙", "辛", "甲", "庚"]}]},
+     "reading": "紫微在卯酉 + 贪狼同度 + 乙辛甲庚生年干"},
+
+    {"id": "sg-ziwei-yinshen", "star": "紫微", "verdict": "吉",
+     "text": "寅申宫旺地与天府同度，甲庚丁己生人财官格",
+     "note": "紫微在寅申旺地与天府同度，甲庚丁己生年干者财官格",
+     "topic": "落宫", "src": S,
+     "cond": {"and": [{"or": [{"stars": ["紫微"], "at": "寅"}, {"stars": ["紫微"], "at": "申"}]},
+                      {"same_palace": ["紫微", "天府"]}, {"gan": ["甲", "庚", "丁", "己"]}]},
+     "reading": "紫微在寅申 + 天府同度 + 甲庚丁己生年干"},
+
+    {"id": "sg-ziwei-sihai", "star": "紫微", "verdict": "吉",
+     "text": "巳亥宫旺地与七杀同度，乙戊生人财官格",
+     "note": "紫微在巳亥旺地与七杀同度，乙戊生年干者财官格",
+     "topic": "落宫", "src": S,
+     "cond": {"and": [{"or": [{"stars": ["紫微"], "at": "巳"}, {"stars": ["紫微"], "at": "亥"}]},
+                      {"same_palace": ["紫微", "七杀"]}, {"gan": ["乙", "戊"]}]},
+     "reading": "紫微在巳亥 + 七杀同度 + 乙戊生年干"},
+
+    {"id": "sg-ziwei-chenxu", "star": "紫微", "verdict": "吉",
+     "text": "辰戌宫得地与天相同度，乙己甲庚癸生人财官格",
+     "note": "紫微在辰戌得地与天相同度，乙己甲庚癸生年干者财官格",
+     "topic": "落宫", "src": S,
+     "cond": {"and": [{"or": [{"stars": ["紫微"], "at": "辰"}, {"stars": ["紫微"], "at": "戌"}]},
+                      {"same_palace": ["紫微", "天相"]}, {"gan": ["乙", "己", "甲", "庚", "癸"]}]},
+     "reading": "紫微在辰戌 + 天相同度 + 乙己甲庚癸生年干"},
+
+    {"id": "sg-ziwei-chouwei", "star": "紫微", "verdict": "吉",
+     "text": "丑未宫入庙与破军同度，乙己甲庚丁壬生人财官格",
+     "note": "紫微在丑未入庙与破军同度，乙己甲庚丁壬生年干者财官格",
+     "topic": "落宫", "src": S,
+     "cond": {"and": [{"or": [{"stars": ["紫微"], "at": "丑"}, {"stars": ["紫微"], "at": "未"}]},
+                      {"same_palace": ["紫微", "破军"]}, {"gan": ["乙", "己", "甲", "庚", "丁", "壬"]}]},
+     "reading": "紫微在丑未 + 破军同度 + 乙己甲庚丁壬生年干"},
+]
+
+
+def find_star_gong(chart):
+    """判定诸星同垣落宫断语，返回命中的 [{id,star,verdict,text,note,src,reading}]。"""
+    return find(STAR_GONG, GejuAdapter(chart))[0]
 
 
 if __name__ == "__main__":

@@ -33,56 +33,55 @@ _REQUIRED = ["id", "name", "verdict", "text", "note", "cond", "reading"]
 
 
 def main():
-    rules = ZG.GEJU_RULES
-    print(f"[紫微] 格局判定回归：{len(rules)} 格局规则表\n")
-
-    # —— 1. 字段完整性 + id 唯一 + verdict 合法 ——
-    bad = []
-    ids = set()
-    for r in rules:
-        for f in _REQUIRED:
-            if f not in r or not r[f]:
-                bad.append((r.get("id"), f"缺 {f}"))
-        if r["id"] in ids:
-            bad.append((r["id"], "重复 id"))
-        ids.add(r["id"])
-        if r["verdict"] not in ("吉", "凶", "中"):
-            bad.append((r["id"], f"非法 verdict {r['verdict']!r}"))
-    ok_fields = not bad
-    print(f"  {'✓' if ok_fields else '✗'} 字段完整性：{len(rules)} 条 id 唯一、字段齐全 {('；违规 ' + str(bad)) if bad else ''}")
-
-    # —— 2. cond 可解析：多张盘跑 find_geju 不抛异常 ——
-    #    找几张不同命宫的盘（不同生辰），确保覆盖面广
-    charts_ok = True
-    try:
-        test_cases = [
-            (1990, 5, 15, 8, 1),
-            (1984, 2, 4, 12, 0),
-            (2000, 11, 11, 6, 1),
-            (1976, 8, 8, 20, 0),
-        ]
-        for tc in test_cases:
-            chart = zhiwei.cast(*tc)
-            hits = ZG.find_geju(chart)
-            assert isinstance(hits, list)
-    except Exception as e:
-        charts_ok = False
-        print(f"  ✗ cond 解析异常：{type(e).__name__}: {e}")
-    print(f"  {'✓' if charts_ok else '✗'} cond 可解析：{len(test_cases)} 张盘跑 find_geju 无异常")
-
-    # —— 3. 原文佐证：每条 text 至少一个片段能在《全书》Grep 到 ——
     corpus = open(_TXT, encoding="utf-8").read()
-    no_src = []
-    for r in rules:
-        frags = [s.strip() for s in r["text"].split("；") if s.strip()]
-        if not any(f in corpus for f in frags):
-            no_src.append((r["id"], r["name"], frags))
-    ok_src = not no_src
-    print(f"  {'✓' if ok_src else '✗'} 原文佐证：每条格局 text 至少一片段见于《全书》txt {('；缺失 ' + str(no_src)) if no_src else ''}")
+    tables = [
+        ("格局", ZG.GEJU_RULES, ZG.find_geju),
+        ("落宫", ZG.STAR_GONG, ZG.find_star_gong),
+    ]
+    all_ok = True
 
-    fail = (not ok_fields) or (not charts_ok) or (not ok_src)
-    print(f"\n结果: {'失败' if fail else '通过'}（字段完整性 + cond 可解析 + 原文佐证）")
-    sys.exit(1 if fail else 0)
+    for label, table, finder in tables:
+        print(f"[紫微·{label}] {len(table)} 条\n")
+
+        # —— 1. 字段完整性 + id 唯一 + verdict 合法 ——
+        bad = []
+        ids = set()
+        for r in table:
+            for f in ("id", "verdict", "text", "note", "cond", "reading"):
+                if f not in r or not r[f]:
+                    bad.append((r.get("id"), f"缺 {f}"))
+            if r["id"] in ids:
+                bad.append((r["id"], "重复 id"))
+            ids.add(r["id"])
+            if r["verdict"] not in ("吉", "凶", "中"):
+                bad.append((r["id"], f"非法 verdict {r['verdict']!r}"))
+        ok_fields = not bad
+        print(f"  {'✓' if ok_fields else '✗'} 字段完整性 {('；违规 ' + str(bad)) if bad else ''}")
+
+        # —— 2. cond 可解析 ——
+        charts_ok = True
+        try:
+            for tc in [(1990, 5, 15, 8, 1), (1984, 2, 4, 12, 0), (2000, 11, 11, 6, 1), (1976, 8, 8, 20, 0)]:
+                assert isinstance(finder(zhiwei.cast(*tc)), list)
+        except Exception as e:
+            charts_ok = False
+            print(f"  ✗ cond 解析异常：{type(e).__name__}: {e}")
+        print(f"  {'✓' if charts_ok else '✗'} cond 可解析")
+
+        # —— 3. 原文佐证 ——
+        no_src = []
+        for r in table:
+            frags = [s.strip() for s in r["text"].split("；") if s.strip()]
+            if not any(f in corpus for f in frags):
+                no_src.append((r["id"], frags))
+        ok_src = not no_src
+        print(f"  {'✓' if ok_src else '✗'} 原文佐证 {('；缺失 ' + str(no_src)) if no_src else ''}")
+
+        all_ok = all_ok and ok_fields and charts_ok and ok_src
+        print()
+
+    print(f"结果: {'通过' if all_ok else '失败'}")
+    sys.exit(0 if all_ok else 1)
 
 
 if __name__ == "__main__":
