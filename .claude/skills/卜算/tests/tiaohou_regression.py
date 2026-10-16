@@ -30,21 +30,30 @@ from judge.tiaohou import TIAO_HOU
 _GAN = "甲乙丙丁戊己庚辛壬癸"
 _ZHI = "寅卯辰巳午未申酉戌亥子丑"
 
-# 甲木 12 月：原文「第一用神」golden（据《穷通宝鉴》各月明确表述提取）
-_JIA_FIRST = [
-    ("寅", "丙", "正月得丙癸逢"),
-    ("卯", "庚", "二月庚金得所"),
-    ("辰", "庚", "三月先取庚金"),
-    ("巳", "癸", "四月先癸後丁"),
-    ("午", "癸", "五月先癸後丁"),
-    ("未", "丁", "六月先丁後庚"),
-    ("申", "丁", "七月丁火为尊"),
-    ("酉", "丁", "八月丁火为先"),
-    ("戌", "丁", "九月独爱丁火"),
-    ("亥", "庚", "十月庚丁为要"),
-    ("子", "丁", "十一月丁先庚後"),
-    ("丑", "庚", "十二月先用庚劈甲"),
-]
+# 十干 × 十二月「第一用神」golden（据《穷通宝鉴》各月明确表述提取）。
+# 每干 12 字，顺序=寅卯辰巳午未申酉戌亥子丑；'?'=原文未明确（合并论述/缺失/并列）。
+_FIRST_GOLDEN = {
+    "甲": "丙庚庚癸癸丁丁丁丁庚丁庚",
+    "乙": "丙丙癸癸癸丙己癸癸丙丙丙",
+    "丙": "壬壬壬壬壬壬壬壬甲甲壬壬",
+    "丁": "庚庚甲庚?甲甲?甲甲甲甲",
+    "戊": "丙丙甲甲壬癸丙丙甲甲丙丙",
+    "己": "丙甲丙癸癸癸癸癸甲丙丙丙",
+    "庚": "丙丁甲壬壬丁丁丁甲丁丁丙",
+    "辛": "己壬壬壬?壬壬壬壬壬丙丙",
+    "壬": "庚戊甲壬癸辛戊甲甲戊戊丙",
+    "癸": "辛庚丙辛庚庚丁辛辛庚丙丙",
+}
+# 关键差异格的原文表述（差异报告引用出处，避免「断言无据」）
+_NOTE = {
+    ("甲", "未"): "六月先丁後庚", ("甲", "申"): "七月丁火为尊",
+    ("甲", "戌"): "九月独爱丁火", ("甲", "丑"): "十二月先用庚劈甲",
+    ("丁", "寅"): "正月姑用庚金(劈甲)", ("丁", "巳"): "四月必用庚劈甲",
+    ("壬", "巳"): "四月专取壬水比肩", ("辛", "寅"): "正月取己土为身之本",
+    ("辛", "亥"): "十月先用壬水", ("辛", "子"): "十一月壬丙两透",
+    ("己", "申"): "三秋己土癸先丙後", ("庚", "辰"): "三月先甲後丁",
+    ("戊", "辰"): "三月先甲後丙", ("乙", "申"): "七月喜己土为用",
+}
 
 
 def main():
@@ -73,19 +82,25 @@ def main():
     ok_legal = not bad
     print(f"  {'✓' if ok_legal else '✗'} 合法性：每条用神在十干内、非空、无重复 {('；违规 ' + str(bad)) if bad else ''}")
 
-    # —— 差异报告：甲木 12 月第一用神 ——
-    print("\n  [差异报告] 甲木 12 月：原文第一用神 vs TIAO_HOU 第一用神")
-    diff = []
-    for z, yuan_first, note in _JIA_FIRST:
-        got = TIAO_HOU["甲"][z]
-        mark = "✓" if got[0] == yuan_first else "✗"
-        if got[0] != yuan_first:
-            diff.append((z, yuan_first, got, note))
-        print(f"    {mark} 甲{('寅卯辰巳午未申酉戌亥子丑'.index(z)+1)}月({z}): 原文「{yuan_first}」vs TIAO_HOU {got}  [{note}]")
-
-    print(f"\n  差异 {len(diff)} 处（提炼口径差异，非对错，供人工复核）：")
-    for z, yuan_first, got, note in diff:
-        print(f"    甲{('寅卯辰巳午未申酉戌亥子丑'.index(z)+1)}月({z}): 原文「{yuan_first}」≠ TIAO_HOU 首用神「{got[0]}」")
+    # —— 差异报告：全量 120 格第一用神（10 干 × 12 月） ——
+    print("\n  [差异报告] 全量 120 格：原文第一用神 vs TIAO_HOU 首用神（'?'=原文未明确）")
+    diff, weiming = [], []
+    for g in _GAN:
+        s = _FIRST_GOLDEN[g]
+        for i, z in enumerate(_ZHI):
+            yuan = s[i]
+            if yuan == "?":
+                weiming.append((g, z))
+                continue
+            got = TIAO_HOU[g][z][0]
+            if got != yuan:
+                note = _NOTE.get((g, z), "")
+                diff.append((g, z, yuan, got, note))
+    for g, z, yuan, got, note in diff:
+        print(f"    ✗ {g}{z}月: 原文「{yuan}」{('（' + note + '）') if note else ''} ≠ TIAO_HOU 首用神「{got}」")
+    print(f"\n  差异 {len(diff)} 处（提炼口径差异，非对错，供人工复核）；原文未明确 {len(weiming)} 格：")
+    if weiming:
+        print("    未明确格：" + "、".join(f"{g}{z}" for g, z in weiming))
 
     fail = (not ok_count) or (not ok_legal)
     print(f"\n结果: {'失败' if fail else '通过'}（120 完整性 + 合法性硬断言；第一用神差异不判错）")

@@ -150,6 +150,24 @@ def wangshuai_score(ec):
     return {"得分": round(total, 1), "档次": level, "分项": parts, "日主五行": ri_wx}
 
 
+def wangshuai_ratio(ec):
+    """日主旺衰连续 ratio（0-1 同党占比）。复用 `judge/bazi_chain.py::day_master_strength`
+    的成分加权（同党=比劫+印，异党=食伤+财+官杀，`ratio = 同党/(同党+异党)`），
+    与 `wangshuai_score`（0-100 帮身绝对分）互补——score 暴露「帮身绝对分」，
+    ratio 暴露「同党/(同党+异党)」归一化连续值，收口「旺衰量化暴露连续 ratio（现为离散分）」。
+    返回 {ratio, 档次, 有根, 同党, 异党, 净值}，五档分界沿用 bazi_chain.RATIO_BANDS。"""
+    from judge import bazi_chain as bc
+    quad = {
+        "year": (ec.getYearGan(), ec.getYearZhi()),
+        "month": (ec.getMonthGan(), ec.getMonthZhi()),
+        "day": (ec.getDayGan(), ec.getDayZhi()),
+        "hour": (ec.getTimeGan(), ec.getTimeZhi()),
+    }
+    s = bc.day_master_strength(quad)
+    return {"ratio": s.ratio, "档次": s.label, "有根": s.has_root,
+            "同党": s.support, "异党": s.drain, "净值": s.net}
+
+
 _SS_EXPAND = {
     "伤官": ["伤官"], "食神": ["食神"], "偏印": ["偏印"], "正官": ["正官"], "七杀": ["七杀"],
     "印": ["正印", "偏印"], "财": ["正财", "偏财"], "比劫": ["比肩", "劫财"],
@@ -271,11 +289,13 @@ def mingli_analysis(y, mo, d, hh=12, mi=0, ss=0, gender=1):
     """命理增强分析：旺衰量化 + 格局成破 + 合化判断。打印并返回 dict。"""
     ec = Solar.fromYmdHms(y, mo, d, hh, mi, ss).getLunar().getEightChar()
     ws = wangshuai_score(ec)
+    wsr = wangshuai_ratio(ec)
     ge = tiaohou.ding_ge(y, mo, d, hh, gender)
     cj = geju_chengjiu(ec, ge["格局"])
     hh_report = hehua_report(ec)
-    print("[旺衰量化] 日主{}{}({}) 得分 {} 分 → {}  ".format(
-        ec.getDayGan(), ec.getDayZhi(), ws["日主五行"], ws["得分"], ws["档次"]))
+    print("[旺衰量化] 日主{}{}({}) 得分 {} 分 → {}  连续ratio {:.2f}（同党{}/异党{}）→ {}  ".format(
+        ec.getDayGan(), ec.getDayZhi(), ws["日主五行"], ws["得分"], ws["档次"],
+        wsr["ratio"], wsr["同党"], wsr["异党"], wsr["档次"]))
     print("  " + "；".join(f"{k}{v[0]}分({v[1]})" for k, v in ws["分项"].items()))
     print(f"[格局] {ge['格局']}（{ge['依据']}）→ {cj['判定']}：{cj['依据']}")
     if hh_report:
@@ -302,7 +322,7 @@ def mingli_analysis(y, mo, d, hh=12, mi=0, ss=0, gender=1):
     by = bingyao(ws, cj, sorted(xi), sorted(ji))
     print()
     print(f"【病药框架】{by}")
-    return {"旺衰": ws, "格局": cj, "合化": hh_report,
+    return {"旺衰": ws, "旺衰ratio": wsr, "格局": cj, "合化": hh_report,
             "喜": sorted(xi), "忌": sorted(ji), "综合评分": score, "病药": by}
 
 
