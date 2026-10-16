@@ -20,6 +20,12 @@ import re
 import datetime
 import collections
 
+# 本文件在 regress/ 子目录，需把上级 libs/ 加进 sys.path 才能 `from engines.taiyi.kinliuren`，
+# 否则 docs 里的 `python scripts/libs/regress/liuren_regress.py` 直跑会 ModuleNotFoundError。
+_LIB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _LIB not in sys.path:
+    sys.path.insert(0, _LIB)
+
 from lunar_python import Solar
 from engines.taiyi.kinliuren import Liuren
 

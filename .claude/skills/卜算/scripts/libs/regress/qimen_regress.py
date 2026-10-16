@@ -44,7 +44,10 @@ for _stream in (sys.stdout, sys.stderr):
     except Exception:
         pass
 
-LIB = os.path.dirname(os.path.abspath(__file__))
+# 本文件在 regress/ 子目录，需把上级 libs/ 加进 sys.path 才能 `from engines.qimen` 与
+# `import engines.qimen.config`（否则 `python scripts/libs/regress/qimen_regress.py` 直接跑
+# 会 ModuleNotFoundError: engines，docs 里的直跑用法即成死路径）。
+LIB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if LIB not in sys.path:
     sys.path.insert(0, LIB)
 
