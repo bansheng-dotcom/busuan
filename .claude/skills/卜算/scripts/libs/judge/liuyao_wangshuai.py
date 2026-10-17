@@ -28,6 +28,11 @@ if sys.platform == "win32":
 
 from pan import najia  # noqa: E402
 
+# 出处（固化，断卦仍 Grep 原文佐证）：
+#  月令旺相休囚死 → 《增删卜易》四时旺相章；墓库 → 《增删卜易》墓库章；
+#  元神忌神 → 《增删卜易》元神忌神章（生克冲合）；判断矩阵 → 《增删卜易》四处生克章。
+SOURCE = "《增删卜易》"
+
 _WX = najia.ZHI_WX
 _SHENG = najia.SHENG
 _KE = najia.KE
