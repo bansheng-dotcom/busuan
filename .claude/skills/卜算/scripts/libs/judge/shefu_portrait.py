@@ -25,6 +25,28 @@ KB_PATH = os.path.join(HERE, "..", "..", "..", "data", "类象库.json")
 
 _DIMS = ["颜色", "材质", "形态", "功能", "结构", "性质"]
 
+# 五行盲区：盘面缺某五行 → 对该五行所主物件「分辨力低」（缺≠非，见射覆特征画像.md §6.4）
+_WX_ALL = ["金", "木", "水", "火", "土"]
+_WX_BLIND = {
+    "金": "金属/刀剪/利器",
+    "木": "木竹/织物/绳线",
+    "水": "液体/暗昧/污秽",
+    "火": "发光发热/红赤/点火",
+    "土": "陶瓦/容器/玉石/泥土",
+}
+# 卦盲区（梅花）：六观缺某卦 → 缺该卦主类象
+_GUA_ALL = ["乾", "坤", "震", "巽", "坎", "离", "艮", "兑"]
+_GUA_BLIND = {
+    "乾": "金属圆/玉/贵重",
+    "坤": "布帛/五谷/瓦器/方柔",
+    "震": "震动/发声/草木/车辆",
+    "巽": "木竹/风/绳直",
+    "坎": "水/液体/陷",
+    "离": "火/光明/中空/电",
+    "艮": "山/止/果蓏/手",
+    "兑": "金刃/缺器/刀剪/带口工具",
+}
+
 
 def _load():
     with open(KB_PATH, encoding="utf-8") as f:
@@ -75,7 +97,8 @@ def portrait(signals, context=None):
         out[dim] = [(val, _conf_level(sc), round(sc, 2)) for val, sc in items[:2]]
     if context in _CONTEXT_DIMS:
         out = {k: v for k, v in out.items() if k in _CONTEXT_DIMS[context]}
-    return {"signals": [s[0] for s in signals], "used": used, "dimensions": out}
+    return {"signals": [s[0] for s in signals], "used": used, "dimensions": out,
+            "blind": blind_spots(signals)}
 
 
 def portrait_liuren(tianjiang_list):
@@ -217,6 +240,34 @@ def _wuxing_of(name):
     return None
 
 
+def blind_spots(signals):
+    """盲区标注：盘面信号「缺什么」→ 对哪类物件分辨力低。
+
+    两类盲区：
+    - 五行盲区：signals 五行并集 vs 金木水火土全集，缺者标「对{所主物类}分辨力低」。
+    - 卦盲区：仅当 signals 含八卦名时，六观卦并集 vs 八卦全集，缺者标「缺该卦主类象」。
+
+    铁律（缺X≠非X）：盲区只表「本盘对该类分辨力低（无该类信号可依）」，绝不推出
+    「物件非该类」——起盘采样有限，缺＝没起出，不是不存在（2026-10-18 指甲刀教训：
+    金口诀四位无金、梅花六观无兑，实物却是铁指甲刀）。"""
+    present_wx = set()
+    present_gua = set()
+    for name, _w in signals:
+        wx = _wuxing_of(name)
+        if wx:
+            present_wx.add(wx)
+        if name in _GUA_ALL:
+            present_gua.add(name)
+    out = {}
+    miss_wx = [wx for wx in _WX_ALL if wx not in present_wx]
+    if miss_wx:
+        out["五行"] = [f"缺{wx}→对{_WX_BLIND[wx]}分辨力低" for wx in miss_wx]
+    miss_gua = [g for g in _GUA_ALL if g not in present_gua]
+    if present_gua and miss_gua:
+        out["卦"] = [f"缺{g}→缺「{_GUA_BLIND[g]}」类象" for g in miss_gua]
+    return out
+
+
 def related_wuxing(names):
     """五行同气联象（网络化）：返回 {五行: [库内同气节点名...]}。
     跨 天将/八卦/地支/天干 四类节点，按五行关联同气象——射覆取象不全时，
@@ -270,6 +321,11 @@ def _fmt(p):
     for dim, vals in p["dimensions"].items():
         s = " / ".join(f"[{v[1]}] {v[0]}" for v in vals)
         lines.append(f"  {dim}  {s}")
+    blind = p.get("blind") or {}
+    if blind:
+        lines.append("⚠️ 盲区（本盘分辨力低的维度，缺≠非，建议交互补）")
+        for kind, items in blind.items():
+            lines.append(f"  {kind}: {'、'.join(items)}")
     # 候选参考：取材质+形态+功能+物类 top 值拼成候选类别（降分辨率给候选，不点名）
     cand = []
     for dim in ("材质", "形态", "功能", "物类"):

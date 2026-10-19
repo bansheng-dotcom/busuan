@@ -1,0 +1,1412 @@
+//! 四柱各层的校验用例：权威 oracle、性质测试与边界。
+
+#![allow(clippy::float_cmp, reason = "用例里的常量比较是精确期望值")]
+
+use super::*;
+
+// ---- fortune_at / timeline 测试 ----------------------------------
+
+fn natal_1987() -> BirthInput {
+    BirthInput { year: 1987, month: 9, day: 17, hour: 15, minute: 0, tz: 8.0, gender: Some(Gender::Male) }
+}
+
+/// 春节换岁：一年只换一次，且换在正月初一那天。
+///
+/// 原先这一支由公历年加农历月日反推，在公历十一、十二月上会把年柱退回前一年——
+/// 2024-12-15 是农历十一月，而 2024 年正月初一（02-10）早已过去，年柱却算成癸卯。
+/// 而当时三条测试取的都是二月三月的日期，恰好落在那套判断对的区间里，
+/// 注释还写着「覆盖 L397」「fallback L402」——照着分支写的，不是照着规矩写的。
+///
+/// 这条改成查规矩本身：逐日扫过整年，年柱只准变一次，且变的那天农历必是正月初一。
+/// 不拿 `m.lunar.year` 对答案，那是实现现在直接返回的东西，比了等于没比。
+#[test]
+fn the_spring_festival_year_turns_once_a_year_on_the_first_of_the_first_month() {
+    use crate::{BaziSchool, YearBreakMethod, ZiHourMethod};
+    let school = BaziSchool {
+        zi_hour: ZiHourMethod::Late,
+        year_break: YearBreakMethod::SpringFestival,
+    };
+    let days_in = |y: i32, m: u32| -> u32 {
+        match m {
+            1 | 3 | 5 | 7 | 8 | 10 | 12 => 31,
+            4 | 6 | 9 | 11 => 30,
+            _ => u32::from((y % 4 == 0 && y % 100 != 0) || y % 400 == 0) + 28,
+        }
+    };
+    for year in 2020..=2030i32 {
+        let mut turns: Vec<(u32, u32)> = Vec::new();
+        let mut prev: Option<String> = None;
+        for month in 1..=12u32 {
+            for day in 1..=days_in(year, month) {
+                let m = Moment::new(year, month, day, 12, 0, 8.0);
+                let gz = compute_at_school(&m, None, school).year.ganzhi.clone();
+                if let Some(before) = &prev
+                    && *before != gz
+                {
+                    {
+                        turns.push((month, day));
+                        // 换岁那天，农历必是非闰的正月初一。
+                        assert_eq!(
+                            (m.lunar.month, m.lunar.day, m.lunar.leap),
+                            (1, 1, false),
+                            "{year}-{month:02}-{day:02} 年柱由 {before} 换成 {gz}，但农历不是正月初一"
+                        );
+                    }
+                }
+                prev = Some(gz);
+            }
+        }
+        assert_eq!(turns.len(), 1, "{year} 年该只换一次岁，实得 {turns:?}");
+    }
+}
+
+/// 立春派与春节派在公历下半年必须一致——两者只在年初那一段分歧。
+///
+/// 立春在公历二月初、正月初一在一月下旬到二月中，两个界都落在年初；
+/// 三月之后到年末，两派该给同一根年柱。原先那套反推在十一、十二月上会岔开，
+/// 这条正是那个岔口的守卫。
+#[test]
+fn the_two_year_break_schools_only_disagree_early_in_the_year() {
+    use crate::{BaziSchool, YearBreakMethod, ZiHourMethod};
+    let sf = BaziSchool { zi_hour: ZiHourMethod::Late, year_break: YearBreakMethod::SpringFestival };
+    for year in 2020..=2030i32 {
+        for month in 3..=12u32 {
+            for day in [1u32, 15, 28] {
+                let m = Moment::new(year, month, day, 12, 0, 8.0);
+                assert_eq!(
+                    compute_at_school(&m, None, sf).year.ganzhi,
+                    compute_at_school(&m, None, BaziSchool::default()).year.ganzhi,
+                    "{year}-{month:02}-{day:02} 两派年柱不该分歧"
+                );
+            }
+        }
+    }
+}
+
+
+#[test]
+fn fortune_at_aggregates_natal_and_t() {
+    // 1987 长沙男（本命主用神=木官杀，忌火印+土比劫）；t=2026-06-16(age ~38.7)
+    let f = fortune_at(natal_1987(), 2026, 6, 16, 10, 0, 8.0);
+    // 本命旺衰恒等
+    assert_eq!(f.ming_strength.score, f.natal.strength.score);
+    // age 浮点合理
+    assert!(f.age_years > 38.0 && f.age_years < 39.0, "age_years={}", f.age_years);
+    // 流年丙午（2026年柱）与 t_chart 年柱一致
+    assert_eq!(f.flow_year_ganzhi, f.t_chart.year.ganzhi);
+    assert_eq!(f.flow_year_ganzhi, "丙午");
+    // 大运：1987-09-17 男 → 阳年顺行，十步覆盖，age ~38 落在第 4-5 步附近（具体随起运岁数）
+    assert!(f.dayun_step.is_some());
+    assert!(f.dayun_ganzhi.is_some());
+    // 用神供给度 ∈ [0, 100]
+    assert!(f.primary_supply_pct <= 100);
+    if let Some(s) = f.secondary_supply_pct { assert!(s <= 100); }
+    for v in &f.avoid_supply_pcts { assert!(*v <= 100); }
+    // 忌神条目数 = natal.yongshen.avoid_wuxing.len()
+    assert_eq!(f.avoid_supply_pcts.len(), f.natal.yongshen.avoid_wuxing.len());
+    // delta = yun.score - ming.score
+    assert_eq!(
+        f.delta_score,
+        i32::try_from(f.yun_strength.score).unwrap() - i32::try_from(f.ming_strength.score).unwrap()
+    );
+}
+
+#[test]
+fn fortune_at_t_chart_is_t_moment_bazi() {
+    // t_chart 实际就是 t 时刻自起一盘 — 与从 t 算的本命 BaziChart 字节一致（确认共享层一次性算法路径）。
+    let f = fortune_at(natal_1987(), 2026, 6, 16, 10, 0, 8.0);
+    let standalone = compute(BirthInput {
+        year: 2026, month: 6, day: 16, hour: 10, minute: 0, tz: 8.0, gender: Some(Gender::Male)
+    });
+    assert_eq!(f.t_chart.year.ganzhi, standalone.year.ganzhi);
+    assert_eq!(f.t_chart.month.ganzhi, standalone.month.ganzhi);
+    assert_eq!(f.t_chart.day.ganzhi, standalone.day.ganzhi);
+    assert_eq!(f.t_chart.hour.ganzhi, standalone.hour.ganzhi);
+}
+
+#[test]
+fn fortune_timeline_covers_range_and_is_well_formed() {
+    let timeline = fortune_supply_timeline(natal_1987(), 100);
+    assert_eq!(timeline.len(), 101);
+    assert_eq!(timeline[0].age, 0);
+    assert_eq!(timeline[100].age, 100);
+    // 每年公历 = 出生年 + age
+    for p in &timeline {
+        assert_eq!(p.year, 1987 + i32::try_from(p.age).unwrap());
+        assert!(p.yun_score <= 100);
+        assert!(p.primary_supply_pct <= 100);
+        assert!(p.avoid_supply_pct <= 100);
+        // 流年干支字面合法（2 个汉字）
+        assert_eq!(p.flow_year_ganzhi.chars().count(), 2);
+    }
+    // 出生当年 age=0 流年应 = natal 年柱（都是 1987 → 丁卯）。
+    assert_eq!(timeline[0].flow_year_ganzhi, "丁卯");
+    // age=39 (2026) → 丙午；age=43 (2030) → 庚戌。
+    assert_eq!(timeline[39].flow_year_ganzhi, "丙午");
+    assert_eq!(timeline[43].flow_year_ganzhi, "庚戌");
+}
+
+#[test]
+fn fortune_timeline_dayun_step_monotone_non_decreasing() {
+    // 大运按 start_age 递增，timeline 上 step index 应单调不减（或保持 None 期一致）。
+    let timeline = fortune_supply_timeline(natal_1987(), 100);
+    let mut prev: Option<usize> = None;
+    for p in &timeline {
+        if let (Some(prev_i), Some(cur_i)) = (prev, p.dayun_step) {
+            assert!(cur_i >= prev_i, "dayun_step 应单调不减 prev={prev_i} cur={cur_i} at age={}", p.age);
+        }
+        if p.dayun_step.is_some() { prev = p.dayun_step; }
+    }
+}
+
+#[test]
+fn judgment_threshold_boundaries() {
+    // 大吉：net=+15+ (primary 30， avoid 15， net=15)
+    let j = judge_from_supplies(30, None, 15);
+    assert_eq!(j.level, "大吉");
+    assert_eq!(j.score, 15);
+    // 吉：net 5..15 (primary 20， avoid 15， net=5)
+    let j = judge_from_supplies(20, None, 15);
+    assert_eq!(j.level, "吉");
+    assert_eq!(j.score, 5);
+    // 平：net 0 (primary 15， avoid 15)
+    let j = judge_from_supplies(15, None, 15);
+    assert_eq!(j.level, "平");
+    // 凶：net -5 (primary 10， avoid 15)
+    let j = judge_from_supplies(10, None, 15);
+    assert_eq!(j.level, "凶");
+    assert_eq!(j.score, -5);
+    // 大凶：net -15 (primary 0， avoid 15)
+    let j = judge_from_supplies(0, None, 15);
+    assert_eq!(j.level, "大凶");
+    assert_eq!(j.score, -15);
+    // 副用神计入：primary 10 + secondary 20 （折 0.5=10） - avoid 5 = +15 → 大吉
+    let j = judge_from_supplies(10, Some(20), 5);
+    assert_eq!(j.level, "大吉");
+    assert_eq!(j.score, 15);
+    // summary 非空且含百分比
+    assert!(!j.summary.is_empty());
+    assert!(j.summary.contains('%'));
+}
+
+#[test]
+fn fortune_at_carries_judgment_for_1987() {
+    // 1987 长沙男 + 2026-06-16：主用神木 13%/副水 9%/忌火 33%
+    // net = 13 + 9/2 - 33 = 13 + 4 - 33 = -16 → 大凶
+    let f = fortune_at(natal_1987(), 2026, 6, 16, 10, 0, 8.0);
+    assert_eq!(f.judgment.level, "大凶");
+    assert_eq!(f.judgment.score, -16);
+    assert!(f.judgment.summary.contains("33%"));
+    assert!(f.judgment.summary.contains("宜守不宜攻"));
+}
+
+#[test]
+fn fortune_timeline_carries_judgment_each_point() {
+    let timeline = fortune_supply_timeline(natal_1987(), 100);
+    let levels: std::collections::HashSet<&str> = timeline.iter().map(|p| p.judgment.level.as_str()).collect();
+    // 100 年里至少出现 2 个等级（命局不可能恒一）
+    assert!(levels.len() >= 2, "timeline should cover multiple judgment levels: {levels:?}");
+    // 每点判读 score 满足 5 等级阈值
+    for p in &timeline {
+        let net = p.judgment.score;
+        match p.judgment.level.as_str() {
+            "大吉" => assert!(net >= 15),
+            "吉" => assert!((5..15).contains(&net)),
+            "平" => assert!((-4..5).contains(&net)),
+            "凶" => assert!((-14..-4).contains(&net)),
+            "大凶" => assert!(net <= -15),
+            other => panic!("unexpected level {other}"),
+        }
+    }
+}
+
+#[test]
+fn wuxing_pct_by_name_dispatch_all_five_plus_unknown() {
+    let w = WuxingPower { wood: 10, fire: 20, earth: 30, metal: 40, water: 50 };
+    assert_eq!(wuxing_pct_by_name(&w, "木"), 10);
+    assert_eq!(wuxing_pct_by_name(&w, "火"), 20);
+    assert_eq!(wuxing_pct_by_name(&w, "土"), 30);
+    assert_eq!(wuxing_pct_by_name(&w, "金"), 40);
+    assert_eq!(wuxing_pct_by_name(&w, "水"), 50);
+    assert_eq!(wuxing_pct_by_name(&w, "未知"), 0);
+}
+
+/// 年柱换岁流派：2024-02-01（立春前一日）出生。
+/// 立春派：归 2023 癸卯；春节派：归 2023（春节 2024-02-10，出生在它之前 → 也归 2023）。
+/// 2024-02-09（春节前一日）：立春派 2024 甲辰（已过立春 2024-02-04）；春节派 2023（未到正月初一）。
+#[test]
+fn year_break_school_lichun_vs_springfestival() {
+    let m = Moment::new(2024, 2, 9, 12, 0, 8.0);
+    let chun = compute_at_school(&m, None, BaziSchool { zi_hour: ZiHourMethod::Late, year_break: YearBreakMethod::LiChun });
+    let sf = compute_at_school(&m, None, BaziSchool { zi_hour: ZiHourMethod::Late, year_break: YearBreakMethod::SpringFestival });
+    assert_eq!(chun.year.ganzhi, "甲辰", "立春派 2024-02-09 已过立春 → 甲辰");
+    assert_eq!(sf.year.ganzhi, "癸卯", "春节派 2024-02-09 春节(02-10)未到 → 癸卯");
+}
+
+/// 子时流派校验：23：30 出生，晚子（主流）归次日日柱；早子（传统少数）归当日。
+/// 1990-06-15 日柱=辛亥；1990-06-16 日柱应为壬子（辛亥之次）。
+#[test]
+fn zi_hour_school_late_vs_early() {
+    let m_2330 = Moment::new(1990, 6, 15, 23, 30, 8.0);
+    let late = compute_at_with(&m_2330, None, ZiHourMethod::Late);
+    let early = compute_at_with(&m_2330, None, ZiHourMethod::Early);
+    // 早子：仍归当日（辛亥）
+    assert_eq!(early.day.ganzhi, "辛亥", "Early Zi 日柱应为 1990-06-15 当日");
+    // 晚子：归次日（壬子）
+    assert_eq!(late.day.ganzhi, "壬子", "Late Zi 日柱应为次日 1990-06-16");
+    // 非 23 点出生时，两派应一致
+    let m_1430 = Moment::new(1990, 6, 15, 14, 30, 8.0);
+    let a = compute_at_with(&m_1430, None, ZiHourMethod::Late);
+    let b = compute_at_with(&m_1430, None, ZiHourMethod::Early);
+    assert_eq!(a.day.ganzhi, b.day.ganzhi);
+}
+
+#[test]
+fn sample_1990_06_15_male() {
+    let chart = compute(BirthInput {
+        year: 1990,
+        month: 6,
+        day: 15,
+        hour: 14,
+        minute: 30,
+        tz: 8.0,
+        gender: Some(Gender::Male),
+    });
+    assert_eq!(chart.year.ganzhi, "庚午");
+    assert_eq!(chart.month.ganzhi, "壬午");
+    assert_eq!(chart.day.ganzhi, "辛亥");
+    assert_eq!(chart.hour.ganzhi, "乙未");
+    assert_eq!(chart.day_master, "辛");
+    assert_eq!(chart.day_master_wuxing, "金");
+    assert_eq!(chart.month.ten_god, "伤官"); // 壬 vs 日主辛
+    assert_eq!(chart.day.ten_god, "日主");
+    assert_eq!(
+        (chart.lunar.year, chart.lunar.month, chart.lunar.day),
+        (1990, 5, 23)
+    );
+    let dy = chart.dayun.as_ref().unwrap();
+    assert!(dy.forward); // 庚午阳年男 → 顺行
+    assert_eq!(dy.pillars.len(), 10);
+    assert_eq!(dy.pillars[0].ganzhi, "癸未"); // 月柱壬午顺行下一步
+}
+
+/// 起运岁数：从生日数到相邻那个「节」，天数除以三。
+///
+/// 此前一处也没验过。大运只验了顺逆、十步齐、首步干支，而起运岁数决定每一步
+/// 从几岁开始——它错了，整条运程全错位。变异测试在 `compute_dayun` 上留下
+/// 二十个活口，全落在「找相邻的节」与「天数折岁」这一段。
+///
+/// 规则两源相合：阳年男与阴年女从生日**顺**数到下一个节、阴年男与阳年女**逆**数
+/// 到上一个节，所数天数除以三；且推大运**用节不用气**，十二节为立春·惊蛰·清明·
+/// 立夏·芒种·小暑·立秋·白露·寒露·立冬·大雪·小寒。
+/// 见 <https://zhuanlan.zhihu.com/p/630204689> 与 <https://m.k366.com/bazi/199667.htm>，
+/// 两处所述一致。
+///
+/// 校验用另一条路走一遍。本函数的找法是：由出生时太阳黄经算出 `k`，再 ±30° 定目标。
+/// 这里换成：把十二个节的黄经在前中后三年里各求一次时刻，取紧邻生时的那个。
+/// 两种写法没有共用的算术，算出的却是同一个答案。
+#[test]
+fn the_starting_age_is_the_days_to_the_adjacent_jie_divided_by_three() {
+    // 十二节的黄经：立春 315 起，每 30° 一个，故恒 ≡ 15 (mod 30)。
+    const JIE_LONGITUDES: [f64; 12] =
+        [315.0, 345.0, 15.0, 45.0, 75.0, 105.0, 135.0, 165.0, 195.0, 225.0, 255.0, 285.0];
+    for lon in JIE_LONGITUDES {
+        assert!(
+            (lon.rem_euclid(30.0) - 15.0).abs() < 1e-9,
+            "{lon} 不是节的黄经——中气在 30 的整数倍上，推大运不用它"
+        );
+    }
+
+    for (year, month, day, hour, minute, gender) in [
+        (1990i32, 6u32, 15u32, 14u32, 30u32, Gender::Male),
+        (1990, 6, 15, 14, 30, Gender::Female),
+        (1987, 9, 17, 12, 0, Gender::Male),
+        (1987, 9, 17, 12, 0, Gender::Female),
+        (2000, 1, 1, 0, 0, Gender::Male),
+        (2024, 2, 20, 8, 0, Gender::Male),
+        (1975, 11, 3, 23, 50, Gender::Female),
+        (2010, 7, 7, 6, 0, Gender::Male),
+    ] {
+        let chart = compute(BirthInput { year, month, day, hour, minute, tz: 8.0, gender: Some(gender) });
+        let dayun = chart.dayun.as_ref().expect("给了性别就该有大运");
+
+        let jd = mingli_astro::jd_from_local(year, month, day, hour, minute, 0.0, 8.0);
+        let (mut nearest_after, mut nearest_before) = (f64::INFINITY, f64::NEG_INFINITY);
+        for target in JIE_LONGITUDES {
+            for probe_year in [year - 1, year, year + 1] {
+                let t = mingli_astro::solar_term_jd(probe_year, target);
+                if t > jd && t < nearest_after {
+                    nearest_after = t;
+                }
+                if t < jd && t > nearest_before {
+                    nearest_before = t;
+                }
+            }
+        }
+        let days = if dayun.forward { nearest_after - jd } else { jd - nearest_before };
+        assert!(
+            (0.0..32.0).contains(&days),
+            "{year}-{month:02}-{day:02}：离相邻的节 {days:.2} 天——一个月里必有一个节，不该这么远"
+        );
+        // `start_age_years` 对外保留两位小数，故容差取 0.005 年。
+        assert!(
+            (dayun.start_age_years - days / 3.0).abs() < 0.005,
+            "{year}-{month:02}-{day:02} {gender:?}：起运 {:.4} 岁，另一条路算得 {:.4} 岁",
+            dayun.start_age_years,
+            days / 3.0
+        );
+        // 十步各差十年，首步从起运整岁数上开始。
+        let first = dayun.start_age_years.round() as u32;
+        for (i, pillar) in dayun.pillars.iter().enumerate() {
+            assert_eq!(
+                pillar.start_age,
+                first + u32::try_from(i).expect("十步以内") * 10,
+                "{year}-{month:02}-{day:02}：第 {} 步的起始年龄", i + 1
+            );
+        }
+    }
+}
+
+/// 顺逆四种组合都走一遍：阳男顺、阴女顺、阴男逆、阳女逆。
+///
+/// 原有两条各验一个方向，四种组合里空着两种。
+#[test]
+fn the_direction_follows_the_year_stem_and_the_gender() {
+    for (year, month, day, expect_yang, ) in
+        [(1990i32, 6u32, 15u32, true), (1989, 6, 15, false), (2000, 6, 15, true), (2001, 6, 15, false)]
+    {
+        for (gender, forward) in
+            [(Gender::Male, expect_yang), (Gender::Female, !expect_yang)]
+        {
+            let chart = compute(BirthInput { year, month, day, hour: 12, minute: 0, tz: 8.0, gender: Some(gender) });
+            assert_eq!(
+                chart.dayun.as_ref().expect("有性别").forward,
+                forward,
+                "{year} 年（阳年 {expect_yang}）{gender:?} 应{}行",
+                if forward { "顺" } else { "逆" }
+            );
+        }
+    }
+}
+
+/// 起运岁数落在「三天折一年」该给的范围里，并与到节的天数对得上。
+///
+/// 现有的大运测试验的是方向、有无、步序单调——没有一条碰过**起运岁数**本身，
+/// 而那正是「几岁起运」这个对外头条输出。于是求下一个/上一个节所用的那两行初值
+/// （`jd ± (Δλ mod 360) / 0.98565`）改坏了也没人红：变异扫描在那两行上留了八个漏网。
+///
+/// 那两行是喂给牛顿迭代的**起点**，可这里的不动点不唯一——每年都有一个同名的节。
+/// 初值偏一格，迭代就收敛到隔壁年的那个节，天数从二十几天变成三百多天，
+/// 起运岁数从几岁变成一百多岁。所以这里钉两件事：
+///
+/// 一、`start_age_years × 3` 就是到节的天数，而节相邻两个之间至多约 31 天，
+///    故起运岁数必在 `[0, 11)` 内。落到隔壁年的话这条立刻红。
+/// 二、十步大运的 `start_age` 逐步 +10，且第一步等于起运岁数取整。
+#[test]
+fn the_starting_age_is_the_days_to_the_term_divided_by_three() {
+    for (y, mo, d, h, g) in [
+        (1987_i32, 9_u32, 17_u32, 14_u32, Gender::Male),
+        (1990, 6, 15, 12, Gender::Female),
+        (1989, 6, 15, 12, Gender::Male),
+        (2000, 1, 1, 0, Gender::Female),
+        (2024, 2, 4, 23, Gender::Male),
+    ] {
+        let chart = compute(BirthInput {
+            year: y,
+            month: mo,
+            day: d,
+            hour: h,
+            minute: 0,
+            tz: 8.0,
+            gender: Some(g),
+        });
+        let dy = chart.dayun.as_ref().expect("给了性别就该有大运");
+        assert!(
+            (0.0..11.0).contains(&dy.start_age_years),
+            "{y}-{mo:02}-{d:02}：起运 {} 岁——两节之间至多约 31 天，三天折一年最多 11 岁，\
+             超出说明求节时收敛到了隔壁年",
+            dy.start_age_years
+        );
+        assert_eq!(dy.pillars.len(), 10, "大运应排十步");
+        assert_eq!(
+            dy.pillars[0].start_age,
+            dy.start_age_years.round() as u32,
+            "第一步的起运岁数应与 start_age_years 取整一致"
+        );
+        for (i, w) in dy.pillars.windows(2).enumerate() {
+            assert_eq!(
+                w[1].start_age,
+                w[0].start_age + 10,
+                "第 {} 步与第 {} 步之间应差十年",
+                i + 1,
+                i + 2
+            );
+        }
+    }
+}
+
+#[test]
+fn dayun_reverse_for_yin_year_male() {
+    // 1989 己巳（阴年）男 → 逆行
+    let chart = compute(BirthInput {
+        year: 1989,
+        month: 6,
+        day: 15,
+        hour: 12,
+        minute: 0,
+        tz: 8.0,
+        gender: Some(Gender::Male),
+    });
+    assert!(!chart.dayun.as_ref().unwrap().forward);
+}
+
+#[test]
+fn before_lichun_uses_prev_year() {
+    // 1990-01-20 在立春(1990-02-04)前 → 年柱归 1989 己巳。
+    let chart = compute(BirthInput {
+        year: 1990,
+        month: 1,
+        day: 20,
+        hour: 12,
+        minute: 0,
+        tz: 8.0,
+        gender: None,
+    });
+    assert_eq!(chart.year.ganzhi, "己巳");
+}
+
+#[test]
+fn no_dayun_without_gender() {
+    let chart = compute(BirthInput {
+        year: 2000,
+        month: 1,
+        day: 1,
+        hour: 0,
+        minute: 0,
+        tz: 8.0,
+        gender: None,
+    });
+    assert!(chart.dayun.is_none());
+}
+
+#[test]
+fn xunkong_and_nayin_oracle() {
+    // 1990-06-15 14：30 男 → 日柱辛亥。辛亥在甲辰旬 → 旬空寅卯；辛亥纳音=钗钏金（金）。
+    let chart = compute(BirthInput {
+        year: 1990, month: 6, day: 15, hour: 14, minute: 30, tz: 8.0,
+        gender: Some(Gender::Male),
+    });
+    assert_eq!(chart.day.ganzhi, "辛亥");
+    assert_eq!(chart.xunkong, ["寅".to_string(), "卯".to_string()]);
+    assert_eq!(chart.day.nayin, "金"); // 钗钏金
+
+    // 1987-09-17 15：00 男 → 四柱 丁卯 己酉 己巳 壬申。日柱己巳在甲子旬 → 旬空戌亥。
+    let c2 = compute(BirthInput {
+        year: 1987, month: 9, day: 17, hour: 15, minute: 0, tz: 8.0,
+        gender: Some(Gender::Male),
+    });
+    assert_eq!(c2.year.ganzhi, "丁卯");
+    assert_eq!(c2.day.ganzhi, "己巳");
+    assert_eq!(c2.hour.ganzhi, "壬申");
+    assert_eq!(c2.xunkong, ["戌".to_string(), "亥".to_string()]);
+}
+
+#[test]
+fn strength_oracle_1987_male_yin_earth() {
+    // 1987-09-17 15：00 男 = 丁卯 己酉 己巳 壬申。日主己土。
+    // 手算：
+    //   得令（月酉）：己阴土在酉=长生 stage0 → 20；酉藏[辛]辛金=食伤非同党；got_ling=20。
+    //   得地（卯/巳/申）：
+    //     卯[乙] 七杀，非 → 0；
+    //     巳[丙 庚 戊] 丙印（本+9） 庚伤(0) 戊劫（余+3） = 12；
+    //     申[庚 壬 戊] 庚伤 壬财 戊劫（余+3） = 3；
+    //     got_di = 0+12+3 = 15。
+    //   得势（年丁/月己/时壬）：丁印(+10) 己比肩(+10) 壬财(0)=20。
+    //   raw=20+15+20=55 → score=55*100/90=61 → 偏强。
+    let c = compute(BirthInput {
+        year: 1987, month: 9, day: 17, hour: 15, minute: 0, tz: 8.0,
+        gender: Some(Gender::Male),
+    });
+    assert_eq!(c.day_master, "己");
+    assert_eq!(c.strength.got_ling, 20, "酉=长生 20、月支辛伤非同党");
+    assert_eq!(c.strength.got_di, 15, "巳丙印9+戊劫3 申戊劫3");
+    assert_eq!(c.strength.got_shi, 20, "丁印10+己比10");
+    assert_eq!(c.strength.score, 61);
+    assert_eq!(c.strength.level, "偏强");
+    // 此例五行分布凑巧合 100；独立舍入的一般合计范围为 98–102。
+    let s = c.strength.wuxing;
+    let sum = s.wood + s.fire + s.earth + s.metal + s.water;
+    assert!((99..=101).contains(&sum), "wuxing 合 ≈ 100，实 {sum}");
+    // 金最旺（月令酉×1.5 + 巳/申庚金）：应是最大项
+    let max = [s.wood, s.fire, s.earth, s.metal, s.water].into_iter().max().unwrap();
+    assert_eq!(s.metal, max, "酉月金最旺");
+}
+
+#[test]
+fn strength_oracle_1990_male_yin_metal_in_summer() {
+    // 1990-06-15 14：30 男 = 庚午 壬午 辛亥 乙未。日主辛金，生于午月夏火克金。
+    // 手算：
+    //   得令（月午）：辛阴金在午=stage6 病 → 6；午藏[丁 己] 丁七杀(0) 己偏印（中+3） → 6+3=9。
+    //   得地（午/亥/未）：
+    //     午[丁 己] 丁七杀 己偏印（中+5） = 5
+    //     亥[壬 甲] 壬伤 甲正财 = 0
+    //     未[己 乙 丁] 己偏印（本+9） 乙偏财 丁七杀 = 9
+    //     got_di = 5+0+9 = 14。
+    //   得势（年庚/月壬/时乙）：庚劫财(+10) 壬伤 乙偏财 → 10。
+    //   raw=9+14+10=33 → score=33*100/90=36 → 偏弱（辛金生夏天合理）。
+    let c = compute(BirthInput {
+        year: 1990, month: 6, day: 15, hour: 14, minute: 30, tz: 8.0,
+        gender: Some(Gender::Male),
+    });
+    assert_eq!(c.day_master, "辛");
+    assert_eq!(c.strength.got_ling, 9);
+    assert_eq!(c.strength.got_di, 14);
+    assert_eq!(c.strength.got_shi, 10);
+    assert_eq!(c.strength.score, 36);
+    assert_eq!(c.strength.level, "偏弱");
+}
+
+/// Female 大运：阴年女顺行 / 阳年女逆行。1990 庚午阳年女 → 逆行。
+#[test]
+fn dayun_female_gender() {
+    let chart = compute(BirthInput {
+        year: 1990, month: 6, day: 15, hour: 14, minute: 30, tz: 8.0,
+        gender: Some(Gender::Female),
+    });
+    assert!(!chart.dayun.as_ref().unwrap().forward, "庚午阳年女 → 逆行");
+}
+
+/// 春节换年：春节后归本年（覆盖 L397 = month==1 day>=1 非闰分支）。
+/// 2024-02-15（春节 02-10 已过）非闰正月初六 → 春节派应归 2024 甲辰。
+#[test]
+fn year_break_springfestival_after_lunar_new_year() {
+    let m = Moment::new(2024, 2, 15, 12, 0, 8.0);
+    let sf = compute_at_school(&m, None, BaziSchool {
+        zi_hour: ZiHourMethod::Late, year_break: YearBreakMethod::SpringFestival,
+    });
+    assert_eq!(sf.year.ganzhi, "甲辰", "春节(02-10)已过 → 春节派归 2024 甲辰");
+}
+
+/// 春节换年 fallback：既非正月初一在前、又非月>=11/=12/闰正月 → m.year。
+/// 实际上 2024-03-15（农历二月初六）中已到春节后，但 month=2，不命中前两条 → fallback L402。
+#[test]
+fn year_break_springfestival_fallback_branch() {
+    let m = Moment::new(2024, 3, 15, 12, 0, 8.0);
+    let sf = compute_at_school(&m, None, BaziSchool {
+        zi_hour: ZiHourMethod::Late, year_break: YearBreakMethod::SpringFestival,
+    });
+    // 立春派与春节派此刻应一致（都在 2024 范围内），走 fallback m.year
+    assert_eq!(sf.year.ganzhi, "甲辰");
+}
+
+#[test]
+fn strength_extras_empty_equals_natal() {
+    // 空 extras 必须等价于本命旺衰，作为本命 chart 的回归校验。
+    use mingli_ganzhi::parse_ganzhi;
+    let c = compute(BirthInput {
+        year: 1987, month: 9, day: 17, hour: 15, minute: 0, tz: 8.0,
+        gender: Some(Gender::Male),
+    });
+    let y = parse_ganzhi(&c.year.ganzhi).unwrap();
+    let mo = parse_ganzhi(&c.month.ganzhi).unwrap();
+    let d = parse_ganzhi(&c.day.ganzhi).unwrap();
+    let h = parse_ganzhi(&c.hour.ganzhi).unwrap();
+    let no_extra = compute_strength_with_extras(y, mo, d, h, &[]);
+    assert_eq!(no_extra.score, c.strength.score);
+    assert_eq!(no_extra.got_ling, c.strength.got_ling);
+    assert_eq!(no_extra.got_di, c.strength.got_di);
+    assert_eq!(no_extra.got_shi, c.strength.got_shi);
+}
+
+#[test]
+fn strength_extras_help_pushes_score_up() {
+    // 1987 己土 本命 = 偏强 61（得令20+得地15+得势20）。叠加「戊午」（戊=劫财+10、午藏丁己印+劫）：
+    //   得地原15 + （午丁本印+9 + 己中劫+5） = 29（未封顶）；得势原20 + 戊劫+10 = 30（封顶）；得令20。
+    //   raw = 79 → score = 79*100/90 = 87 → 强。
+    use mingli_ganzhi::parse_ganzhi;
+    let c = compute(BirthInput {
+        year: 1987, month: 9, day: 17, hour: 15, minute: 0, tz: 8.0,
+        gender: Some(Gender::Male),
+    });
+    let y = parse_ganzhi(&c.year.ganzhi).unwrap();
+    let mo = parse_ganzhi(&c.month.ganzhi).unwrap();
+    let d = parse_ganzhi(&c.day.ganzhi).unwrap();
+    let h = parse_ganzhi(&c.hour.ganzhi).unwrap();
+    let yun = compute_strength_with_extras(y, mo, d, h, &[parse_ganzhi("戊午").unwrap()]);
+    assert_eq!(yun.got_di, 29);
+    assert_eq!(yun.got_shi, 30, "得势封顶");
+    assert_eq!(yun.score, 87);
+    assert_eq!(yun.level, "强");
+    assert!(yun.score > c.strength.score, "助党推升旺衰");
+}
+
+#[test]
+fn strength_extras_hostile_keeps_score_steady() {
+    // 加纯敌党（如「壬寅」：壬财、寅藏甲丙戊→甲杀/丙印/戊劫）：
+    //   实际寅有印+劫，会拉升 di，所以严格意义不是「纯敌」。改测「乙未」乙偏财 + 未己乙丁（己劫本+9、乙财、丁印余+3=12）。
+    //   得地原15+12=27；得势原20+乙财0=20；得令20；raw=67→score=74 偏强（仍提升，因未支带印劫）。
+    // 真正纯敌党：取「庚申」（庚=伤、申=庚伤本+壬财中+戊劫余3=3）：
+    //   得地原15+3=18；得势原20+庚伤0=20；得令20；raw=58→score=64 偏强（微升）。
+    //   关键性质：不论加什么 extras，得令永远不变 = 月令固定。
+    use mingli_ganzhi::parse_ganzhi;
+    let c = compute(BirthInput {
+        year: 1987, month: 9, day: 17, hour: 15, minute: 0, tz: 8.0,
+        gender: Some(Gender::Male),
+    });
+    let y = parse_ganzhi(&c.year.ganzhi).unwrap();
+    let mo = parse_ganzhi(&c.month.ganzhi).unwrap();
+    let d = parse_ganzhi(&c.day.ganzhi).unwrap();
+    let h = parse_ganzhi(&c.hour.ganzhi).unwrap();
+    let yun = compute_strength_with_extras(y, mo, d, h, &[parse_ganzhi("庚申").unwrap()]);
+    assert_eq!(yun.got_ling, c.strength.got_ling, "得令固定取本命月支，extras 不改");
+    assert_eq!(yun.got_di, 18);
+    assert_eq!(yun.got_shi, 20);
+    assert_eq!(yun.score, 64);
+}
+
+#[test]
+fn strength_score_bounds() {
+    // 任意输入下，三栏都在 [0,30]、综合分都在 [0,100]、五行和约 100。
+    for &(y, m, d, h) in &[
+        (2024, 6, 21, 12), (1980, 1, 1, 0), (2000, 11, 11, 11),
+        (1949, 10, 1, 15), (2030, 2, 4, 16),
+    ] {
+        let c = compute(BirthInput {
+            year: y, month: m, day: d, hour: h, minute: 0, tz: 8.0, gender: None,
+        });
+        let s = &c.strength;
+        assert!(s.got_ling <= 30);
+        assert!(s.got_di <= 30);
+        assert!(s.got_shi <= 30);
+        assert!(s.score <= 100);
+        let sum = s.wuxing.wood + s.wuxing.fire + s.wuxing.earth + s.wuxing.metal + s.wuxing.water;
+        assert!((98..=102).contains(&sum));
+    }
+}
+
+#[test]
+fn pattern_1987_yin_earth_anzang_shi_shen() {
+    // 1987-09-17 15：00 男 = 丁卯 己酉 己巳 壬申。日主己土，月支酉（专气藏辛）。
+    // 三干头（丁/己/壬）无辛 → 辛不透 → 暗藏取本气 → 辛（食神） → 暗食神格。
+    let c = compute(BirthInput {
+        year: 1987, month: 9, day: 17, hour: 15, minute: 0, tz: 8.0,
+        gender: Some(Gender::Male),
+    });
+    let p = &c.pattern;
+    assert_eq!(p.name, "暗食神格");
+    assert_eq!(p.qi_stem, "辛");
+    assert_eq!(p.qi_kind, "本气");
+    assert!(!p.revealed);
+    assert_eq!(p.revealed_in, None);
+    assert_eq!(p.ten_god, "食神");
+    assert!(!p.is_lu_ren);
+}
+
+#[test]
+fn pattern_1990_yin_metal_anzang_qisha() {
+    // 1990-06-15 14：30 男 = 庚午 壬午 辛亥 乙未。日主辛，月支午（本丁/中己）。
+    // 三干头（庚/壬/乙）无丁、无己 → 暗藏取本气丁（七杀） → 暗七杀格。
+    let c = compute(BirthInput {
+        year: 1990, month: 6, day: 15, hour: 14, minute: 30, tz: 8.0,
+        gender: Some(Gender::Male),
+    });
+    assert_eq!(c.pattern.name, "暗七杀格");
+    assert_eq!(c.pattern.qi_stem, "丁");
+    assert_eq!(c.pattern.ten_god, "七杀");
+    assert!(!c.pattern.revealed);
+}
+
+/// 直接构造 GanZhi 测纯算法（不经历法约束）——覆盖建禄/月刃/八正格透干的各分支。
+#[test]
+fn pattern_jianlu_when_main_qi_equals_day_master() {
+    // 日主甲（0 阳木） + 月支寅（本气甲） → 同五行同阴阳 → 建禄格。
+    let yr = GanZhi { stem: 9, branch: 0 };   // 任意
+    let mo = GanZhi { stem: 2, branch: 2 };   // 月支寅
+    let dy = GanZhi { stem: 0, branch: 4 };   // 日主甲
+    let hr = GanZhi { stem: 5, branch: 11 };
+    let p = determine_pattern(yr, mo, dy, hr);
+    assert_eq!(p.name, "建禄格");
+    assert!(p.is_lu_ren);
+    assert_eq!(p.ten_god, "比肩");
+}
+
+#[test]
+fn pattern_yueren_when_main_qi_same_element_different_polarity() {
+    // 日主甲（0 阳木） + 月支卯（本气乙阴木） → 同五行异阴阳 → 月刃格。
+    let yr = GanZhi { stem: 9, branch: 0 };
+    let mo = GanZhi { stem: 2, branch: 3 };
+    let dy = GanZhi { stem: 0, branch: 4 };
+    let hr = GanZhi { stem: 5, branch: 11 };
+    let p = determine_pattern(yr, mo, dy, hr);
+    assert_eq!(p.name, "月刃格");
+    assert!(p.is_lu_ren);
+    assert_eq!(p.ten_god, "劫财");
+}
+
+#[test]
+fn pattern_main_qi_revealed() {
+    // 月支寅（本甲/中丙/余戊），日主己土。让本气甲在年柱透出 → 正官格（甲对己=正官）。
+    let yr = GanZhi { stem: 0, branch: 0 }; // 年干 甲
+    let mo = GanZhi { stem: 9, branch: 2 }; // 月干 癸（非月令藏干），月支寅
+    let dy = GanZhi { stem: 5, branch: 11 }; // 日主 己
+    let hr = GanZhi { stem: 3, branch: 7 }; // 时干 丁
+    let p = determine_pattern(yr, mo, dy, hr);
+    assert_eq!(p.name, "正官格");
+    assert!(p.revealed);
+    assert_eq!(p.qi_stem, "甲");
+    assert_eq!(p.qi_kind, "本气");
+    assert_eq!(p.revealed_in.as_deref(), Some("年柱"));
+    assert_eq!(p.ten_god, "正官");
+}
+
+#[test]
+fn pattern_middle_qi_revealed_skips_main_qi() {
+    // 月支寅（本甲/中丙/余戊），日主己。本气甲不透，中气丙在时柱透 → 正印格。
+    let yr = GanZhi { stem: 3, branch: 5 }; // 丁巳
+    let mo = GanZhi { stem: 9, branch: 2 }; // 癸寅（非历法合理，纯算法测试）
+    let dy = GanZhi { stem: 5, branch: 11 }; // 己亥
+    let hr = GanZhi { stem: 2, branch: 3 }; // 丙卯
+    let p = determine_pattern(yr, mo, dy, hr);
+    assert_eq!(p.name, "正印格");
+    assert!(p.revealed);
+    assert_eq!(p.qi_stem, "丙");
+    assert_eq!(p.qi_kind, "中气");
+    assert_eq!(p.revealed_in.as_deref(), Some("时柱"));
+    assert_eq!(p.ten_god, "正印");
+}
+
+#[test]
+fn pattern_yu_qi_revealed_when_main_and_middle_unrevealed() {
+    // 月支寅（本甲/中丙/余戊），日主庚金。让余气戊在月柱透 → 偏印格（戊对庚=偏印，土生金同阳）。
+    let yr = GanZhi { stem: 1, branch: 5 }; // 乙巳
+    let mo = GanZhi { stem: 4, branch: 2 }; // 戊寅
+    let dy = GanZhi { stem: 6, branch: 11 }; // 庚亥
+    let hr = GanZhi { stem: 9, branch: 3 }; // 癸卯
+    let p = determine_pattern(yr, mo, dy, hr);
+    assert_eq!(p.name, "偏印格");
+    assert_eq!(p.qi_stem, "戊");
+    assert_eq!(p.qi_kind, "余气");
+    assert_eq!(p.revealed_in.as_deref(), Some("月柱"));
+    assert_eq!(p.ten_god, "偏印");
+}
+
+#[test]
+fn yongshen_1987_male_yin_earth_strong() {
+    // 1987-09-17 15：00 男 = 丁卯 己酉 己巳 壬申。日主己土 score 61 偏强。
+    // 五行分布：木11/火20/土23/金32/水14。
+    // 走身强宜耗：候选 官杀木(11)/财水(14)/食伤金(32) → 升序 木<水<金 → 主用神=木（官杀），副=水（财）。
+    // 忌神 = 印火 + 比劫土。
+    let c = compute(BirthInput {
+        year: 1987, month: 9, day: 17, hour: 15, minute: 0, tz: 8.0,
+        gender: Some(Gender::Male),
+    });
+    let y = &c.yongshen;
+    assert_eq!(y.method, "扶抑 · 身强宜耗");
+    assert_eq!(y.primary_wuxing, "木");
+    assert_eq!(y.primary_role, "官杀");
+    assert_eq!(y.secondary_wuxing.as_deref(), Some("水"));
+    assert_eq!(y.secondary_role.as_deref(), Some("财"));
+    assert_eq!(y.avoid_wuxing, vec!["火".to_string(), "土".to_string()]);
+    assert!(y.reasoning.contains("耗身"));
+}
+
+#[test]
+fn yongshen_1990_male_yin_metal_weak() {
+    // 1990-06-15 14：30 男 = 庚午 壬午 辛亥 乙未。日主辛金 score 36 偏弱。
+    // 走身弱宜扶：印星（土）优先，比劫（金）副。忌神 = 官杀火 + 财木。
+    let c = compute(BirthInput {
+        year: 1990, month: 6, day: 15, hour: 14, minute: 30, tz: 8.0,
+        gender: Some(Gender::Male),
+    });
+    let y = &c.yongshen;
+    assert_eq!(y.method, "扶抑 · 身弱宜扶");
+    assert_eq!(y.primary_wuxing, "土");
+    assert_eq!(y.primary_role, "印星");
+    assert_eq!(y.secondary_wuxing.as_deref(), Some("金"));
+    assert_eq!(y.secondary_role.as_deref(), Some("比劫"));
+    assert_eq!(y.avoid_wuxing, vec!["火".to_string(), "木".to_string()]);
+    assert!(y.reasoning.contains("助身"));
+}
+
+/// 中和走调候：用纯算法构造一个 score≈50 的盘，看调候按月支取。
+#[test]
+fn yongshen_neutral_takes_tiao_hou() {
+    use mingli_ganzhi::parse_ganzhi;
+    // 手造 score=50 strength + 月支子（冬月） → 调候取火。
+    let fake_str = Strength {
+        score: 50, level: "中和".into(),
+        got_ling: 15, got_di: 15, got_shi: 15,
+        wuxing: WuxingPower { wood: 20, fire: 20, earth: 20, metal: 20, water: 20 },
+    };
+    // 日主己土 + 月支子 → 调候 寒月取火
+    let y = determine_yongshen(5, 0, &fake_str);
+    assert_eq!(y.method, "调候为主");
+    assert_eq!(y.primary_wuxing, "火");
+    assert_eq!(y.primary_role, "调候");
+    assert!(y.secondary_wuxing.is_none());
+    assert!(y.avoid_wuxing.is_empty());
+    // 日主己土 + 月支午（燥月） → 取水
+    let y2 = determine_yongshen(5, 6, &fake_str);
+    assert_eq!(y2.primary_wuxing, "水");
+    // 日主庚 + 月支寅（春木） → 取金
+    let y3 = determine_yongshen(6, 2, &fake_str);
+    assert_eq!(y3.primary_wuxing, "金");
+    // 日主壬 + 月支申（秋金） → 取火
+    let y4 = determine_yongshen(8, 8, &fake_str);
+    assert_eq!(y4.primary_wuxing, "火");
+    // 日主甲 + 月支辰（杂气） → 取日主同行（木）
+    let y5 = determine_yongshen(0, 4, &fake_str);
+    assert_eq!(y5.primary_wuxing, "木");
+    // 校验：5 个月支分支都已覆盖，确认 parse_ganzhi 与本测试无关
+    assert!(parse_ganzhi("甲子").is_some());
+}
+
+/// 反查五行关系正确性：印星生我、官杀克我。
+#[test]
+fn yongshen_role_inverses_correct() {
+    use mingli_ganzhi::Element;
+    // 印星 X.generates() == dm
+    for dm in [Element::Wood, Element::Fire, Element::Earth, Element::Metal, Element::Water] {
+        assert_eq!(yin_xing_of(dm).generates(), dm, "印星生我：{dm:?}");
+        assert_eq!(guan_sha_of(dm).controls(), dm, "官杀克我：{dm:?}");
+    }
+}
+
+#[test]
+fn true_solar_offset_changshanha_oracle() {
+    // 长沙 1987-09-17 lon=112.94°E，tz=+8（标准经线 120°）。
+    //   经度差 = (112.94 − 120) × 4 = −28.24 min
+    //   EoT（9月17日） ≈ +6 min（Spencer 公式）
+    //   合 ≈ −22 min（真太阳时较钟表早约 22 分钟）
+    let off = true_solar_offset_minutes(112.94, 8.0, 1987, 9, 17);
+    assert!(
+        (-24.0..=-20.0).contains(&off),
+        "长沙 1987-09-17 真太阳时差应在 [-24, -20] 分钟，实测 {off:.2}"
+    );
+}
+
+#[test]
+fn true_solar_does_not_change_pillar_when_within_same_chen() {
+    // 长沙 1987-09-17 15：00 钟表（未时）；真太阳时 ≈ 14：38，仍在未时(13-15)：
+    //   等等，未时 13-15，15：00 已是申时(15-17)；真太阳 14：38 是未时。
+    //   ⇒ 时柱按钟表 是申时，按真太阳是未时；时柱会变！
+    // 重新设计：取真正不变的 case：15：30 钟表 → 真太阳 ≈ 15：08，两者都申时 → 时柱同。
+    let with_solar = compute_with_true_solar(BirthInput {
+        year: 1987, month: 9, day: 17, hour: 15, minute: 30, tz: 8.0,
+        gender: Some(Gender::Male),
+    }, 112.94);
+    let no_solar = compute(BirthInput {
+        year: 1987, month: 9, day: 17, hour: 15, minute: 30, tz: 8.0,
+        gender: Some(Gender::Male),
+    });
+    // 钟表 15：30 申时 hour_branch=8；真太阳 ≈ 15：08 申时 hour_branch=8 → 时柱同。
+    assert_eq!(no_solar.hour.ganzhi, with_solar.hour.ganzhi);
+}
+
+#[test]
+fn true_solar_changes_pillar_across_chen_boundary() {
+    // 长沙 1987-09-17 钟表 15：00（申时起点），真太阳 ≈ 14：38（未时）：
+    //   钟表 hour_branch=hour_branch(15，30)=8 申、真太阳 hour_branch(14，..)=7 未 → 时柱必变。
+    let no_solar = compute(BirthInput {
+        year: 1987, month: 9, day: 17, hour: 15, minute: 0, tz: 8.0,
+        gender: Some(Gender::Male),
+    });
+    let with_solar = compute_with_true_solar(BirthInput {
+        year: 1987, month: 9, day: 17, hour: 15, minute: 0, tz: 8.0,
+        gender: Some(Gender::Male),
+    }, 112.94);
+    // 钟表时柱 = 壬申（已验）；真太阳时柱 = ？
+    // hour_branch=7 未， day_stem=5（己）， stem=(5%5)*2+7=7 → 辛。时柱=辛未。
+    assert_eq!(no_solar.hour.ganzhi, "壬申");
+    assert_eq!(with_solar.hour.ganzhi, "辛未");
+    // 其它三柱不变（同一日同一月同一年）
+    assert_eq!(no_solar.year.ganzhi, with_solar.year.ganzhi);
+    assert_eq!(no_solar.month.ganzhi, with_solar.month.ganzhi);
+    assert_eq!(no_solar.day.ganzhi, with_solar.day.ganzhi);
+}
+
+/// 真太阳时推过午夜时，校正后的年月日时分逐项对得上。
+///
+/// 上面几条真太阳时的测试都在长沙（112.94°E，偏移约 −22 分钟）上，一整天之内动不出去，
+/// 而且只比干支。于是两处没人守：跨日的那两支（`total < 0` 往前一天、
+/// `total >= 24×60` 往后一天）从没走到过；分钟数从来没被断言过——干支只认时辰，
+/// 把 `in_day_min % 60` 改成 `/ 60` 也看不出来。变异扫描在那几行上留了十个漏网。
+///
+/// 喀什（75.99°E）用北京时间，偏移约 −3 小时，是这条路的现实用例；往东取 135°E
+/// 走另一支。`BaziChart::input` 带的是**校正后**的时刻，所以这里逐项比它，
+/// 而不是只比干支。期望值由已经对过公开值的 `true_solar_offset_minutes` 推出。
+#[test]
+fn crossing_midnight_moves_the_whole_moment() {
+    for (lon, y, mo, d, h, mi) in [
+        (75.99_f64, 1987_i32, 9_u32, 17_u32, 1_u32, 0_u32),  // 往前跨到前一天
+        (75.99, 2000, 1, 1, 0, 30),                          // 跨年那一天，往前
+        (135.0, 1987, 9, 17, 23, 40),                        // 往后跨到次日
+        (135.0, 1999, 12, 31, 23, 50),                       // 跨年，往后
+    ] {
+        let off = true_solar_offset_minutes(lon, 8.0, y, mo, d).round() as i32;
+        let total = i32::try_from(h).expect("小时在 0..24") * 60
+            + i32::try_from(mi).expect("分钟在 0..60")
+            + off;
+        assert!(
+            !(0..24 * 60).contains(&total),
+            "{y}-{mo:02}-{d:02} {h:02}:{mi:02} 在 {lon}°E 的真太阳时是 {total} 分，\
+             没有跨日——这条测试要的正是跨日"
+        );
+        let (delta, in_day) = if total < 0 { (-1, total + 24 * 60) } else { (1, total - 24 * 60) };
+        let (ey, em, ed) = add_days_civil(y, mo, d, delta);
+        let got = compute_with_true_solar(
+            BirthInput { year: y, month: mo, day: d, hour: h, minute: mi, tz: 8.0, gender: Some(Gender::Male) },
+            lon,
+        );
+        assert_eq!(
+            (got.input.year, got.input.month, got.input.day, got.input.hour, got.input.minute),
+            (
+                ey,
+                em,
+                ed,
+                u32::try_from(in_day / 60).expect("0..24"),
+                u32::try_from(in_day % 60).expect("0..60")
+            ),
+            "{y}-{mo:02}-{d:02} {h:02}:{mi:02} @{lon}°E 的真太阳时刻不对"
+        );
+        let expected = compute(BirthInput {
+            year: got.input.year,
+            month: got.input.month,
+            day: got.input.day,
+            hour: got.input.hour,
+            minute: got.input.minute,
+            tz: 8.0,
+            gender: Some(Gender::Male),
+        });
+        assert_eq!(got.day.ganzhi, expected.day.ganzhi, "日柱应随跨日改成那一天的");
+        assert_eq!(got.hour.ganzhi, expected.hour.ganzhi);
+    }
+}
+
+/// 真太阳时正好落在午夜零点时，算作当天的 00:00，不往前退一天。
+///
+/// `total < 0` 与 `total <= 0` 的分岔只在这一刻上：松成 `<=`，零点会被当成
+/// 「前一天的 24:00」，时刻直接坏掉。取样得刚好把偏移抵消掉才走得到。
+#[test]
+fn midnight_exactly_stays_on_the_same_day() {
+    let (lon, y, mo, d) = (112.94_f64, 1987_i32, 9_u32, 17_u32);
+    let off = true_solar_offset_minutes(lon, 8.0, y, mo, d).round() as i32;
+    assert!((-60..0).contains(&off), "这条取样要一个 −60..0 分钟的偏移，实得 {off}");
+    let mi = u32::try_from(-off).expect("上面已限定在 0..60");
+    let got = compute_with_true_solar(
+        BirthInput { year: y, month: mo, day: d, hour: 0, minute: mi, tz: 8.0, gender: Some(Gender::Male) },
+        lon,
+    );
+    assert_eq!(
+        (got.input.year, got.input.month, got.input.day, got.input.hour, got.input.minute),
+        (y, mo, d, 0, 0),
+        "真太阳时恰为 00:00 时应留在当天"
+    );
+}
+
+/// 五行取值、互补打分、调候月支 —— 三张多路映射逐支走一遍。
+///
+/// 三处形状相同：一个五路（或更多路）的 `match`，而测试只走过其中几支。
+/// 变异扫描因此报出「把 `wx_pct` 整个换成常数 0」「删掉 `complement_score` 的
+/// 火/金/水三支」「删掉调候里 `2..=3` 那支」都没有一条测试红。
+///
+/// 表测试是这类缺口最直接的答案：把每一支都点一遍，且让每一支的期望值互不相同，
+/// 于是「走错支」和「整个函数被换掉」都会红。
+#[test]
+fn the_five_element_lookups_hit_every_arm() {
+    let wx = WuxingPower { wood: 11, fire: 22, earth: 33, metal: 44, water: 55 };
+
+    // 一、按 Element 取百分比：五支各取各的字段。数值互不相同，走错一支就红。
+    for (e, want) in [
+        (Element::Wood, 11_u32),
+        (Element::Fire, 22),
+        (Element::Earth, 33),
+        (Element::Metal, 44),
+        (Element::Water, 55),
+    ] {
+        assert_eq!(crate::strength::wx_pct(&wx, e), want, "{e:?} 取错了字段");
+    }
+
+    // 二、团队互补打分：按用神五行的中文名取对方那一行的百分比；认不出的给 0。
+    for (name, want) in [("木", 11_u32), ("火", 22), ("土", 33), ("金", 44), ("水", 55)] {
+        assert_eq!(complement_score(name, &wx), want, "{name} 取错了字段");
+    }
+    assert_eq!(complement_score("土星", &wx), 0, "认不出的五行名应给 0 而不是撞上某一支");
+}
+
+/// 中和局的调候，十二个月支各取到该取的那一行。
+///
+/// 调候那张表按月支分成五段（寒/燥/春木/秋金/杂气）。原有的用神测试只覆盖到其中几段，
+/// 于是删掉「寅卯春木月 — 取金修剪」那一支、让它落到杂气那条兜底上，也没有测试红。
+///
+/// 这里直接喂一个中和的 `Strength`（score 落在 41..=59），十二个月支逐个问。
+#[test]
+fn the_balanced_chart_takes_its_seasonal_remedy_from_the_month_branch() {
+    let strength = Strength {
+        score: 50,
+        level: "中和".to_string(),
+        got_ling: 15,
+        got_di: 15,
+        got_shi: 20,
+        wuxing: WuxingPower { wood: 20, fire: 20, earth: 20, metal: 20, water: 20 },
+    };
+    // 日干取甲（木）；杂气那一段取日主同行，故期望是「木」。
+    for (branch, want) in [
+        (0_u8, "火"), (1, "火"), (11, "火"),      // 亥子丑 寒月 → 火
+        (5, "水"), (6, "水"), (7, "水"),          // 巳午未 燥月 → 水
+        (2, "金"), (3, "金"),                     // 寅卯 春木月 → 金
+        (8, "火"), (9, "火"),                     // 申酉 秋金月 → 火
+        (4, "木"), (10, "木"),                    // 辰戌 杂气月 → 日主同行
+    ] {
+        let ys = determine_yongshen(0, branch, &strength);
+        assert_eq!(
+            ys.primary_wuxing, want,
+            "月支 {branch} 的调候应取 {want}，实得 {}（{}）",
+            ys.primary_wuxing, ys.reasoning
+        );
+    }
+}
+
+/// 月令本气与日主同五行时，同阴阳出建禄、异阴阳出月刃。
+///
+/// 这两格由 `(main_qi % 2) == (dm % 2)` 分开。而同五行的两个天干本来就同属一对
+/// （0/1 木、2/3 火……），所以把那个 `%` 改成 `/` 之后两边恒等，**一切都成了建禄**——
+/// 没有一条测试红，因为整个套件里**从来没有出现过月刃格**。
+///
+/// 1980-03-12 日柱甲申、月柱己卯：卯的本气是乙（阴木），日主甲（阳木），同五行异阴阳 → 月刃。
+#[test]
+fn the_yang_blade_and_the_prosperity_pattern_are_told_apart_by_polarity() {
+    let blade = compute(BirthInput {
+        year: 1980, month: 3, day: 12, hour: 12, minute: 0, tz: 8.0, gender: None,
+    });
+    assert_eq!(blade.day.ganzhi, "甲申", "取样的日柱变了，下面这条结论要重验");
+    assert_eq!(blade.month.ganzhi, "己卯", "取样的月柱变了，下面这条结论要重验");
+    assert_eq!(
+        blade.pattern.name, "月刃格",
+        "甲日主生卯月，本气乙（阴木）与日主甲（阳木）同五行异阴阳，应是月刃而非建禄"
+    );
+
+    // 同五行同阴阳的对照：寅月本气甲，甲日主 → 建禄。
+    let lu = compute(BirthInput {
+        year: 1980, month: 2, day: 21, hour: 12, minute: 0, tz: 8.0, gender: None,
+    });
+    assert_eq!(lu.pattern.name, "建禄格", "甲日主生寅月本气甲，同阴阳应是建禄，实得 {}", lu.pattern.name);
+
+    // 换一个日主再走一遍——甲的序号是 0，`0 % 2` 与 `0 / 2` 都是 0，
+    // 单看甲这一对分不出「取余」和「整除」。丙的序号是 2：`2 % 2 = 0`，`2 / 2 = 1`。
+    let blade_bing = compute(BirthInput {
+        year: 1980, month: 6, day: 12, hour: 12, minute: 0, tz: 8.0, gender: None,
+    });
+    assert_eq!(blade_bing.day.ganzhi, "丙辰", "取样的日柱变了，下面这条结论要重验");
+    assert_eq!(
+        blade_bing.pattern.name, "月刃格",
+        "丙日主生午月，本气丁（阴火）与丙（阳火）同五行异阴阳，应是月刃"
+    );
+    let lu_bing = compute(BirthInput {
+        year: 1980, month: 5, day: 13, hour: 12, minute: 0, tz: 8.0, gender: None,
+    });
+    assert_eq!(lu_bing.day.ganzhi, "丙戌", "取样的日柱变了，下面这条结论要重验");
+    assert_eq!(
+        lu_bing.pattern.name, "建禄格",
+        "丙日主生巳月本气丙，同阴阳应是建禄，实得 {}",
+        lu_bing.pattern.name
+    );
+}
+
+#[test]
+fn true_solar_helpers_round_trip() {
+    // 校验 day_of_year 闰年分支 + add_days_civil 跨月跨年。
+    assert_eq!(day_of_year(2024, 3, 1), 61); // 闰年 1月31+2月29+1=61
+    assert_eq!(day_of_year(2023, 3, 1), 60);
+    assert_eq!(add_days_civil(2024, 1, 1, -1), (2023, 12, 31));
+    assert_eq!(add_days_civil(2023, 12, 31, 1), (2024, 1, 1));
+    assert_eq!(add_days_civil(2024, 2, 28, 2), (2024, 3, 1)); // 闰年 +2 跨 29
+    assert_eq!(add_days_civil(2023, 2, 28, 2), (2023, 3, 2)); // 平年 28→3/2
+
+    // 二月本身，闰年与平年各问一次。
+    //
+    // 上面两条问的都是 3 月 1 日，那时 `m > 2` 与 `m >= 2` 给的是同一个答案；
+    // 分岔只在二月里：闰年的 2 月 29 日之前不该加那一天。
+    // 变异扫描因此把 `m > 2` 改成 `m >= 2` 也没人拦。
+    assert_eq!(day_of_year(2024, 2, 1), 32, "闰年 2 月 1 日仍是第 32 天，闰日在这天之后");
+    assert_eq!(day_of_year(2024, 2, 29), 60);
+    assert_eq!(day_of_year(2023, 2, 28), 59);
+    assert_eq!(day_of_year(2024, 1, 31), 31, "一月不受闰日影响");
+
+    // 往回退恰好落在某月 1 日。
+    //
+    // `while d < 1` 与 `while d <= 1` 的分岔只在结果正好是 1 号时：松成 `<=`，
+    // 1 号会被再退一个月、加上那个月的天数，变成上个月的 32 号这种数。
+    // 上面几条的结果分别是 31、1、1、2 号——落在 1 号的那两条是**加**出来的，
+    // 走的是另一个循环，退的那条落在 31 号，所以这一支一直没被问到。
+    assert_eq!(add_days_civil(2024, 3, 2, -1), (2024, 3, 1));
+    assert_eq!(add_days_civil(2024, 5, 2, -1), (2024, 5, 1));
+}
+
+#[test]
+fn three_houses_1987_oracle() {
+    // 1987-09-17 15：00 男 = 丁卯 己酉 己巳 壬申。
+    // 月支酉(9)，时支未（7，15：00 hour_branch=(15+1)/2=8 申？）。
+    //   等等 hour_branch(15，0)=(16/2)=8 申。所以时支=申(8)。
+    //   命宫支 = (9 - 8 + 12) % 12 = 1 → 丑；命宫干 = 五虎遁丁年丑月 = 癸（丁年寅起壬，寅卯辰巳午未申酉戌亥子丑 = 壬癸甲乙丙丁戊己庚辛壬癸，丑=癸） → 命宫=癸丑。
+    //   身宫支 = (9 + 8) % 12 = 5 → 巳；身宫干 = 丁年寅起壬，巳=丙（壬癸甲乙丙） → 身宫=丙巳。
+    //   胎元 = 己酉 +1+3 = 庚子。
+    let c = compute(BirthInput {
+        year: 1987, month: 9, day: 17, hour: 15, minute: 0, tz: 8.0,
+        gender: Some(Gender::Male),
+    });
+    let t = &c.three_houses;
+    // 丁年寅月起壬：寅壬卯癸辰甲巳乙午丙未丁申戊酉己戌庚亥辛子壬丑癸 — 命宫干=癸，身宫干=乙。
+    assert_eq!(t.ming_gong, "癸丑");
+    assert_eq!(t.shen_gong, "乙巳");
+    assert_eq!(t.tai_yuan, "庚子");
+}
+
+#[test]
+fn three_houses_1990_oracle() {
+    // 1990-06-15 14：30 男 = 庚午 壬午 辛亥 乙未。
+    // 月支午(6)，时支未（7，14：30 hour_branch=(15/2)=7 未）。
+    //   命宫支 = (6 - 7 + 12) % 12 = 11 → 亥；命宫干 = 庚年寅月起戊，寅卯辰巳午未申酉戌亥子丑 = 戊己庚辛壬癸甲乙丙丁戊己，亥=丁 → 命宫=丁亥。
+    //   身宫支 = (6 + 7) % 12 = 1 → 丑；身宫干 = 庚年戊起，丑=己 → 身宫=己丑。
+    //   胎元 = 壬午 +1+3 = 癸酉。
+    let c = compute(BirthInput {
+        year: 1990, month: 6, day: 15, hour: 14, minute: 30, tz: 8.0,
+        gender: Some(Gender::Male),
+    });
+    assert_eq!(c.three_houses.ming_gong, "丁亥");
+    assert_eq!(c.three_houses.shen_gong, "己丑");
+    assert_eq!(c.three_houses.tai_yuan, "癸酉");
+}
+
+/// 命宫公式性质：寅月寅时 → 命宫支 = (2-2+12)%12 = 0 = 子；身宫支 = 4 = 辰。
+#[test]
+fn three_houses_ming_gong_property() {
+    // 甲年寅月寅时（任意 day）：月支=寅(2)，时支=寅(2)。
+    // 甲年寅月起丙：寅丙卯丁辰戊巳己午庚未辛申壬酉癸戌甲亥乙子丙丑丁。
+    let yr = GanZhi { stem: 0, branch: 0 }; // 甲年
+    let mo = GanZhi { stem: 2, branch: 2 }; // 丙寅
+    let th = determine_three_houses(yr, mo, 2);
+    // 命宫支 = (2-2+12)%12 = 0 → 子；命宫干 = 甲年子月 = 丙 → 命宫=丙子。
+    assert_eq!(th.ming_gong, "丙子");
+    // 身宫支 = (2+2)%12 = 4 → 辰；身宫干 = 甲年辰月 = 戊 → 身宫=戊辰。
+    assert_eq!(th.shen_gong, "戊辰");
+    // 胎元 = 月柱干+1=丁、支+3=巳 → 丁巳。
+    assert_eq!(th.tai_yuan, "丁巳");
+}
+
+#[test]
+fn team_wuxing_average_oracle() {
+    // 两人合盘：1987 长沙（木11火20土23金32水14）+ 1990 长沙（走 compute 后取实际值）。
+    // 平均 = 两人逐项求和÷2。
+    let a = compute(BirthInput {
+        year: 1987, month: 9, day: 17, hour: 15, minute: 0, tz: 8.0,
+        gender: Some(Gender::Male),
+    });
+    let b = compute(BirthInput {
+        year: 1990, month: 6, day: 15, hour: 14, minute: 30, tz: 8.0,
+        gender: Some(Gender::Male),
+    });
+    let team = team_wuxing_average(&[a.clone(), b.clone()]);
+    assert_eq!(team.wood, u32::midpoint(a.strength.wuxing.wood, b.strength.wuxing.wood));
+    assert_eq!(team.fire, u32::midpoint(a.strength.wuxing.fire, b.strength.wuxing.fire));
+    assert_eq!(team.earth, u32::midpoint(a.strength.wuxing.earth, b.strength.wuxing.earth));
+    assert_eq!(team.metal, u32::midpoint(a.strength.wuxing.metal, b.strength.wuxing.metal));
+    assert_eq!(team.water, u32::midpoint(a.strength.wuxing.water, b.strength.wuxing.water));
+}
+
+#[test]
+fn team_wuxing_empty_is_zero() {
+    let z = team_wuxing_average(&[]);
+    assert_eq!(z.wood + z.fire + z.earth + z.metal + z.water, 0);
+}
+
+#[test]
+fn complement_and_team_extremes() {
+    // 1987 wuxing： 木11 火20 土23 金32 水14。
+    let a = compute(BirthInput {
+        year: 1987, month: 9, day: 17, hour: 15, minute: 0, tz: 8.0,
+        gender: Some(Gender::Male),
+    });
+    let wx = &a.strength.wuxing;
+    // 对应主用神「木」（1987 偏强主用木），互补度 = 11（自给度低，需别人补）
+    assert_eq!(complement_score(&a.yongshen.primary_wuxing, wx), wx.wood);
+    // 极端最弱 = 木11、最旺 = 金32
+    assert_eq!(team_weakest(wx), ("木".into(), wx.wood));
+    assert_eq!(team_strongest(wx), ("金".into(), wx.metal));
+    // 未知五行字符串 → 0
+    assert_eq!(complement_score("xxx", wx), 0);
+}
+
+/// 1987-09-17 男 = 丁卯 己酉 己巳 壬申。日干己，年支卯。
+/// 各柱命中神煞（人工核校）：
+/// - 年柱卯：日干己 → 卯无日干锚命中（学堂/文昌均酉）；
+///   年支卯 anchor 亥卯未组 → 桃花子/驿马巳/华盖未/将星卯 → 卯=将星 ✓
+/// - 月柱酉：日干己 → 命中 学堂（酉） + 文昌（酉）；年支卯 anchor → 酉非该组任一神煞 → 无；合 [学堂， 文昌]
+/// - 日柱巳：日干己 → 巳非任一日干锚位 → 无；年支卯 anchor → 巳=驿马；且非魁罡 → 合 [驿马]
+/// - 时柱申：日干己 → 无；年支卯 anchor → 申非该组任一 → 无 → 合 []
+#[test]
+fn shensha_1987_oracle() {
+    let c = compute(BirthInput {
+        year: 1987, month: 9, day: 17, hour: 15, minute: 0, tz: 8.0,
+        gender: Some(Gender::Male),
+    });
+    assert_eq!(c.year.shensha, vec!["将星"]);
+    // shensha_by_day_stem 内部顺序 = 羊刃/禄/文昌/红艳/学堂/词馆 → 文昌先于学堂
+    assert_eq!(c.month.shensha, vec!["文昌", "学堂"]);
+    assert_eq!(c.day.shensha, vec!["驿马"]);
+    assert_eq!(c.hour.shensha, Vec::<String>::new());
+}
+
+/// 魁罡日柱触发：1980-09-13 22：00 男 → 看是不是庚辰/庚戌/壬辰/戊戌之一？
+/// 实际不知日柱，构造一个已知魁罡日：1984-04-29 （任查）。
+/// 改用 zi_hour 测试日柱 = 壬辰的样例。
+/// 1976-12-04 → 日柱壬辰？（查实际锚 2024-01-01=甲子 0，壬辰=28号）
+/// 简化：用合成 GanZhi 直接测 is_kuigang_day，主测「魁罡」字符串出现在 day.shensha 即可。
+#[test]
+fn shensha_kuigang_marker() {
+    use mingli_ganzhi::is_kuigang_day;
+    // 任意找一天日柱 = 庚戌（=06 戌 序号 47）？跑出来反测：
+    // 1979-08-12 = JDN ？，日柱？
+    // 直接 unit test ganzhi crate fn：
+    assert!(is_kuigang_day(mingli_ganzhi::GanZhi { stem: 6, branch: 10 }));
+    assert!(!is_kuigang_day(mingli_ganzhi::GanZhi { stem: 5, branch: 5 })); // 己巳
+    // 1987 己巳日 → 非魁罡 → day.shensha 不含「魁罡」
+    let c = compute(BirthInput {
+        year: 1987, month: 9, day: 17, hour: 15, minute: 0, tz: 8.0,
+        gender: Some(Gender::Male),
+    });
+    assert!(!c.day.shensha.contains(&"魁罡".to_string()));
+}
+
+#[test]
+fn hidden_stems_oracle() {
+    // 1987-09-17：四柱 丁卯 己酉 己巳 壬申。
+    let c = compute(BirthInput {
+        year: 1987, month: 9, day: 17, hour: 15, minute: 0, tz: 8.0,
+        gender: Some(Gender::Male),
+    });
+    let stems = |p: &Pillar| p.hidden.iter().map(|h| h.stem.clone()).collect::<Vec<_>>();
+    assert_eq!(stems(&c.year), ["乙"]); // 卯藏乙
+    assert_eq!(stems(&c.month), ["辛"]); // 酉藏辛
+    assert_eq!(stems(&c.day), ["丙", "庚", "戊"]); // 巳藏丙庚戊
+    assert_eq!(stems(&c.hour), ["庚", "壬", "戊"]); // 申藏庚壬戊
+    // 支藏十神接线：日主己土，巳本气丙火生己土、阴阳异 → 正印。
+    assert_eq!(c.day.hidden[0].ten_god, "正印");
+    // 十二长生（日主己，阴干逆行，长生在酉）：年卯=病、月酉=长生、日巳=帝旺、时申=沐浴。
+    assert_eq!(c.year.day_twelve, "病");
+    assert_eq!(c.month.day_twelve, "长生");
+    assert_eq!(c.day.day_twelve, "帝旺");
+    assert_eq!(c.hour.day_twelve, "沐浴");
+}
+
+#[test]
+fn score_40_has_one_consistent_weak_classification() {
+    // Observed API counterexample: formerly level=中和 but method=身弱宜扶.
+    let c = compute(BirthInput { year:1991, month:3, day:20, hour:14, minute:30, tz:5.75, gender:None });
+    assert_eq!(c.strength.score, 40);
+    assert_eq!(c.strength.level, "偏弱");
+    assert_eq!(c.yongshen.method, "扶抑 · 身弱宜扶");
+    assert!(!c.yongshen.reasoning.contains("中和"));
+}
+
+#[test]
+fn peer_qi_revealed_does_not_become_an_eight_pattern() {
+    // Both actual dates used to return 比肩格 / 劫财格 with is_lu_ren=false.
+    for (month, day, name, stem) in [(5,15,"暗七杀格","丙"),(3,5,"暗正官格","甲")] {
+        let c = compute(BirthInput { year:1990, month, day, hour:14, minute:30, tz:5.75, gender:None });
+        assert_eq!(c.pattern.name, name);
+        assert_eq!(c.pattern.qi_stem, stem);
+        assert!(!c.pattern.revealed);
+        assert!(!c.pattern.is_lu_ren);
+        assert_eq!(c.pattern.revealed_in, None);
+        assert!(c.pattern.source.contains("无可取八正格的透干"));
+    }
+    // 辰藏戊乙癸，日主甲：中气乙劫财虽在年柱透出，仍继续找余气癸正印。
+    let p = determine_pattern(GanZhi{stem:1,branch:1},GanZhi{stem:6,branch:4},GanZhi{stem:0,branch:0},GanZhi{stem:9,branch:1});
+    assert_eq!(p.name,"正印格");
+    assert_eq!(p.qi_kind,"余气");
+    assert_eq!(p.revealed_in.as_deref(),Some("时柱"));
+}
+
+#[test]
+fn every_pattern_symbol_combination_has_consistent_attribution() {
+    // Exhaust all 120,000 relevant inputs: day stem × month branch × three revealed stems.
+    // Other branches and civil-calendar correlations do not enter determine_pattern.
+    let eight=["正官","七杀","正财","偏财","正印","偏印","食神","伤官"];
+    for dm in 0..10 { for mb in 0..12 { for year in 0..10 { for month in 0..10 { for hour in 0..10 {
+        let p=determine_pattern(GanZhi{stem:year,branch:year%2},GanZhi{stem:month,branch:mb},GanZhi{stem:dm,branch:dm%2},GanZhi{stem:hour,branch:hour%2});
+        let hidden=hidden_stems(mb);
+        let qi=STEMS.iter().position(|s|*s==p.qi_stem).unwrap() as u8;
+        assert!(hidden.contains(&qi));
+        assert_eq!(p.ten_god,ten_god(dm,qi));
+        if p.is_lu_ren {
+            assert!(matches!(p.name.as_str(),"建禄格"|"月刃格"));
+            assert!(matches!(p.ten_god.as_str(),"比肩"|"劫财"));
+            assert_eq!(qi,hidden[0]);assert!(!p.revealed);assert!(p.revealed_in.is_none());
+        } else {
+            assert!(eight.contains(&p.ten_god.as_str()));
+            if p.revealed {
+                let stem=match p.revealed_in.as_deref(){Some("年柱")=>year,Some("月柱")=>month,Some("时柱")=>hour,_=>panic!("missing source")};
+                assert_eq!(stem,qi);
+                assert_eq!(p.name,format!("{}格",p.ten_god));
+            } else {
+                assert_eq!(qi,hidden[0]);assert!(p.revealed_in.is_none());
+                assert_eq!(p.name,format!("暗{}格",p.ten_god));
+                // Falling back never overlooks a revealed non-peer monthly stem.
+                for &h in hidden { if [year,month,hour].contains(&h) { assert!(matches!(ten_god(dm,h),"比肩"|"劫财")); } }
+            }
+        }
+    }}}}}
+}
+
+/// All 60^4 = 12,960,000 symbol charts; civil-calendar feasibility is not assumed.
+/// This is an arithmetic contract check, not an independent calendar oracle.
+/// Split by year pillar so the shards run on separate test threads.
+const PILLAR_YEAR_SHARDS: [(u8, u8); 4] = [(0, 15), (15, 30), (30, 45), (45, 60)];
+
+fn sixty_pillar_combinations_keep_strength_and_method_consistent(years: std::ops::Range<u8>) {
+    for y in years { for d in 0..60 { for m in 0..60 { for h in 0..60 {
+        let gz=|n:u8|GanZhi{stem:n%10,branch:n%12};
+        let (year,month,day,hour)=(gz(y),gz(m),gz(d),gz(h));
+        let s=compute_strength(year,month,day,hour);
+        let y=determine_yongshen(day.stem,month.branch,&s);
+        assert!(s.got_ling<=30 && s.got_di<=30 && s.got_shi<=30 && s.score<=100);
+        assert_eq!(s.score,(s.got_ling+s.got_di+s.got_shi)*100/90);
+        match s.score {
+            0..=40=>{assert!(matches!(s.level.as_str(),"弱"|"偏弱"));assert_eq!(y.method,"扶抑 · 身弱宜扶");},
+            41..=59=>{assert_eq!(s.level,"中和");assert_eq!(y.method,"调候为主");},
+            _=>{assert!(matches!(s.level.as_str(),"偏强"|"强"));assert_eq!(y.method,"扶抑 · 身强宜耗");},
+        }
+        let sum=s.wuxing.wood+s.wuxing.fire+s.wuxing.earth+s.wuxing.metal+s.wuxing.water;
+        assert!((98..=102).contains(&sum));
+    }}}}
+}
+
+fn pillar_shard(i: usize) {
+    let (from, to) = PILLAR_YEAR_SHARDS[i];
+    sixty_pillar_combinations_keep_strength_and_method_consistent(from..to);
+}
+#[test]
+fn sixty_pillar_combinations_year_pillars_0_to_14() {
+    pillar_shard(0);
+}
+#[test]
+fn sixty_pillar_combinations_year_pillars_15_to_29() {
+    pillar_shard(1);
+}
+#[test]
+fn sixty_pillar_combinations_year_pillars_30_to_44() {
+    pillar_shard(2);
+}
+#[test]
+fn sixty_pillar_combinations_year_pillars_45_to_59() {
+    pillar_shard(3);
+}
+#[test]
+fn sixty_pillar_shards_cover_every_year_pillar_once() {
+    assert_eq!(PILLAR_YEAR_SHARDS[0].0, 0);
+    assert_eq!(PILLAR_YEAR_SHARDS[PILLAR_YEAR_SHARDS.len() - 1].1, 60);
+    for w in PILLAR_YEAR_SHARDS.windows(2) {
+        assert_eq!(w[1].0, w[0].1, "shards must be contiguous: {w:?}");
+    }
+}

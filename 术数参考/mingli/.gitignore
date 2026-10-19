@@ -1,0 +1,23 @@
+# Rust
+target/
+**/*.rs.bk
+
+# JS / web
+node_modules/
+dist/
+web/e2e/shots/
+*.tsbuildinfo
+
+# OS / editors
+.DS_Store
+*.swp
+
+# Environment variables
+.env
+.env.local
+
+# Tool output
+mutants.out*/
+bench/browser/node_modules/
+bench/browser/package-lock.json
+__pycache__/

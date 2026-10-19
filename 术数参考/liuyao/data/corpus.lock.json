@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "corpus_snapshot": "2026-09-15-six-books-r9final",
+  "corpus_hash": "ff687b5ae8032bb7625868193d8fc32265c16bc14ea6ff2472dac20dcb89c4bd",
+  "build_implementation_sha256": "0fc12ab7811fb0b037fc55134424b6e1f839d0eae18894c2f42f24ff6040d9ab",
+  "assets": [
+    {
+      "kind": "corpus",
+      "name": "liuyao-corpus-2026-09-15-r9final.zip",
+      "sha256": "04b35475e529ee637e2a004f311ddd9e4a67da2455de25bd04c6d271ccfa324a",
+      "size": 12283999,
+      "file_count": 1036,
+      "uncompressed_size": 76187272,
+      "url": "https://github.com/zhishengyk/liuyao/releases/download/v0.8.7/liuyao-corpus-2026-09-15-r9final.zip"
+    },
+    {
+      "kind": "reference",
+      "url": "https://api.github.com/repos/zhishengyk/liuyao/releases/assets/556999241",
+      "sha256": "504effb5e76ddcd432710c5a3d60ef3a94c67c3a19584000beac486e0613fe67",
+      "size": 44967026,
+      "file_count": 1877,
+      "uncompressed_size": 131527902,
+      "name": "liuyao-reference-archive-2026-09-11.zip"
+    }
+  ]
+}

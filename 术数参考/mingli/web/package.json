@@ -1,0 +1,26 @@
+{
+  "name": "mingli-web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "css-vars": "node e2e/css-vars.mjs",
+    "errors": "node e2e/errors.mjs",
+    "shots": "node e2e/css-vars.mjs && node e2e/wired.mjs && node e2e/errors.mjs && node e2e/shoot.mjs"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^6.0.5",
+    "playwright": "^1.62.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.1"
+  }
+}

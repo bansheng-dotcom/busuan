@@ -1,0 +1,24 @@
+[package]
+name = "mingli-core"
+description = "Mathematical primitives behind divination systems: cyclic groups with CRT, angle quantization, a GF(2) lattice, a hash ring, group actions, and a seeded sampler. No world data, no dependencies."
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+repository.workspace = true
+keywords = ["cyclic-group", "crt", "gf2", "quantizer", "divination"]
+categories = ["algorithms", "mathematics"]
+
+# 数学石必须零依赖：它是整棵树的根，放大半径=全栈。
+[dependencies]
+
+[dev-dependencies]
+criterion = { version = "0.8", default-features = false }
+# 仅测试期：基于性质的测试（随机输入验不变量）。不进运行时依赖，根仍零依赖。
+proptest = "1"
+
+[lints]
+workspace = true
+
+[[bench]]
+name = "core_bench"
+harness = false

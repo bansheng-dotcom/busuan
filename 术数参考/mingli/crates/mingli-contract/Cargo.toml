@@ -1,0 +1,21 @@
+[package]
+name = "mingli-contract"
+description = "The ports between a divination system and the code that orchestrates it: the CastingEngine and WordEngine traits, the shared query, and the determinism and school declarations."
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+repository.workspace = true
+keywords = ["divination", "traits", "ports", "contract"]
+categories = ["algorithms", "api-bindings"]
+
+[dependencies]
+# 契约里的 `cast(&Moment, ..)` 需要共享时刻这一领域类型；除此之外不依赖任何叶。
+mingli-astro = { workspace = true, features = ["serde"] }
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+[dev-dependencies]
+proptest = "1"
+
+[lints]
+workspace = true

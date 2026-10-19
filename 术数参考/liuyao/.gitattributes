@@ -1,0 +1,3 @@
+# Keep code fingerprints and the small corpus lock stable across platforms.
+*.py text eol=lf
+data/corpus.lock.json text eol=lf

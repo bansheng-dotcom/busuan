@@ -1,0 +1,11 @@
+/* 样式按「管什么」分文件。
+ *
+ * 这里的 @import 次序就是拆分前的行序——层叠靠次序，次序一变，同权重的规则就换了赢家。
+ * 加文件要想清楚插在哪一行，不能往末尾一丢了事。
+ */
+@import './styles/base.css';
+@import './styles/intent-bar.css';
+@import './styles/fortune.css';
+@import './styles/shell.css';
+@import './styles/leaves.css';
+@import './styles/intents.css';

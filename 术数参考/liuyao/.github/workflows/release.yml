@@ -1,0 +1,90 @@
+name: Release
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Checkout pinned Wang Huying book archive
+        uses: actions/checkout@v4
+        with:
+          ref: f67598b8c299f1aafdc3fa9e88a2747586f5e2ac
+          path: .local/books-archive
+          sparse-checkout: |
+            书籍/六爻/王虎应
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -e '.[test]' build uv
+      - name: Restore pinned corpus assets
+        run: python scripts/prepare_corpus.py
+      - name: Check tag matches package version
+        if: startsWith(github.ref, 'refs/tags/')
+        run: python -c "import os; from liuyao_mcp import __version__; assert os.environ['GITHUB_REF_NAME'] == 'v' + __version__"
+      - name: Select stable or preview gates
+        id: channel
+        run: |
+          python - <<'PY'
+          import os
+          from packaging.version import Version
+          from liuyao_mcp import __version__
+          preview = Version(__version__).is_prerelease
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write(f'preview={str(preview).lower()}\n')
+              output.write(f'ingest_flags={"--allow-partial" if preview else ""}\n')
+              output.write(f'build_flags={"--prerelease" if preview else ""}\n')
+              output.write(f'publish_flags={"--prerelease" if preview else ""}\n')
+          PY
+      - run: python -m liuyao_mcp.ingest ${{ steps.channel.outputs.ingest_flags }}
+      - name: Required full test suite
+        run: python -m pytest -q --junitxml=full-suite.xml
+      - name: Preserve full suite result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-suite-result
+          path: full-suite.xml
+      - run: python scripts/build_release.py ${{ steps.channel.outputs.build_flags }}
+      - name: Test self-contained wheel with uvx
+        run: python scripts/smoke_release.py --wheel "$PWD"/dist/*-py3-none-any.whl
+      - name: Test cached wheel without network access
+        run: python scripts/smoke_release.py --wheel "$PWD"/dist/*-py3-none-any.whl --offline
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release
+          path: dist/
+      - name: Publish GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          release_notes_args=(--generate-notes)
+          if [[ -f "docs/releases/$GITHUB_REF_NAME.md" ]]; then
+            release_notes_args=(--notes-file "docs/releases/$GITHUB_REF_NAME.md")
+          fi
+          gh release create "$GITHUB_REF_NAME" dist/* --verify-tag "${release_notes_args[@]}" --title "$GITHUB_REF_NAME" ${{ steps.channel.outputs.publish_flags }}
+      - name: Test plugin downloads the published wheel
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          UV_CACHE_DIR: ${{ runner.temp }}/liuyao-plugin-cache
+        run: python scripts/smoke_release.py --plugin
+      - name: Test the same plugin command with network blocked
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          UV_CACHE_DIR: ${{ runner.temp }}/liuyao-plugin-cache
+          HTTP_PROXY: http://127.0.0.1:9
+          HTTPS_PROXY: http://127.0.0.1:9
+          ALL_PROXY: http://127.0.0.1:9
+          NO_PROXY: ''
+          UV_HTTP_TIMEOUT: '2'
+          UV_HTTP_RETRIES: '0'
+        run: python scripts/smoke_release.py --plugin

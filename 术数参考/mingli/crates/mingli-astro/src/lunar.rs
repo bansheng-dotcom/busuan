@@ -1,0 +1,200 @@
+//! 农历（阴阳合历）：基于朔与中气的「无中气置闰」算法，确定性、不查表。
+//!
+//! 规则（通行的中国农历定朔定气法）：
+//! - 朔（新月）所在民用日为农历月初一。
+//! - 含冬至(λ=270°)之月为「十一月」（子月）。
+//! - 一岁（冬至到次冬至）内若有 13 个月，则该岁置闰；闰月 = 该岁内第一个「不含中气」之月，
+//!   其月名沿用前一个月（如闰二月）。中气 = 太阳黄经为 30° 整数倍之节气。
+
+use crate::sun::{solar_term_jd, sun_apparent_longitude};
+use crate::{
+    civil_day_number, jd_ut_to_jde, local_civil_day_of,
+    moon::{new_moon_jd_ut, new_moon_k_near},
+};
+#[cfg(feature = "serde")]
+use serde::Serialize;
+
+/// 阴阳合历日期（公历换算所得）。
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[cfg_attr(feature = "serde", derive(Serialize))]
+pub struct LunarDate {
+    /// 农历年（以正月初一为界；十一、十二月归本岁起始年）。
+    pub year: i32,
+    /// 月序 1..12（闰月沿用同序号，配合 `leap`）。
+    pub month: u32,
+    /// 是否为闰月。
+    pub leap: bool,
+    /// 日 1..30。
+    pub day: u32,
+}
+
+/// 一次朔搜索允许走多少步。
+///
+/// 平朔估算与真朔相差不超过 ~0.6 天，所以起点至多偏一格，正常一到两步就落位。
+/// 给到 8 是让真实情况有足够余量，同时把「走不完」与「走得久」分开：超过它就不是
+/// 慢，是不动了。
+///
+/// 上限本身也是守卫。没有它，任何把 [`new_moon_jd_ut`] 或 `local_civil_day_of`
+/// 算错的改动都不会让调用方拿到错答案——而是让它**永远拿不到答案**。
+/// 变异扫描里这一族有十二个变异是这样超时的：既没被拦住，也没被记成漏网，
+/// 只是把测试挂在那儿。挂死比答错难查得多，因为它不给你任何可读的东西。
+const MAX_NEW_MOON_STEPS: u32 = 8;
+
+/// 返回「本地民用日序号 <= cdn」的最大朔所在民用日 cdn，及其朔序号 k。
+fn new_moon_on_or_before(cdn: i64, tz: f64) -> (i64, i64) {
+    let mut k = new_moon_k_near(cdn as f64 - 0.5);
+    for _ in 0..MAX_NEW_MOON_STEPS {
+        let c = local_civil_day_of(new_moon_jd_ut(k), tz);
+        let c_next = local_civil_day_of(new_moon_jd_ut(k + 1), tz);
+        if c <= cdn && cdn < c_next {
+            return (c, k);
+        } else if c > cdn {
+            k -= 1;
+        } else {
+            // 估算式取的是最近一个朔，真朔与平朔相差不超过 ~0.6 天，
+            // 因此估算至多偏大一格、不会偏小。这一支是搜索循环的安全网。
+            //
+            // 「实测不进」由 [`the_new_moon_estimate_is_never_too_low`] 守着，
+            // 不再只是这里的一句话。它此前确实只是一句话——本文件的注释这么写了很久，
+            // 而验证它的办法（把这支改成 panic 跑一遍全量扫描）从没有人跑过。
+            k += 1;
+        }
+    }
+    panic!(
+        "朔搜索在 {MAX_NEW_MOON_STEPS} 步内没有收敛（民用日 {cdn}，时区 {tz}）——\
+         朔的时刻或民用日换算算错了"
+    );
+}
+
+/// 含某年冬至之月的初一（子月初一）的民用日 cdn 与朔序号。
+fn month11(year: i32, tz: f64) -> (i64, i64) {
+    let ws_cdn = local_civil_day_of(solar_term_jd(year, 270.0), tz);
+    new_moon_on_or_before(ws_cdn, tz)
+}
+
+/// 公历 → 农历。`tz` 为时区偏移小时（中国 +8，日本 +9）。
+///
+/// # Panics
+///
+/// 朔的时刻或冬至时刻算错到「搜索走不到位」时会 panic，而不是返回一个凑出来的日期。
+/// 正常输入下走不到那里：搜索的步数上限是按天文事实定的（一岁至多 13 个月、
+/// 平朔与真朔相差不超过 ~0.6 天），够用还有余量。
+#[must_use]
+pub fn solar_to_lunar(year: i32, month: u32, day: u32, tz: f64) -> LunarDate {
+    let cdn = civil_day_number(year, month, day);
+
+    let (m11_y_cdn, _) = month11(year, tz);
+    let start_year = if cdn >= m11_y_cdn { year } else { year - 1 };
+    let (_start_cdn, start_k) = month11(start_year, tz);
+    let (next11_cdn, _) = month11(start_year + 1, tz);
+
+    // 枚举本岁内每个朔（农历月初一），记录其所在民用日 cdn
+    let mut nm_cdn: Vec<i64> = Vec::new();
+    // 一岁 12 或 13 个月，加上两端的边界共 14 个朔就该到；16 留两格余量。
+    // 同 [`MAX_NEW_MOON_STEPS`]：没有上限，冬至或朔算错时这里是转不完，不是答错。
+    for i in 0..16 {
+        let c = local_civil_day_of(new_moon_jd_ut(start_k + i), tz);
+        nm_cdn.push(c);
+        if c >= next11_cdn {
+            break;
+        }
+    }
+    assert!(
+        nm_cdn.last().is_some_and(|&c| c >= next11_cdn),
+        "{start_year} 岁内枚举了 {} 个朔仍未到下一个子月（{next11_cdn}）——\
+         冬至时刻或朔的时刻算错了",
+        nm_cdn.len()
+    );
+    let n_months = nm_cdn.len() - 1; // 12（平） 或 13（闰）
+    let is_leap_year = n_months == 13;
+
+    // 某月 [i， i+1) 是否含中气（λ 为 30° 整数倍）。
+    // 关键：中国农历定气按「民用日」判定，故取该月初一与下月初一【当地 0 时】的太阳黄经，
+    // 看其间是否跨过 30° 整数倍（而非用朔的瞬时——否则 2020 夏至这类刀刃 case 会误判）。
+    let lam_at_day = |cdn: i64| -> f64 {
+        let jd_ut = (cdn as f64 - 0.5) - tz / 24.0; // 该民用日当地 0 时，转 UT
+        sun_apparent_longitude(jd_ut_to_jde(jd_ut))
+    };
+    let has_zhongqi = |i: usize| -> bool {
+        let a = lam_at_day(nm_cdn[i]);
+        let b = lam_at_day(nm_cdn[i + 1]);
+        let na = (a / 30.0).floor() as i64;
+        let mut nb = (b / 30.0).floor() as i64;
+        if b < a {
+            nb += 12;
+        }
+        nb > na
+    };
+
+    // 编号
+    let mut num: u32 = 11;
+    let mut last: u32 = 11;
+    let mut leap_done = false;
+    let mut info: Vec<(u32, bool)> = Vec::with_capacity(n_months);
+    for i in 0..n_months {
+        let is_leap = is_leap_year && !leap_done && i >= 1 && !has_zhongqi(i);
+        if is_leap {
+            info.push((last, true));
+            leap_done = true;
+        } else {
+            info.push((num, false));
+            last = num;
+            num = if num == 12 { 1 } else { num + 1 };
+        }
+    }
+
+    // 定位 cdn 所在月
+    let mut idx = 0usize;
+    for i in 0..n_months {
+        if nm_cdn[i] <= cdn && cdn < nm_cdn[i + 1] {
+            idx = i;
+            break;
+        }
+    }
+    let (mnum, leap) = info[idx];
+    let lday = (cdn - nm_cdn[idx] + 1) as u32;
+    let lyear = if mnum >= 11 { start_year } else { start_year + 1 };
+    LunarDate {
+        year: lyear,
+        month: mnum,
+        leap,
+        day: lday,
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{new_moon_k_near, new_moon_on_or_before};
+    use crate::civil_day_number;
+
+    /// 朔序号的估算只会偏大，不会偏小。
+    ///
+    /// `new_moon_on_or_before` 的搜索有两支：估大了往回退，估小了往前进。前一支正常走，
+    /// 后一支按 [`new_moon_k_near`] 的构造应当永远不进——它取的是最近一个平朔，
+    /// 而真朔与平朔相差不超过 ~0.6 天。
+    ///
+    /// 这条把那个「应当」变成检查：若估算真的偏小过一次，返回的 k 就会大于估算值。
+    /// 实测（2026-09-01）1900–2100 全程无一例；另一种验法是把那一支改成 panic
+    /// 跑一遍全量扫描，同样不触发，但那种验法留不进仓库。
+    ///
+    /// 它也解释了变异扫描在那一支上留下的两个漏网（`k += 1` 改成 `-=` 或 `*=`）：
+    /// 走不到的代码改了不会有人知道，这是等价变异，不是守卫的缺口。
+    #[test]
+    fn the_new_moon_estimate_is_never_too_low() {
+        let mut checked = 0_u32;
+        for year in 1900..=2100 {
+            for (month, day) in [(1_u32, 15_u32), (4, 10), (7, 20), (10, 5)] {
+                let cdn = civil_day_number(year, month, day);
+                let (_, k) = new_moon_on_or_before(cdn, 8.0);
+                let est = new_moon_k_near(cdn as f64 - 0.5);
+                assert!(
+                    k == est || k == est - 1,
+                    "{year}-{month:02}-{day:02}：搜索落在 k={k}，估算是 {est}——\
+                     估算偏小了，那支「安全网」不再是死代码"
+                );
+                checked += 1;
+            }
+        }
+        assert_eq!(checked, 804, "取样数变了，上面那句实测结论要跟着重验");
+    }
+}

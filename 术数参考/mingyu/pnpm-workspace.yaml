@@ -1,0 +1,10 @@
+packages:
+  - 'packages/*'
+overrides:
+  esbuild: 0.28.1
+allowBuilds:
+  esbuild: true
+onlyBuiltDependencies:
+  - esbuild
+patchedDependencies:
+  iztro@2.5.8: patches/iztro@2.5.8.patch

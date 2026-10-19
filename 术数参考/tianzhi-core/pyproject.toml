@@ -1,0 +1,37 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tianzhi-core"
+version = "0.6.2"
+description = "东方术数的核心算法：以典籍为据，把可推算的部分还原成可检验的算法"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "zaoxu001" }]
+keywords = ["bazi", "four-pillars", "liuren", "ziwei", "ganzhi", "jieqi", "metaphysics"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering",
+  "Natural Language :: Chinese (Simplified)",
+]
+dependencies = ["lunar_python>=1.4.8"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.urls]
+Homepage = "https://github.com/zaoxu001/tianzhi-core"
+Issues = "https://github.com/zaoxu001/tianzhi-core/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["tianzhi_core"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

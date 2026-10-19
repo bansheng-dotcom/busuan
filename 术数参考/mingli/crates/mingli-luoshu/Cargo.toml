@@ -1,0 +1,22 @@
+[package]
+name = "mingli-luoshu"
+description = "The Luoshu magic square and nine-palace flight: the order-3 square, the palaces and their trigrams and directions, and forward and reverse flying stars."
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+repository.workspace = true
+keywords = ["luoshu", "magic-square", "nine-palace", "feng-shui"]
+categories = ["algorithms", "mathematics"]
+
+[dependencies]
+mingli-core = { workspace = true }
+
+[dev-dependencies]
+criterion = { version = "0.8", default-features = false }
+
+[lints]
+workspace = true
+
+[[bench]]
+name = "luoshu_bench"
+harness = false

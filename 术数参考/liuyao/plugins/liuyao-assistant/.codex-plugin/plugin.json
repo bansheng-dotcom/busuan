@@ -1,0 +1,19 @@
+{
+  "name": "liuyao-assistant",
+  "version": "1.0.8",
+  "description": "手动切片资料库：排盘、规则检索、卦例及出处回查。",
+  "author": {
+    "name": "zhishengyk"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "六爻助手",
+    "shortDescription": "排盘、查理法与象法、比对卦例，并回查原文。",
+    "longDescription": "检索六书手动切片，保留规则、共享条件与案例角色。保留原文出处、盘面审核状态、作者解释与反馈的区别。",
+    "developerName": "zhishengyk",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "使用六爻助手，先排盘，再查理法与相似卦例，给出原文依据。"
+  },
+  "mcpServers": "./.mcp.json"
+}

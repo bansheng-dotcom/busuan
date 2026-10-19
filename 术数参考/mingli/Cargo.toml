@@ -1,0 +1,139 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/mingli",
+    "crates/mingli-core",
+    "crates/mingli-contract",
+    "crates/mingli-astro",
+    "crates/mingli-ephemeris",
+    "crates/mingli-ganzhi",
+    "crates/mingli-gua",
+    "crates/mingli-luoshu",
+    "crates/mingli-bazi",
+    "crates/mingli-ziwei",
+    "crates/mingli-astrology",
+    "crates/mingli-jyotish",
+    "crates/mingli-qizhengsiyu",
+    "crates/mingli-yijing",
+    "crates/mingli-geomancy",
+    "crates/mingli-sikidy",
+    "crates/mingli-ifa",
+    "crates/mingli-cartomancy",
+    "crates/mingli-meihua",
+    "crates/mingli-xiaoliuren",
+    "crates/mingli-zeri",
+    "crates/mingli-maya",
+    "crates/mingli-pawukon",
+    "crates/mingli-mahabote",
+    "crates/mingli-tibetan",
+    "crates/mingli-liuren",
+    "crates/mingli-qimen",
+    "crates/mingli-taiyi",
+    "crates/mingli-numerology",
+    "crates/mingli-gematria",
+    "crates/mingli-abjad",
+    "crates/mingli-wuge",
+    "crates/mingli-analysis",
+    "crates/mingli-interpret",
+    "crates/mingli-wasm",
+    "crates/mingli-registry",
+    "crates/mingli-app",
+    "crates/mingli-engine",
+    "services/mingli-api",
+]
+
+[workspace.package]
+edition = "2024"
+version = "1.2.0"
+license = "MIT"
+repository = "https://github.com/goliajp/mingli"
+rust-version = "1.97"
+
+[workspace.dependencies]
+mingli = { version = "1.2.0", path = "crates/mingli" }
+mingli-core = { version = "1.2.0", path = "crates/mingli-core" }
+mingli-contract = { version = "1.2.0", path = "crates/mingli-contract" }
+# 缺省不带 serde：只想拿类型化结果的叶不该被迫链上 serde_derive 与 syn。
+# 需要序列化的消费者显式 `features = ["serde"]`。
+mingli-astro = { version = "1.2.0", path = "crates/mingli-astro", default-features = false }
+mingli-ephemeris = { version = "1.2.0", path = "crates/mingli-ephemeris", default-features = false }
+mingli-ganzhi = { version = "1.2.0", path = "crates/mingli-ganzhi", default-features = false }
+mingli-gua = { version = "1.2.0", path = "crates/mingli-gua", default-features = false }
+mingli-luoshu = { version = "1.2.0", path = "crates/mingli-luoshu" }
+# 缺省不带本地星历：装配根按档位（`astrology` / `astrology-lite`）自己补，
+# 用例层要强类型推运，显式补 `port`。
+mingli-astrology = { version = "1.2.0", path = "crates/mingli-astrology", default-features = false }
+mingli-jyotish = { version = "1.2.0", path = "crates/mingli-jyotish" }
+mingli-qizhengsiyu = { version = "1.2.0", path = "crates/mingli-qizhengsiyu" }
+mingli-engine = { version = "1.2.0", path = "crates/mingli-engine" }
+# registry 与 app 的星历叶按 feature 可裁，故在此设为 opt-in：
+# 各消费者显式声明它要哪几片。若在这里留默认全开，下游写 `default-features = false`
+# 会被 Cargo 拒（继承来的依赖不许覆盖它），于是「轻量构建」这句话就永远不成立。
+mingli-registry = { version = "1.2.0", path = "crates/mingli-registry", default-features = false }
+mingli-app = { version = "1.2.0", path = "crates/mingli-app", default-features = false }
+mingli-analysis = { version = "1.2.0", path = "crates/mingli-analysis" }
+mingli-interpret = { version = "1.2.0", path = "crates/mingli-interpret" }
+mingli-wasm = { version = "1.2.0", path = "crates/mingli-wasm" }
+mingli-bazi = { version = "1.2.0", path = "crates/mingli-bazi" }
+mingli-ziwei = { version = "1.2.0", path = "crates/mingli-ziwei" }
+mingli-yijing = { version = "1.2.0", path = "crates/mingli-yijing" }
+mingli-geomancy = { version = "1.2.0", path = "crates/mingli-geomancy" }
+mingli-sikidy = { version = "1.2.0", path = "crates/mingli-sikidy" }
+mingli-ifa = { version = "1.2.0", path = "crates/mingli-ifa" }
+mingli-cartomancy = { version = "1.2.0", path = "crates/mingli-cartomancy" }
+mingli-meihua = { version = "1.2.0", path = "crates/mingli-meihua" }
+mingli-xiaoliuren = { version = "1.2.0", path = "crates/mingli-xiaoliuren" }
+mingli-zeri = { version = "1.2.0", path = "crates/mingli-zeri" }
+mingli-maya = { version = "1.2.0", path = "crates/mingli-maya" }
+mingli-pawukon = { version = "1.2.0", path = "crates/mingli-pawukon" }
+mingli-mahabote = { version = "1.2.0", path = "crates/mingli-mahabote" }
+mingli-tibetan = { version = "1.2.0", path = "crates/mingli-tibetan" }
+mingli-liuren = { version = "1.2.0", path = "crates/mingli-liuren" }
+mingli-qimen = { version = "1.2.0", path = "crates/mingli-qimen" }
+mingli-taiyi = { version = "1.2.0", path = "crates/mingli-taiyi" }
+mingli-numerology = { version = "1.2.0", path = "crates/mingli-numerology" }
+mingli-gematria = { version = "1.2.0", path = "crates/mingli-gematria" }
+mingli-abjad = { version = "1.2.0", path = "crates/mingli-abjad" }
+mingli-wuge = { version = "1.2.0", path = "crates/mingli-wuge" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+
+# 全树统一 lint 上限。每个 crate 用 `[lints] workspace = true` 接入；
+# 接入即须 deny-clean（故 crate 在其 Phase 打磨到全文档后才接入）。
+[workspace.lints.rust]
+missing_docs = "deny"
+unsafe_code = "forbid"
+unreachable_pub = "warn"
+missing_debug_implementations = "warn"
+
+[workspace.lints.clippy]
+all = { level = "deny", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+# 两个对「中文文档 + 数学符号代码」是纯噪音的 pedantic lint，全树豁免：
+doc_markdown = "allow"          # 中文/数学术语(GF(2)/Z_n/S¹)误报缺反引号
+many_single_char_names = "allow" # 数学代码 a,b,m,n,g,p 等单字符是惯例
+
+[profile.dev]
+# debug=1 (line tables) instead of the default 2 (full DWARF). Backtraces keep
+# file and line; what is lost is variable inspection in a debugger, which this
+# project's workflow does not use. Measured 2026-08-28: target/debug/deps is
+# the largest single thing on these machines — 104 GB in smix alone — and the
+# debug info is most of it.
+debug = 1
+# macOS keeps every compilation's .o files in target/debug/deps under the
+# default unpacked mode and never removes them, and each test binary's first
+# exec then waits while the system walks that directory. packed keeps line
+# tables without the loose objects; on Linux the two measure the same.
+split-debuginfo = "packed"
+
+# Third-party crates are optimized even in dev and test builds. The report tests
+# evaluate the VSOP87 series millions of times; unoptimized, the vsop87 and astro
+# crates made the mingli-bazi unit tests take 273 s instead of 166 s. Dependencies
+# rarely change, so the extra compile time is paid once per lockfile, not per edit.
+[profile.dev.package."*"]
+opt-level = 3

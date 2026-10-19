@@ -1,0 +1,27 @@
+[package]
+name = "mingli-interpret"
+description = "The interpretation layer, kept strictly apart from computation: assembles guard-railed prompts from a chart and its determinism profile, for a replaceable backend."
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+repository.workspace = true
+keywords = ["prompt", "llm", "divination", "interpretation"]
+categories = ["text-processing", "api-bindings"]
+
+[dependencies]
+mingli-contract = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+[dev-dependencies]
+mingli-contract = { workspace = true }
+mingli-engine = { workspace = true }
+mingli-registry = { workspace = true, features = ["full"] }
+criterion = { version = "0.8", default-features = false }
+
+[lints]
+workspace = true
+
+[[bench]]
+name = "interpret_bench"
+harness = false
